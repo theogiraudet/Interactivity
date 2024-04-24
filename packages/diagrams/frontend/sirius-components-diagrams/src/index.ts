@@ -54,6 +54,8 @@ export type { DiagramPaletteToolContextValue } from './renderer/palette/DiagramP
 export { DiagramPaletteToolContext } from './renderer/palette/DiagramPaletteToolContext';
 export { DiagramPaletteToolContribution } from './renderer/palette/DiagramPaletteToolContribution';
 export type { DiagramPaletteToolContributionComponentProps } from './renderer/palette/DiagramPaletteToolContribution.types';
+export type { DiagramPanelActionProps } from './renderer/panel/DiagramPanel.types';
+export { diagramPanelActionExtensionPoint } from './renderer/panel/DiagramPanelExtensionPoints';
 export type { GQLSingleClickOnDiagramElementTool } from './renderer/palette/Palette.types';
 export { DiagramRepresentation } from './representation/DiagramRepresentation';
 export type { GQLDiagramDescription } from './representation/DiagramRepresentation.types';
