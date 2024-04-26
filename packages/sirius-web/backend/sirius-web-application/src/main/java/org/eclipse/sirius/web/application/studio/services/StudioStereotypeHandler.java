@@ -25,6 +25,8 @@ import org.eclipse.sirius.components.emf.migration.MigrationService;
 import org.eclipse.sirius.components.emf.migration.api.IMigrationParticipant;
 import org.eclipse.sirius.components.emf.services.JSONResourceFactory;
 import org.eclipse.sirius.components.emf.services.api.IEMFEditingContext;
+import org.eclipse.sirius.components.interactivity.Interactivity;
+import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.view.View;
 import org.eclipse.sirius.components.view.ViewFactory;
 import org.eclipse.sirius.components.view.diagram.DiagramDescription;
@@ -56,7 +58,8 @@ public class StudioStereotypeHandler implements IStereotypeHandler {
     public boolean canHandle(IEditingContext editingContext, String stereotypeId) {
         return List.of(
                 StudioStereotypeProvider.DOMAIN_STEREOTYPE,
-                StudioStereotypeProvider.VIEW_STEREOTYPE
+                StudioStereotypeProvider.VIEW_STEREOTYPE,
+                StudioStereotypeProvider.INTERACTIVITY_STEREOTYPE
         ).contains(stereotypeId);
     }
 
@@ -66,10 +69,25 @@ public class StudioStereotypeHandler implements IStereotypeHandler {
             return switch (stereotypeId) {
                 case StudioStereotypeProvider.DOMAIN_STEREOTYPE -> createDomainDocument(emfEditingContext, name);
                 case StudioStereotypeProvider.VIEW_STEREOTYPE -> createViewDocument(emfEditingContext, name);
+                case StudioStereotypeProvider.INTERACTIVITY_STEREOTYPE -> createInteractivityDocument(emfEditingContext, name);
                 default -> Optional.empty();
             };
         }
         return Optional.empty();
+    }
+
+    private Optional<DocumentDTO> createInteractivityDocument(IEMFEditingContext editingContext, String name) {
+        var documentId = UUID.randomUUID();
+        var resource = new JSONResourceFactory().createResourceFromPath(documentId.toString());
+        resource.eAdapters().add(new ResourceMetadataAdapter(name));
+
+        editingContext.getDomain().getResourceSet().getResources().add(resource);
+
+        Interactivity interactivity = InteractivityFactory.eINSTANCE.createInteractivity();
+
+        resource.getContents().add(interactivity);
+
+        return Optional.of(new DocumentDTO(documentId, name, ExplorerDescriptionProvider.DOCUMENT_KIND));
     }
 
     private Optional<DocumentDTO> createDomainDocument(IEMFEditingContext editingContext, String name) {

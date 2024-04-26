@@ -56,7 +56,8 @@ public class RepresentationMetadataDataFetcher implements IDataFetcherWithFieldC
                 FieldCoordinates.coordinates("Validation", METADATA_FIELD),
                 FieldCoordinates.coordinates("Gantt", METADATA_FIELD),
                 FieldCoordinates.coordinates("Deck", METADATA_FIELD),
-                FieldCoordinates.coordinates("Portal", METADATA_FIELD)
+                FieldCoordinates.coordinates("Portal", METADATA_FIELD),
+                FieldCoordinates.coordinates("Interactivity", METADATA_FIELD)
         );
         // @formatter:on
     }

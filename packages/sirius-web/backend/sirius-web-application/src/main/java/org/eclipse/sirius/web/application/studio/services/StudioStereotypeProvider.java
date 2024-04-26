@@ -33,6 +33,8 @@ public class StudioStereotypeProvider implements IStereotypeProvider {
 
     public static final String DOMAIN_STEREOTYPE = "domain";
 
+    public static final String INTERACTIVITY_STEREOTYPE = "interactivity";
+
     private final IStudioCapableEditingContextPredicate studioCapableEditingContextPredicate;
 
     public StudioStereotypeProvider(IStudioCapableEditingContextPredicate studioCapableEditingContextPredicate) {
@@ -44,7 +46,8 @@ public class StudioStereotypeProvider implements IStereotypeProvider {
         if (this.studioCapableEditingContextPredicate.test(editingContext)) {
             return List.of(
                     new Stereotype(DOMAIN_STEREOTYPE, "Domain"),
-                    new Stereotype(VIEW_STEREOTYPE, "View")
+                    new Stereotype(VIEW_STEREOTYPE, "View"),
+                    new Stereotype(INTERACTIVITY_STEREOTYPE, "Interactivity")
             );
         }
         return List.of();

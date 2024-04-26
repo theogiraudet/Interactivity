@@ -13,6 +13,8 @@
 package org.eclipse.sirius.web.infrastructure.emf;
 
 import org.eclipse.sirius.components.emf.configuration.ChildExtenderProvider;
+import org.eclipse.sirius.components.interactivity.InteractivityPackage;
+import org.eclipse.sirius.components.semantic_zoom.provider.SemanticZoomItemProviderAdapterFactory;
 import org.eclipse.sirius.components.view.ViewPackage;
 import org.eclipse.sirius.components.view.deck.provider.DeckItemProviderAdapterFactory;
 import org.eclipse.sirius.components.view.diagram.DiagramPackage;
@@ -30,6 +32,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class EMFChildExtenderProviderConfiguration {
+
+    @Bean
+    public ChildExtenderProvider semanticZoomChildExtenderProvider() {
+        return new ChildExtenderProvider(InteractivityPackage.eNS_URI, SemanticZoomItemProviderAdapterFactory.InteractivityChildCreationExtender::new);
+    }
 
     @Bean
     public ChildExtenderProvider diagramChildExtenderProvider() {

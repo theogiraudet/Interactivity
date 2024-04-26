@@ -22,6 +22,7 @@ import org.eclipse.sirius.components.collaborative.dto.EditingContextAction;
 import org.eclipse.sirius.components.core.api.IEditingContext;
 import org.eclipse.sirius.components.domain.DomainPackage;
 import org.eclipse.sirius.components.emf.services.api.IEMFEditingContext;
+import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.view.ViewPackage;
 import org.eclipse.sirius.web.application.studio.services.api.IStudioCapableEditingContextPredicate;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,8 @@ public class StudioEditingContextActionProvider implements IEditingContextAction
     public static final String EMPTY_DOMAIN_ID = "empty_domain";
 
     public static final String EMPTY_VIEW_ID = "empty_view";
+
+    public static final String EMPTY_INTERACTIVITY_ID = "empty_interactivity";
 
     private final IStudioCapableEditingContextPredicate studioCapableEditingContextPredicate;
 
@@ -59,12 +62,16 @@ public class StudioEditingContextActionProvider implements IEditingContextAction
 
             var containsDomain = nsURIs.contains(DomainPackage.eNS_URI);
             var containsView = nsURIs.contains(ViewPackage.eNS_URI);
+            var containsInteractivity = nsURIs.contains(InteractivityPackage.eNS_URI);
 
             if (containsDomain) {
                 actions.add(new EditingContextAction(EMPTY_DOMAIN_ID, "Domain"));
             }
             if (containsView) {
                 actions.add(new EditingContextAction(EMPTY_VIEW_ID, "View"));
+            }
+            if (containsInteractivity) {
+                actions.add(new EditingContextAction(EMPTY_INTERACTIVITY_ID, "Interactivity"));
             }
         }
 

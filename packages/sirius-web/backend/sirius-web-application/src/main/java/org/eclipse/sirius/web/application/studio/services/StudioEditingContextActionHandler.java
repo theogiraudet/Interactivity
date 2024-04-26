@@ -12,9 +12,6 @@
  *******************************************************************************/
 package org.eclipse.sirius.web.application.studio.services;
 
-import static org.eclipse.sirius.web.application.studio.services.StudioEditingContextActionProvider.EMPTY_DOMAIN_ID;
-import static org.eclipse.sirius.web.application.studio.services.StudioEditingContextActionProvider.EMPTY_VIEW_ID;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -31,9 +28,13 @@ import org.eclipse.sirius.components.domain.DomainFactory;
 import org.eclipse.sirius.components.emf.ResourceMetadataAdapter;
 import org.eclipse.sirius.components.emf.services.JSONResourceFactory;
 import org.eclipse.sirius.components.emf.services.api.IEMFEditingContext;
+import org.eclipse.sirius.components.interactivity.Interactivity;
+import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.representations.Failure;
 import org.eclipse.sirius.components.representations.IStatus;
 import org.eclipse.sirius.components.representations.Success;
+import org.eclipse.sirius.components.semantic_zoom.SemanticZoom;
+import org.eclipse.sirius.components.semantic_zoom.SemanticZoomFactory;
 import org.eclipse.sirius.components.view.View;
 import org.eclipse.sirius.components.view.ViewFactory;
 import org.eclipse.sirius.components.view.diagram.DiagramDescription;
@@ -41,6 +42,8 @@ import org.eclipse.sirius.components.view.diagram.DiagramFactory;
 import org.eclipse.sirius.emfjson.resource.JsonResource;
 import org.eclipse.sirius.web.application.studio.services.api.IDomainNameProvider;
 import org.springframework.stereotype.Service;
+
+import static org.eclipse.sirius.web.application.studio.services.StudioEditingContextActionProvider.*;
 
 /**
  * Used to handle the studio related editing context actions.
@@ -58,7 +61,7 @@ public class StudioEditingContextActionHandler implements IEditingContextActionH
 
     @Override
     public boolean canHandle(IEditingContext editingContext, String actionId) {
-        return List.of(EMPTY_DOMAIN_ID, EMPTY_VIEW_ID).contains(actionId);
+        return List.of(EMPTY_DOMAIN_ID, EMPTY_VIEW_ID, EMPTY_INTERACTIVITY_ID).contains(actionId);
     }
 
     @Override
@@ -66,6 +69,7 @@ public class StudioEditingContextActionHandler implements IEditingContextActionH
         return switch (actionId) {
             case EMPTY_DOMAIN_ID -> this.createEmptyDomainDocument(editingContext);
             case EMPTY_VIEW_ID -> this.createEmptyViewDocument(editingContext);
+            case EMPTY_INTERACTIVITY_ID -> this.createEmptyInteractivityDocument(editingContext);
             default -> new Failure("Unknown action");
         };
     }
@@ -93,6 +97,19 @@ public class StudioEditingContextActionHandler implements IEditingContextActionH
             JsonResource resource = new JSONResourceFactory().createResourceFromPath(UUID.randomUUID().toString());
             resource.getContents().add(newView);
             resource.eAdapters().add(new ResourceMetadataAdapter("View"));
+            resourceSet.getResources().add(resource);
+
+            return (IStatus) new Success(ChangeKind.SEMANTIC_CHANGE, Map.of());
+        }).orElse(new Failure("Unsupported editing context"));
+    }
+
+    private IStatus createEmptyInteractivityDocument(IEditingContext editingContext) {
+        return this.getResourceSet(editingContext).map(resourceSet -> {
+            Interactivity newInteractivity = InteractivityFactory.eINSTANCE.createInteractivity();
+
+            JsonResource resource = new JSONResourceFactory().createResourceFromPath(UUID.randomUUID().toString());
+            resource.getContents().add(newInteractivity);
+            resource.eAdapters().add(new ResourceMetadataAdapter("Interactivity"));
             resourceSet.getResources().add(resource);
 
             return (IStatus) new Success(ChangeKind.SEMANTIC_CHANGE, Map.of());

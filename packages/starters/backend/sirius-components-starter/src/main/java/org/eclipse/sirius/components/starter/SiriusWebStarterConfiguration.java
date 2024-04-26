@@ -63,6 +63,7 @@ import reactor.core.publisher.Flux;
     "org.eclipse.sirius.components.collaborative.selection",
     "org.eclipse.sirius.components.collaborative.trees",
     "org.eclipse.sirius.components.collaborative.validation",
+    "org.eclipse.sirius.components.collaborative.interactivity",
 })
 // @formatter:on
 public class SiriusWebStarterConfiguration {
