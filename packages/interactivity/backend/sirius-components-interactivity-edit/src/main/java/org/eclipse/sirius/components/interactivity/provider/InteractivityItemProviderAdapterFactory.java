@@ -79,7 +79,7 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Object> supportedTypes = new ArrayList<>();
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
 	 * This constructs an instance.
@@ -116,29 +116,6 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 		}
 
 		return interactivityItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.DiagramEditor} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DiagramEditorItemProvider diagramEditorItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.DiagramEditor}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDiagramEditorAdapter() {
-		if (diagramEditorItemProvider == null) {
-			diagramEditorItemProvider = new DiagramEditorItemProvider(this);
-		}
-
-		return diagramEditorItemProvider;
 	}
 
 	/**
@@ -185,6 +162,29 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 		}
 
 		return zoomLevelItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.DiagramEditor} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DiagramEditorItemProvider diagramEditorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.DiagramEditor}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDiagramEditorAdapter() {
+		if (diagramEditorItemProvider == null) {
+			diagramEditorItemProvider = new DiagramEditorItemProvider(this);
+		}
+
+		return diagramEditorItemProvider;
 	}
 
 	/**
@@ -314,7 +314,7 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	}
 
 	/**
-	 * This disposes all of the item providers created by this factory.
+	 * This disposes all of the item providers created by this factory. 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -323,12 +323,12 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	public void dispose() {
 		if (interactivityItemProvider != null)
 			interactivityItemProvider.dispose();
-		if (diagramEditorItemProvider != null)
-			diagramEditorItemProvider.dispose();
 		if (graphicZoomItemProvider != null)
 			graphicZoomItemProvider.dispose();
 		if (zoomLevelItemProvider != null)
 			zoomLevelItemProvider.dispose();
+		if (diagramEditorItemProvider != null)
+			diagramEditorItemProvider.dispose();
 	}
 
 }

@@ -4,14 +4,15 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
 package org.eclipse.sirius.components.semantic_zoom;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.sirius.components.interactivity.Action;
 
 /**
@@ -23,7 +24,8 @@ import org.eclipse.sirius.components.interactivity.Action;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.semantic_zoom.LevelOfDetail#getId <em>Id</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.semantic_zoom.LevelOfDetail#getStyleOverrides <em>Style Overrides</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.semantic_zoom.LevelOfDetail#getHiddenASElements <em>Hidden AS Elements</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage#getLevelOfDetail()
@@ -32,25 +34,37 @@ import org.eclipse.sirius.components.interactivity.Action;
  */
 public interface LevelOfDetail extends Action {
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Style Overrides</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.components.semantic_zoom.StyleOverride}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage#getLevelOfDetail_Id()
-	 * @model required="true"
+	 * @return the value of the '<em>Style Overrides</em>' containment reference list.
+	 * @see org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage#getLevelOfDetail_StyleOverrides()
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getId();
+	EList<StyleOverride> getStyleOverrides();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.sirius.components.semantic_zoom.LevelOfDetail#getId <em>Id</em>}' attribute.
+	 * Returns the value of the '<em><b>Hidden AS Elements</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
+	 * @return the value of the '<em>Hidden AS Elements</em>' attribute.
+	 * @see #setHiddenASElements(String)
+	 * @see org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage#getLevelOfDetail_HiddenASElements()
+	 * @model
 	 * @generated
 	 */
-	void setId(String value);
+	String getHiddenASElements();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.sirius.components.semantic_zoom.LevelOfDetail#getHiddenASElements <em>Hidden AS Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Hidden AS Elements</em>' attribute.
+	 * @see #getHiddenASElements()
+	 * @generated
+	 */
+	void setHiddenASElements(String value);
 
 } // LevelOfDetail

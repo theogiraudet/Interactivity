@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.sirius.components.interactivity.GraphicZoom;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.ObservableEvent;
+import org.eclipse.sirius.components.interactivity.ZoomLevel;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,21 +33,21 @@ import org.eclipse.sirius.components.interactivity.ObservableEvent;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.GraphicZoomImpl#getEvents <em>Events</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.GraphicZoomImpl#getLevels <em>Levels</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class GraphicZoomImpl extends MinimalEObjectImpl.Container implements GraphicZoom {
 	/**
-	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
+	 * The cached value of the '{@link #getLevels() <em>Levels</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEvents()
+	 * @see #getLevels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ObservableEvent> events;
+	protected EList<ZoomLevel> levels;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,12 +74,12 @@ public class GraphicZoomImpl extends MinimalEObjectImpl.Container implements Gra
 	 * @generated
 	 */
 	@Override
-	public EList<ObservableEvent> getEvents() {
-		if (events == null) {
-			events = new EObjectContainmentEList<>(ObservableEvent.class, this,
-					InteractivityPackage.GRAPHIC_ZOOM__EVENTS);
+	public EList<ZoomLevel> getLevels() {
+		if (levels == null) {
+			levels = new EObjectContainmentEList<ZoomLevel>(ZoomLevel.class, this,
+					InteractivityPackage.GRAPHIC_ZOOM__LEVELS);
 		}
-		return events;
+		return levels;
 	}
 
 	/**
@@ -90,8 +90,8 @@ public class GraphicZoomImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case InteractivityPackage.GRAPHIC_ZOOM__EVENTS:
-			return ((InternalEList<?>) getEvents()).basicRemove(otherEnd, msgs);
+		case InteractivityPackage.GRAPHIC_ZOOM__LEVELS:
+			return ((InternalEList<?>) getLevels()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -104,8 +104,8 @@ public class GraphicZoomImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case InteractivityPackage.GRAPHIC_ZOOM__EVENTS:
-			return getEvents();
+		case InteractivityPackage.GRAPHIC_ZOOM__LEVELS:
+			return getLevels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,9 +119,9 @@ public class GraphicZoomImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case InteractivityPackage.GRAPHIC_ZOOM__EVENTS:
-			getEvents().clear();
-			getEvents().addAll((Collection<? extends ObservableEvent>) newValue);
+		case InteractivityPackage.GRAPHIC_ZOOM__LEVELS:
+			getLevels().clear();
+			getLevels().addAll((Collection<? extends ZoomLevel>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +135,8 @@ public class GraphicZoomImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case InteractivityPackage.GRAPHIC_ZOOM__EVENTS:
-			getEvents().clear();
+		case InteractivityPackage.GRAPHIC_ZOOM__LEVELS:
+			getLevels().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -150,8 +150,8 @@ public class GraphicZoomImpl extends MinimalEObjectImpl.Container implements Gra
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case InteractivityPackage.GRAPHIC_ZOOM__EVENTS:
-			return events != null && !events.isEmpty();
+		case InteractivityPackage.GRAPHIC_ZOOM__LEVELS:
+			return levels != null && !levels.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

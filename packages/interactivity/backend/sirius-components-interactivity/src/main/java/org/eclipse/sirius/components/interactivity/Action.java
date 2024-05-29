@@ -12,7 +12,6 @@
  */
 package org.eclipse.sirius.components.interactivity;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -24,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.interactivity.Action#getReferences <em>References</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.Action#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getAction()
@@ -32,16 +31,26 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Action extends EObject {
+
 	/**
-	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.ModelReference}.
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>References</em>' containment reference list.
-	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getAction_References()
-	 * @model containment="true"
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getAction_Name()
+	 * @model required="true"
 	 * @generated
 	 */
-	EList<ModelReference> getReferences();
+	String getName();
 
+	/**
+	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.Action#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 } // Action

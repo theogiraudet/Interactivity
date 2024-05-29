@@ -3,47 +3,36 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="interactivity" nsURI="http://www.eclipse.org/sirius-web/interactivity"
     nsPrefix="interactivity">
   <eClassifiers xsi:type="ecore:EClass" name="Interactivity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="interactiveElements" upperBound="-1"
-        eType="#//InteractiveElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramEditors" upperBound="-1"
+        eType="#//DiagramEditor" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InteractiveElement" abstract="true"
-      interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tools" upperBound="-1"
-        eType="#//Interaction" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
-        eType="#//InteractiveFeature" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Interaction" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
-        eType="#//ObservableEvent" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ObservableEvent" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
-        upperBound="-1" eType="#//Action"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interaction" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-        eType="#//ModelReference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InteractiveFeature" abstract="true"
-      interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
-        eType="#//Action" containment="true"/>
+      interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicZoom" eSuperTypes="#//Interaction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="levels" upperBound="-1"
+        eType="#//ZoomLevel" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ModelReference" abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DiagramEditor" eSuperTypes="#//InteractiveElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramReference" eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//DiagramDescription"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GraphicZoom" eSuperTypes="#//Interaction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ZoomLevel" eSuperTypes="#//ObservableEvent">
+  <eClassifiers xsi:type="ecore:EClass" name="ZoomLevel" eSuperTypes="#//Command">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionsToTrigger" upperBound="-1"
+        eType="#//Action"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractSyntaxReference" abstract="true"
-      interface="true" eSuperTypes="#//ModelReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ConcreteSyntaxReference" abstract="true"
-      interface="true" eSuperTypes="#//ModelReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AsCsMappingReference" abstract="true"
-      interface="true" eSuperTypes="#//ModelReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeMappingReference" abstract="true"
-      interface="true" eSuperTypes="#//AsCsMappingReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Command" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiagramEditor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interactiveFeatures" upperBound="-1"
+        eType="#//InteractiveFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interactions" upperBound="-1"
+        eType="#//Interaction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramDefinition" lowerBound="1"
+        eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//DiagramDescription"/>
+  </eClassifiers>
 </ecore:EPackage>

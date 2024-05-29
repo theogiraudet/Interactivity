@@ -27,7 +27,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoom;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoomFactory;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
@@ -77,7 +76,7 @@ public class SemanticZoomItemProvider extends ItemProviderAdapter implements IEd
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(InteractivityPackage.Literals.INTERACTIVE_FEATURE__ACTIONS);
+			childrenFeatures.add(SemanticZoomPackage.Literals.SEMANTIC_ZOOM__LEVELS);
 		}
 		return childrenFeatures;
 	}
@@ -139,7 +138,7 @@ public class SemanticZoomItemProvider extends ItemProviderAdapter implements IEd
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(SemanticZoom.class)) {
-		case SemanticZoomPackage.SEMANTIC_ZOOM__ACTIONS:
+		case SemanticZoomPackage.SEMANTIC_ZOOM__LEVELS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -157,7 +156,7 @@ public class SemanticZoomItemProvider extends ItemProviderAdapter implements IEd
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVE_FEATURE__ACTIONS,
+		newChildDescriptors.add(createChildParameter(SemanticZoomPackage.Literals.SEMANTIC_ZOOM__LEVELS,
 				SemanticZoomFactory.eINSTANCE.createLevelOfDetail()));
 	}
 

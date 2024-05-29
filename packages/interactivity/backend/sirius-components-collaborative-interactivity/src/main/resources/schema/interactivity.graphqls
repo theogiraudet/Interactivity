@@ -1,0 +1,85 @@
+extend type Mutation {
+    semanticZoom(input: SemanticZoomInput!): SemanticZoomPayload!
+}
+
+extend type Query {
+    interactivity(input: InteractivityModelInput!): InteractivityModelPayload!
+    affectedElements(input: ComputeAffectedNodesInput!): ComputeAffectedElementsPayload!
+}
+
+input SemanticZoomInput {
+    id: ID!
+    editingContextId: ID!
+    representationId: ID!
+}
+
+input InteractivityModelInput {
+    id: ID!
+    editingContextId: ID!
+    representationId: ID!
+}
+
+input ComputeAffectedNodesInput {
+    id: ID!
+    editingContextId: ID!
+    representationId: ID!
+    actionId: String!
+}
+
+union SemanticZoomPayload = SuccessPayload | ErrorPayload
+union InteractivityModelPayload = InteractivityModelSuccessPayload | SuccessPayload | ErrorPayload
+union ComputeAffectedElementsPayload = ComputeAffectedElementsSuccessPayload | SuccessPayload | ErrorPayload
+
+type InteractivityModelSuccessPayload {
+    id: ID!
+    interactivity: Interactivity!
+}
+
+type ComputeAffectedElementsSuccessPayload {
+    id: ID!
+    affectedElementIds: [String!]!
+}
+
+
+
+type Interactivity {
+    domainId: String!
+    diagramEditors: [DiagramEditor!]!
+}
+
+type DiagramEditor {
+    interactions: [Interaction!]!
+    interactiveFeatures: [InteractiveFeature!]!
+    diagramDefinition: DiagramDescription
+}
+
+union Interaction = GraphicZoom
+union InteractiveFeature = SemanticZoom
+interface Command {
+    actionsToTrigger: [Action!]!
+}
+union Action = LevelOfDetail
+
+type GraphicZoom {
+    levels: [ZoomLevel!]!
+}
+
+type ZoomLevel implements Command {
+    actionsToTrigger: [Action!]!
+    level: Int!
+}
+
+type SemanticZoom {
+    levels: [LevelOfDetail!]!
+}
+
+type LevelOfDetail {
+    name: String!
+    #    hiddenASElement: String!
+    #    styleOverrides: [StyleOverride!]!
+    #    asElements: String!
+}
+
+#type StyleOverride {
+#    style: INodeStyle
+#}

@@ -24,7 +24,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.interactivity.Interactivity#getInteractiveElements <em>Interactive Elements</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.Interactivity#getDomainId <em>Domain Id</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.Interactivity#getDiagramEditors <em>Diagram Editors</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getInteractivity()
@@ -33,15 +34,37 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Interactivity extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Interactive Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.InteractiveElement}.
+	 * Returns the value of the '<em><b>Domain Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Interactive Elements</em>' containment reference list.
-	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getInteractivity_InteractiveElements()
+	 * @return the value of the '<em>Domain Id</em>' attribute.
+	 * @see #setDomainId(String)
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getInteractivity_DomainId()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getDomainId();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.Interactivity#getDomainId <em>Domain Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domain Id</em>' attribute.
+	 * @see #getDomainId()
+	 * @generated
+	 */
+	void setDomainId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Diagram Editors</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.DiagramEditor}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Diagram Editors</em>' containment reference list.
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getInteractivity_DiagramEditors()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<InteractiveElement> getInteractiveElements();
+	EList<DiagramEditor> getDiagramEditors();
 
 } // Interactivity

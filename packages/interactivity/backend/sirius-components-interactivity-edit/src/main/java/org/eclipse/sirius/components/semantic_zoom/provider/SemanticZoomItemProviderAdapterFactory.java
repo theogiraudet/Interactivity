@@ -35,8 +35,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.sirius.components.interactivity.InteractiveElement;
-import org.eclipse.sirius.components.interactivity.InteractiveFeature;
+import org.eclipse.sirius.components.interactivity.Command;
+import org.eclipse.sirius.components.interactivity.DiagramEditor;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.util.InteractivitySwitch;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoomFactory;
@@ -138,72 +138,26 @@ public class SemanticZoomItemProviderAdapterFactory extends SemanticZoomAdapterF
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.semantic_zoom.NodeMappingStyleOverride} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.semantic_zoom.StyleOverride} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NodeMappingStyleOverrideItemProvider nodeMappingStyleOverrideItemProvider;
+	protected StyleOverrideItemProvider styleOverrideItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.sirius.components.semantic_zoom.NodeMappingStyleOverride}.
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.semantic_zoom.StyleOverride}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createNodeMappingStyleOverrideAdapter() {
-		if (nodeMappingStyleOverrideItemProvider == null) {
-			nodeMappingStyleOverrideItemProvider = new NodeMappingStyleOverrideItemProvider(this);
+	public Adapter createStyleOverrideAdapter() {
+		if (styleOverrideItemProvider == null) {
+			styleOverrideItemProvider = new StyleOverrideItemProvider(this);
 		}
 
-		return nodeMappingStyleOverrideItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.semantic_zoom.ByDepth} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ByDepthItemProvider byDepthItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.sirius.components.semantic_zoom.ByDepth}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createByDepthAdapter() {
-		if (byDepthItemProvider == null) {
-			byDepthItemProvider = new ByDepthItemProvider(this);
-		}
-
-		return byDepthItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.semantic_zoom.ByEdgeNumber} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ByEdgeNumberItemProvider byEdgeNumberItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.sirius.components.semantic_zoom.ByEdgeNumber}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createByEdgeNumberAdapter() {
-		if (byEdgeNumberItemProvider == null) {
-			byEdgeNumberItemProvider = new ByEdgeNumberItemProvider(this);
-		}
-
-		return byEdgeNumberItemProvider;
+		return styleOverrideItemProvider;
 	}
 
 	/**
@@ -315,12 +269,8 @@ public class SemanticZoomItemProviderAdapterFactory extends SemanticZoomAdapterF
 			semanticZoomItemProvider.dispose();
 		if (levelOfDetailItemProvider != null)
 			levelOfDetailItemProvider.dispose();
-		if (nodeMappingStyleOverrideItemProvider != null)
-			nodeMappingStyleOverrideItemProvider.dispose();
-		if (byDepthItemProvider != null)
-			byDepthItemProvider.dispose();
-		if (byEdgeNumberItemProvider != null)
-			byEdgeNumberItemProvider.dispose();
+		if (styleOverrideItemProvider != null)
+			styleOverrideItemProvider.dispose();
 	}
 
 	/**
@@ -370,10 +320,9 @@ public class SemanticZoomItemProviderAdapterFactory extends SemanticZoomAdapterF
 			 * @generated
 			 */
 			@Override
-			public Object caseInteractiveElement(InteractiveElement object) {
-				newChildDescriptors
-						.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVE_ELEMENT__FEATURES,
-								SemanticZoomFactory.eINSTANCE.createSemanticZoom()));
+			public Object caseCommand(Command object) {
+				newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.COMMAND__ACTIONS,
+						SemanticZoomFactory.eINSTANCE.createLevelOfDetail()));
 
 				return null;
 			}
@@ -384,9 +333,10 @@ public class SemanticZoomItemProviderAdapterFactory extends SemanticZoomAdapterF
 			 * @generated
 			 */
 			@Override
-			public Object caseInteractiveFeature(InteractiveFeature object) {
-				newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVE_FEATURE__ACTIONS,
-						SemanticZoomFactory.eINSTANCE.createLevelOfDetail()));
+			public Object caseDiagramEditor(DiagramEditor object) {
+				newChildDescriptors
+						.add(createChildParameter(InteractivityPackage.Literals.DIAGRAM_EDITOR__INTERACTIVE_FEATURES,
+								SemanticZoomFactory.eINSTANCE.createSemanticZoom()));
 
 				return null;
 			}

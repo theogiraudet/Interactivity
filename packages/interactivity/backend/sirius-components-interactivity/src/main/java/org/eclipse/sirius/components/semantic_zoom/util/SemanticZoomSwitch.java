@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- *
+ * 
  * SPDX-License-Identifier: EPL-2.0
- *
+ * 
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -14,19 +14,13 @@ package org.eclipse.sirius.components.semantic_zoom.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.util.Switch;
+
 import org.eclipse.sirius.components.interactivity.Action;
-import org.eclipse.sirius.components.interactivity.AsCsMappingReference;
 import org.eclipse.sirius.components.interactivity.InteractiveFeature;
-import org.eclipse.sirius.components.interactivity.ModelReference;
-import org.eclipse.sirius.components.interactivity.NodeMappingReference;
-import org.eclipse.sirius.components.semantic_zoom.ByDepth;
-import org.eclipse.sirius.components.semantic_zoom.ByEdgeNumber;
-import org.eclipse.sirius.components.semantic_zoom.GraphicalFilter;
-import org.eclipse.sirius.components.semantic_zoom.LevelOfDetail;
-import org.eclipse.sirius.components.semantic_zoom.NodeMappingStyleOverride;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoom;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
+
+import org.eclipse.sirius.components.semantic_zoom.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -103,40 +97,9 @@ public class SemanticZoomSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case SemanticZoomPackage.GRAPHICAL_FILTER: {
-			GraphicalFilter graphicalFilter = (GraphicalFilter) theEObject;
-			T result = caseGraphicalFilter(graphicalFilter);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case SemanticZoomPackage.NODE_MAPPING_STYLE_OVERRIDE: {
-			NodeMappingStyleOverride nodeMappingStyleOverride = (NodeMappingStyleOverride) theEObject;
-			T result = caseNodeMappingStyleOverride(nodeMappingStyleOverride);
-			if (result == null)
-				result = caseNodeMappingReference(nodeMappingStyleOverride);
-			if (result == null)
-				result = caseAsCsMappingReference(nodeMappingStyleOverride);
-			if (result == null)
-				result = caseModelReference(nodeMappingStyleOverride);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case SemanticZoomPackage.BY_DEPTH: {
-			ByDepth byDepth = (ByDepth) theEObject;
-			T result = caseByDepth(byDepth);
-			if (result == null)
-				result = caseGraphicalFilter(byDepth);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case SemanticZoomPackage.BY_EDGE_NUMBER: {
-			ByEdgeNumber byEdgeNumber = (ByEdgeNumber) theEObject;
-			T result = caseByEdgeNumber(byEdgeNumber);
-			if (result == null)
-				result = caseGraphicalFilter(byEdgeNumber);
+		case SemanticZoomPackage.STYLE_OVERRIDE: {
+			StyleOverride styleOverride = (StyleOverride) theEObject;
+			T result = caseStyleOverride(styleOverride);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -177,62 +140,17 @@ public class SemanticZoomSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Graphical Filter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Style Override</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Graphical Filter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Style Override</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGraphicalFilter(GraphicalFilter object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node Mapping Style Override</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node Mapping Style Override</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNodeMappingStyleOverride(NodeMappingStyleOverride object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>By Depth</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>By Depth</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseByDepth(ByDepth object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>By Edge Number</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>By Edge Number</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseByEdgeNumber(ByEdgeNumber object) {
+	public T caseStyleOverride(StyleOverride object) {
 		return null;
 	}
 
@@ -263,51 +181,6 @@ public class SemanticZoomSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAction(Action object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModelReference(ModelReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>As Cs Mapping Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>As Cs Mapping Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAsCsMappingReference(AsCsMappingReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node Mapping Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node Mapping Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNodeMappingReference(NodeMappingReference object) {
 		return null;
 	}
 

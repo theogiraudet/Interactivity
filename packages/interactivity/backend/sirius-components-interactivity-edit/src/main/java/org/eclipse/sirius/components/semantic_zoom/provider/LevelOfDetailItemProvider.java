@@ -61,41 +61,57 @@ public class LevelOfDetailItemProvider extends ItemProviderAdapter implements IE
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addReferencesPropertyDescriptor(object);
-			addIdPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
+			addStyleOverridesPropertyDescriptor(object);
+			addHiddenASElementsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the References feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addReferencesPropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Action_references_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Action_references_feature",
-								"_UI_Action_type"),
-						InteractivityPackage.Literals.ACTION__REFERENCES, true, false, true, null, null, null));
+						getResourceLocator(), getString("_UI_Action_name_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Action_name_feature", "_UI_Action_type"),
+						InteractivityPackage.Literals.ACTION__NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Id feature.
+	 * This adds a property descriptor for the Style Overrides feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_LevelOfDetail_id_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_LevelOfDetail_id_feature",
-								"_UI_LevelOfDetail_type"),
-						SemanticZoomPackage.Literals.LEVEL_OF_DETAIL__ID, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	protected void addStyleOverridesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_LevelOfDetail_styleOverrides_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_LevelOfDetail_styleOverrides_feature",
+						"_UI_LevelOfDetail_type"),
+				SemanticZoomPackage.Literals.LEVEL_OF_DETAIL__STYLE_OVERRIDES, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Hidden AS Elements feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHiddenASElementsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_LevelOfDetail_hiddenASElements_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_LevelOfDetail_hiddenASElements_feature",
+						"_UI_LevelOfDetail_type"),
+				SemanticZoomPackage.Literals.LEVEL_OF_DETAIL__HIDDEN_AS_ELEMENTS, true, false, false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -127,7 +143,7 @@ public class LevelOfDetailItemProvider extends ItemProviderAdapter implements IE
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((LevelOfDetail) object).getId();
+		String label = ((LevelOfDetail) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_LevelOfDetail_type")
 				: getString("_UI_LevelOfDetail_type") + " " + label;
 	}
@@ -144,7 +160,8 @@ public class LevelOfDetailItemProvider extends ItemProviderAdapter implements IE
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(LevelOfDetail.class)) {
-		case SemanticZoomPackage.LEVEL_OF_DETAIL__ID:
+		case SemanticZoomPackage.LEVEL_OF_DETAIL__NAME:
+		case SemanticZoomPackage.LEVEL_OF_DETAIL__HIDDEN_AS_ELEMENTS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

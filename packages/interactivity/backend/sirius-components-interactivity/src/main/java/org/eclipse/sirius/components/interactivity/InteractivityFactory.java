@@ -41,15 +41,6 @@ public interface InteractivityFactory extends EFactory {
 	Interactivity createInteractivity();
 
 	/**
-	 * Returns a new object of class '<em>Diagram Editor</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Diagram Editor</em>'.
-	 * @generated
-	 */
-	DiagramEditor createDiagramEditor();
-
-	/**
 	 * Returns a new object of class '<em>Graphic Zoom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,6 +57,15 @@ public interface InteractivityFactory extends EFactory {
 	 * @generated
 	 */
 	ZoomLevel createZoomLevel();
+
+	/**
+	 * Returns a new object of class '<em>Diagram Editor</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diagram Editor</em>'.
+	 * @generated
+	 */
+	DiagramEditor createDiagramEditor();
 
 	/**
 	 * Returns the package supported by this factory.

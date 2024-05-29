@@ -77,13 +77,22 @@ public interface InteractivityPackage extends EPackage {
 	int INTERACTIVITY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Interactive Elements</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Domain Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERACTIVITY__INTERACTIVE_ELEMENTS = 0;
+	int INTERACTIVITY__DOMAIN_ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Diagram Editors</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERACTIVITY__DIAGRAM_EDITORS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Interactivity</em>' class.
@@ -92,7 +101,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERACTIVITY_FEATURE_COUNT = 1;
+	int INTERACTIVITY_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Interactivity</em>' class.
@@ -104,52 +113,6 @@ public interface InteractivityPackage extends EPackage {
 	int INTERACTIVITY_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.InteractiveElement <em>Interactive Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.InteractiveElement
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getInteractiveElement()
-	 * @generated
-	 */
-	int INTERACTIVE_ELEMENT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Tools</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERACTIVE_ELEMENT__TOOLS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Features</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERACTIVE_ELEMENT__FEATURES = 1;
-
-	/**
-	 * The number of structural features of the '<em>Interactive Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERACTIVE_ELEMENT_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Interactive Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERACTIVE_ELEMENT_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.Interaction <em>Interaction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -157,16 +120,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getInteraction()
 	 * @generated
 	 */
-	int INTERACTION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERACTION__EVENTS = 0;
+	int INTERACTION = 1;
 
 	/**
 	 * The number of structural features of the '<em>Interaction</em>' class.
@@ -175,7 +129,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERACTION_FEATURE_COUNT = 1;
+	int INTERACTION_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Interaction</em>' class.
@@ -187,43 +141,6 @@ public interface InteractivityPackage extends EPackage {
 	int INTERACTION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.ObservableEvent <em>Observable Event</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.ObservableEvent
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getObservableEvent()
-	 * @generated
-	 */
-	int OBSERVABLE_EVENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Actions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBSERVABLE_EVENT__ACTIONS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Observable Event</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBSERVABLE_EVENT_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Observable Event</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBSERVABLE_EVENT_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.Action <em>Action</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,16 +148,16 @@ public interface InteractivityPackage extends EPackage {
 	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getAction()
 	 * @generated
 	 */
-	int ACTION = 4;
+	int ACTION = 2;
 
 	/**
-	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__REFERENCES = 0;
+	int ACTION__NAME = 0;
 
 	/**
 	 * The number of structural features of the '<em>Action</em>' class.
@@ -268,16 +185,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getInteractiveFeature()
 	 * @generated
 	 */
-	int INTERACTIVE_FEATURE = 5;
-
-	/**
-	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERACTIVE_FEATURE__ACTIONS = 0;
+	int INTERACTIVE_FEATURE = 3;
 
 	/**
 	 * The number of structural features of the '<em>Interactive Feature</em>' class.
@@ -286,7 +194,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERACTIVE_FEATURE_FEATURE_COUNT = 1;
+	int INTERACTIVE_FEATURE_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Interactive Feature</em>' class.
@@ -298,32 +206,133 @@ public interface InteractivityPackage extends EPackage {
 	int INTERACTIVE_FEATURE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.ModelReference <em>Model Reference</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.GraphicZoomImpl <em>Graphic Zoom</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.ModelReference
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getModelReference()
+	 * @see org.eclipse.sirius.components.interactivity.impl.GraphicZoomImpl
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getGraphicZoom()
 	 * @generated
 	 */
-	int MODEL_REFERENCE = 6;
+	int GRAPHIC_ZOOM = 4;
 
 	/**
-	 * The number of structural features of the '<em>Model Reference</em>' class.
+	 * The feature id for the '<em><b>Levels</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_REFERENCE_FEATURE_COUNT = 0;
+	int GRAPHIC_ZOOM__LEVELS = INTERACTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Model Reference</em>' class.
+	 * The number of structural features of the '<em>Graphic Zoom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_REFERENCE_OPERATION_COUNT = 0;
+	int GRAPHIC_ZOOM_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Graphic Zoom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_ZOOM_OPERATION_COUNT = INTERACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.Command <em>Command</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.Command
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getCommand()
+	 * @generated
+	 */
+	int COMMAND = 6;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND__ACTIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Command</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Command</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.ZoomLevelImpl <em>Zoom Level</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.impl.ZoomLevelImpl
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getZoomLevel()
+	 * @generated
+	 */
+	int ZOOM_LEVEL = 5;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ZOOM_LEVEL__ACTIONS = COMMAND__ACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ZOOM_LEVEL__LEVEL = COMMAND_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Actions To Trigger</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ZOOM_LEVEL__ACTIONS_TO_TRIGGER = COMMAND_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Zoom Level</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ZOOM_LEVEL_FEATURE_COUNT = COMMAND_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Zoom Level</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ZOOM_LEVEL_OPERATION_COUNT = COMMAND_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl <em>Diagram Editor</em>}' class.
@@ -336,31 +345,31 @@ public interface InteractivityPackage extends EPackage {
 	int DIAGRAM_EDITOR = 7;
 
 	/**
-	 * The feature id for the '<em><b>Tools</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Interactive Features</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM_EDITOR__TOOLS = INTERACTIVE_ELEMENT__TOOLS;
+	int DIAGRAM_EDITOR__INTERACTIVE_FEATURES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Features</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Interactions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM_EDITOR__FEATURES = INTERACTIVE_ELEMENT__FEATURES;
+	int DIAGRAM_EDITOR__INTERACTIONS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Diagram Reference</b></em>' reference.
+	 * The feature id for the '<em><b>Diagram Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM_EDITOR__DIAGRAM_REFERENCE = INTERACTIVE_ELEMENT_FEATURE_COUNT + 0;
+	int DIAGRAM_EDITOR__DIAGRAM_DEFINITION = 2;
 
 	/**
 	 * The number of structural features of the '<em>Diagram Editor</em>' class.
@@ -369,7 +378,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM_EDITOR_FEATURE_COUNT = INTERACTIVE_ELEMENT_FEATURE_COUNT + 1;
+	int DIAGRAM_EDITOR_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Diagram Editor</em>' class.
@@ -378,202 +387,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM_EDITOR_OPERATION_COUNT = INTERACTIVE_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.GraphicZoomImpl <em>Graphic Zoom</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.impl.GraphicZoomImpl
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getGraphicZoom()
-	 * @generated
-	 */
-	int GRAPHIC_ZOOM = 8;
-
-	/**
-	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GRAPHIC_ZOOM__EVENTS = INTERACTION__EVENTS;
-
-	/**
-	 * The number of structural features of the '<em>Graphic Zoom</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GRAPHIC_ZOOM_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Graphic Zoom</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GRAPHIC_ZOOM_OPERATION_COUNT = INTERACTION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.ZoomLevelImpl <em>Zoom Level</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.impl.ZoomLevelImpl
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getZoomLevel()
-	 * @generated
-	 */
-	int ZOOM_LEVEL = 9;
-
-	/**
-	 * The feature id for the '<em><b>Actions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ZOOM_LEVEL__ACTIONS = OBSERVABLE_EVENT__ACTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Level</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ZOOM_LEVEL__LEVEL = OBSERVABLE_EVENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Zoom Level</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ZOOM_LEVEL_FEATURE_COUNT = OBSERVABLE_EVENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Zoom Level</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ZOOM_LEVEL_OPERATION_COUNT = OBSERVABLE_EVENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.AbstractSyntaxReference <em>Abstract Syntax Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.AbstractSyntaxReference
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getAbstractSyntaxReference()
-	 * @generated
-	 */
-	int ABSTRACT_SYNTAX_REFERENCE = 10;
-
-	/**
-	 * The number of structural features of the '<em>Abstract Syntax Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_SYNTAX_REFERENCE_FEATURE_COUNT = MODEL_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Abstract Syntax Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_SYNTAX_REFERENCE_OPERATION_COUNT = MODEL_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference <em>Concrete Syntax Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getConcreteSyntaxReference()
-	 * @generated
-	 */
-	int CONCRETE_SYNTAX_REFERENCE = 11;
-
-	/**
-	 * The number of structural features of the '<em>Concrete Syntax Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCRETE_SYNTAX_REFERENCE_FEATURE_COUNT = MODEL_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Concrete Syntax Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCRETE_SYNTAX_REFERENCE_OPERATION_COUNT = MODEL_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.AsCsMappingReference <em>As Cs Mapping Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.AsCsMappingReference
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getAsCsMappingReference()
-	 * @generated
-	 */
-	int AS_CS_MAPPING_REFERENCE = 12;
-
-	/**
-	 * The number of structural features of the '<em>As Cs Mapping Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS_CS_MAPPING_REFERENCE_FEATURE_COUNT = MODEL_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>As Cs Mapping Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AS_CS_MAPPING_REFERENCE_OPERATION_COUNT = MODEL_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.NodeMappingReference <em>Node Mapping Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.sirius.components.interactivity.NodeMappingReference
-	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getNodeMappingReference()
-	 * @generated
-	 */
-	int NODE_MAPPING_REFERENCE = 13;
-
-	/**
-	 * The number of structural features of the '<em>Node Mapping Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_MAPPING_REFERENCE_FEATURE_COUNT = AS_CS_MAPPING_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Node Mapping Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_MAPPING_REFERENCE_OPERATION_COUNT = AS_CS_MAPPING_REFERENCE_OPERATION_COUNT + 0;
+	int DIAGRAM_EDITOR_OPERATION_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Interactivity <em>Interactivity</em>}'.
@@ -586,47 +400,26 @@ public interface InteractivityPackage extends EPackage {
 	EClass getInteractivity();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.Interactivity#getInteractiveElements <em>Interactive Elements</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.components.interactivity.Interactivity#getDomainId <em>Domain Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Interactive Elements</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.Interactivity#getInteractiveElements()
+	 * @return the meta object for the attribute '<em>Domain Id</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Interactivity#getDomainId()
 	 * @see #getInteractivity()
 	 * @generated
 	 */
-	EReference getInteractivity_InteractiveElements();
+	EAttribute getInteractivity_DomainId();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.InteractiveElement <em>Interactive Element</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.Interactivity#getDiagramEditors <em>Diagram Editors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Interactive Element</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.InteractiveElement
+	 * @return the meta object for the containment reference list '<em>Diagram Editors</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Interactivity#getDiagramEditors()
+	 * @see #getInteractivity()
 	 * @generated
 	 */
-	EClass getInteractiveElement();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.InteractiveElement#getTools <em>Tools</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Tools</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.InteractiveElement#getTools()
-	 * @see #getInteractiveElement()
-	 * @generated
-	 */
-	EReference getInteractiveElement_Tools();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.InteractiveElement#getFeatures <em>Features</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Features</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.InteractiveElement#getFeatures()
-	 * @see #getInteractiveElement()
-	 * @generated
-	 */
-	EReference getInteractiveElement_Features();
+	EReference getInteractivity_DiagramEditors();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Interaction <em>Interaction</em>}'.
@@ -639,38 +432,6 @@ public interface InteractivityPackage extends EPackage {
 	EClass getInteraction();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.Interaction#getEvents <em>Events</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Events</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.Interaction#getEvents()
-	 * @see #getInteraction()
-	 * @generated
-	 */
-	EReference getInteraction_Events();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.ObservableEvent <em>Observable Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Observable Event</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.ObservableEvent
-	 * @generated
-	 */
-	EClass getObservableEvent();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.sirius.components.interactivity.ObservableEvent#getActions <em>Actions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Actions</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.ObservableEvent#getActions()
-	 * @see #getObservableEvent()
-	 * @generated
-	 */
-	EReference getObservableEvent_Actions();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Action <em>Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -681,15 +442,15 @@ public interface InteractivityPackage extends EPackage {
 	EClass getAction();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.Action#getReferences <em>References</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.components.interactivity.Action#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>References</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.Action#getReferences()
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Action#getName()
 	 * @see #getAction()
 	 * @generated
 	 */
-	EReference getAction_References();
+	EAttribute getAction_Name();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.InteractiveFeature <em>Interactive Feature</em>}'.
@@ -702,48 +463,6 @@ public interface InteractivityPackage extends EPackage {
 	EClass getInteractiveFeature();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.InteractiveFeature#getActions <em>Actions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Actions</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.InteractiveFeature#getActions()
-	 * @see #getInteractiveFeature()
-	 * @generated
-	 */
-	EReference getInteractiveFeature_Actions();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.ModelReference <em>Model Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model Reference</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.ModelReference
-	 * @generated
-	 */
-	EClass getModelReference();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.DiagramEditor <em>Diagram Editor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Diagram Editor</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor
-	 * @generated
-	 */
-	EClass getDiagramEditor();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getDiagramReference <em>Diagram Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Diagram Reference</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor#getDiagramReference()
-	 * @see #getDiagramEditor()
-	 * @generated
-	 */
-	EReference getDiagramEditor_DiagramReference();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.GraphicZoom <em>Graphic Zoom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -752,6 +471,17 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getGraphicZoom();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.GraphicZoom#getLevels <em>Levels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Levels</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.GraphicZoom#getLevels()
+	 * @see #getGraphicZoom()
+	 * @generated
+	 */
+	EReference getGraphicZoom_Levels();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.ZoomLevel <em>Zoom Level</em>}'.
@@ -775,44 +505,79 @@ public interface InteractivityPackage extends EPackage {
 	EAttribute getZoomLevel_Level();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.AbstractSyntaxReference <em>Abstract Syntax Reference</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.sirius.components.interactivity.ZoomLevel#getActionsToTrigger <em>Actions To Trigger</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Syntax Reference</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.AbstractSyntaxReference
+	 * @return the meta object for the reference list '<em>Actions To Trigger</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.ZoomLevel#getActionsToTrigger()
+	 * @see #getZoomLevel()
 	 * @generated
 	 */
-	EClass getAbstractSyntaxReference();
+	EReference getZoomLevel_ActionsToTrigger();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference <em>Concrete Syntax Reference</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Command <em>Command</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Concrete Syntax Reference</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference
+	 * @return the meta object for class '<em>Command</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Command
 	 * @generated
 	 */
-	EClass getConcreteSyntaxReference();
+	EClass getCommand();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.AsCsMappingReference <em>As Cs Mapping Reference</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.sirius.components.interactivity.Command#getActions <em>Actions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>As Cs Mapping Reference</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.AsCsMappingReference
+	 * @return the meta object for the reference list '<em>Actions</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Command#getActions()
+	 * @see #getCommand()
 	 * @generated
 	 */
-	EClass getAsCsMappingReference();
+	EReference getCommand_Actions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.NodeMappingReference <em>Node Mapping Reference</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.DiagramEditor <em>Diagram Editor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Node Mapping Reference</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.NodeMappingReference
+	 * @return the meta object for class '<em>Diagram Editor</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor
 	 * @generated
 	 */
-	EClass getNodeMappingReference();
+	EClass getDiagramEditor();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getInteractiveFeatures <em>Interactive Features</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Interactive Features</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor#getInteractiveFeatures()
+	 * @see #getDiagramEditor()
+	 * @generated
+	 */
+	EReference getDiagramEditor_InteractiveFeatures();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getInteractions <em>Interactions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Interactions</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor#getInteractions()
+	 * @see #getDiagramEditor()
+	 * @generated
+	 */
+	EReference getDiagramEditor_Interactions();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getDiagramDefinition <em>Diagram Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Diagram Definition</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor#getDiagramDefinition()
+	 * @see #getDiagramEditor()
+	 * @generated
+	 */
+	EReference getDiagramEditor_DiagramDefinition();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -848,38 +613,20 @@ public interface InteractivityPackage extends EPackage {
 		EClass INTERACTIVITY = eINSTANCE.getInteractivity();
 
 		/**
-		 * The meta object literal for the '<em><b>Interactive Elements</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Domain Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INTERACTIVITY__INTERACTIVE_ELEMENTS = eINSTANCE.getInteractivity_InteractiveElements();
+		EAttribute INTERACTIVITY__DOMAIN_ID = eINSTANCE.getInteractivity_DomainId();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.InteractiveElement <em>Interactive Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.sirius.components.interactivity.InteractiveElement
-		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getInteractiveElement()
-		 * @generated
-		 */
-		EClass INTERACTIVE_ELEMENT = eINSTANCE.getInteractiveElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Tools</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Diagram Editors</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INTERACTIVE_ELEMENT__TOOLS = eINSTANCE.getInteractiveElement_Tools();
-
-		/**
-		 * The meta object literal for the '<em><b>Features</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INTERACTIVE_ELEMENT__FEATURES = eINSTANCE.getInteractiveElement_Features();
+		EReference INTERACTIVITY__DIAGRAM_EDITORS = eINSTANCE.getInteractivity_DiagramEditors();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.Interaction <em>Interaction</em>}' class.
@@ -892,32 +639,6 @@ public interface InteractivityPackage extends EPackage {
 		EClass INTERACTION = eINSTANCE.getInteraction();
 
 		/**
-		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INTERACTION__EVENTS = eINSTANCE.getInteraction_Events();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.ObservableEvent <em>Observable Event</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.sirius.components.interactivity.ObservableEvent
-		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getObservableEvent()
-		 * @generated
-		 */
-		EClass OBSERVABLE_EVENT = eINSTANCE.getObservableEvent();
-
-		/**
-		 * The meta object literal for the '<em><b>Actions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OBSERVABLE_EVENT__ACTIONS = eINSTANCE.getObservableEvent_Actions();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.Action <em>Action</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -928,12 +649,12 @@ public interface InteractivityPackage extends EPackage {
 		EClass ACTION = eINSTANCE.getAction();
 
 		/**
-		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ACTION__REFERENCES = eINSTANCE.getAction_References();
+		EAttribute ACTION__NAME = eINSTANCE.getAction_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.InteractiveFeature <em>Interactive Feature</em>}' class.
@@ -946,42 +667,6 @@ public interface InteractivityPackage extends EPackage {
 		EClass INTERACTIVE_FEATURE = eINSTANCE.getInteractiveFeature();
 
 		/**
-		 * The meta object literal for the '<em><b>Actions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INTERACTIVE_FEATURE__ACTIONS = eINSTANCE.getInteractiveFeature_Actions();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.ModelReference <em>Model Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.sirius.components.interactivity.ModelReference
-		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getModelReference()
-		 * @generated
-		 */
-		EClass MODEL_REFERENCE = eINSTANCE.getModelReference();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl <em>Diagram Editor</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl
-		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getDiagramEditor()
-		 * @generated
-		 */
-		EClass DIAGRAM_EDITOR = eINSTANCE.getDiagramEditor();
-
-		/**
-		 * The meta object literal for the '<em><b>Diagram Reference</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DIAGRAM_EDITOR__DIAGRAM_REFERENCE = eINSTANCE.getDiagramEditor_DiagramReference();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.GraphicZoomImpl <em>Graphic Zoom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -990,6 +675,14 @@ public interface InteractivityPackage extends EPackage {
 		 * @generated
 		 */
 		EClass GRAPHIC_ZOOM = eINSTANCE.getGraphicZoom();
+
+		/**
+		 * The meta object literal for the '<em><b>Levels</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GRAPHIC_ZOOM__LEVELS = eINSTANCE.getGraphicZoom_Levels();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.ZoomLevelImpl <em>Zoom Level</em>}' class.
@@ -1010,44 +703,64 @@ public interface InteractivityPackage extends EPackage {
 		EAttribute ZOOM_LEVEL__LEVEL = eINSTANCE.getZoomLevel_Level();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.AbstractSyntaxReference <em>Abstract Syntax Reference</em>}' class.
+		 * The meta object literal for the '<em><b>Actions To Trigger</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.sirius.components.interactivity.AbstractSyntaxReference
-		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getAbstractSyntaxReference()
 		 * @generated
 		 */
-		EClass ABSTRACT_SYNTAX_REFERENCE = eINSTANCE.getAbstractSyntaxReference();
+		EReference ZOOM_LEVEL__ACTIONS_TO_TRIGGER = eINSTANCE.getZoomLevel_ActionsToTrigger();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference <em>Concrete Syntax Reference</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.Command <em>Command</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference
-		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getConcreteSyntaxReference()
+		 * @see org.eclipse.sirius.components.interactivity.Command
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getCommand()
 		 * @generated
 		 */
-		EClass CONCRETE_SYNTAX_REFERENCE = eINSTANCE.getConcreteSyntaxReference();
+		EClass COMMAND = eINSTANCE.getCommand();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.AsCsMappingReference <em>As Cs Mapping Reference</em>}' class.
+		 * The meta object literal for the '<em><b>Actions</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.sirius.components.interactivity.AsCsMappingReference
-		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getAsCsMappingReference()
 		 * @generated
 		 */
-		EClass AS_CS_MAPPING_REFERENCE = eINSTANCE.getAsCsMappingReference();
+		EReference COMMAND__ACTIONS = eINSTANCE.getCommand_Actions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.NodeMappingReference <em>Node Mapping Reference</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl <em>Diagram Editor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.sirius.components.interactivity.NodeMappingReference
-		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getNodeMappingReference()
+		 * @see org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getDiagramEditor()
 		 * @generated
 		 */
-		EClass NODE_MAPPING_REFERENCE = eINSTANCE.getNodeMappingReference();
+		EClass DIAGRAM_EDITOR = eINSTANCE.getDiagramEditor();
+
+		/**
+		 * The meta object literal for the '<em><b>Interactive Features</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DIAGRAM_EDITOR__INTERACTIVE_FEATURES = eINSTANCE.getDiagramEditor_InteractiveFeatures();
+
+		/**
+		 * The meta object literal for the '<em><b>Interactions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DIAGRAM_EDITOR__INTERACTIONS = eINSTANCE.getDiagramEditor_Interactions();
+
+		/**
+		 * The meta object literal for the '<em><b>Diagram Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DIAGRAM_EDITOR__DIAGRAM_DEFINITION = eINSTANCE.getDiagramEditor_DiagramDefinition();
 
 	}
 

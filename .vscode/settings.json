@@ -11,5 +11,6 @@
   "[plaintext]": {
     "editor.formatOnSave": false
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "CodeGPT.apiKey": "OpenAI"
 }

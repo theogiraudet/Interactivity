@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright (c) 2021 Obeo.
+ This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v2.0
+ which accompanies this distribution, and is available at
+ https://www.eclipse.org/legal/epl-2.0/
+ 
+ SPDX-License-Identifier: EPL-2.0
+ 
+ Contributors:
+     Obeo - initial API and implementation
+-->
+
+<plugin
+      name="%pluginName"
+      id="sirius-components-semantic-zoom-edit"
+      version="1.0.0"
+      provider-name="%providerName"
+      class="org.eclipse.sirius.components.semantic_zoom.provider.SemanticZoomEditPlugin$Implementation">
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="sirius-components-semantic-zoom" export="true"/>
+      <import plugin="org.eclipse.emf.edit" export="true"/>
+      <import plugin="sirius-components-view-diagram" export="true"/>
+      <import plugin="sirius-components-view-diagram-edit" export="true"/>
+      <import plugin="sirius-components-interactivity" export="true"/>
+      <import plugin="sirius-components-interactivity-edit" export="true"/>
+      <import plugin="sirius-components-view" export="true"/>
+      <import plugin="sirius-components-view-edit" export="true"/>
+   </requires>
+
+   <runtime>
+      <library name=".">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated semantic_zoom -->
+      <factory
+            uri="http://www.eclipse.org/sirius-web/semantic_zoom"
+            class="org.eclipse.sirius.components.semantic_zoom.provider.SemanticZoomItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.childCreationExtenders">
+      <!-- @generated semantic_zoom -->
+      <extender
+            uri="http://www.eclipse.org/sirius-web/interactivity"
+            class="org.eclipse.sirius.components.semantic_zoom.provider.SemanticZoomItemProviderAdapterFactory$InteractivityChildCreationExtender"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated interactivity -->
+      <factory
+            uri="http://www.eclipse.org/sirius-web/interactivity"
+            class="org.eclipse.sirius.components.interactivity.provider.InteractivityItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+</plugin>

@@ -70,12 +70,12 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 		switch (eClass.getClassifierID()) {
 		case InteractivityPackage.INTERACTIVITY:
 			return createInteractivity();
-		case InteractivityPackage.DIAGRAM_EDITOR:
-			return createDiagramEditor();
 		case InteractivityPackage.GRAPHIC_ZOOM:
 			return createGraphicZoom();
 		case InteractivityPackage.ZOOM_LEVEL:
 			return createZoomLevel();
+		case InteractivityPackage.DIAGRAM_EDITOR:
+			return createDiagramEditor();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -98,17 +98,6 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public DiagramEditor createDiagramEditor() {
-		DiagramEditorImpl diagramEditor = new DiagramEditorImpl();
-		return diagramEditor;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public GraphicZoom createGraphicZoom() {
 		GraphicZoomImpl graphicZoom = new GraphicZoomImpl();
 		return graphicZoom;
@@ -123,6 +112,17 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 	public ZoomLevel createZoomLevel() {
 		ZoomLevelImpl zoomLevel = new ZoomLevelImpl();
 		return zoomLevel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DiagramEditor createDiagramEditor() {
+		DiagramEditorImpl diagramEditor = new DiagramEditorImpl();
+		return diagramEditor;
 	}
 
 	/**

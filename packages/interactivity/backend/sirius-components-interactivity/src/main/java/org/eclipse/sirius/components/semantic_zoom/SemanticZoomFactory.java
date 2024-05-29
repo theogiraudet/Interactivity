@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- *
+ * 
  * SPDX-License-Identifier: EPL-2.0
- *
+ * 
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -50,31 +50,13 @@ public interface SemanticZoomFactory extends EFactory {
 	LevelOfDetail createLevelOfDetail();
 
 	/**
-	 * Returns a new object of class '<em>Node Mapping Style Override</em>'.
+	 * Returns a new object of class '<em>Style Override</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Node Mapping Style Override</em>'.
+	 * @return a new object of class '<em>Style Override</em>'.
 	 * @generated
 	 */
-	NodeMappingStyleOverride createNodeMappingStyleOverride();
-
-	/**
-	 * Returns a new object of class '<em>By Depth</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>By Depth</em>'.
-	 * @generated
-	 */
-	ByDepth createByDepth();
-
-	/**
-	 * Returns a new object of class '<em>By Edge Number</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>By Edge Number</em>'.
-	 * @generated
-	 */
-	ByEdgeNumber createByEdgeNumber();
+	StyleOverride createStyleOverride();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -13,6 +13,8 @@
 package org.eclipse.sirius.web.infrastructure.graphql;
 
 import org.eclipse.sirius.components.graphql.api.ReflectiveTypeResolver;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import graphql.schema.TypeResolver;
@@ -25,7 +27,8 @@ import graphql.schema.idl.WiringFactory;
  *
  * @author sbegaudeau
  */
-@Service
+//@Order
+//@Service
 public class GraphQLWiringFactory implements WiringFactory {
 
     @Override

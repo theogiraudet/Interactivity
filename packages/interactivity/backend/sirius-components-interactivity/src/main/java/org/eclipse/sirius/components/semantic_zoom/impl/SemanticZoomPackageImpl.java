@@ -18,14 +18,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.semantic_zoom.ByDepth;
-import org.eclipse.sirius.components.semantic_zoom.ByEdgeNumber;
-import org.eclipse.sirius.components.semantic_zoom.GraphicalFilter;
 import org.eclipse.sirius.components.semantic_zoom.LevelOfDetail;
-import org.eclipse.sirius.components.semantic_zoom.NodeMappingStyleOverride;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoom;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoomFactory;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
+import org.eclipse.sirius.components.semantic_zoom.StyleOverride;
 import org.eclipse.sirius.components.view.ViewPackage;
 import org.eclipse.sirius.components.view.diagram.DiagramPackage;
 
@@ -55,28 +52,7 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass graphicalFilterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nodeMappingStyleOverrideEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass byDepthEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass byEdgeNumberEClass = null;
+	private EClass styleOverrideEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -163,6 +139,16 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 	 * @generated
 	 */
 	@Override
+	public EReference getSemanticZoom_Levels() {
+		return (EReference) semanticZoomEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getLevelOfDetail() {
 		return levelOfDetailEClass;
 	}
@@ -173,8 +159,8 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 	 * @generated
 	 */
 	@Override
-	public EAttribute getLevelOfDetail_Id() {
-		return (EAttribute) levelOfDetailEClass.getEStructuralFeatures().get(0);
+	public EReference getLevelOfDetail_StyleOverrides() {
+		return (EReference) levelOfDetailEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -183,8 +169,8 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 	 * @generated
 	 */
 	@Override
-	public EClass getGraphicalFilter() {
-		return graphicalFilterEClass;
+	public EAttribute getLevelOfDetail_HiddenASElements() {
+		return (EAttribute) levelOfDetailEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -193,8 +179,8 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 	 * @generated
 	 */
 	@Override
-	public EClass getNodeMappingStyleOverride() {
-		return nodeMappingStyleOverrideEClass;
+	public EClass getStyleOverride() {
+		return styleOverrideEClass;
 	}
 
 	/**
@@ -203,8 +189,8 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 	 * @generated
 	 */
 	@Override
-	public EReference getNodeMappingStyleOverride_NodeDescription() {
-		return (EReference) nodeMappingStyleOverrideEClass.getEStructuralFeatures().get(0);
+	public EAttribute getStyleOverride_AsElements() {
+		return (EAttribute) styleOverrideEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -213,38 +199,8 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 	 * @generated
 	 */
 	@Override
-	public EReference getNodeMappingStyleOverride_Style() {
-		return (EReference) nodeMappingStyleOverrideEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getNodeMappingStyleOverride_Filters() {
-		return (EReference) nodeMappingStyleOverrideEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getByDepth() {
-		return byDepthEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getByEdgeNumber() {
-		return byEdgeNumberEClass;
+	public EReference getStyleOverride_Style() {
+		return (EReference) styleOverrideEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -278,20 +234,15 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 
 		// Create classes and their features
 		semanticZoomEClass = createEClass(SEMANTIC_ZOOM);
+		createEReference(semanticZoomEClass, SEMANTIC_ZOOM__LEVELS);
 
 		levelOfDetailEClass = createEClass(LEVEL_OF_DETAIL);
-		createEAttribute(levelOfDetailEClass, LEVEL_OF_DETAIL__ID);
+		createEReference(levelOfDetailEClass, LEVEL_OF_DETAIL__STYLE_OVERRIDES);
+		createEAttribute(levelOfDetailEClass, LEVEL_OF_DETAIL__HIDDEN_AS_ELEMENTS);
 
-		graphicalFilterEClass = createEClass(GRAPHICAL_FILTER);
-
-		nodeMappingStyleOverrideEClass = createEClass(NODE_MAPPING_STYLE_OVERRIDE);
-		createEReference(nodeMappingStyleOverrideEClass, NODE_MAPPING_STYLE_OVERRIDE__NODE_DESCRIPTION);
-		createEReference(nodeMappingStyleOverrideEClass, NODE_MAPPING_STYLE_OVERRIDE__STYLE);
-		createEReference(nodeMappingStyleOverrideEClass, NODE_MAPPING_STYLE_OVERRIDE__FILTERS);
-
-		byDepthEClass = createEClass(BY_DEPTH);
-
-		byEdgeNumberEClass = createEClass(BY_EDGE_NUMBER);
+		styleOverrideEClass = createEClass(STYLE_OVERRIDE);
+		createEAttribute(styleOverrideEClass, STYLE_OVERRIDE__AS_ELEMENTS);
+		createEReference(styleOverrideEClass, STYLE_OVERRIDE__STYLE);
 	}
 
 	/**
@@ -331,38 +282,31 @@ public class SemanticZoomPackageImpl extends EPackageImpl implements SemanticZoo
 		// Add supertypes to classes
 		semanticZoomEClass.getESuperTypes().add(theInteractivityPackage.getInteractiveFeature());
 		levelOfDetailEClass.getESuperTypes().add(theInteractivityPackage.getAction());
-		nodeMappingStyleOverrideEClass.getESuperTypes().add(theInteractivityPackage.getNodeMappingReference());
-		byDepthEClass.getESuperTypes().add(this.getGraphicalFilter());
-		byEdgeNumberEClass.getESuperTypes().add(this.getGraphicalFilter());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(semanticZoomEClass, SemanticZoom.class, "SemanticZoom", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSemanticZoom_Levels(), this.getLevelOfDetail(), null, "levels", null, 0, -1,
+				SemanticZoom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(levelOfDetailEClass, LevelOfDetail.class, "LevelOfDetail", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLevelOfDetail_Id(), ecorePackage.getEString(), "id", null, 1, 1, LevelOfDetail.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLevelOfDetail_StyleOverrides(), this.getStyleOverride(), null, "styleOverrides", null, 0, -1,
+				LevelOfDetail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLevelOfDetail_HiddenASElements(), ecorePackage.getEString(), "hiddenASElements", null, 0, 1,
+				LevelOfDetail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(graphicalFilterEClass, GraphicalFilter.class, "GraphicalFilter", IS_ABSTRACT, IS_INTERFACE,
+		initEClass(styleOverrideEClass, StyleOverride.class, "StyleOverride", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(nodeMappingStyleOverrideEClass, NodeMappingStyleOverride.class, "NodeMappingStyleOverride",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNodeMappingStyleOverride_NodeDescription(), theDiagramPackage.getNodeDescription(), null,
-				"nodeDescription", null, 1, 1, NodeMappingStyleOverride.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNodeMappingStyleOverride_Style(), theDiagramPackage.getNodeStyleDescription(), null, "style",
-				null, 1, 1, NodeMappingStyleOverride.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNodeMappingStyleOverride_Filters(), this.getGraphicalFilter(), null, "filters", null, 0, -1,
-				NodeMappingStyleOverride.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(byDepthEClass, ByDepth.class, "ByDepth", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(byEdgeNumberEClass, ByEdgeNumber.class, "ByEdgeNumber", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStyleOverride_AsElements(), ecorePackage.getEString(), "asElements", null, 1, 1,
+				StyleOverride.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getStyleOverride_Style(), theDiagramPackage.getNodeStyleDescription(), null, "style", null, 1, 1,
+				StyleOverride.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

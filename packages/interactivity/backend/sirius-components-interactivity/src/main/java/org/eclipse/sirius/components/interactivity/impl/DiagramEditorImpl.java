@@ -37,43 +37,43 @@ import org.eclipse.sirius.components.view.diagram.DiagramDescription;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl#getTools <em>Tools</em>}</li>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl#getFeatures <em>Features</em>}</li>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl#getDiagramReference <em>Diagram Reference</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl#getInteractiveFeatures <em>Interactive Features</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl#getInteractions <em>Interactions</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DiagramEditorImpl#getDiagramDefinition <em>Diagram Definition</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements DiagramEditor {
 	/**
-	 * The cached value of the '{@link #getTools() <em>Tools</em>}' containment reference list.
+	 * The cached value of the '{@link #getInteractiveFeatures() <em>Interactive Features</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTools()
+	 * @see #getInteractiveFeatures()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Interaction> tools;
+	protected EList<InteractiveFeature> interactiveFeatures;
 
 	/**
-	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
+	 * The cached value of the '{@link #getInteractions() <em>Interactions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFeatures()
+	 * @see #getInteractions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<InteractiveFeature> features;
+	protected EList<Interaction> interactions;
 
 	/**
-	 * The cached value of the '{@link #getDiagramReference() <em>Diagram Reference</em>}' reference.
+	 * The cached value of the '{@link #getDiagramDefinition() <em>Diagram Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDiagramReference()
+	 * @see #getDiagramDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected DiagramDescription diagramReference;
+	protected DiagramDescription diagramDefinition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -100,12 +100,12 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	 * @generated
 	 */
 	@Override
-	public EList<Interaction> getTools() {
-		if (tools == null) {
-			tools = new EObjectContainmentEList<>(Interaction.class, this,
-					InteractivityPackage.DIAGRAM_EDITOR__TOOLS);
+	public EList<InteractiveFeature> getInteractiveFeatures() {
+		if (interactiveFeatures == null) {
+			interactiveFeatures = new EObjectContainmentEList<InteractiveFeature>(InteractiveFeature.class, this,
+					InteractivityPackage.DIAGRAM_EDITOR__INTERACTIVE_FEATURES);
 		}
-		return tools;
+		return interactiveFeatures;
 	}
 
 	/**
@@ -114,12 +114,12 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	 * @generated
 	 */
 	@Override
-	public EList<InteractiveFeature> getFeatures() {
-		if (features == null) {
-			features = new EObjectContainmentEList<>(InteractiveFeature.class, this,
-					InteractivityPackage.DIAGRAM_EDITOR__FEATURES);
+	public EList<Interaction> getInteractions() {
+		if (interactions == null) {
+			interactions = new EObjectContainmentEList<Interaction>(Interaction.class, this,
+					InteractivityPackage.DIAGRAM_EDITOR__INTERACTIONS);
 		}
-		return features;
+		return interactions;
 	}
 
 	/**
@@ -128,18 +128,18 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	 * @generated
 	 */
 	@Override
-	public DiagramDescription getDiagramReference() {
-		if (diagramReference != null && diagramReference.eIsProxy()) {
-			InternalEObject oldDiagramReference = (InternalEObject) diagramReference;
-			diagramReference = (DiagramDescription) eResolveProxy(oldDiagramReference);
-			if (diagramReference != oldDiagramReference) {
+	public DiagramDescription getDiagramDefinition() {
+		if (diagramDefinition != null && diagramDefinition.eIsProxy()) {
+			InternalEObject oldDiagramDefinition = (InternalEObject) diagramDefinition;
+			diagramDefinition = (DiagramDescription) eResolveProxy(oldDiagramDefinition);
+			if (diagramDefinition != oldDiagramDefinition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_REFERENCE, oldDiagramReference,
-							diagramReference));
+							InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_DEFINITION, oldDiagramDefinition,
+							diagramDefinition));
 			}
 		}
-		return diagramReference;
+		return diagramDefinition;
 	}
 
 	/**
@@ -147,8 +147,8 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DiagramDescription basicGetDiagramReference() {
-		return diagramReference;
+	public DiagramDescription basicGetDiagramDefinition() {
+		return diagramDefinition;
 	}
 
 	/**
@@ -157,12 +157,12 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	 * @generated
 	 */
 	@Override
-	public void setDiagramReference(DiagramDescription newDiagramReference) {
-		DiagramDescription oldDiagramReference = diagramReference;
-		diagramReference = newDiagramReference;
+	public void setDiagramDefinition(DiagramDescription newDiagramDefinition) {
+		DiagramDescription oldDiagramDefinition = diagramDefinition;
+		diagramDefinition = newDiagramDefinition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_REFERENCE, oldDiagramReference, diagramReference));
+					InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_DEFINITION, oldDiagramDefinition, diagramDefinition));
 	}
 
 	/**
@@ -173,10 +173,10 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case InteractivityPackage.DIAGRAM_EDITOR__TOOLS:
-			return ((InternalEList<?>) getTools()).basicRemove(otherEnd, msgs);
-		case InteractivityPackage.DIAGRAM_EDITOR__FEATURES:
-			return ((InternalEList<?>) getFeatures()).basicRemove(otherEnd, msgs);
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIVE_FEATURES:
+			return ((InternalEList<?>) getInteractiveFeatures()).basicRemove(otherEnd, msgs);
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIONS:
+			return ((InternalEList<?>) getInteractions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -189,14 +189,14 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case InteractivityPackage.DIAGRAM_EDITOR__TOOLS:
-			return getTools();
-		case InteractivityPackage.DIAGRAM_EDITOR__FEATURES:
-			return getFeatures();
-		case InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_REFERENCE:
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIVE_FEATURES:
+			return getInteractiveFeatures();
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIONS:
+			return getInteractions();
+		case InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_DEFINITION:
 			if (resolve)
-				return getDiagramReference();
-			return basicGetDiagramReference();
+				return getDiagramDefinition();
+			return basicGetDiagramDefinition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,16 +210,16 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case InteractivityPackage.DIAGRAM_EDITOR__TOOLS:
-			getTools().clear();
-			getTools().addAll((Collection<? extends Interaction>) newValue);
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIVE_FEATURES:
+			getInteractiveFeatures().clear();
+			getInteractiveFeatures().addAll((Collection<? extends InteractiveFeature>) newValue);
 			return;
-		case InteractivityPackage.DIAGRAM_EDITOR__FEATURES:
-			getFeatures().clear();
-			getFeatures().addAll((Collection<? extends InteractiveFeature>) newValue);
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIONS:
+			getInteractions().clear();
+			getInteractions().addAll((Collection<? extends Interaction>) newValue);
 			return;
-		case InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_REFERENCE:
-			setDiagramReference((DiagramDescription) newValue);
+		case InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_DEFINITION:
+			setDiagramDefinition((DiagramDescription) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -233,14 +233,14 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case InteractivityPackage.DIAGRAM_EDITOR__TOOLS:
-			getTools().clear();
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIVE_FEATURES:
+			getInteractiveFeatures().clear();
 			return;
-		case InteractivityPackage.DIAGRAM_EDITOR__FEATURES:
-			getFeatures().clear();
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIONS:
+			getInteractions().clear();
 			return;
-		case InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_REFERENCE:
-			setDiagramReference((DiagramDescription) null);
+		case InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_DEFINITION:
+			setDiagramDefinition((DiagramDescription) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -254,12 +254,12 @@ public class DiagramEditorImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case InteractivityPackage.DIAGRAM_EDITOR__TOOLS:
-			return tools != null && !tools.isEmpty();
-		case InteractivityPackage.DIAGRAM_EDITOR__FEATURES:
-			return features != null && !features.isEmpty();
-		case InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_REFERENCE:
-			return diagramReference != null;
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIVE_FEATURES:
+			return interactiveFeatures != null && !interactiveFeatures.isEmpty();
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIONS:
+			return interactions != null && !interactions.isEmpty();
+		case InteractivityPackage.DIAGRAM_EDITOR__DIAGRAM_DEFINITION:
+			return diagramDefinition != null;
 		}
 		return super.eIsSet(featureID);
 	}

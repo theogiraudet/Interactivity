@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.sirius.components.interactivity.Action;
+import org.eclipse.sirius.components.semantic_zoom.LevelOfDetail;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoom;
 import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
 
@@ -33,21 +33,21 @@ import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.semantic_zoom.impl.SemanticZoomImpl#getActions <em>Actions</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.semantic_zoom.impl.SemanticZoomImpl#getLevels <em>Levels</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class SemanticZoomImpl extends MinimalEObjectImpl.Container implements SemanticZoom {
 	/**
-	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * The cached value of the '{@link #getLevels() <em>Levels</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getActions()
+	 * @see #getLevels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Action> actions;
+	protected EList<LevelOfDetail> levels;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,12 +74,12 @@ public class SemanticZoomImpl extends MinimalEObjectImpl.Container implements Se
 	 * @generated
 	 */
 	@Override
-	public EList<Action> getActions() {
-		if (actions == null) {
-			actions = new EObjectContainmentEList<>(Action.class, this,
-					SemanticZoomPackage.SEMANTIC_ZOOM__ACTIONS);
+	public EList<LevelOfDetail> getLevels() {
+		if (levels == null) {
+			levels = new EObjectContainmentEList<>(LevelOfDetail.class, this,
+					SemanticZoomPackage.SEMANTIC_ZOOM__LEVELS);
 		}
-		return actions;
+		return levels;
 	}
 
 	/**
@@ -90,8 +90,8 @@ public class SemanticZoomImpl extends MinimalEObjectImpl.Container implements Se
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case SemanticZoomPackage.SEMANTIC_ZOOM__ACTIONS:
-			return ((InternalEList<?>) getActions()).basicRemove(otherEnd, msgs);
+		case SemanticZoomPackage.SEMANTIC_ZOOM__LEVELS:
+			return ((InternalEList<?>) getLevels()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -104,8 +104,8 @@ public class SemanticZoomImpl extends MinimalEObjectImpl.Container implements Se
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case SemanticZoomPackage.SEMANTIC_ZOOM__ACTIONS:
-			return getActions();
+		case SemanticZoomPackage.SEMANTIC_ZOOM__LEVELS:
+			return getLevels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,9 +119,9 @@ public class SemanticZoomImpl extends MinimalEObjectImpl.Container implements Se
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case SemanticZoomPackage.SEMANTIC_ZOOM__ACTIONS:
-			getActions().clear();
-			getActions().addAll((Collection<? extends Action>) newValue);
+		case SemanticZoomPackage.SEMANTIC_ZOOM__LEVELS:
+			getLevels().clear();
+			getLevels().addAll((Collection<? extends LevelOfDetail>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +135,8 @@ public class SemanticZoomImpl extends MinimalEObjectImpl.Container implements Se
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case SemanticZoomPackage.SEMANTIC_ZOOM__ACTIONS:
-			getActions().clear();
+		case SemanticZoomPackage.SEMANTIC_ZOOM__LEVELS:
+			getLevels().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -150,8 +150,8 @@ public class SemanticZoomImpl extends MinimalEObjectImpl.Container implements Se
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case SemanticZoomPackage.SEMANTIC_ZOOM__ACTIONS:
-			return actions != null && !actions.isEmpty();
+		case SemanticZoomPackage.SEMANTIC_ZOOM__LEVELS:
+			return levels != null && !levels.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

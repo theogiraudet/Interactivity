@@ -12,7 +12,6 @@
  */
 package org.eclipse.sirius.components.interactivity;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -20,28 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Interactive Feature</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.sirius.components.interactivity.InteractiveFeature#getActions <em>Actions</em>}</li>
- * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getInteractiveFeature()
  * @model interface="true" abstract="true"
  * @generated
  */
 public interface InteractiveFeature extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.Action}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actions</em>' containment reference list.
-	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getInteractiveFeature_Actions()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Action> getActions();
-
 } // InteractiveFeature

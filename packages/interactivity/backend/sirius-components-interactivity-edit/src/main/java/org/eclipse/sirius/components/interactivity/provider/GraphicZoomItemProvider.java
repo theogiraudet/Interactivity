@@ -77,7 +77,7 @@ public class GraphicZoomItemProvider extends ItemProviderAdapter implements IEdi
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(InteractivityPackage.Literals.INTERACTION__EVENTS);
+			childrenFeatures.add(InteractivityPackage.Literals.GRAPHIC_ZOOM__LEVELS);
 		}
 		return childrenFeatures;
 	}
@@ -139,7 +139,7 @@ public class GraphicZoomItemProvider extends ItemProviderAdapter implements IEdi
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(GraphicZoom.class)) {
-		case InteractivityPackage.GRAPHIC_ZOOM__EVENTS:
+		case InteractivityPackage.GRAPHIC_ZOOM__LEVELS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -157,7 +157,7 @@ public class GraphicZoomItemProvider extends ItemProviderAdapter implements IEdi
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTION__EVENTS,
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.GRAPHIC_ZOOM__LEVELS,
 				InteractivityFactory.eINSTANCE.createZoomLevel()));
 	}
 

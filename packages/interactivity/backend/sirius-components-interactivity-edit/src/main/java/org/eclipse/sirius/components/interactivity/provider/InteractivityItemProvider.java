@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -26,6 +27,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.sirius.components.interactivity.Interactivity;
@@ -61,8 +63,25 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addDomainIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Domain Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDomainIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Interactivity_domainId_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Interactivity_domainId_feature",
+								"_UI_Interactivity_type"),
+						InteractivityPackage.Literals.INTERACTIVITY__DOMAIN_ID, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -77,7 +96,7 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(InteractivityPackage.Literals.INTERACTIVITY__INTERACTIVE_ELEMENTS);
+			childrenFeatures.add(InteractivityPackage.Literals.INTERACTIVITY__DIAGRAM_EDITORS);
 		}
 		return childrenFeatures;
 	}
@@ -124,7 +143,9 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Interactivity_type");
+		String label = ((Interactivity) object).getDomainId();
+		return label == null || label.length() == 0 ? getString("_UI_Interactivity_type")
+				: getString("_UI_Interactivity_type") + " " + label;
 	}
 
 	/**
@@ -139,7 +160,10 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Interactivity.class)) {
-		case InteractivityPackage.INTERACTIVITY__INTERACTIVE_ELEMENTS:
+		case InteractivityPackage.INTERACTIVITY__DOMAIN_ID:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
+		case InteractivityPackage.INTERACTIVITY__DIAGRAM_EDITORS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -157,7 +181,7 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__INTERACTIVE_ELEMENTS,
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__DIAGRAM_EDITORS,
 				InteractivityFactory.eINSTANCE.createDiagramEditor()));
 	}
 

@@ -12,6 +12,8 @@
  */
 package org.eclipse.sirius.components.interactivity;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.components.view.diagram.DiagramDescription;
 
 /**
@@ -23,34 +25,60 @@ import org.eclipse.sirius.components.view.diagram.DiagramDescription;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getDiagramReference <em>Diagram Reference</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getInteractiveFeatures <em>Interactive Features</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getInteractions <em>Interactions</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getDiagramDefinition <em>Diagram Definition</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getDiagramEditor()
  * @model
  * @generated
  */
-public interface DiagramEditor extends InteractiveElement {
-
+public interface DiagramEditor extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Diagram Reference</b></em>' reference.
+	 * Returns the value of the '<em><b>Interactive Features</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.InteractiveFeature}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Diagram Reference</em>' reference.
-	 * @see #setDiagramReference(DiagramDescription)
-	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getDiagramEditor_DiagramReference()
-	 * @model
+	 * @return the value of the '<em>Interactive Features</em>' containment reference list.
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getDiagramEditor_InteractiveFeatures()
+	 * @model containment="true"
 	 * @generated
 	 */
-	DiagramDescription getDiagramReference();
+	EList<InteractiveFeature> getInteractiveFeatures();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getDiagramReference <em>Diagram Reference</em>}' reference.
+	 * Returns the value of the '<em><b>Interactions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.Interaction}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Diagram Reference</em>' reference.
-	 * @see #getDiagramReference()
+	 * @return the value of the '<em>Interactions</em>' containment reference list.
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getDiagramEditor_Interactions()
+	 * @model containment="true"
 	 * @generated
 	 */
-	void setDiagramReference(DiagramDescription value);
+	EList<Interaction> getInteractions();
+
+	/**
+	 * Returns the value of the '<em><b>Diagram Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Diagram Definition</em>' reference.
+	 * @see #setDiagramDefinition(DiagramDescription)
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getDiagramEditor_DiagramDefinition()
+	 * @model required="true"
+	 * @generated
+	 */
+	DiagramDescription getDiagramDefinition();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.DiagramEditor#getDiagramDefinition <em>Diagram Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Diagram Definition</em>' reference.
+	 * @see #getDiagramDefinition()
+	 * @generated
+	 */
+	void setDiagramDefinition(DiagramDescription value);
+
 } // DiagramEditor

@@ -62,24 +62,24 @@ public class DiagramEditorItemProvider extends ItemProviderAdapter implements IE
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addDiagramReferencePropertyDescriptor(object);
+			addDiagramDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Diagram Reference feature.
+	 * This adds a property descriptor for the Diagram Definition feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDiagramReferencePropertyDescriptor(Object object) {
+	protected void addDiagramDefinitionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_DiagramEditor_diagramReference_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_DiagramEditor_diagramReference_feature",
+				getString("_UI_DiagramEditor_diagramDefinition_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_DiagramEditor_diagramDefinition_feature",
 						"_UI_DiagramEditor_type"),
-				InteractivityPackage.Literals.DIAGRAM_EDITOR__DIAGRAM_REFERENCE, true, false, true, null, null, null));
+				InteractivityPackage.Literals.DIAGRAM_EDITOR__DIAGRAM_DEFINITION, true, false, true, null, null, null));
 	}
 
 	/**
@@ -94,8 +94,8 @@ public class DiagramEditorItemProvider extends ItemProviderAdapter implements IE
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(InteractivityPackage.Literals.INTERACTIVE_ELEMENT__TOOLS);
-			childrenFeatures.add(InteractivityPackage.Literals.INTERACTIVE_ELEMENT__FEATURES);
+			childrenFeatures.add(InteractivityPackage.Literals.DIAGRAM_EDITOR__INTERACTIVE_FEATURES);
+			childrenFeatures.add(InteractivityPackage.Literals.DIAGRAM_EDITOR__INTERACTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -157,8 +157,8 @@ public class DiagramEditorItemProvider extends ItemProviderAdapter implements IE
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(DiagramEditor.class)) {
-		case InteractivityPackage.DIAGRAM_EDITOR__TOOLS:
-		case InteractivityPackage.DIAGRAM_EDITOR__FEATURES:
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIVE_FEATURES:
+		case InteractivityPackage.DIAGRAM_EDITOR__INTERACTIONS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -176,7 +176,7 @@ public class DiagramEditorItemProvider extends ItemProviderAdapter implements IE
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVE_ELEMENT__TOOLS,
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.DIAGRAM_EDITOR__INTERACTIONS,
 				InteractivityFactory.eINSTANCE.createGraphicZoom()));
 	}
 

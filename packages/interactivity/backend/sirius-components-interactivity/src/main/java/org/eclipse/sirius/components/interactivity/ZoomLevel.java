@@ -12,6 +12,8 @@
  */
 package org.eclipse.sirius.components.interactivity;
 
+import org.eclipse.emf.common.util.EList;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Zoom Level</b></em>'.
@@ -22,13 +24,14 @@ package org.eclipse.sirius.components.interactivity;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.sirius.components.interactivity.ZoomLevel#getLevel <em>Level</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.ZoomLevel#getActionsToTrigger <em>Actions To Trigger</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getZoomLevel()
  * @model
  * @generated
  */
-public interface ZoomLevel extends ObservableEvent {
+public interface ZoomLevel extends Command {
 	/**
 	 * Returns the value of the '<em><b>Level</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -50,5 +53,17 @@ public interface ZoomLevel extends ObservableEvent {
 	 * @generated
 	 */
 	void setLevel(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Actions To Trigger</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.Action}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Actions To Trigger</em>' reference list.
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getZoomLevel_ActionsToTrigger()
+	 * @model
+	 * @generated
+	 */
+	EList<Action> getActionsToTrigger();
 
 } // ZoomLevel

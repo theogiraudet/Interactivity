@@ -12,7 +12,16 @@
  *******************************************************************************/
 
 import { Selection, useSelection } from '@eclipse-sirius/sirius-components-core';
-import React, { MouseEvent as ReactMouseEvent, memo, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import React, {
+  MouseEvent as ReactMouseEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  memo,
+} from 'react';
 import {
   Background,
   BackgroundVariant,
@@ -25,7 +34,6 @@ import {
   OnEdgesChange,
   OnMove,
   OnNodesChange,
-  ReactFlow,
   applyNodeChanges,
 } from 'reactflow';
 import { DiagramContext } from '../contexts/DiagramContext';
@@ -73,6 +81,7 @@ import { useShiftSelection } from './selection/useShiftSelection';
 import { useSnapToGrid } from './snap-to-grid/useSnapToGrid';
 
 import 'reactflow/dist/style.css';
+import { InteractiveReactFlow } from '@eclipse-sirius/sirius-components-interactivity';
 
 const GRID_STEP: number = 10;
 
@@ -120,10 +129,12 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
   const { fitToScreen } = useInitialFitToScreen();
   const { setSelection } = useSelection();
 
+  const [convertedDiagram, setDiagram] = useState<Diagram | undefined>(undefined);
+
   useEffect(() => {
     const { diagram, cause } = diagramRefreshedEventPayload;
     const convertedDiagram: Diagram = convertDiagram(diagram, nodeConverters, diagramDescription);
-
+    setDiagram(convertedDiagram);
     const selectedNodeIds = nodes.filter((node) => node.selected).map((node) => node.id);
     if (cause === 'layout') {
       convertedDiagram.nodes
@@ -285,7 +296,8 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
   );
 
   return (
-    <ReactFlow
+    <InteractiveReactFlow
+      diagram={convertedDiagram!}
       nodes={nodes}
       nodeTypes={nodeTypes}
       onNodesChange={handleNodesChange}
@@ -359,6 +371,6 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
       {diagramDescription.debug ? <DebugPanel reactFlowWrapper={ref} /> : null}
       <ConnectorContextualMenu />
       {helperLinesEnabled ? <HelperLines horizontal={horizontalHelperLine} vertical={verticalHelperLine} /> : null}
-    </ReactFlow>
+    </InteractiveReactFlow>
   );
 });

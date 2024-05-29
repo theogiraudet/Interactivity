@@ -17,35 +17,27 @@
       disposableProviderFactory="true" extensibleProviderFactory="true" childCreationExtenders="true"
       ecorePackage="interactivity.ecore#/">
     <genClasses ecoreClass="interactivity.ecore#//Interactivity">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Interactivity/interactiveElements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interactivity.ecore#//Interactivity/domainId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Interactivity/diagramEditors"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//InteractiveElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//InteractiveElement/tools"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//InteractiveElement/features"/>
+    <genClasses image="false" ecoreClass="interactivity.ecore#//Interaction"/>
+    <genClasses image="false" ecoreClass="interactivity.ecore#//Action"/>
+    <genClasses ecoreClass="interactivity.ecore#//InteractiveFeature"/>
+    <genClasses ecoreClass="interactivity.ecore#//GraphicZoom">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//GraphicZoom/levels"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//Interaction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Interaction/events"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//ObservableEvent">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference interactivity.ecore#//ObservableEvent/actions"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//Action">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference interactivity.ecore#//Action/references"/>
-    </genClasses>
-    <genClasses ecoreClass="interactivity.ecore#//InteractiveFeature">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//InteractiveFeature/actions"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//ModelReference"/>
-    <genClasses ecoreClass="interactivity.ecore#//DiagramEditor">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference interactivity.ecore#//DiagramEditor/diagramReference"/>
-    </genClasses>
-    <genClasses ecoreClass="interactivity.ecore#//GraphicZoom"/>
     <genClasses ecoreClass="interactivity.ecore#//ZoomLevel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interactivity.ecore#//ZoomLevel/level"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference interactivity.ecore#//ZoomLevel/actionsToTrigger"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//AbstractSyntaxReference"/>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//ConcreteSyntaxReference"/>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//AsCsMappingReference"/>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//NodeMappingReference"/>
+    <genClasses image="false" ecoreClass="interactivity.ecore#//Command">
+      <genFeatures property="None" children="true" createChild="true" propertySortChoices="true"
+          ecoreFeature="ecore:EReference interactivity.ecore#//Command/actions"/>
+    </genClasses>
+    <genClasses ecoreClass="interactivity.ecore#//DiagramEditor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//DiagramEditor/interactiveFeatures"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//DiagramEditor/interactions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference interactivity.ecore#//DiagramEditor/diagramDefinition"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

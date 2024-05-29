@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.interactivity.Command#getReferences <em>References</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.Command#getActions <em>Actions</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getCommand()
@@ -33,15 +33,15 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Command extends EObject {
 	/**
-	 * Returns the value of the '<em><b>References</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.LanguageDefinitionReference}.
+	 * Returns the value of the '<em><b>Actions</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.Action}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>References</em>' reference list.
-	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getCommand_References()
+	 * @return the value of the '<em>Actions</em>' reference list.
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getCommand_Actions()
 	 * @model
 	 * @generated
 	 */
-	EList<LanguageDefinitionReference> getReferences();
+	EList<Action> getActions();
 
 } // Command

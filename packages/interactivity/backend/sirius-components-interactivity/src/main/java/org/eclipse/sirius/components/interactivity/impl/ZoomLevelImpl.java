@@ -34,6 +34,7 @@ import org.eclipse.sirius.components.interactivity.ZoomLevel;
  * <ul>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.ZoomLevelImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.ZoomLevelImpl#getLevel <em>Level</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.ZoomLevelImpl#getActionsToTrigger <em>Actions To Trigger</em>}</li>
  * </ul>
  *
  * @generated
@@ -68,6 +69,16 @@ public class ZoomLevelImpl extends MinimalEObjectImpl.Container implements ZoomL
 	 * @ordered
 	 */
 	protected int level = LEVEL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getActionsToTrigger() <em>Actions To Trigger</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActionsToTrigger()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actionsToTrigger;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -131,12 +142,28 @@ public class ZoomLevelImpl extends MinimalEObjectImpl.Container implements ZoomL
 	 * @generated
 	 */
 	@Override
+	public EList<Action> getActionsToTrigger() {
+		if (actionsToTrigger == null) {
+			actionsToTrigger = new EObjectResolvingEList<>(Action.class, this,
+					InteractivityPackage.ZOOM_LEVEL__ACTIONS_TO_TRIGGER);
+		}
+		return actionsToTrigger;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case InteractivityPackage.ZOOM_LEVEL__ACTIONS:
 			return getActions();
 		case InteractivityPackage.ZOOM_LEVEL__LEVEL:
 			return getLevel();
+		case InteractivityPackage.ZOOM_LEVEL__ACTIONS_TO_TRIGGER:
+			return getActionsToTrigger();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,6 +184,10 @@ public class ZoomLevelImpl extends MinimalEObjectImpl.Container implements ZoomL
 		case InteractivityPackage.ZOOM_LEVEL__LEVEL:
 			setLevel((Integer) newValue);
 			return;
+		case InteractivityPackage.ZOOM_LEVEL__ACTIONS_TO_TRIGGER:
+			getActionsToTrigger().clear();
+			getActionsToTrigger().addAll((Collection<? extends Action>) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -175,6 +206,9 @@ public class ZoomLevelImpl extends MinimalEObjectImpl.Container implements ZoomL
 		case InteractivityPackage.ZOOM_LEVEL__LEVEL:
 			setLevel(LEVEL_EDEFAULT);
 			return;
+		case InteractivityPackage.ZOOM_LEVEL__ACTIONS_TO_TRIGGER:
+			getActionsToTrigger().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -191,6 +225,8 @@ public class ZoomLevelImpl extends MinimalEObjectImpl.Container implements ZoomL
 			return actions != null && !actions.isEmpty();
 		case InteractivityPackage.ZOOM_LEVEL__LEVEL:
 			return level != LEVEL_EDEFAULT;
+		case InteractivityPackage.ZOOM_LEVEL__ACTIONS_TO_TRIGGER:
+			return actionsToTrigger != null && !actionsToTrigger.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

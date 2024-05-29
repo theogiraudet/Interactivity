@@ -2,19 +2,18 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="semantic_zoom" nsURI="http://www.eclipse.org/sirius-web/semantic_zoom"
     nsPrefix="semantic_zoom">
-  <eClassifiers xsi:type="ecore:EClass" name="SemanticZoom" eSuperTypes="interactivity.ecore#//InteractiveFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticZoom" eSuperTypes="interactivity.ecore#//InteractiveFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="levels" upperBound="-1"
+        eType="#//LevelOfDetail" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LevelOfDetail" eSuperTypes="interactivity.ecore#//Action">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="styleOverrides" upperBound="-1"
+        eType="#//StyleOverride" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hiddenASElements" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GraphicalFilter" abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeMappingStyleOverride" eSuperTypes="interactivity.ecore#//NodeMappingReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeDescription" lowerBound="1"
-        eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//NodeDescription"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="style" lowerBound="1" eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//NodeStyleDescription"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="filters" upperBound="-1"
-        eType="#//GraphicalFilter" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleOverride">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="asElements" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="style" lowerBound="1" eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//NodeStyleDescription"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ByDepth" eSuperTypes="#//GraphicalFilter"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ByEdgeNumber" eSuperTypes="#//GraphicalFilter"/>
 </ecore:EPackage>

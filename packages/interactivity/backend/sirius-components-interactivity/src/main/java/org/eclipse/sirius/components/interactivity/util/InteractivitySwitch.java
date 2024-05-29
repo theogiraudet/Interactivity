@@ -15,20 +15,14 @@ package org.eclipse.sirius.components.interactivity.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipse.sirius.components.interactivity.AbstractSyntaxReference;
 import org.eclipse.sirius.components.interactivity.Action;
-import org.eclipse.sirius.components.interactivity.AsCsMappingReference;
-import org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference;
+import org.eclipse.sirius.components.interactivity.Command;
 import org.eclipse.sirius.components.interactivity.DiagramEditor;
 import org.eclipse.sirius.components.interactivity.GraphicZoom;
 import org.eclipse.sirius.components.interactivity.Interaction;
-import org.eclipse.sirius.components.interactivity.InteractiveElement;
 import org.eclipse.sirius.components.interactivity.InteractiveFeature;
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.ModelReference;
-import org.eclipse.sirius.components.interactivity.NodeMappingReference;
-import org.eclipse.sirius.components.interactivity.ObservableEvent;
 import org.eclipse.sirius.components.interactivity.ZoomLevel;
 
 /**
@@ -95,23 +89,9 @@ public class InteractivitySwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case InteractivityPackage.INTERACTIVE_ELEMENT: {
-			InteractiveElement interactiveElement = (InteractiveElement) theEObject;
-			T result = caseInteractiveElement(interactiveElement);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case InteractivityPackage.INTERACTION: {
 			Interaction interaction = (Interaction) theEObject;
 			T result = caseInteraction(interaction);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case InteractivityPackage.OBSERVABLE_EVENT: {
-			ObservableEvent observableEvent = (ObservableEvent) theEObject;
-			T result = caseObservableEvent(observableEvent);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -130,22 +110,6 @@ public class InteractivitySwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case InteractivityPackage.MODEL_REFERENCE: {
-			ModelReference modelReference = (ModelReference) theEObject;
-			T result = caseModelReference(modelReference);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case InteractivityPackage.DIAGRAM_EDITOR: {
-			DiagramEditor diagramEditor = (DiagramEditor) theEObject;
-			T result = caseDiagramEditor(diagramEditor);
-			if (result == null)
-				result = caseInteractiveElement(diagramEditor);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case InteractivityPackage.GRAPHIC_ZOOM: {
 			GraphicZoom graphicZoom = (GraphicZoom) theEObject;
 			T result = caseGraphicZoom(graphicZoom);
@@ -159,45 +123,21 @@ public class InteractivitySwitch<T> extends Switch<T> {
 			ZoomLevel zoomLevel = (ZoomLevel) theEObject;
 			T result = caseZoomLevel(zoomLevel);
 			if (result == null)
-				result = caseObservableEvent(zoomLevel);
+				result = caseCommand(zoomLevel);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case InteractivityPackage.ABSTRACT_SYNTAX_REFERENCE: {
-			AbstractSyntaxReference abstractSyntaxReference = (AbstractSyntaxReference) theEObject;
-			T result = caseAbstractSyntaxReference(abstractSyntaxReference);
-			if (result == null)
-				result = caseModelReference(abstractSyntaxReference);
+		case InteractivityPackage.COMMAND: {
+			Command command = (Command) theEObject;
+			T result = caseCommand(command);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case InteractivityPackage.CONCRETE_SYNTAX_REFERENCE: {
-			ConcreteSyntaxReference concreteSyntaxReference = (ConcreteSyntaxReference) theEObject;
-			T result = caseConcreteSyntaxReference(concreteSyntaxReference);
-			if (result == null)
-				result = caseModelReference(concreteSyntaxReference);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case InteractivityPackage.AS_CS_MAPPING_REFERENCE: {
-			AsCsMappingReference asCsMappingReference = (AsCsMappingReference) theEObject;
-			T result = caseAsCsMappingReference(asCsMappingReference);
-			if (result == null)
-				result = caseModelReference(asCsMappingReference);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case InteractivityPackage.NODE_MAPPING_REFERENCE: {
-			NodeMappingReference nodeMappingReference = (NodeMappingReference) theEObject;
-			T result = caseNodeMappingReference(nodeMappingReference);
-			if (result == null)
-				result = caseAsCsMappingReference(nodeMappingReference);
-			if (result == null)
-				result = caseModelReference(nodeMappingReference);
+		case InteractivityPackage.DIAGRAM_EDITOR: {
+			DiagramEditor diagramEditor = (DiagramEditor) theEObject;
+			T result = caseDiagramEditor(diagramEditor);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -223,21 +163,6 @@ public class InteractivitySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Interactive Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Interactive Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInteractiveElement(InteractiveElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Interaction</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -249,21 +174,6 @@ public class InteractivitySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInteraction(Interaction object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Observable Event</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Observable Event</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseObservableEvent(ObservableEvent object) {
 		return null;
 	}
 
@@ -298,36 +208,6 @@ public class InteractivitySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModelReference(ModelReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Diagram Editor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Diagram Editor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDiagramEditor(DiagramEditor object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Graphic Zoom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -358,62 +238,32 @@ public class InteractivitySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Syntax Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Command</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Syntax Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Command</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractSyntaxReference(AbstractSyntaxReference object) {
+	public T caseCommand(Command object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Concrete Syntax Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Diagram Editor</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Concrete Syntax Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Diagram Editor</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConcreteSyntaxReference(ConcreteSyntaxReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>As Cs Mapping Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>As Cs Mapping Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAsCsMappingReference(AsCsMappingReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Node Mapping Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Node Mapping Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNodeMappingReference(NodeMappingReference object) {
+	public T caseDiagramEditor(DiagramEditor object) {
 		return null;
 	}
 

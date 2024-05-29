@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- *
+ * 
  * SPDX-License-Identifier: EPL-2.0
- *
+ * 
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -14,20 +14,15 @@ package org.eclipse.sirius.components.semantic_zoom.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.sirius.components.interactivity.Action;
-import org.eclipse.sirius.components.interactivity.AsCsMappingReference;
 import org.eclipse.sirius.components.interactivity.InteractiveFeature;
-import org.eclipse.sirius.components.interactivity.ModelReference;
-import org.eclipse.sirius.components.interactivity.NodeMappingReference;
-import org.eclipse.sirius.components.semantic_zoom.ByDepth;
-import org.eclipse.sirius.components.semantic_zoom.ByEdgeNumber;
-import org.eclipse.sirius.components.semantic_zoom.GraphicalFilter;
-import org.eclipse.sirius.components.semantic_zoom.LevelOfDetail;
-import org.eclipse.sirius.components.semantic_zoom.NodeMappingStyleOverride;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoom;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
+
+import org.eclipse.sirius.components.semantic_zoom.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -83,7 +78,7 @@ public class SemanticZoomAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SemanticZoomSwitch<Adapter> modelSwitch = new SemanticZoomSwitch<>() {
+	protected SemanticZoomSwitch<Adapter> modelSwitch = new SemanticZoomSwitch<Adapter>() {
 		@Override
 		public Adapter caseSemanticZoom(SemanticZoom object) {
 			return createSemanticZoomAdapter();
@@ -95,23 +90,8 @@ public class SemanticZoomAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseGraphicalFilter(GraphicalFilter object) {
-			return createGraphicalFilterAdapter();
-		}
-
-		@Override
-		public Adapter caseNodeMappingStyleOverride(NodeMappingStyleOverride object) {
-			return createNodeMappingStyleOverrideAdapter();
-		}
-
-		@Override
-		public Adapter caseByDepth(ByDepth object) {
-			return createByDepthAdapter();
-		}
-
-		@Override
-		public Adapter caseByEdgeNumber(ByEdgeNumber object) {
-			return createByEdgeNumberAdapter();
+		public Adapter caseStyleOverride(StyleOverride object) {
+			return createStyleOverrideAdapter();
 		}
 
 		@Override
@@ -122,21 +102,6 @@ public class SemanticZoomAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseAction(Action object) {
 			return createActionAdapter();
-		}
-
-		@Override
-		public Adapter caseModelReference(ModelReference object) {
-			return createModelReferenceAdapter();
-		}
-
-		@Override
-		public Adapter caseAsCsMappingReference(AsCsMappingReference object) {
-			return createAsCsMappingReferenceAdapter();
-		}
-
-		@Override
-		public Adapter caseNodeMappingReference(NodeMappingReference object) {
-			return createNodeMappingReferenceAdapter();
 		}
 
 		@Override
@@ -187,58 +152,16 @@ public class SemanticZoomAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.semantic_zoom.GraphicalFilter <em>Graphical Filter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.semantic_zoom.StyleOverride <em>Style Override</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.semantic_zoom.GraphicalFilter
+	 * @see org.eclipse.sirius.components.semantic_zoom.StyleOverride
 	 * @generated
 	 */
-	public Adapter createGraphicalFilterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.semantic_zoom.NodeMappingStyleOverride <em>Node Mapping Style Override</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.semantic_zoom.NodeMappingStyleOverride
-	 * @generated
-	 */
-	public Adapter createNodeMappingStyleOverrideAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.semantic_zoom.ByDepth <em>By Depth</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.semantic_zoom.ByDepth
-	 * @generated
-	 */
-	public Adapter createByDepthAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.semantic_zoom.ByEdgeNumber <em>By Edge Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.semantic_zoom.ByEdgeNumber
-	 * @generated
-	 */
-	public Adapter createByEdgeNumberAdapter() {
+	public Adapter createStyleOverrideAdapter() {
 		return null;
 	}
 
@@ -267,48 +190,6 @@ public class SemanticZoomAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createActionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.ModelReference <em>Model Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.ModelReference
-	 * @generated
-	 */
-	public Adapter createModelReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.AsCsMappingReference <em>As Cs Mapping Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.AsCsMappingReference
-	 * @generated
-	 */
-	public Adapter createAsCsMappingReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.NodeMappingReference <em>Node Mapping Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.NodeMappingReference
-	 * @generated
-	 */
-	public Adapter createNodeMappingReferenceAdapter() {
 		return null;
 	}
 

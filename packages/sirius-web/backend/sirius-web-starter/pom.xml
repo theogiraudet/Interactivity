@@ -59,6 +59,11 @@
 			<artifactId>sirius-components-diagrams-graphql</artifactId>
 			<version>2024.3.6</version>
 		</dependency>
+				<dependency>
+			<groupId>org.eclipse.sirius</groupId>
+			<artifactId>sirius-components-interactivity-graphql</artifactId>
+			<version>2024.3.3</version>
+		</dependency>
 		<dependency>
 			<groupId>org.eclipse.sirius</groupId>
 			<artifactId>sirius-components-forms-graphql</artifactId>

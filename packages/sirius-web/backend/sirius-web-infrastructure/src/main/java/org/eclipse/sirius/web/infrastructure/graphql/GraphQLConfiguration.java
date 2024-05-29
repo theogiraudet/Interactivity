@@ -15,6 +15,7 @@ package org.eclipse.sirius.web.infrastructure.graphql;
 import java.io.IOException;
 import java.util.List;
 
+import graphql.schema.idl.*;
 import org.eclipse.sirius.components.graphql.api.IDataFetcherWithFieldCoordinates;
 import org.eclipse.sirius.components.graphql.api.InstantScalarType;
 import org.eclipse.sirius.components.graphql.api.UploadScalarType;
@@ -32,11 +33,6 @@ import graphql.execution.DataFetcherExceptionHandler;
 import graphql.execution.ExecutionStrategy;
 import graphql.schema.GraphQLCodeRegistry;
 import graphql.schema.GraphQLSchema;
-import graphql.schema.idl.RuntimeWiring;
-import graphql.schema.idl.SchemaGenerator;
-import graphql.schema.idl.SchemaParser;
-import graphql.schema.idl.SchemaPrinter;
-import graphql.schema.idl.TypeDefinitionRegistry;
 
 /**
  * Spring Configuration used to create everything necessary to run GraphQL queries.
@@ -74,7 +70,7 @@ public class GraphQLConfiguration {
     }
 
     @Bean
-    public GraphQLSchema graphQLSchema(ResourcePatternResolver resourcePatternResolver, GraphQLWiringFactory graphQLWiringFactory, List<IDataFetcherWithFieldCoordinates<?>> dataFetchersWithCoordinates) {
+    public GraphQLSchema graphQLSchema(ResourcePatternResolver resourcePatternResolver, WiringFactory graphQLWiringFactory, List<IDataFetcherWithFieldCoordinates<?>> dataFetchersWithCoordinates) {
         GraphQLCodeRegistry.Builder builder = GraphQLCodeRegistry.newCodeRegistry();
         dataFetchersWithCoordinates.forEach(dataFetcherWithCoordinates -> {
             dataFetcherWithCoordinates.getFieldCoordinates().forEach(fieldCoordinates -> builder.dataFetcher(fieldCoordinates, dataFetcherWithCoordinates));

@@ -14,17 +14,17 @@
   <foreignModel>semantic_zoom.ecore</foreignModel>
   <genPackages prefix="SemanticZoom" basePackage="org.eclipse.sirius.components" disposableProviderFactory="true"
       childCreationExtenders="true" fileExtensions="semantic_zoom" ecorePackage="semantic_zoom.ecore#/">
-    <genClasses ecoreClass="semantic_zoom.ecore#//SemanticZoom"/>
+    <genClasses ecoreClass="semantic_zoom.ecore#//SemanticZoom">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference semantic_zoom.ecore#//SemanticZoom/levels"/>
+    </genClasses>
     <genClasses ecoreClass="semantic_zoom.ecore#//LevelOfDetail">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute semantic_zoom.ecore#//LevelOfDetail/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute semantic_zoom.ecore#//LevelOfDetail/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference semantic_zoom.ecore#//LevelOfDetail/styleOverrides"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute semantic_zoom.ecore#//LevelOfDetail/hiddenASElements"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="semantic_zoom.ecore#//GraphicalFilter"/>
-    <genClasses ecoreClass="semantic_zoom.ecore#//NodeMappingStyleOverride">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference semantic_zoom.ecore#//NodeMappingStyleOverride/nodeDescription"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference semantic_zoom.ecore#//NodeMappingStyleOverride/style"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference semantic_zoom.ecore#//NodeMappingStyleOverride/filters"/>
+    <genClasses ecoreClass="semantic_zoom.ecore#//StyleOverride">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute semantic_zoom.ecore#//StyleOverride/asElements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference semantic_zoom.ecore#//StyleOverride/style"/>
     </genClasses>
-    <genClasses ecoreClass="semantic_zoom.ecore#//ByDepth"/>
-    <genClasses ecoreClass="semantic_zoom.ecore#//ByEdgeNumber"/>
   </genPackages>
 </genmodel:GenModel>

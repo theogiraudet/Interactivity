@@ -16,20 +16,14 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.sirius.components.interactivity.AbstractSyntaxReference;
 import org.eclipse.sirius.components.interactivity.Action;
-import org.eclipse.sirius.components.interactivity.AsCsMappingReference;
-import org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference;
+import org.eclipse.sirius.components.interactivity.Command;
 import org.eclipse.sirius.components.interactivity.DiagramEditor;
 import org.eclipse.sirius.components.interactivity.GraphicZoom;
 import org.eclipse.sirius.components.interactivity.Interaction;
-import org.eclipse.sirius.components.interactivity.InteractiveElement;
 import org.eclipse.sirius.components.interactivity.InteractiveFeature;
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.ModelReference;
-import org.eclipse.sirius.components.interactivity.NodeMappingReference;
-import org.eclipse.sirius.components.interactivity.ObservableEvent;
 import org.eclipse.sirius.components.interactivity.ZoomLevel;
 
 /**
@@ -86,25 +80,15 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InteractivitySwitch<Adapter> modelSwitch = new InteractivitySwitch<>() {
+	protected InteractivitySwitch<Adapter> modelSwitch = new InteractivitySwitch<Adapter>() {
 		@Override
 		public Adapter caseInteractivity(Interactivity object) {
 			return createInteractivityAdapter();
 		}
 
 		@Override
-		public Adapter caseInteractiveElement(InteractiveElement object) {
-			return createInteractiveElementAdapter();
-		}
-
-		@Override
 		public Adapter caseInteraction(Interaction object) {
 			return createInteractionAdapter();
-		}
-
-		@Override
-		public Adapter caseObservableEvent(ObservableEvent object) {
-			return createObservableEventAdapter();
 		}
 
 		@Override
@@ -118,16 +102,6 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseModelReference(ModelReference object) {
-			return createModelReferenceAdapter();
-		}
-
-		@Override
-		public Adapter caseDiagramEditor(DiagramEditor object) {
-			return createDiagramEditorAdapter();
-		}
-
-		@Override
 		public Adapter caseGraphicZoom(GraphicZoom object) {
 			return createGraphicZoomAdapter();
 		}
@@ -138,23 +112,13 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseAbstractSyntaxReference(AbstractSyntaxReference object) {
-			return createAbstractSyntaxReferenceAdapter();
+		public Adapter caseCommand(Command object) {
+			return createCommandAdapter();
 		}
 
 		@Override
-		public Adapter caseConcreteSyntaxReference(ConcreteSyntaxReference object) {
-			return createConcreteSyntaxReferenceAdapter();
-		}
-
-		@Override
-		public Adapter caseAsCsMappingReference(AsCsMappingReference object) {
-			return createAsCsMappingReferenceAdapter();
-		}
-
-		@Override
-		public Adapter caseNodeMappingReference(NodeMappingReference object) {
-			return createNodeMappingReferenceAdapter();
+		public Adapter caseDiagramEditor(DiagramEditor object) {
+			return createDiagramEditorAdapter();
 		}
 
 		@Override
@@ -191,20 +155,6 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.InteractiveElement <em>Interactive Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.InteractiveElement
-	 * @generated
-	 */
-	public Adapter createInteractiveElementAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Interaction <em>Interaction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -215,20 +165,6 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInteractionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.ObservableEvent <em>Observable Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.ObservableEvent
-	 * @generated
-	 */
-	public Adapter createObservableEventAdapter() {
 		return null;
 	}
 
@@ -261,34 +197,6 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.ModelReference <em>Model Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.ModelReference
-	 * @generated
-	 */
-	public Adapter createModelReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.DiagramEditor <em>Diagram Editor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor
-	 * @generated
-	 */
-	public Adapter createDiagramEditorAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.GraphicZoom <em>Graphic Zoom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -317,58 +225,30 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.AbstractSyntaxReference <em>Abstract Syntax Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Command <em>Command</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.AbstractSyntaxReference
+	 * @see org.eclipse.sirius.components.interactivity.Command
 	 * @generated
 	 */
-	public Adapter createAbstractSyntaxReferenceAdapter() {
+	public Adapter createCommandAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference <em>Concrete Syntax Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.DiagramEditor <em>Diagram Editor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.ConcreteSyntaxReference
+	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor
 	 * @generated
 	 */
-	public Adapter createConcreteSyntaxReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.AsCsMappingReference <em>As Cs Mapping Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.AsCsMappingReference
-	 * @generated
-	 */
-	public Adapter createAsCsMappingReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.NodeMappingReference <em>Node Mapping Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.NodeMappingReference
-	 * @generated
-	 */
-	public Adapter createNodeMappingReferenceAdapter() {
+	public Adapter createDiagramEditorAdapter() {
 		return null;
 	}
 

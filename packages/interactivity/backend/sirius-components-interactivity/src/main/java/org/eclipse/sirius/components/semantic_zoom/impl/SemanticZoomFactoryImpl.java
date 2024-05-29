@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- *
+ * 
  * SPDX-License-Identifier: EPL-2.0
- *
+ * 
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -15,15 +15,12 @@ package org.eclipse.sirius.components.semantic_zoom.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.sirius.components.semantic_zoom.ByDepth;
-import org.eclipse.sirius.components.semantic_zoom.ByEdgeNumber;
-import org.eclipse.sirius.components.semantic_zoom.LevelOfDetail;
-import org.eclipse.sirius.components.semantic_zoom.NodeMappingStyleOverride;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoom;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoomFactory;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
+
+import org.eclipse.sirius.components.semantic_zoom.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -73,12 +70,8 @@ public class SemanticZoomFactoryImpl extends EFactoryImpl implements SemanticZoo
 			return createSemanticZoom();
 		case SemanticZoomPackage.LEVEL_OF_DETAIL:
 			return createLevelOfDetail();
-		case SemanticZoomPackage.NODE_MAPPING_STYLE_OVERRIDE:
-			return createNodeMappingStyleOverride();
-		case SemanticZoomPackage.BY_DEPTH:
-			return createByDepth();
-		case SemanticZoomPackage.BY_EDGE_NUMBER:
-			return createByEdgeNumber();
+		case SemanticZoomPackage.STYLE_OVERRIDE:
+			return createStyleOverride();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -112,31 +105,9 @@ public class SemanticZoomFactoryImpl extends EFactoryImpl implements SemanticZoo
 	 * @generated
 	 */
 	@Override
-	public NodeMappingStyleOverride createNodeMappingStyleOverride() {
-		NodeMappingStyleOverrideImpl nodeMappingStyleOverride = new NodeMappingStyleOverrideImpl();
-		return nodeMappingStyleOverride;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ByDepth createByDepth() {
-		ByDepthImpl byDepth = new ByDepthImpl();
-		return byDepth;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ByEdgeNumber createByEdgeNumber() {
-		ByEdgeNumberImpl byEdgeNumber = new ByEdgeNumberImpl();
-		return byEdgeNumber;
+	public StyleOverride createStyleOverride() {
+		StyleOverrideImpl styleOverride = new StyleOverrideImpl();
+		return styleOverride;
 	}
 
 	/**

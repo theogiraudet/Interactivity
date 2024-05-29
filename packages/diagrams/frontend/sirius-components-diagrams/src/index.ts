@@ -54,3 +54,5 @@ export { DiagramPaletteToolContribution } from './renderer/palette/DiagramPalett
 export type { DiagramPaletteToolContributionComponentProps } from './renderer/palette/DiagramPaletteToolContribution.types';
 export { DiagramRepresentation } from './representation/DiagramRepresentation';
 export type { GQLDiagramDescription } from './representation/DiagramRepresentation.types';
+export { useStore } from './representation/useStore';
+export type { useStoreValue } from './representation/useStore.types';
