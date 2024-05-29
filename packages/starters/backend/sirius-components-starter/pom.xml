@@ -115,6 +115,11 @@
 			<artifactId>sirius-components-collaborative-deck</artifactId>
             <version>2024.3.6</version>
 		</dependency>
+				<dependency>
+			<groupId>org.eclipse.sirius</groupId>
+			<artifactId>sirius-components-interactivity-edit</artifactId>
+            <version>2024.3.6</version>
+		</dependency>
 		<dependency>
 			<groupId>org.eclipse.sirius</groupId>
 			<artifactId>sirius-components-collaborative-formdescriptioneditors</artifactId>
