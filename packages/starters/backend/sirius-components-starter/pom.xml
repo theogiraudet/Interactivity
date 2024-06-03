@@ -117,7 +117,7 @@
 		</dependency>
 				<dependency>
 			<groupId>org.eclipse.sirius</groupId>
-			<artifactId>sirius-components-interactivity-edit</artifactId>
+			<artifactId>sirius-components-collaborative-interactivity</artifactId>
             <version>2024.3.6</version>
 		</dependency>
 		<dependency>

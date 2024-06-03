@@ -214,7 +214,6 @@ public class BuilderGenerator {
         for (GenFeature feat : clazz.getAllGenFeatures()) {
             if (!feat.getEcoreFeature().isDerived() && feat.getEcoreFeature().isChangeable()) {
                 if (!feat.getEcoreFeature().isMany()) {
-                    System.out.println(clazz.capName(clazz.getName()));
                     body.append("""
                                 /**
                                  * Setter for #accessor.

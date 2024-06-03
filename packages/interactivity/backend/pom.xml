@@ -17,7 +17,7 @@
 
 	<groupId>org.eclipse.sirius</groupId>
 	<artifactId>sirius-components-interactivity-parent</artifactId>
-	<version>2024.3.3</version>
+	<version>2024.3.6</version>
 
 	<name>sirius-components-domain-parent</name>
 	<description>Sirius Components Interactivity Parent</description>

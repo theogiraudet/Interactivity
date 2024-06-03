@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>org.eclipse.sirius</groupId>
 			<artifactId>sirius-components-interactivity-starter</artifactId>
-			<version>2024.3.3</version>
+			<version>2024.3.6</version>
 		</dependency>
 
 		<!-- Sirius Web Specific Dependencies -->

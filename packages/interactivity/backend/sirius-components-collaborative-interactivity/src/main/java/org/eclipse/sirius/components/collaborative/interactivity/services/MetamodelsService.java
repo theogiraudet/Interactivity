@@ -38,7 +38,6 @@ public class MetamodelsService {
     }
 
     public Optional<EObject> getModel(IEditingContext editingContext, String representationId) {
-        System.out.println();
         var representationOpt = representationSearchService.findById(editingContext, representationId, Diagram.class);
         if(representationOpt.isPresent()) {
            var object = objectSearchService.getObject(editingContext, representationOpt.get().getTargetObjectId());
