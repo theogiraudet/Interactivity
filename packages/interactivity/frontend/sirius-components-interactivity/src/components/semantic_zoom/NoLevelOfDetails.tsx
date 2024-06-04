@@ -6,11 +6,10 @@ export const NoLevelOfDetail = (props: Omit<InteractiveFeatureProps<GQLLevelOfDe
   useCustomEventListener(
     'reset',
     () => {
-      if (props.setNodes && props.getNodes && props.getNodes() != props.diagram.nodes) {
-        props.setNodes(props.diagram.nodes);
-      } else if (props.setNodes && props.getNodes) {
-        console.log(props.getNodes() != props.diagram.nodes);
-      }
+      // if (props.getNodes() != props.diagram.nodes) {
+      console.log('reset');
+      props.setNodes(props.diagram.nodes);
+      // }
     },
     []
   );

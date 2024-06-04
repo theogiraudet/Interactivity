@@ -21,7 +21,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Interactivity/diagramEditors"/>
     </genClasses>
     <genClasses image="false" ecoreClass="interactivity.ecore#//Interaction"/>
-    <genClasses image="false" ecoreClass="interactivity.ecore#//Action"/>
+    <genClasses image="false" ecoreClass="interactivity.ecore#//Action">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interactivity.ecore#//Action/name"/>
+    </genClasses>
     <genClasses ecoreClass="interactivity.ecore#//InteractiveFeature"/>
     <genClasses ecoreClass="interactivity.ecore#//GraphicZoom">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//GraphicZoom/levels"/>

@@ -1,31 +1,39 @@
-import { Diagram, useStoreValue } from '@eclipse-sirius/sirius-components-diagrams';
+import { Diagram, NodeData } from '@eclipse-sirius/sirius-components-diagrams';
 import { useLazyQuery } from '@apollo/client';
 import { getInteractivityModelQuery } from '../graphql/query/getInteractivityModel';
 import { GQLInteractivityModelSuccessPayload, InteractivityPayload } from '../graphql/query/InteractivityGraphQL.types';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useStore } from 'reactflow';
+import { Instance, useStore } from 'reactflow';
 import { EventManager } from './EventDispatcher';
 import { getJsx } from '../components/InteractiveFeatureMapping';
 import { getHandler } from '../handler/handlers';
 
 export type DOMEvents = Omit<React.DOMAttributes<HTMLDivElement>, 'children' | 'dangerouslySetInnerHTML'>;
 
-export type UseInteractivityValue = DOMEvents &
-  Partial<useStoreValue> & {
-    representationId: string;
-    editingContextId: string;
-    zoomMin: number;
-    zoomMax: number;
-    diagram: Diagram;
-  };
+export type UseInteractivityValue = DOMEvents & {
+  representationId: string;
+  editingContextId: string;
+  zoomMin: number;
+  zoomMax: number;
+  diagram: Diagram;
+  getNodes: Instance.GetNodes<NodeData>;
+  setNodes: Instance.SetNodes<NodeData>;
+};
+
+const EPSILON = 0.0001;
 
 export const useInteractivity = (props: UseInteractivityValue) => {
   const zoomEvent = useMemo(() => new EventManager<(zoomLevel: number) => void>(), []);
   // const [interactions, setInteractions] = useState<GQLInteraction[]>([])
   const [elements, setElements] = useState<JSX.Element[]>([]);
-
+  const [oldZoom, setZoom] = useState<number>(0);
   const zoom = useStore((state) => state.transform[2]);
-  zoomEvent.update(zoom);
+
+  if (Math.abs(oldZoom - zoom) > EPSILON) {
+    console.log('Zoooooooom');
+    zoomEvent.update(zoom);
+    setZoom(zoom);
+  }
 
   const [load] = useLazyQuery<InteractivityPayload>(getInteractivityModelQuery, {
     onCompleted: (data) => {

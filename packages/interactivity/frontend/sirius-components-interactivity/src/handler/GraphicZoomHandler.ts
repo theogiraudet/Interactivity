@@ -21,7 +21,7 @@ export class GraphicZoomHandler implements Handler<GQLGraphicZoom> {
             console.log('Emit ' + action.name);
             emitCustomEvent(action.name);
           }
-        } else if (newZoom != oldZoom && newZoom > specifiedZoom) {
+        } else {
           emitCustomEvent('reset');
         }
       });
