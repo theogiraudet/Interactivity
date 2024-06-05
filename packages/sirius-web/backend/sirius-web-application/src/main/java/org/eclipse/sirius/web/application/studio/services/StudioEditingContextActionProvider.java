@@ -39,6 +39,8 @@ public class StudioEditingContextActionProvider implements IEditingContextAction
 
     public static final String EMPTY_VIEW_ID = "empty_view";
 
+    public static final String EMPTY_ACTION_ID = "empty";
+
     public static final String EMPTY_INTERACTIVITY_ID = "empty_interactivity";
 
     private final IStudioCapableEditingContextPredicate studioCapableEditingContextPredicate;
@@ -73,6 +75,7 @@ public class StudioEditingContextActionProvider implements IEditingContextAction
             if (containsInteractivity) {
                 actions.add(new EditingContextAction(EMPTY_INTERACTIVITY_ID, "Interactivity"));
             }
+            actions.add(new EditingContextAction(EMPTY_ACTION_ID, "Others..."));
         }
 
         return actions;
