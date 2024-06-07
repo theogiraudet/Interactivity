@@ -19,7 +19,6 @@ import org.eclipse.sirius.components.core.api.IEditingContextProcessor;
 import org.eclipse.sirius.components.domain.DomainPackage;
 import org.eclipse.sirius.components.emf.services.api.IEMFEditingContext;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
 import org.eclipse.sirius.components.view.ViewPackage;
 import org.eclipse.sirius.components.view.deck.DeckPackage;
 import org.eclipse.sirius.components.view.deck.adapters.DeckColorAdapter;
@@ -63,7 +62,6 @@ public class StudioEditingContextInitializer implements IEditingContextProcessor
             packageRegistry.put(FormPackage.eNS_URI, FormPackage.eINSTANCE);
             packageRegistry.put(GanttPackage.eNS_URI, GanttPackage.eINSTANCE);
             packageRegistry.put(InteractivityPackage.eNS_URI, InteractivityPackage.eINSTANCE);
-            packageRegistry.put(SemanticZoomPackage.eNS_URI, SemanticZoomPackage.eINSTANCE);
 
             var resourceSet = emfEditingContext.getDomain().getResourceSet();
             this.studioColorPalettesLoader.loadStudioColorPalettes(resourceSet).ifPresent(view -> {

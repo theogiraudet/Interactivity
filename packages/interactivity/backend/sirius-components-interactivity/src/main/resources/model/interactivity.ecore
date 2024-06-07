@@ -5,34 +5,66 @@
   <eClassifiers xsi:type="ecore:EClass" name="Interactivity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainId" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramEditors" upperBound="-1"
-        eType="#//DiagramEditor" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Interaction" abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramDefinition" lowerBound="1"
+        eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//DiagramDescription"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//InteractiveFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filters" upperBound="-1"
+        eType="#//FilterDefinition" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InteractiveFeature" abstract="true"
       interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GraphicZoom" eSuperTypes="#//Interaction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="levels" upperBound="-1"
-        eType="#//ZoomLevel" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticZoom" eSuperTypes="#//InteractiveFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="levels" lowerBound="1"
+        upperBound="-1" eType="#//Level" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ZoomLevel" eSuperTypes="#//Command">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actionsToTrigger" upperBound="-1"
-        eType="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Level">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" lowerBound="1"
+        eType="#//FilterDefinition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Command" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
-        eType="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FilterDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" lowerBound="1"
+        upperBound="-1" eType="#//Modifier" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DiagramEditor">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="interactiveFeatures" upperBound="-1"
-        eType="#//InteractiveFeature" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="interactions" upperBound="-1"
-        eType="#//Interaction" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramDefinition" lowerBound="1"
-        eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//DiagramDescription"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Modifier" abstract="true" interface="true"
+      eSuperTypes="#//Identifiable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VisibilityModifier" eSuperTypes="#//Modifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hide" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleModifier" eSuperTypes="#//Modifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="style" lowerBound="1" eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//NodeStyleDescription"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicFilter" eSuperTypes="#//InteractiveFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filters" lowerBound="1"
+        upperBound="-1" eType="#//Filter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="radius" eType="#//Radius"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Filter" eSuperTypes="#//Identifiable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="#//FilterDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="focus" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Radius" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FixedRadius" eSuperTypes="#//Radius">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BoundedRadius" eSuperTypes="#//Radius">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticSearch" eSuperTypes="#//InteractiveFeature #//Identifiable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="search" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Identifiable" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

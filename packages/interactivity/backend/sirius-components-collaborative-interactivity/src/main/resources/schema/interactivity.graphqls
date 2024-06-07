@@ -1,16 +1,6 @@
-extend type Mutation {
-    semanticZoom(input: SemanticZoomInput!): SemanticZoomPayload!
-}
-
 extend type Query {
     interactivity(input: InteractivityModelInput!): InteractivityModelPayload!
     affectedElements(input: ComputeAffectedNodesInput!): ComputeAffectedElementsPayload!
-}
-
-input SemanticZoomInput {
-    id: ID!
-    editingContextId: ID!
-    representationId: ID!
 }
 
 input InteractivityModelInput {
@@ -23,7 +13,7 @@ input ComputeAffectedNodesInput {
     id: ID!
     editingContextId: ID!
     representationId: ID!
-    actionId: String!
+    containerIds: [String!]!
 }
 
 union SemanticZoomPayload = SuccessPayload | ErrorPayload
@@ -37,49 +27,83 @@ type InteractivityModelSuccessPayload {
 
 type ComputeAffectedElementsSuccessPayload {
     id: ID!
+    affectedElementIds: [AffectedElementIdsPair!]!
+}
+
+type AffectedElementIdsPair {
+    id: String!
     affectedElementIds: [String!]!
 }
 
-
-
 type Interactivity {
     domainId: String!
-    diagramEditors: [DiagramEditor!]!
+    diagramDefinition: DiagramDescription!
+    features: [InteractiveFeature!]!
+    filters: [FilterDefinition!]!
 }
 
-type DiagramEditor {
-    interactions: [Interaction!]!
-    interactiveFeatures: [InteractiveFeature!]!
-    diagramDefinition: DiagramDescription
+interface Identifiable {
+    id: String!
 }
 
-union Interaction = GraphicZoom
-union InteractiveFeature = SemanticZoom
-interface Command {
-    actionsToTrigger: [Action!]!
-}
-union Action = LevelOfDetail
+union InteractiveFeature = SemanticZoom | DynamicFilter | SemanticSearch
 
-type GraphicZoom {
+type SemanticZoom {
     levels: [ZoomLevel!]!
 }
 
-type ZoomLevel implements Command {
-    actionsToTrigger: [Action!]!
-    level: Int!
+type ZoomLevel {
+    min: Int!
+    max: Int!
+    filter: FilterDefinition
 }
 
-type SemanticZoom {
-    levels: [LevelOfDetail!]!
-}
-
-type LevelOfDetail {
+type FilterDefinition {
     name: String!
-    #    hiddenASElement: String!
-    #    styleOverrides: [StyleOverride!]!
-    #    asElements: String!
+    modifiers: [Modifier!]!
 }
 
-#type StyleOverride {
-#    style: INodeStyle
-#}
+interface Modifier implements Identifiable {
+    path: String!
+    id: String!
+}
+
+type VisibilityModifier implements Modifier & Identifiable {
+    path: String!
+    hide: Boolean!
+    id: String!
+}
+
+type StyleModifier implements Modifier & Identifiable {
+    path: String!
+    style: INodeStyle
+    id: String!
+}
+
+type DynamicFilter {
+    filters: [Filter!]!
+    radius: Radius
+}
+
+type Filter implements Identifiable {
+    reference: FilterDefinition
+    name: String!
+    focus: String!
+    id: String!
+}
+
+union Radius = FixedRadius | BoundedRadius
+
+type FixedRadius {
+    value: Int!
+}
+
+type BoundedRadius {
+    min: Int!
+    max: Int!
+}
+
+type SemanticSearch implements Identifiable {
+    search: String!
+    id: String!
+}

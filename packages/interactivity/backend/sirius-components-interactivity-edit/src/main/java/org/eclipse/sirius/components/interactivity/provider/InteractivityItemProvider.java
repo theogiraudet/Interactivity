@@ -64,6 +64,7 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 			super.getPropertyDescriptors(object);
 
 			addDomainIdPropertyDescriptor(object);
+			addDiagramDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -85,6 +86,21 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	}
 
 	/**
+	 * This adds a property descriptor for the Diagram Definition feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDiagramDefinitionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Interactivity_diagramDefinition_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_Interactivity_diagramDefinition_feature",
+						"_UI_Interactivity_type"),
+				InteractivityPackage.Literals.INTERACTIVITY__DIAGRAM_DEFINITION, true, false, true, null, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -96,7 +112,8 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(InteractivityPackage.Literals.INTERACTIVITY__DIAGRAM_EDITORS);
+			childrenFeatures.add(InteractivityPackage.Literals.INTERACTIVITY__FEATURES);
+			childrenFeatures.add(InteractivityPackage.Literals.INTERACTIVITY__FILTERS);
 		}
 		return childrenFeatures;
 	}
@@ -118,11 +135,11 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	 * This returns Interactivity.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Interactivity.svg"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Interactivity"));
 	}
 
 	/**
@@ -163,7 +180,8 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 		case InteractivityPackage.INTERACTIVITY__DOMAIN_ID:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
-		case InteractivityPackage.INTERACTIVITY__DIAGRAM_EDITORS:
+		case InteractivityPackage.INTERACTIVITY__FEATURES:
+		case InteractivityPackage.INTERACTIVITY__FILTERS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -181,8 +199,17 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__DIAGRAM_EDITORS,
-				InteractivityFactory.eINSTANCE.createDiagramEditor()));
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__FEATURES,
+				InteractivityFactory.eINSTANCE.createSemanticZoom()));
+
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__FEATURES,
+				InteractivityFactory.eINSTANCE.createDynamicFilter()));
+
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__FEATURES,
+				InteractivityFactory.eINSTANCE.createSemanticSearch()));
+
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__FILTERS,
+				InteractivityFactory.eINSTANCE.createFilterDefinition()));
 	}
 
 	/**

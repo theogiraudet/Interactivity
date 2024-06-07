@@ -16,7 +16,10 @@ export const computeAffectedElementsQuery = gql`
   query affectedElements($input: ComputeAffectedNodesInput!) {
     affectedElements(input: $input) {
       ... on ComputeAffectedElementsSuccessPayload {
-        affectedElementIds
+        affectedElementIds {
+          id
+          affectedElementIds
+        }
       }
     }
   }

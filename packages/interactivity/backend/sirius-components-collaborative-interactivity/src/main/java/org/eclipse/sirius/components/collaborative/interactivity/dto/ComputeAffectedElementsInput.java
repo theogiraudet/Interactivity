@@ -4,4 +4,4 @@ import org.eclipse.sirius.components.collaborative.interactivity.api.IInteractiv
 
 import java.util.UUID;
 
-public record ComputeAffectedElementsInput(UUID id, String representationId, String editingContextId, String actionId) implements IInteractivityInput {}
+public record ComputeAffectedElementsInput(UUID id, String representationId, String editingContextId, String[] containerIds) implements IInteractivityInput {}

@@ -15,15 +15,22 @@ package org.eclipse.sirius.components.interactivity.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipse.sirius.components.interactivity.Action;
-import org.eclipse.sirius.components.interactivity.Command;
-import org.eclipse.sirius.components.interactivity.DiagramEditor;
-import org.eclipse.sirius.components.interactivity.GraphicZoom;
-import org.eclipse.sirius.components.interactivity.Interaction;
+import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.Filter;
+import org.eclipse.sirius.components.interactivity.FilterDefinition;
+import org.eclipse.sirius.components.interactivity.FixedRadius;
+import org.eclipse.sirius.components.interactivity.Identifiable;
 import org.eclipse.sirius.components.interactivity.InteractiveFeature;
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.ZoomLevel;
+import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Radius;
+import org.eclipse.sirius.components.interactivity.SemanticSearch;
+import org.eclipse.sirius.components.interactivity.SemanticZoom;
+import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.interactivity.VisibilityModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,20 +96,6 @@ public class InteractivitySwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case InteractivityPackage.INTERACTION: {
-			Interaction interaction = (Interaction) theEObject;
-			T result = caseInteraction(interaction);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case InteractivityPackage.ACTION: {
-			Action action = (Action) theEObject;
-			T result = caseAction(action);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case InteractivityPackage.INTERACTIVE_FEATURE: {
 			InteractiveFeature interactiveFeature = (InteractiveFeature) theEObject;
 			T result = caseInteractiveFeature(interactiveFeature);
@@ -110,34 +103,117 @@ public class InteractivitySwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case InteractivityPackage.GRAPHIC_ZOOM: {
-			GraphicZoom graphicZoom = (GraphicZoom) theEObject;
-			T result = caseGraphicZoom(graphicZoom);
+		case InteractivityPackage.SEMANTIC_ZOOM: {
+			SemanticZoom semanticZoom = (SemanticZoom) theEObject;
+			T result = caseSemanticZoom(semanticZoom);
 			if (result == null)
-				result = caseInteraction(graphicZoom);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case InteractivityPackage.ZOOM_LEVEL: {
-			ZoomLevel zoomLevel = (ZoomLevel) theEObject;
-			T result = caseZoomLevel(zoomLevel);
-			if (result == null)
-				result = caseCommand(zoomLevel);
+				result = caseInteractiveFeature(semanticZoom);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case InteractivityPackage.COMMAND: {
-			Command command = (Command) theEObject;
-			T result = caseCommand(command);
+		case InteractivityPackage.LEVEL: {
+			Level level = (Level) theEObject;
+			T result = caseLevel(level);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case InteractivityPackage.DIAGRAM_EDITOR: {
-			DiagramEditor diagramEditor = (DiagramEditor) theEObject;
-			T result = caseDiagramEditor(diagramEditor);
+		case InteractivityPackage.FILTER_DEFINITION: {
+			FilterDefinition filterDefinition = (FilterDefinition) theEObject;
+			T result = caseFilterDefinition(filterDefinition);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.MODIFIER: {
+			Modifier modifier = (Modifier) theEObject;
+			T result = caseModifier(modifier);
+			if (result == null)
+				result = caseIdentifiable(modifier);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.VISIBILITY_MODIFIER: {
+			VisibilityModifier visibilityModifier = (VisibilityModifier) theEObject;
+			T result = caseVisibilityModifier(visibilityModifier);
+			if (result == null)
+				result = caseModifier(visibilityModifier);
+			if (result == null)
+				result = caseIdentifiable(visibilityModifier);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.STYLE_MODIFIER: {
+			StyleModifier styleModifier = (StyleModifier) theEObject;
+			T result = caseStyleModifier(styleModifier);
+			if (result == null)
+				result = caseModifier(styleModifier);
+			if (result == null)
+				result = caseIdentifiable(styleModifier);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.DYNAMIC_FILTER: {
+			DynamicFilter dynamicFilter = (DynamicFilter) theEObject;
+			T result = caseDynamicFilter(dynamicFilter);
+			if (result == null)
+				result = caseInteractiveFeature(dynamicFilter);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.FILTER: {
+			Filter filter = (Filter) theEObject;
+			T result = caseFilter(filter);
+			if (result == null)
+				result = caseIdentifiable(filter);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.RADIUS: {
+			Radius radius = (Radius) theEObject;
+			T result = caseRadius(radius);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.FIXED_RADIUS: {
+			FixedRadius fixedRadius = (FixedRadius) theEObject;
+			T result = caseFixedRadius(fixedRadius);
+			if (result == null)
+				result = caseRadius(fixedRadius);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.BOUNDED_RADIUS: {
+			BoundedRadius boundedRadius = (BoundedRadius) theEObject;
+			T result = caseBoundedRadius(boundedRadius);
+			if (result == null)
+				result = caseRadius(boundedRadius);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.SEMANTIC_SEARCH: {
+			SemanticSearch semanticSearch = (SemanticSearch) theEObject;
+			T result = caseSemanticSearch(semanticSearch);
+			if (result == null)
+				result = caseInteractiveFeature(semanticSearch);
+			if (result == null)
+				result = caseIdentifiable(semanticSearch);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.IDENTIFIABLE: {
+			Identifiable identifiable = (Identifiable) theEObject;
+			T result = caseIdentifiable(identifiable);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -163,36 +239,6 @@ public class InteractivitySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Interaction</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Interaction</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInteraction(Interaction object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Action</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAction(Action object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Interactive Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -208,62 +254,197 @@ public class InteractivitySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Graphic Zoom</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Semantic Zoom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Graphic Zoom</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Semantic Zoom</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGraphicZoom(GraphicZoom object) {
+	public T caseSemanticZoom(SemanticZoom object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Zoom Level</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Level</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Zoom Level</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Level</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseZoomLevel(ZoomLevel object) {
+	public T caseLevel(Level object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Command</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Filter Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Command</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Filter Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCommand(Command object) {
+	public T caseFilterDefinition(FilterDefinition object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Diagram Editor</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Modifier</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Diagram Editor</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Modifier</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDiagramEditor(DiagramEditor object) {
+	public T caseModifier(Modifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Visibility Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Visibility Modifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVisibilityModifier(VisibilityModifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Style Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Style Modifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStyleModifier(StyleModifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dynamic Filter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDynamicFilter(DynamicFilter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Filter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFilter(Filter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Radius</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Radius</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRadius(Radius object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Fixed Radius</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Fixed Radius</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFixedRadius(FixedRadius object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bounded Radius</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bounded Radius</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBoundedRadius(BoundedRadius object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Semantic Search</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Semantic Search</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSemanticSearch(SemanticSearch object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Identifiable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Identifiable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIdentifiable(Identifiable object) {
 		return null;
 	}
 

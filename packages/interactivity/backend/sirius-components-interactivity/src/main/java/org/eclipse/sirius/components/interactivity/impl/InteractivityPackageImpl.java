@@ -17,16 +17,23 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.sirius.components.interactivity.Action;
-import org.eclipse.sirius.components.interactivity.Command;
-import org.eclipse.sirius.components.interactivity.DiagramEditor;
-import org.eclipse.sirius.components.interactivity.GraphicZoom;
-import org.eclipse.sirius.components.interactivity.Interaction;
+import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.Filter;
+import org.eclipse.sirius.components.interactivity.FilterDefinition;
+import org.eclipse.sirius.components.interactivity.FixedRadius;
+import org.eclipse.sirius.components.interactivity.Identifiable;
 import org.eclipse.sirius.components.interactivity.InteractiveFeature;
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.ZoomLevel;
+import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Radius;
+import org.eclipse.sirius.components.interactivity.SemanticSearch;
+import org.eclipse.sirius.components.interactivity.SemanticZoom;
+import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.interactivity.VisibilityModifier;
 import org.eclipse.sirius.components.view.ViewPackage;
 import org.eclipse.sirius.components.view.diagram.DiagramPackage;
 
@@ -49,20 +56,6 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass interactionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass actionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass interactiveFeatureEClass = null;
 
 	/**
@@ -70,28 +63,91 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass graphicZoomEClass = null;
+	private EClass semanticZoomEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass zoomLevelEClass = null;
+	private EClass levelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass commandEClass = null;
+	private EClass filterDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass diagramEditorEClass = null;
+	private EClass modifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass visibilityModifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass styleModifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dynamicFilterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass filterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass radiusEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fixedRadiusEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass boundedRadiusEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass semanticSearchEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass identifiableEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -187,7 +243,7 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EReference getInteractivity_DiagramEditors() {
+	public EReference getInteractivity_DiagramDefinition() {
 		return (EReference) interactivityEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -197,8 +253,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EClass getInteraction() {
-		return interactionEClass;
+	public EReference getInteractivity_Features() {
+		return (EReference) interactivityEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -207,18 +263,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EClass getAction() {
-		return actionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getAction_Name() {
-		return (EAttribute) actionEClass.getEStructuralFeatures().get(0);
+	public EReference getInteractivity_Filters() {
+		return (EReference) interactivityEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -237,8 +283,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EClass getGraphicZoom() {
-		return graphicZoomEClass;
+	public EClass getSemanticZoom() {
+		return semanticZoomEClass;
 	}
 
 	/**
@@ -247,8 +293,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EReference getGraphicZoom_Levels() {
-		return (EReference) graphicZoomEClass.getEStructuralFeatures().get(0);
+	public EReference getSemanticZoom_Levels() {
+		return (EReference) semanticZoomEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -257,8 +303,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EClass getZoomLevel() {
-		return zoomLevelEClass;
+	public EClass getLevel() {
+		return levelEClass;
 	}
 
 	/**
@@ -267,8 +313,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EAttribute getZoomLevel_Level() {
-		return (EAttribute) zoomLevelEClass.getEStructuralFeatures().get(0);
+	public EAttribute getLevel_Min() {
+		return (EAttribute) levelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -277,8 +323,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EReference getZoomLevel_ActionsToTrigger() {
-		return (EReference) zoomLevelEClass.getEStructuralFeatures().get(1);
+	public EAttribute getLevel_Max() {
+		return (EAttribute) levelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -287,8 +333,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EClass getCommand() {
-		return commandEClass;
+	public EReference getLevel_Filter() {
+		return (EReference) levelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -297,8 +343,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EReference getCommand_Actions() {
-		return (EReference) commandEClass.getEStructuralFeatures().get(0);
+	public EClass getFilterDefinition() {
+		return filterDefinitionEClass;
 	}
 
 	/**
@@ -307,8 +353,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EClass getDiagramEditor() {
-		return diagramEditorEClass;
+	public EAttribute getFilterDefinition_Name() {
+		return (EAttribute) filterDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -317,8 +363,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EReference getDiagramEditor_InteractiveFeatures() {
-		return (EReference) diagramEditorEClass.getEStructuralFeatures().get(0);
+	public EReference getFilterDefinition_Modifiers() {
+		return (EReference) filterDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -327,8 +373,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EReference getDiagramEditor_Interactions() {
-		return (EReference) diagramEditorEClass.getEStructuralFeatures().get(1);
+	public EClass getModifier() {
+		return modifierEClass;
 	}
 
 	/**
@@ -337,8 +383,218 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EReference getDiagramEditor_DiagramDefinition() {
-		return (EReference) diagramEditorEClass.getEStructuralFeatures().get(2);
+	public EAttribute getModifier_Path() {
+		return (EAttribute) modifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVisibilityModifier() {
+		return visibilityModifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getVisibilityModifier_Hide() {
+		return (EAttribute) visibilityModifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStyleModifier() {
+		return styleModifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStyleModifier_Style() {
+		return (EReference) styleModifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDynamicFilter() {
+		return dynamicFilterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDynamicFilter_Filters() {
+		return (EReference) dynamicFilterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDynamicFilter_Radius() {
+		return (EReference) dynamicFilterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getFilter() {
+		return filterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFilter_Reference() {
+		return (EReference) filterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getFilter_Name() {
+		return (EAttribute) filterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getFilter_Focus() {
+		return (EAttribute) filterEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getRadius() {
+		return radiusEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getFixedRadius() {
+		return fixedRadiusEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getFixedRadius_Value() {
+		return (EAttribute) fixedRadiusEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getBoundedRadius() {
+		return boundedRadiusEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getBoundedRadius_Min() {
+		return (EAttribute) boundedRadiusEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getBoundedRadius_Max() {
+		return (EAttribute) boundedRadiusEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSemanticSearch() {
+		return semanticSearchEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSemanticSearch_Search() {
+		return (EAttribute) semanticSearchEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIdentifiable() {
+		return identifiableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getIdentifiable_Id() {
+		return (EAttribute) identifiableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -373,29 +629,56 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		// Create classes and their features
 		interactivityEClass = createEClass(INTERACTIVITY);
 		createEAttribute(interactivityEClass, INTERACTIVITY__DOMAIN_ID);
-		createEReference(interactivityEClass, INTERACTIVITY__DIAGRAM_EDITORS);
-
-		interactionEClass = createEClass(INTERACTION);
-
-		actionEClass = createEClass(ACTION);
-		createEAttribute(actionEClass, ACTION__NAME);
+		createEReference(interactivityEClass, INTERACTIVITY__DIAGRAM_DEFINITION);
+		createEReference(interactivityEClass, INTERACTIVITY__FEATURES);
+		createEReference(interactivityEClass, INTERACTIVITY__FILTERS);
 
 		interactiveFeatureEClass = createEClass(INTERACTIVE_FEATURE);
 
-		graphicZoomEClass = createEClass(GRAPHIC_ZOOM);
-		createEReference(graphicZoomEClass, GRAPHIC_ZOOM__LEVELS);
+		semanticZoomEClass = createEClass(SEMANTIC_ZOOM);
+		createEReference(semanticZoomEClass, SEMANTIC_ZOOM__LEVELS);
 
-		zoomLevelEClass = createEClass(ZOOM_LEVEL);
-		createEAttribute(zoomLevelEClass, ZOOM_LEVEL__LEVEL);
-		createEReference(zoomLevelEClass, ZOOM_LEVEL__ACTIONS_TO_TRIGGER);
+		levelEClass = createEClass(LEVEL);
+		createEAttribute(levelEClass, LEVEL__MIN);
+		createEAttribute(levelEClass, LEVEL__MAX);
+		createEReference(levelEClass, LEVEL__FILTER);
 
-		commandEClass = createEClass(COMMAND);
-		createEReference(commandEClass, COMMAND__ACTIONS);
+		filterDefinitionEClass = createEClass(FILTER_DEFINITION);
+		createEAttribute(filterDefinitionEClass, FILTER_DEFINITION__NAME);
+		createEReference(filterDefinitionEClass, FILTER_DEFINITION__MODIFIERS);
 
-		diagramEditorEClass = createEClass(DIAGRAM_EDITOR);
-		createEReference(diagramEditorEClass, DIAGRAM_EDITOR__INTERACTIVE_FEATURES);
-		createEReference(diagramEditorEClass, DIAGRAM_EDITOR__INTERACTIONS);
-		createEReference(diagramEditorEClass, DIAGRAM_EDITOR__DIAGRAM_DEFINITION);
+		modifierEClass = createEClass(MODIFIER);
+		createEAttribute(modifierEClass, MODIFIER__PATH);
+
+		visibilityModifierEClass = createEClass(VISIBILITY_MODIFIER);
+		createEAttribute(visibilityModifierEClass, VISIBILITY_MODIFIER__HIDE);
+
+		styleModifierEClass = createEClass(STYLE_MODIFIER);
+		createEReference(styleModifierEClass, STYLE_MODIFIER__STYLE);
+
+		dynamicFilterEClass = createEClass(DYNAMIC_FILTER);
+		createEReference(dynamicFilterEClass, DYNAMIC_FILTER__FILTERS);
+		createEReference(dynamicFilterEClass, DYNAMIC_FILTER__RADIUS);
+
+		filterEClass = createEClass(FILTER);
+		createEReference(filterEClass, FILTER__REFERENCE);
+		createEAttribute(filterEClass, FILTER__NAME);
+		createEAttribute(filterEClass, FILTER__FOCUS);
+
+		radiusEClass = createEClass(RADIUS);
+
+		fixedRadiusEClass = createEClass(FIXED_RADIUS);
+		createEAttribute(fixedRadiusEClass, FIXED_RADIUS__VALUE);
+
+		boundedRadiusEClass = createEClass(BOUNDED_RADIUS);
+		createEAttribute(boundedRadiusEClass, BOUNDED_RADIUS__MIN);
+		createEAttribute(boundedRadiusEClass, BOUNDED_RADIUS__MAX);
+
+		semanticSearchEClass = createEClass(SEMANTIC_SEARCH);
+		createEAttribute(semanticSearchEClass, SEMANTIC_SEARCH__SEARCH);
+
+		identifiableEClass = createEClass(IDENTIFIABLE);
+		createEAttribute(identifiableEClass, IDENTIFIABLE__ID);
 	}
 
 	/**
@@ -431,8 +714,16 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		graphicZoomEClass.getESuperTypes().add(this.getInteraction());
-		zoomLevelEClass.getESuperTypes().add(this.getCommand());
+		semanticZoomEClass.getESuperTypes().add(this.getInteractiveFeature());
+		modifierEClass.getESuperTypes().add(this.getIdentifiable());
+		visibilityModifierEClass.getESuperTypes().add(this.getModifier());
+		styleModifierEClass.getESuperTypes().add(this.getModifier());
+		dynamicFilterEClass.getESuperTypes().add(this.getInteractiveFeature());
+		filterEClass.getESuperTypes().add(this.getIdentifiable());
+		fixedRadiusEClass.getESuperTypes().add(this.getRadius());
+		boundedRadiusEClass.getESuperTypes().add(this.getRadius());
+		semanticSearchEClass.getESuperTypes().add(this.getInteractiveFeature());
+		semanticSearchEClass.getESuperTypes().add(this.getIdentifiable());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(interactivityEClass, Interactivity.class, "Interactivity", !IS_ABSTRACT, !IS_INTERFACE,
@@ -440,50 +731,101 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		initEAttribute(getInteractivity_DomainId(), ecorePackage.getEString(), "domainId", null, 1, 1,
 				Interactivity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEReference(getInteractivity_DiagramEditors(), this.getDiagramEditor(), null, "diagramEditors", null, 0, -1,
+		initEReference(getInteractivity_DiagramDefinition(), theDiagramPackage.getDiagramDescription(), null,
+				"diagramDefinition", null, 1, 1, Interactivity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInteractivity_Features(), this.getInteractiveFeature(), null, "features", null, 0, -1,
 				Interactivity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(interactionEClass, Interaction.class, "Interaction", IS_ABSTRACT, IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(actionEClass, Action.class, "Action", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAction_Name(), ecorePackage.getEString(), "name", null, 1, 1, Action.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInteractivity_Filters(), this.getFilterDefinition(), null, "filters", null, 0, -1,
+				Interactivity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(interactiveFeatureEClass, InteractiveFeature.class, "InteractiveFeature", IS_ABSTRACT, IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(graphicZoomEClass, GraphicZoom.class, "GraphicZoom", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(semanticZoomEClass, SemanticZoom.class, "SemanticZoom", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGraphicZoom_Levels(), this.getZoomLevel(), null, "levels", null, 0, -1, GraphicZoom.class,
+		initEReference(getSemanticZoom_Levels(), this.getLevel(), null, "levels", null, 1, -1, SemanticZoom.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(zoomLevelEClass, ZoomLevel.class, "ZoomLevel", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getZoomLevel_Level(), ecorePackage.getEInt(), "level", null, 0, 1, ZoomLevel.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getZoomLevel_ActionsToTrigger(), this.getAction(), null, "actionsToTrigger", null, 0, -1,
-				ZoomLevel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(commandEClass, Command.class, "Command", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCommand_Actions(), this.getAction(), null, "actions", null, 0, -1, Command.class,
+		initEClass(levelEClass, Level.class, "Level", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLevel_Min(), ecorePackage.getEInt(), "min", null, 1, 1, Level.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLevel_Max(), ecorePackage.getEInt(), "max", null, 1, 1, Level.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLevel_Filter(), this.getFilterDefinition(), null, "filter", null, 1, 1, Level.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(diagramEditorEClass, DiagramEditor.class, "DiagramEditor", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(filterDefinitionEClass, FilterDefinition.class, "FilterDefinition", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDiagramEditor_InteractiveFeatures(), this.getInteractiveFeature(), null,
-				"interactiveFeatures", null, 0, -1, DiagramEditor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDiagramEditor_Interactions(), this.getInteraction(), null, "interactions", null, 0, -1,
-				DiagramEditor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+		initEAttribute(getFilterDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1,
+				FilterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getFilterDefinition_Modifiers(), this.getModifier(), null, "modifiers", null, 1, -1,
+				FilterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDiagramEditor_DiagramDefinition(), theDiagramPackage.getDiagramDescription(), null,
-				"diagramDefinition", null, 1, 1, DiagramEditor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modifierEClass, Modifier.class, "Modifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModifier_Path(), ecorePackage.getEString(), "path", null, 1, 1, Modifier.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(visibilityModifierEClass, VisibilityModifier.class, "VisibilityModifier", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVisibilityModifier_Hide(), ecorePackage.getEBoolean(), "hide", null, 1, 1,
+				VisibilityModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(styleModifierEClass, StyleModifier.class, "StyleModifier", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStyleModifier_Style(), theDiagramPackage.getNodeStyleDescription(), null, "style", null, 1, 1,
+				StyleModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dynamicFilterEClass, DynamicFilter.class, "DynamicFilter", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDynamicFilter_Filters(), this.getFilter(), null, "filters", null, 1, -1, DynamicFilter.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDynamicFilter_Radius(), this.getRadius(), null, "radius", null, 0, 1, DynamicFilter.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(filterEClass, Filter.class, "Filter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFilter_Reference(), this.getFilterDefinition(), null, "reference", null, 1, 1, Filter.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFilter_Name(), ecorePackage.getEString(), "name", null, 1, 1, Filter.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFilter_Focus(), ecorePackage.getEString(), "focus", null, 1, 1, Filter.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(radiusEClass, Radius.class, "Radius", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(fixedRadiusEClass, FixedRadius.class, "FixedRadius", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFixedRadius_Value(), ecorePackage.getEInt(), "value", null, 0, 1, FixedRadius.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(boundedRadiusEClass, BoundedRadius.class, "BoundedRadius", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBoundedRadius_Min(), ecorePackage.getEInt(), "min", null, 1, 1, BoundedRadius.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBoundedRadius_Max(), ecorePackage.getEInt(), "max", null, 1, 1, BoundedRadius.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(semanticSearchEClass, SemanticSearch.class, "SemanticSearch", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSemanticSearch_Search(), ecorePackage.getEString(), "search", null, 1, 1,
+				SemanticSearch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(identifiableEClass, Identifiable.class, "Identifiable", IS_ABSTRACT, IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIdentifiable_Id(), ecorePackage.getEString(), "id", null, 1, 1, Identifiable.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

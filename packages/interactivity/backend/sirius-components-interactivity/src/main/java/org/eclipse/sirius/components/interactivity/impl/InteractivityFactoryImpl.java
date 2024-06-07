@@ -17,12 +17,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.sirius.components.interactivity.DiagramEditor;
-import org.eclipse.sirius.components.interactivity.GraphicZoom;
+import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.Filter;
+import org.eclipse.sirius.components.interactivity.FilterDefinition;
+import org.eclipse.sirius.components.interactivity.FixedRadius;
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.ZoomLevel;
+import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.SemanticSearch;
+import org.eclipse.sirius.components.interactivity.SemanticZoom;
+import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.interactivity.VisibilityModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,12 +77,26 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 		switch (eClass.getClassifierID()) {
 		case InteractivityPackage.INTERACTIVITY:
 			return createInteractivity();
-		case InteractivityPackage.GRAPHIC_ZOOM:
-			return createGraphicZoom();
-		case InteractivityPackage.ZOOM_LEVEL:
-			return createZoomLevel();
-		case InteractivityPackage.DIAGRAM_EDITOR:
-			return createDiagramEditor();
+		case InteractivityPackage.SEMANTIC_ZOOM:
+			return createSemanticZoom();
+		case InteractivityPackage.LEVEL:
+			return createLevel();
+		case InteractivityPackage.FILTER_DEFINITION:
+			return createFilterDefinition();
+		case InteractivityPackage.VISIBILITY_MODIFIER:
+			return createVisibilityModifier();
+		case InteractivityPackage.STYLE_MODIFIER:
+			return createStyleModifier();
+		case InteractivityPackage.DYNAMIC_FILTER:
+			return createDynamicFilter();
+		case InteractivityPackage.FILTER:
+			return createFilter();
+		case InteractivityPackage.FIXED_RADIUS:
+			return createFixedRadius();
+		case InteractivityPackage.BOUNDED_RADIUS:
+			return createBoundedRadius();
+		case InteractivityPackage.SEMANTIC_SEARCH:
+			return createSemanticSearch();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -98,9 +119,9 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public GraphicZoom createGraphicZoom() {
-		GraphicZoomImpl graphicZoom = new GraphicZoomImpl();
-		return graphicZoom;
+	public SemanticZoom createSemanticZoom() {
+		SemanticZoomImpl semanticZoom = new SemanticZoomImpl();
+		return semanticZoom;
 	}
 
 	/**
@@ -109,9 +130,9 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public ZoomLevel createZoomLevel() {
-		ZoomLevelImpl zoomLevel = new ZoomLevelImpl();
-		return zoomLevel;
+	public Level createLevel() {
+		LevelImpl level = new LevelImpl();
+		return level;
 	}
 
 	/**
@@ -120,9 +141,86 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public DiagramEditor createDiagramEditor() {
-		DiagramEditorImpl diagramEditor = new DiagramEditorImpl();
-		return diagramEditor;
+	public FilterDefinition createFilterDefinition() {
+		FilterDefinitionImpl filterDefinition = new FilterDefinitionImpl();
+		return filterDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public VisibilityModifier createVisibilityModifier() {
+		VisibilityModifierImpl visibilityModifier = new VisibilityModifierImpl();
+		return visibilityModifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StyleModifier createStyleModifier() {
+		StyleModifierImpl styleModifier = new StyleModifierImpl();
+		return styleModifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DynamicFilter createDynamicFilter() {
+		DynamicFilterImpl dynamicFilter = new DynamicFilterImpl();
+		return dynamicFilter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Filter createFilter() {
+		FilterImpl filter = new FilterImpl();
+		return filter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public FixedRadius createFixedRadius() {
+		FixedRadiusImpl fixedRadius = new FixedRadiusImpl();
+		return fixedRadius;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BoundedRadius createBoundedRadius() {
+		BoundedRadiusImpl boundedRadius = new BoundedRadiusImpl();
+		return boundedRadius;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SemanticSearch createSemanticSearch() {
+		SemanticSearchImpl semanticSearch = new SemanticSearchImpl();
+		return semanticSearch;
 	}
 
 	/**

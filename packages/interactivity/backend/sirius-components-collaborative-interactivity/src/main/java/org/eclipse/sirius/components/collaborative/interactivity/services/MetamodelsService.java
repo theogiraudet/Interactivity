@@ -70,7 +70,7 @@ public class MetamodelsService {
                     if(interactivityOpt.isPresent()) {
                         var interactivity = interactivityOpt.get();
                         // TODO Which view to return when the interactivity model declare several DiagramEditors ?
-                        var viewOpt = this.getModelFromResourceSet(projectResourceSet, View.class, view -> view.getDescriptions().stream().anyMatch(desc -> desc.equals(interactivity.getDiagramEditors().get(0).getDiagramDefinition())));
+                        var viewOpt = this.getModelFromResourceSet(projectResourceSet, View.class, view -> view.getDescriptions().stream().anyMatch(desc -> desc.equals(interactivity.getDiagramDefinition())));
                         return viewOpt.map(view -> new Metamodels(interactivity, domainOpt.get(), view));
                     }
                 }

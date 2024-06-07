@@ -79,7 +79,7 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	protected Collection<Object> supportedTypes = new ArrayList<>();
 
 	/**
 	 * This constructs an instance.
@@ -119,72 +119,233 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.GraphicZoom} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.SemanticZoom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected GraphicZoomItemProvider graphicZoomItemProvider;
+	protected SemanticZoomItemProvider semanticZoomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.GraphicZoom}.
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.SemanticZoom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createGraphicZoomAdapter() {
-		if (graphicZoomItemProvider == null) {
-			graphicZoomItemProvider = new GraphicZoomItemProvider(this);
+	public Adapter createSemanticZoomAdapter() {
+		if (semanticZoomItemProvider == null) {
+			semanticZoomItemProvider = new SemanticZoomItemProvider(this);
 		}
 
-		return graphicZoomItemProvider;
+		return semanticZoomItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.ZoomLevel} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.Level} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ZoomLevelItemProvider zoomLevelItemProvider;
+	protected LevelItemProvider levelItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.ZoomLevel}.
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.Level}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createZoomLevelAdapter() {
-		if (zoomLevelItemProvider == null) {
-			zoomLevelItemProvider = new ZoomLevelItemProvider(this);
+	public Adapter createLevelAdapter() {
+		if (levelItemProvider == null) {
+			levelItemProvider = new LevelItemProvider(this);
 		}
 
-		return zoomLevelItemProvider;
+		return levelItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.DiagramEditor} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.FilterDefinition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DiagramEditorItemProvider diagramEditorItemProvider;
+	protected FilterDefinitionItemProvider filterDefinitionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.DiagramEditor}.
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.FilterDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createDiagramEditorAdapter() {
-		if (diagramEditorItemProvider == null) {
-			diagramEditorItemProvider = new DiagramEditorItemProvider(this);
+	public Adapter createFilterDefinitionAdapter() {
+		if (filterDefinitionItemProvider == null) {
+			filterDefinitionItemProvider = new FilterDefinitionItemProvider(this);
 		}
 
-		return diagramEditorItemProvider;
+		return filterDefinitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.VisibilityModifier} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VisibilityModifierItemProvider visibilityModifierItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.VisibilityModifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createVisibilityModifierAdapter() {
+		if (visibilityModifierItemProvider == null) {
+			visibilityModifierItemProvider = new VisibilityModifierItemProvider(this);
+		}
+
+		return visibilityModifierItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.StyleModifier} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StyleModifierItemProvider styleModifierItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.StyleModifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStyleModifierAdapter() {
+		if (styleModifierItemProvider == null) {
+			styleModifierItemProvider = new StyleModifierItemProvider(this);
+		}
+
+		return styleModifierItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.DynamicFilter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DynamicFilterItemProvider dynamicFilterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.DynamicFilter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDynamicFilterAdapter() {
+		if (dynamicFilterItemProvider == null) {
+			dynamicFilterItemProvider = new DynamicFilterItemProvider(this);
+		}
+
+		return dynamicFilterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.Filter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FilterItemProvider filterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.Filter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFilterAdapter() {
+		if (filterItemProvider == null) {
+			filterItemProvider = new FilterItemProvider(this);
+		}
+
+		return filterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.FixedRadius} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FixedRadiusItemProvider fixedRadiusItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.FixedRadius}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFixedRadiusAdapter() {
+		if (fixedRadiusItemProvider == null) {
+			fixedRadiusItemProvider = new FixedRadiusItemProvider(this);
+		}
+
+		return fixedRadiusItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.BoundedRadius} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BoundedRadiusItemProvider boundedRadiusItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.BoundedRadius}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBoundedRadiusAdapter() {
+		if (boundedRadiusItemProvider == null) {
+			boundedRadiusItemProvider = new BoundedRadiusItemProvider(this);
+		}
+
+		return boundedRadiusItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.SemanticSearch} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SemanticSearchItemProvider semanticSearchItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.SemanticSearch}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSemanticSearchAdapter() {
+		if (semanticSearchItemProvider == null) {
+			semanticSearchItemProvider = new SemanticSearchItemProvider(this);
+		}
+
+		return semanticSearchItemProvider;
 	}
 
 	/**
@@ -314,7 +475,7 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	}
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
+	 * This disposes all of the item providers created by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -323,12 +484,26 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	public void dispose() {
 		if (interactivityItemProvider != null)
 			interactivityItemProvider.dispose();
-		if (graphicZoomItemProvider != null)
-			graphicZoomItemProvider.dispose();
-		if (zoomLevelItemProvider != null)
-			zoomLevelItemProvider.dispose();
-		if (diagramEditorItemProvider != null)
-			diagramEditorItemProvider.dispose();
+		if (semanticZoomItemProvider != null)
+			semanticZoomItemProvider.dispose();
+		if (levelItemProvider != null)
+			levelItemProvider.dispose();
+		if (filterDefinitionItemProvider != null)
+			filterDefinitionItemProvider.dispose();
+		if (visibilityModifierItemProvider != null)
+			visibilityModifierItemProvider.dispose();
+		if (styleModifierItemProvider != null)
+			styleModifierItemProvider.dispose();
+		if (dynamicFilterItemProvider != null)
+			dynamicFilterItemProvider.dispose();
+		if (filterItemProvider != null)
+			filterItemProvider.dispose();
+		if (fixedRadiusItemProvider != null)
+			fixedRadiusItemProvider.dispose();
+		if (boundedRadiusItemProvider != null)
+			boundedRadiusItemProvider.dispose();
+		if (semanticSearchItemProvider != null)
+			semanticSearchItemProvider.dispose();
 	}
 
 }

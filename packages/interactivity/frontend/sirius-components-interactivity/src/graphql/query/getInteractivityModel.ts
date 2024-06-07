@@ -19,26 +19,72 @@ export const getInteractivityModelQuery = gql`
         __typename
         interactivity {
           domainId
-          diagramEditors {
-            interactions {
-              __typename
-              ... on GraphicZoom {
-                levels {
-                  level
-                  actionsToTrigger {
-                    ... on LevelOfDetail {
-                      name
+          filters {
+            name
+            modifiers {
+              id
+              ... on VisibilityModifier {
+                hide
+                path
+              }
+              ... on StyleModifier {
+                path
+              }
+            }
+          }
+          features {
+            __typename
+            ... on SemanticZoom {
+              levels {
+                min
+                max
+                filter {
+                  name
+                  modifiers {
+                    id
+                    ... on VisibilityModifier {
+                      hide
+                      path
+                    }
+                    ... on StyleModifier {
+                      path
                     }
                   }
                 }
               }
             }
-            interactiveFeatures {
-              ... on SemanticZoom {
-                levels {
+            ... on DynamicFilter {
+              filters {
+                id
+                name
+                reference {
                   name
+                  modifiers {
+                    id
+                    ... on VisibilityModifier {
+                      hide
+                      path
+                    }
+                    ... on StyleModifier {
+                      path
+                    }
+                  }
                 }
               }
+              radius {
+                __typename
+                ... on FixedRadius {
+                  value
+                }
+                ... on BoundedRadius {
+                  min
+                  max
+                }
+              }
+            }
+            ... on SemanticSearch {
+              search
+              id
             }
           }
         }

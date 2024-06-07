@@ -23,9 +23,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.sirius.components.interactivity.DiagramEditor;
+import org.eclipse.sirius.components.interactivity.FilterDefinition;
+import org.eclipse.sirius.components.interactivity.InteractiveFeature;
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
+import org.eclipse.sirius.components.view.diagram.DiagramDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +38,9 @@ import org.eclipse.sirius.components.interactivity.InteractivityPackage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.InteractivityImpl#getDomainId <em>Domain Id</em>}</li>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.InteractivityImpl#getDiagramEditors <em>Diagram Editors</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.InteractivityImpl#getDiagramDefinition <em>Diagram Definition</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.InteractivityImpl#getFeatures <em>Features</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.InteractivityImpl#getFilters <em>Filters</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,14 +67,34 @@ public class InteractivityImpl extends MinimalEObjectImpl.Container implements I
 	protected String domainId = DOMAIN_ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDiagramEditors() <em>Diagram Editors</em>}' containment reference list.
+	 * The cached value of the '{@link #getDiagramDefinition() <em>Diagram Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDiagramEditors()
+	 * @see #getDiagramDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DiagramEditor> diagramEditors;
+	protected DiagramDescription diagramDefinition;
+
+	/**
+	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<InteractiveFeature> features;
+
+	/**
+	 * The cached value of the '{@link #getFilters() <em>Filters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFilters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<FilterDefinition> filters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,12 +145,69 @@ public class InteractivityImpl extends MinimalEObjectImpl.Container implements I
 	 * @generated
 	 */
 	@Override
-	public EList<DiagramEditor> getDiagramEditors() {
-		if (diagramEditors == null) {
-			diagramEditors = new EObjectContainmentEList<DiagramEditor>(DiagramEditor.class, this,
-					InteractivityPackage.INTERACTIVITY__DIAGRAM_EDITORS);
+	public DiagramDescription getDiagramDefinition() {
+		if (diagramDefinition != null && diagramDefinition.eIsProxy()) {
+			InternalEObject oldDiagramDefinition = (InternalEObject) diagramDefinition;
+			diagramDefinition = (DiagramDescription) eResolveProxy(oldDiagramDefinition);
+			if (diagramDefinition != oldDiagramDefinition) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							InteractivityPackage.INTERACTIVITY__DIAGRAM_DEFINITION, oldDiagramDefinition,
+							diagramDefinition));
+			}
 		}
-		return diagramEditors;
+		return diagramDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DiagramDescription basicGetDiagramDefinition() {
+		return diagramDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDiagramDefinition(DiagramDescription newDiagramDefinition) {
+		DiagramDescription oldDiagramDefinition = diagramDefinition;
+		diagramDefinition = newDiagramDefinition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					InteractivityPackage.INTERACTIVITY__DIAGRAM_DEFINITION, oldDiagramDefinition, diagramDefinition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<InteractiveFeature> getFeatures() {
+		if (features == null) {
+			features = new EObjectContainmentEList<>(InteractiveFeature.class, this,
+					InteractivityPackage.INTERACTIVITY__FEATURES);
+		}
+		return features;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<FilterDefinition> getFilters() {
+		if (filters == null) {
+			filters = new EObjectContainmentEList<>(FilterDefinition.class, this,
+					InteractivityPackage.INTERACTIVITY__FILTERS);
+		}
+		return filters;
 	}
 
 	/**
@@ -137,8 +218,10 @@ public class InteractivityImpl extends MinimalEObjectImpl.Container implements I
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case InteractivityPackage.INTERACTIVITY__DIAGRAM_EDITORS:
-			return ((InternalEList<?>) getDiagramEditors()).basicRemove(otherEnd, msgs);
+		case InteractivityPackage.INTERACTIVITY__FEATURES:
+			return ((InternalEList<?>) getFeatures()).basicRemove(otherEnd, msgs);
+		case InteractivityPackage.INTERACTIVITY__FILTERS:
+			return ((InternalEList<?>) getFilters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -153,8 +236,14 @@ public class InteractivityImpl extends MinimalEObjectImpl.Container implements I
 		switch (featureID) {
 		case InteractivityPackage.INTERACTIVITY__DOMAIN_ID:
 			return getDomainId();
-		case InteractivityPackage.INTERACTIVITY__DIAGRAM_EDITORS:
-			return getDiagramEditors();
+		case InteractivityPackage.INTERACTIVITY__DIAGRAM_DEFINITION:
+			if (resolve)
+				return getDiagramDefinition();
+			return basicGetDiagramDefinition();
+		case InteractivityPackage.INTERACTIVITY__FEATURES:
+			return getFeatures();
+		case InteractivityPackage.INTERACTIVITY__FILTERS:
+			return getFilters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,9 +260,16 @@ public class InteractivityImpl extends MinimalEObjectImpl.Container implements I
 		case InteractivityPackage.INTERACTIVITY__DOMAIN_ID:
 			setDomainId((String) newValue);
 			return;
-		case InteractivityPackage.INTERACTIVITY__DIAGRAM_EDITORS:
-			getDiagramEditors().clear();
-			getDiagramEditors().addAll((Collection<? extends DiagramEditor>) newValue);
+		case InteractivityPackage.INTERACTIVITY__DIAGRAM_DEFINITION:
+			setDiagramDefinition((DiagramDescription) newValue);
+			return;
+		case InteractivityPackage.INTERACTIVITY__FEATURES:
+			getFeatures().clear();
+			getFeatures().addAll((Collection<? extends InteractiveFeature>) newValue);
+			return;
+		case InteractivityPackage.INTERACTIVITY__FILTERS:
+			getFilters().clear();
+			getFilters().addAll((Collection<? extends FilterDefinition>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -190,8 +286,14 @@ public class InteractivityImpl extends MinimalEObjectImpl.Container implements I
 		case InteractivityPackage.INTERACTIVITY__DOMAIN_ID:
 			setDomainId(DOMAIN_ID_EDEFAULT);
 			return;
-		case InteractivityPackage.INTERACTIVITY__DIAGRAM_EDITORS:
-			getDiagramEditors().clear();
+		case InteractivityPackage.INTERACTIVITY__DIAGRAM_DEFINITION:
+			setDiagramDefinition((DiagramDescription) null);
+			return;
+		case InteractivityPackage.INTERACTIVITY__FEATURES:
+			getFeatures().clear();
+			return;
+		case InteractivityPackage.INTERACTIVITY__FILTERS:
+			getFilters().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -207,8 +309,12 @@ public class InteractivityImpl extends MinimalEObjectImpl.Container implements I
 		switch (featureID) {
 		case InteractivityPackage.INTERACTIVITY__DOMAIN_ID:
 			return DOMAIN_ID_EDEFAULT == null ? domainId != null : !DOMAIN_ID_EDEFAULT.equals(domainId);
-		case InteractivityPackage.INTERACTIVITY__DIAGRAM_EDITORS:
-			return diagramEditors != null && !diagramEditors.isEmpty();
+		case InteractivityPackage.INTERACTIVITY__DIAGRAM_DEFINITION:
+			return diagramDefinition != null;
+		case InteractivityPackage.INTERACTIVITY__FEATURES:
+			return features != null && !features.isEmpty();
+		case InteractivityPackage.INTERACTIVITY__FILTERS:
+			return filters != null && !filters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

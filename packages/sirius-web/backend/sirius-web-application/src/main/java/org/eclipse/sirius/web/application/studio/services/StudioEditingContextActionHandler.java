@@ -33,8 +33,6 @@ import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.representations.Failure;
 import org.eclipse.sirius.components.representations.IStatus;
 import org.eclipse.sirius.components.representations.Success;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoom;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoomFactory;
 import org.eclipse.sirius.components.view.View;
 import org.eclipse.sirius.components.view.ViewFactory;
 import org.eclipse.sirius.components.view.diagram.DiagramDescription;

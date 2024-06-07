@@ -13,19 +13,17 @@ import org.eclipse.sirius.components.core.api.ErrorPayload;
 import org.eclipse.sirius.components.core.api.IEditingContext;
 import org.eclipse.sirius.components.core.api.IIdentityService;
 import org.eclipse.sirius.components.core.api.IPayload;
-import org.eclipse.sirius.components.interactivity.Action;
+import org.eclipse.sirius.components.interactivity.Identifiable;
+import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.Modifier;
 import org.eclipse.sirius.components.interpreter.AQLInterpreter;
 import org.eclipse.sirius.components.interpreter.Result;
 import org.eclipse.sirius.components.representations.Message;
 import org.eclipse.sirius.components.representations.MessageLevel;
-import org.eclipse.sirius.components.semantic_zoom.LevelOfDetail;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Sinks;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ComputeAffectedElementsEventHandler implements IInteractivityEventHandler  {
@@ -56,13 +54,14 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
                 Metamodels metamodels = metamodelsOpt.get();
 
                 var iterator = metamodels.interactivity().eAllContents();
+                Map<String, String[]> map = new HashMap<>();
                 while(iterator.hasNext()) {
                     EObject object = iterator.next();
-                    if(object instanceof Action action && action.getName().equals(input.actionId())) {
+                    if(object instanceof Identifiable identifiable && List.of(input.containerIds()).contains(identifiable.getId())) {
                         Optional<String> query = Optional.empty();
                         boolean success = true;
-                        if(object instanceof LevelOfDetail levelOfDetail) {
-                            query = Optional.of(levelOfDetail.getHiddenASElements());
+                        if(object instanceof Modifier modifier) {
+                            query = Optional.of(modifier.getPath());
                         } else {
                             success = false;
                             errors.add(new Message(object.eClass().getName() + " is not a registered Action type.", MessageLevel.ERROR));
@@ -73,13 +72,14 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
                                errors.add(new Message("Query not found.", MessageLevel.ERROR));
                            } else {
                                String[] objectIds = getObjectIds(editingContext, input.representationId(), query.get()).get();
-                               payload = new ComputeAffectedElementsSuccessPayload(interactivityInput.id(), objectIds);
+                               map.put(identifiable.getId(), objectIds);
 
                            }
                         }
-                        break;
                     }
                 }
+                var value = map.entrySet().stream().map(entry -> new ComputeAffectedElementsSuccessPayload.AffectedElementIdsPair(entry.getKey(), entry.getValue())).toArray(ComputeAffectedElementsSuccessPayload.AffectedElementIdsPair[]::new);
+                payload = new ComputeAffectedElementsSuccessPayload(interactivityInput.id(), value);
             }
         }
         payloadSink.tryEmitValue(payload);

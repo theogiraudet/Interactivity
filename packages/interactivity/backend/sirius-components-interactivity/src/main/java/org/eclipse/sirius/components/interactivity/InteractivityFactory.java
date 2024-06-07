@@ -41,31 +41,94 @@ public interface InteractivityFactory extends EFactory {
 	Interactivity createInteractivity();
 
 	/**
-	 * Returns a new object of class '<em>Graphic Zoom</em>'.
+	 * Returns a new object of class '<em>Semantic Zoom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Graphic Zoom</em>'.
+	 * @return a new object of class '<em>Semantic Zoom</em>'.
 	 * @generated
 	 */
-	GraphicZoom createGraphicZoom();
+	SemanticZoom createSemanticZoom();
 
 	/**
-	 * Returns a new object of class '<em>Zoom Level</em>'.
+	 * Returns a new object of class '<em>Level</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Zoom Level</em>'.
+	 * @return a new object of class '<em>Level</em>'.
 	 * @generated
 	 */
-	ZoomLevel createZoomLevel();
+	Level createLevel();
 
 	/**
-	 * Returns a new object of class '<em>Diagram Editor</em>'.
+	 * Returns a new object of class '<em>Filter Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Diagram Editor</em>'.
+	 * @return a new object of class '<em>Filter Definition</em>'.
 	 * @generated
 	 */
-	DiagramEditor createDiagramEditor();
+	FilterDefinition createFilterDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Visibility Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Visibility Modifier</em>'.
+	 * @generated
+	 */
+	VisibilityModifier createVisibilityModifier();
+
+	/**
+	 * Returns a new object of class '<em>Style Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Style Modifier</em>'.
+	 * @generated
+	 */
+	StyleModifier createStyleModifier();
+
+	/**
+	 * Returns a new object of class '<em>Dynamic Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dynamic Filter</em>'.
+	 * @generated
+	 */
+	DynamicFilter createDynamicFilter();
+
+	/**
+	 * Returns a new object of class '<em>Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Filter</em>'.
+	 * @generated
+	 */
+	Filter createFilter();
+
+	/**
+	 * Returns a new object of class '<em>Fixed Radius</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Fixed Radius</em>'.
+	 * @generated
+	 */
+	FixedRadius createFixedRadius();
+
+	/**
+	 * Returns a new object of class '<em>Bounded Radius</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bounded Radius</em>'.
+	 * @generated
+	 */
+	BoundedRadius createBoundedRadius();
+
+	/**
+	 * Returns a new object of class '<em>Semantic Search</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Semantic Search</em>'.
+	 * @generated
+	 */
+	SemanticSearch createSemanticSearch();
 
 	/**
 	 * Returns the package supported by this factory.

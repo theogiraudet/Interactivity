@@ -16,15 +16,22 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.sirius.components.interactivity.Action;
-import org.eclipse.sirius.components.interactivity.Command;
-import org.eclipse.sirius.components.interactivity.DiagramEditor;
-import org.eclipse.sirius.components.interactivity.GraphicZoom;
-import org.eclipse.sirius.components.interactivity.Interaction;
+import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.Filter;
+import org.eclipse.sirius.components.interactivity.FilterDefinition;
+import org.eclipse.sirius.components.interactivity.FixedRadius;
+import org.eclipse.sirius.components.interactivity.Identifiable;
 import org.eclipse.sirius.components.interactivity.InteractiveFeature;
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.ZoomLevel;
+import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Radius;
+import org.eclipse.sirius.components.interactivity.SemanticSearch;
+import org.eclipse.sirius.components.interactivity.SemanticZoom;
+import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.interactivity.VisibilityModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,20 +87,10 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InteractivitySwitch<Adapter> modelSwitch = new InteractivitySwitch<Adapter>() {
+	protected InteractivitySwitch<Adapter> modelSwitch = new InteractivitySwitch<>() {
 		@Override
 		public Adapter caseInteractivity(Interactivity object) {
 			return createInteractivityAdapter();
-		}
-
-		@Override
-		public Adapter caseInteraction(Interaction object) {
-			return createInteractionAdapter();
-		}
-
-		@Override
-		public Adapter caseAction(Action object) {
-			return createActionAdapter();
 		}
 
 		@Override
@@ -102,23 +99,68 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseGraphicZoom(GraphicZoom object) {
-			return createGraphicZoomAdapter();
+		public Adapter caseSemanticZoom(SemanticZoom object) {
+			return createSemanticZoomAdapter();
 		}
 
 		@Override
-		public Adapter caseZoomLevel(ZoomLevel object) {
-			return createZoomLevelAdapter();
+		public Adapter caseLevel(Level object) {
+			return createLevelAdapter();
 		}
 
 		@Override
-		public Adapter caseCommand(Command object) {
-			return createCommandAdapter();
+		public Adapter caseFilterDefinition(FilterDefinition object) {
+			return createFilterDefinitionAdapter();
 		}
 
 		@Override
-		public Adapter caseDiagramEditor(DiagramEditor object) {
-			return createDiagramEditorAdapter();
+		public Adapter caseModifier(Modifier object) {
+			return createModifierAdapter();
+		}
+
+		@Override
+		public Adapter caseVisibilityModifier(VisibilityModifier object) {
+			return createVisibilityModifierAdapter();
+		}
+
+		@Override
+		public Adapter caseStyleModifier(StyleModifier object) {
+			return createStyleModifierAdapter();
+		}
+
+		@Override
+		public Adapter caseDynamicFilter(DynamicFilter object) {
+			return createDynamicFilterAdapter();
+		}
+
+		@Override
+		public Adapter caseFilter(Filter object) {
+			return createFilterAdapter();
+		}
+
+		@Override
+		public Adapter caseRadius(Radius object) {
+			return createRadiusAdapter();
+		}
+
+		@Override
+		public Adapter caseFixedRadius(FixedRadius object) {
+			return createFixedRadiusAdapter();
+		}
+
+		@Override
+		public Adapter caseBoundedRadius(BoundedRadius object) {
+			return createBoundedRadiusAdapter();
+		}
+
+		@Override
+		public Adapter caseSemanticSearch(SemanticSearch object) {
+			return createSemanticSearchAdapter();
+		}
+
+		@Override
+		public Adapter caseIdentifiable(Identifiable object) {
+			return createIdentifiableAdapter();
 		}
 
 		@Override
@@ -155,34 +197,6 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Interaction <em>Interaction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.Interaction
-	 * @generated
-	 */
-	public Adapter createInteractionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Action <em>Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.Action
-	 * @generated
-	 */
-	public Adapter createActionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.InteractiveFeature <em>Interactive Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -197,58 +211,184 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.GraphicZoom <em>Graphic Zoom</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.SemanticZoom <em>Semantic Zoom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.GraphicZoom
+	 * @see org.eclipse.sirius.components.interactivity.SemanticZoom
 	 * @generated
 	 */
-	public Adapter createGraphicZoomAdapter() {
+	public Adapter createSemanticZoomAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.ZoomLevel <em>Zoom Level</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Level <em>Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.ZoomLevel
+	 * @see org.eclipse.sirius.components.interactivity.Level
 	 * @generated
 	 */
-	public Adapter createZoomLevelAdapter() {
+	public Adapter createLevelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Command <em>Command</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.FilterDefinition <em>Filter Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.Command
+	 * @see org.eclipse.sirius.components.interactivity.FilterDefinition
 	 * @generated
 	 */
-	public Adapter createCommandAdapter() {
+	public Adapter createFilterDefinitionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.DiagramEditor <em>Diagram Editor</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Modifier <em>Modifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.sirius.components.interactivity.DiagramEditor
+	 * @see org.eclipse.sirius.components.interactivity.Modifier
 	 * @generated
 	 */
-	public Adapter createDiagramEditorAdapter() {
+	public Adapter createModifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.VisibilityModifier <em>Visibility Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.VisibilityModifier
+	 * @generated
+	 */
+	public Adapter createVisibilityModifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.StyleModifier <em>Style Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.StyleModifier
+	 * @generated
+	 */
+	public Adapter createStyleModifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.DynamicFilter <em>Dynamic Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.DynamicFilter
+	 * @generated
+	 */
+	public Adapter createDynamicFilterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Filter <em>Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.Filter
+	 * @generated
+	 */
+	public Adapter createFilterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Radius <em>Radius</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.Radius
+	 * @generated
+	 */
+	public Adapter createRadiusAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.FixedRadius <em>Fixed Radius</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.FixedRadius
+	 * @generated
+	 */
+	public Adapter createFixedRadiusAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.BoundedRadius <em>Bounded Radius</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.BoundedRadius
+	 * @generated
+	 */
+	public Adapter createBoundedRadiusAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.SemanticSearch <em>Semantic Search</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.SemanticSearch
+	 * @generated
+	 */
+	public Adapter createSemanticSearchAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Identifiable <em>Identifiable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.Identifiable
+	 * @generated
+	 */
+	public Adapter createIdentifiableAdapter() {
 		return null;
 	}
 

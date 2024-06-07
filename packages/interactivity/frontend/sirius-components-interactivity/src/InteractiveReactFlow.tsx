@@ -3,6 +3,7 @@ import React, { useContext, forwardRef } from 'react';
 import { useInteractivity } from './hook/useInteractivity';
 import { Diagram, DiagramContext, DiagramContextValue, NodeData } from '@eclipse-sirius/sirius-components-diagrams';
 import { EdgeData } from '@eclipse-sirius/sirius-components-diagrams/dist/renderer/DiagramRenderer.types';
+import { Interactivity } from './components/Interactivity';
 
 export const InteractiveReactFlow = forwardRef(
   (props: ReactFlowProps & { diagram: Diagram }, ref: React.Ref<HTMLDivElement>) => {
@@ -18,10 +19,10 @@ export const InteractiveReactFlow = forwardRef(
       zoomMax: props.maxZoom!,
     };
 
-    const features = useInteractivity(childrenProps);
+    const model = useInteractivity(childrenProps);
     return (
       <>
-        {features}
+        {model && <Interactivity interactivity={model} {...childrenProps} />}
         <ReactFlow {...props} ref={ref} />
       </>
     );

@@ -1,5 +1,5 @@
 import { GQLMessage } from '@eclipse-sirius/sirius-components-core';
-import { GQLDiagramDescription } from '@eclipse-sirius/sirius-components-diagrams';
+import { GQLDiagramDescription, GQLNodeStyle } from '@eclipse-sirius/sirius-components-diagrams';
 
 export interface InteractivityModelQuery {
   interactivity: (input: GQLInteractivityModelInput) => GQLInteractivityModelPayload;
@@ -20,7 +20,7 @@ export interface GQLComputeAffectedNodesInput {
   id: string;
   editingContextId: string;
   representationId: string;
-  actionId: string;
+  containerIds: string[];
 }
 
 export interface GQLSuccessPayload {
@@ -43,6 +43,11 @@ export interface GQLInteractivityModelSuccessPayload {
 export interface GQLComputeAffectedElementsSuccessPayload {
   __typename: string;
   id: string;
+  affectedElementIds: AffectedElementIdsPair[];
+}
+
+export interface AffectedElementIdsPair {
+  id: string;
   affectedElementIds: string[];
 }
 
@@ -56,51 +61,76 @@ export interface Nameable {
   __typename: string;
 }
 
+export interface Identifiable {
+  id: string;
+}
+
 export interface GQLInteractivity extends Nameable {
   domainId: string;
-  diagramEditors: GQLDiagramEditor[];
-}
-
-export interface GQLDiagramEditor extends Nameable {
-  interactions: GQLInteraction[];
-  interactiveFeatures: GQLInteractiveFeature[];
   diagramDefinition: GQLDiagramDescription;
+  features: GQLInteractiveFeature[];
+  filters: GQLFilterDefinition[];
 }
-
-export interface GQLInteraction extends Nameable {}
 
 export interface GQLInteractiveFeature extends Nameable {}
 
-export interface GQLCommand extends Nameable {
-  __command: undefined;
-  actionsToTrigger: GQLAction[];
-}
-
-export interface GQLAction extends Nameable {
-  __action: undefined;
-  __typename: string;
-  name: string;
-}
-
-export function isGQLCommand(obj: any): obj is GQLCommand {
-  return typeof obj === 'object' && obj.hasOwnProperty('__command');
-}
-
-export function isGQLAction(obj: any): obj is GQLAction {
-  return typeof obj === 'object' && obj.hasOwnProperty('__action');
-}
-
-export interface GQLGraphicZoom extends GQLInteraction {
+export interface GQLSemanticZoom extends GQLInteractiveFeature {
   levels: GQLZoomLevel[];
 }
 
-export interface GQLZoomLevel extends GQLCommand {
-  actionsToTrigger: GQLAction[];
-  level: number;
+export interface GQLZoomLevel extends Nameable {
+  min: number;
+  max: number;
+  filter: GQLFilterDefinition;
 }
 
-export interface GQLSemanticZoom extends GQLInteractiveFeature {
-  levels: GQLLevelOfDetail[];
+export interface GQLFilterDefinition extends Nameable {
+  name: string;
+  modifiers: GQLModifier[];
 }
 
-export interface GQLLevelOfDetail extends GQLAction {}
+export interface GQLModifier extends Nameable, Identifiable {
+  path: string;
+}
+
+export interface GQLVisibilityModifier extends GQLModifier {
+  hide: boolean;
+}
+
+export function isVisibilityModifier(value: any): value is GQLVisibilityModifier {
+  return value['__typename'] !== undefined && value.__typename === 'VisibilityModifier';
+}
+
+export interface GQLStyleModifier extends GQLModifier {
+  style: GQLNodeStyle;
+}
+
+export function isStyleModifier(value: any): value is GQLStyleModifier {
+  return value['__typename'] !== undefined && value.__typename === 'StyleModifier';
+}
+
+export interface GQLDynamicFilter extends GQLInteractiveFeature {
+  filters: GQLFilter[];
+  radius: GQLRadius;
+}
+
+export interface GQLFilter extends Nameable, Identifiable {
+  reference: GQLFilterDefinition;
+  name: string;
+  focus: string;
+}
+
+export interface GQLRadius extends Nameable {}
+
+export interface GQLFixedRadius extends GQLRadius {
+  value: number;
+}
+
+export interface GQLBoundedRadius extends GQLRadius {
+  min: number;
+  max: number;
+}
+
+export interface GQLSemanticSearch extends GQLInteractiveFeature, Identifiable {
+  search: string;
+}

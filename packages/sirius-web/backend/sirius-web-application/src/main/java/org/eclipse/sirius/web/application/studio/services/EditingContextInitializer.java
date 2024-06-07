@@ -26,7 +26,6 @@ import org.eclipse.sirius.components.domain.DomainPackage;
 import org.eclipse.sirius.components.domain.emf.DomainConverter;
 import org.eclipse.sirius.components.emf.services.EditingContextCrossReferenceAdapter;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
 import org.eclipse.sirius.components.view.View;
 import org.eclipse.sirius.components.view.ViewPackage;
 import org.eclipse.sirius.components.view.deck.DeckPackage;
@@ -82,7 +81,6 @@ public class EditingContextInitializer implements IEditingContextProcessor {
                 resourceSet.getPackageRegistry().put(FormPackage.eNS_URI, FormPackage.eINSTANCE);
                 resourceSet.getPackageRegistry().put(GanttPackage.eNS_URI, GanttPackage.eINSTANCE);
                 resourceSet.getPackageRegistry().put(InteractivityPackage.eNS_URI, InteractivityPackage.eINSTANCE);
-                resourceSet.getPackageRegistry().put(SemanticZoomPackage.eNS_URI, SemanticZoomPackage.eINSTANCE);
 
                 semanticData.getDocuments().forEach(document -> this.resourceLoader.toResource(resourceSet, document.getId().toString(), document.getName(), document.getContent()));
                 resourceSet.eAdapters().add(new EditingContextCrossReferenceAdapter());
