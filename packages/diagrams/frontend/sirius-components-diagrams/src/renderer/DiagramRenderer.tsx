@@ -50,6 +50,7 @@ import { useConnector } from './connector/useConnector';
 import { DebugPanel } from './debug/DebugPanel';
 import { useDiagramDelete } from './delete/useDiagramDelete';
 import { useDiagramDirectEdit } from './direct-edit/useDiagramDirectEdit';
+import { useNodesDraggable } from './drag/useNodesDraggable';
 import { useDrop } from './drop/useDrop';
 import { useDropDiagramStyle } from './dropNode/useDropDiagramStyle';
 import { useDropNode } from './dropNode/useDropNode';
@@ -304,6 +305,8 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
     [onNodeDrag, closeAllPalettes]
   );
 
+  const { nodesDraggable } = useNodesDraggable();
+
   return (
     <InteractiveReactFlow
       diagram={convertedDiagram!}
@@ -341,6 +344,7 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
       connectionMode={ConnectionMode.Loose}
       zoomOnDoubleClick={false}
       connectionLineType={ConnectionLineType.SmoothStep}
+      nodesDraggable={nodesDraggable}
       ref={ref}>
       {snapToGrid ? (
         <>
