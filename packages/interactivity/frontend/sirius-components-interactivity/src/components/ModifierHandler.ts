@@ -21,5 +21,7 @@ function applyVisibilityModifier(
   modifier: GQLVisibilityModifier,
   nodes: Node<NodeData>[] /*, setNodes: ((nodes: Node<NodeData>[]) => void)*/
 ) {
+  console.log('Apply visibility modifier ' + modifier.hide);
+  console.log(nodes);
   nodes.forEach((node) => (node.hidden = modifier.hide));
 }

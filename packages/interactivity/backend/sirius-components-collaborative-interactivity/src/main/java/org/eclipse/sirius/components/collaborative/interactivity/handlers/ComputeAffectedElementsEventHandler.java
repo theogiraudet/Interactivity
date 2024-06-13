@@ -14,7 +14,6 @@ import org.eclipse.sirius.components.core.api.IEditingContext;
 import org.eclipse.sirius.components.core.api.IIdentityService;
 import org.eclipse.sirius.components.core.api.IPayload;
 import org.eclipse.sirius.components.interactivity.Identifiable;
-import org.eclipse.sirius.components.interactivity.Level;
 import org.eclipse.sirius.components.interactivity.Modifier;
 import org.eclipse.sirius.components.interpreter.AQLInterpreter;
 import org.eclipse.sirius.components.interpreter.Result;

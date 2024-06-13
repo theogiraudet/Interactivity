@@ -10,6 +10,8 @@ import org.eclipse.sirius.components.diagrams.Diagram;
 import org.eclipse.sirius.components.domain.Domain;
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
+import org.eclipse.sirius.components.representations.IRepresentationDescription;
+import org.eclipse.sirius.components.view.RepresentationDescription;
 import org.eclipse.sirius.components.view.View;
 import org.eclipse.sirius.components.view.emf.IViewRepresentationDescriptionSearchService;
 import org.eclipse.sirius.web.application.editingcontext.EditingContext;
@@ -90,6 +92,10 @@ public class MetamodelsService {
                 .flatMap(diagram -> this.representationDescriptionSearchService
                         .findById(editingContext, diagram.getDescriptionId())
                 ).map(desc -> desc.getDomainType().split("::")[0]);
+    }
+
+    public Optional<String> getDomainNameByRepresentationDescription(IEditingContext editingContext, IRepresentationDescription description) {
+        return this.representationDescriptionSearchService.findById(editingContext, description.getId()).map(desc -> desc.getDomainType().split("::")[0]);
     }
 
     /**

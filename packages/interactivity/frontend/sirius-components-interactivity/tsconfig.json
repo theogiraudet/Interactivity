@@ -5,7 +5,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "emitDeclarationOnly": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "target": "ES2019"
   },
   "include": ["./src/index.ts"],
   "exclude": ["dist", "build", "node_modules"]

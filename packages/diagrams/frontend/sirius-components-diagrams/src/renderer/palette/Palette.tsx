@@ -62,6 +62,7 @@ import {
   PaletteState,
 } from './Palette.types';
 import { ToolSection } from './tool-section/ToolSection';
+import { emitCustomEvent } from 'react-custom-events';
 
 const usePaletteStyle = makeStyles((theme) => ({
   palette: {
@@ -337,7 +338,6 @@ export const Palette = ({
           startingPositionY: y,
           selectedObjectId: null,
         };
-
         const { data } = await invokeSingleClickOnDiagramElementTool({
           variables: { input },
         });
@@ -431,10 +431,17 @@ export const Palette = ({
       case 'collapse':
         collapseExpandElement(diagramElementId, GQLCollapsingState.COLLAPSED);
         break;
+      case 'dynamic-filter':
+        invokeDynamicFilter(tool as GQLSingleClickOnDiagramElementTool);
+        break;
       default:
         invokeSingleClickTool(tool);
         break;
     }
+  };
+
+  const invokeDynamicFilter = (tool: GQLSingleClickOnDiagramElementTool) => {
+    emitCustomEvent('dynamic-filter', tool);
   };
 
   const invokeFadeDiagramElementTool = () => {

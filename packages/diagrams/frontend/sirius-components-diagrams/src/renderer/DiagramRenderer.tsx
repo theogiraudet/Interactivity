@@ -82,13 +82,14 @@ import { useSnapToGrid } from './snap-to-grid/useSnapToGrid';
 
 import 'reactflow/dist/style.css';
 import { InteractiveReactFlow } from '@eclipse-sirius/sirius-components-interactivity';
+import { useFilter } from '@eclipse-sirius/sirius-components-interactivity';
 
 const GRID_STEP: number = 10;
 
 export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRendererProps) => {
   const { readOnly } = useContext<DiagramContextValue>(DiagramContext);
   const { diagramDescription } = useDiagramDescription();
-  const { getEdges, onEdgesChange, getNodes, setEdges, setNodes } = useStore();
+  const { getEdges, onEdgesChange, getNodes, setEdges, setNodes: oldSetNodes } = useStore();
   const nodes = getNodes();
   const edges = getEdges();
 
@@ -130,6 +131,8 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
   const { setSelection } = useSelection();
 
   const [convertedDiagram, setDiagram] = useState<Diagram | undefined>(undefined);
+  const { diagramId: representationId, editingContextId } = useContext<DiagramContextValue>(DiagramContext);
+  const setNodes = useFilter({ editingContextId, representationId, setNodes: oldSetNodes, getNodes });
 
   useEffect(() => {
     const { diagram, cause } = diagramRefreshedEventPayload;

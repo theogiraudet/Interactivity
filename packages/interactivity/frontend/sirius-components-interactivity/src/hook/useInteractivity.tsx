@@ -6,6 +6,7 @@ import {
   InteractivityPayload,
 } from '../graphql/query/InteractivityGraphQL.types';
 import React, { useEffect, useState } from 'react';
+import { emitCustomEvent } from 'react-custom-events';
 
 export type DOMEvents = Omit<React.DOMAttributes<HTMLDivElement>, 'children' | 'dangerouslySetInnerHTML'>;
 
@@ -37,6 +38,12 @@ export const useInteractivity = (props: UseInteractivityValue) => {
         },
         refetchOnWindowFocus: false,
       },
+    }).then((data) => {
+      const dat = data.data as any;
+      if (dat.interactivity.__typename === 'InteractivityModelSuccessPayload') {
+        const payload = dat.interactivity as GQLInteractivityModelSuccessPayload;
+        emitCustomEvent('set-filter-definitions', payload.interactivity.filters);
+      }
     });
   }, []);
 
