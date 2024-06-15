@@ -116,6 +116,8 @@ public class InteractivitySwitch<T> extends Switch<T> {
 			Level level = (Level) theEObject;
 			T result = caseLevel(level);
 			if (result == null)
+				result = caseIdentifiable(level);
+			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}

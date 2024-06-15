@@ -78,7 +78,7 @@ export interface GQLSemanticZoom extends GQLInteractiveFeature {
   levels: GQLZoomLevel[];
 }
 
-export interface GQLZoomLevel extends Nameable {
+export interface GQLZoomLevel extends Nameable, Identifiable {
   min: number;
   max: number;
   filter: GQLFilterDefinition;

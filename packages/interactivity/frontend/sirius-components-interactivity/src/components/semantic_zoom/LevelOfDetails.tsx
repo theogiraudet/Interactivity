@@ -10,7 +10,7 @@ import { EventObserver } from '../../hook/EventDispatcher';
 import { useEffect } from 'react';
 import { NodeData } from '@eclipse-sirius/sirius-components-diagrams';
 import { Node } from 'reactflow';
-import { applyModifier } from '../ModifierHandler';
+import { applyModifier } from '../filters/ModifierHandler';
 
 const queryParams = (
   editingContextId: string,

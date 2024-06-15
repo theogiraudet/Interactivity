@@ -715,6 +715,7 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 
 		// Add supertypes to classes
 		semanticZoomEClass.getESuperTypes().add(this.getInteractiveFeature());
+		levelEClass.getESuperTypes().add(this.getIdentifiable());
 		modifierEClass.getESuperTypes().add(this.getIdentifiable());
 		visibilityModifierEClass.getESuperTypes().add(this.getModifier());
 		styleModifierEClass.getESuperTypes().add(this.getModifier());

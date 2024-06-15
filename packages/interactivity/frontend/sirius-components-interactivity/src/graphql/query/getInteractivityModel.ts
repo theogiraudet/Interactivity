@@ -36,6 +36,7 @@ export const getInteractivityModelQuery = gql`
             __typename
             ... on SemanticZoom {
               levels {
+                id
                 min
                 max
                 filter {

@@ -53,6 +53,7 @@ type SemanticZoom {
 }
 
 type ZoomLevel {
+    id: String!
     min: Int!
     max: Int!
     filter: FilterDefinition

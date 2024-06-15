@@ -1,6 +1,6 @@
 import { NodeData } from '@eclipse-sirius/sirius-components-diagrams';
 import { Node } from 'reactflow';
-import { Filter } from '../components/Filter';
+import { Filter } from '../components/filters/Filter';
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { useCustomEventListener } from 'react-custom-events';
 import { GQLComputeAffectedElementsPayload, GQLFilterDefinition } from '../graphql/query/InteractivityGraphQL.types';
@@ -32,6 +32,17 @@ export type UseFilterProps = {
   getNodes: () => Node<NodeData>[];
 };
 
+export type FilterState =
+  | {
+      filter: Filter;
+      shouldApply?: boolean;
+    }
+  | Filter;
+
+function isFilter(filter: FilterState): filter is Filter {
+  return filter.hasOwnProperty('id');
+}
+
 export const useFilter = (props: UseFilterProps): Dispatch<SetStateAction<Node<NodeData>[]>> => {
   const [filters, setFilters] = useState<Map<string, Filter>>(new Map());
   const [filterDefs, setFilterDefs] = useState<GQLFilterDefinition[]>([]);
@@ -41,6 +52,7 @@ export const useFilter = (props: UseFilterProps): Dispatch<SetStateAction<Node<N
 
   const callback = useCallback(
     (value: Node<NodeData>[] | ((prevNodes: Node<NodeData>[]) => Node<NodeData>[])) => {
+      console.log(filters.size);
       if (typeof value === 'function') {
         props.setNodes((prevNodes) => {
           const nodesClone = structuredClone(prevNodes);
@@ -60,12 +72,22 @@ export const useFilter = (props: UseFilterProps): Dispatch<SetStateAction<Node<N
 
   useCustomEventListener(
     'set-filter',
-    (filter: Filter) => {
+    (receivedFilters: FilterState[] | FilterState) => {
       setFilters((prevState) => {
-        if (prevState.get(filter.id)) {
-          prevState.delete(filter.id);
-        } else {
-          prevState.set(filter.id, filter);
+        if (!Array.isArray(receivedFilters)) {
+          receivedFilters = [receivedFilters];
+        }
+        for (let filter of receivedFilters) {
+          if (isFilter(filter)) {
+            filter = { filter: filter };
+          }
+          if (filter.shouldApply !== true && prevState.get(filter.filter.id)) {
+            console.log('deleting filter');
+            // Issue: this doesn't refresh the render
+            console.log(prevState.delete(filter.filter.id));
+          } else if (filter.shouldApply !== false) {
+            prevState.set(filter.filter.id, filter.filter);
+          }
         }
         return prevState;
       });
@@ -86,7 +108,7 @@ export const useFilter = (props: UseFilterProps): Dispatch<SetStateAction<Node<N
     ).then((data) => {
       setAffectedNodes(parseQuery(data)!);
     });
-  }, [filterDefs, dnodes]);
+  }, [filterDefs, dnodes.length]);
 
   return callback;
 };

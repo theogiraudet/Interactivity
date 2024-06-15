@@ -61,11 +61,28 @@ public class LevelItemProvider extends ItemProviderAdapter implements IEditingDo
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addIdPropertyDescriptor(object);
 			addMinPropertyDescriptor(object);
 			addMaxPropertyDescriptor(object);
 			addFilterPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Identifiable_id_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Identifiable_id_feature",
+								"_UI_Identifiable_type"),
+						InteractivityPackage.Literals.IDENTIFIABLE__ID, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -141,8 +158,9 @@ public class LevelItemProvider extends ItemProviderAdapter implements IEditingDo
 	 */
 	@Override
 	public String getText(Object object) {
-		Level level = (Level) object;
-		return getString("_UI_Level_type") + " " + level.getMin();
+		String label = ((Level) object).getId();
+		return label == null || label.length() == 0 ? getString("_UI_Level_type")
+				: getString("_UI_Level_type") + " " + label;
 	}
 
 	/**
@@ -157,6 +175,7 @@ public class LevelItemProvider extends ItemProviderAdapter implements IEditingDo
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Level.class)) {
+		case InteractivityPackage.LEVEL__ID:
 		case InteractivityPackage.LEVEL__MIN:
 		case InteractivityPackage.LEVEL__MAX:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

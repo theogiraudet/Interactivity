@@ -29,6 +29,7 @@ import org.eclipse.sirius.components.interactivity.Level;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.LevelImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.LevelImpl#getMin <em>Min</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.LevelImpl#getMax <em>Max</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.LevelImpl#getFilter <em>Filter</em>}</li>
@@ -37,6 +38,26 @@ import org.eclipse.sirius.components.interactivity.Level;
  * @generated
  */
 public class LevelImpl extends MinimalEObjectImpl.Container implements Level {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getMin() <em>Min</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -104,6 +125,29 @@ public class LevelImpl extends MinimalEObjectImpl.Container implements Level {
 	@Override
 	protected EClass eStaticClass() {
 		return InteractivityPackage.Literals.LEVEL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.LEVEL__ID, oldId, id));
 	}
 
 	/**
@@ -202,6 +246,8 @@ public class LevelImpl extends MinimalEObjectImpl.Container implements Level {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+		case InteractivityPackage.LEVEL__ID:
+			return getId();
 		case InteractivityPackage.LEVEL__MIN:
 			return getMin();
 		case InteractivityPackage.LEVEL__MAX:
@@ -222,6 +268,9 @@ public class LevelImpl extends MinimalEObjectImpl.Container implements Level {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case InteractivityPackage.LEVEL__ID:
+			setId((String) newValue);
+			return;
 		case InteractivityPackage.LEVEL__MIN:
 			setMin((Integer) newValue);
 			return;
@@ -243,6 +292,9 @@ public class LevelImpl extends MinimalEObjectImpl.Container implements Level {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+		case InteractivityPackage.LEVEL__ID:
+			setId(ID_EDEFAULT);
+			return;
 		case InteractivityPackage.LEVEL__MIN:
 			setMin(MIN_EDEFAULT);
 			return;
@@ -264,6 +316,8 @@ public class LevelImpl extends MinimalEObjectImpl.Container implements Level {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+		case InteractivityPackage.LEVEL__ID:
+			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		case InteractivityPackage.LEVEL__MIN:
 			return min != MIN_EDEFAULT;
 		case InteractivityPackage.LEVEL__MAX:
@@ -285,7 +339,9 @@ public class LevelImpl extends MinimalEObjectImpl.Container implements Level {
 			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (min: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", min: ");
 		result.append(min);
 		result.append(", max: ");
 		result.append(max);

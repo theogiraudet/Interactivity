@@ -32,10 +32,12 @@ import java.util.*;
 public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
 
     private final MetamodelsService metamodelsService;
+    private final IIdentityService identityService;
 
-    public InteractivityViewPaletteProvider(IURLParser urlParser, IViewRepresentationDescriptionPredicate viewRepresentationDescriptionPredicate, IViewDiagramDescriptionSearchService viewDiagramDescriptionSearchService, IDiagramDescriptionService diagramDescriptionService, IDiagramIdProvider diagramIdProvider, IObjectService objectService, IViewAQLInterpreterFactory aqlInterpreterFactory, MetamodelsService metamodelsService) {
+    public InteractivityViewPaletteProvider(IURLParser urlParser, IViewRepresentationDescriptionPredicate viewRepresentationDescriptionPredicate, IViewDiagramDescriptionSearchService viewDiagramDescriptionSearchService, IDiagramDescriptionService diagramDescriptionService, IDiagramIdProvider diagramIdProvider, IObjectService objectService, IViewAQLInterpreterFactory aqlInterpreterFactory, MetamodelsService metamodelsService, IIdentityService identityService) {
         super(urlParser, viewRepresentationDescriptionPredicate, viewDiagramDescriptionSearchService, diagramDescriptionService, diagramIdProvider, objectService, aqlInterpreterFactory);
         this.metamodelsService = metamodelsService;
+        this.identityService = identityService;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
                                         .label(filter.getName())
                                         .iconURL(List.of("/images/filter.svg"))
                                         .targetDescriptions(List.of())
-                                        .selectionDescriptionId(filter.getId())
+                                        .selectionDescriptionId(filter.getId() + "|" + this.identityService.getId(obj))
                                         .build()
                                 ));
                     }
