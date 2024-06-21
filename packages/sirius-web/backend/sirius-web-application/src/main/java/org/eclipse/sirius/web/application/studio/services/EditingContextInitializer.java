@@ -38,6 +38,7 @@ import org.eclipse.sirius.web.application.studio.services.api.IDomainProvider;
 import org.eclipse.sirius.web.application.studio.services.api.IStudioColorPalettesLoader;
 import org.eclipse.sirius.web.domain.boundedcontexts.semanticdata.services.api.ISemanticDataSearchService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Used to contribute the domain and view models found to the editing context.
@@ -63,6 +64,7 @@ public class EditingContextInitializer implements IEditingContextProcessor {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public void preProcess(IEditingContext editingContext) {
         if (editingContext instanceof EditingContext siriusWebEditingContext) {
             List<Domain> domains = new ArrayList<>();
