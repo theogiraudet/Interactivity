@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
 import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.ElementReference;
 import org.eclipse.sirius.components.interactivity.Filter;
 import org.eclipse.sirius.components.interactivity.FilterDefinition;
 import org.eclipse.sirius.components.interactivity.FixedRadius;
@@ -29,7 +31,9 @@ import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.Level;
 import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Path;
 import org.eclipse.sirius.components.interactivity.Radius;
+import org.eclipse.sirius.components.interactivity.ScopedModifier;
 import org.eclipse.sirius.components.interactivity.SemanticSearch;
 import org.eclipse.sirius.components.interactivity.SemanticZoom;
 import org.eclipse.sirius.components.interactivity.StyleModifier;
@@ -148,6 +152,34 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	private EClass identifiableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scopedModifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass elementReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pathEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass defaultModifierEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -383,16 +415,6 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EAttribute getModifier_Path() {
-		return (EAttribute) modifierEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getVisibilityModifier() {
 		return visibilityModifierEClass;
 	}
@@ -463,16 +485,6 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EReference getDynamicFilter_Radius() {
-		return (EReference) dynamicFilterEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getFilter() {
 		return filterEClass;
 	}
@@ -503,8 +515,28 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EAttribute getFilter_Focus() {
-		return (EAttribute) filterEClass.getEStructuralFeatures().get(2);
+	public EReference getFilter_Focus() {
+		return (EReference) filterEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFilter_Radius() {
+		return (EReference) filterEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFilter_DefaultModifier() {
+		return (EReference) filterEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -583,8 +615,8 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
-	public EAttribute getSemanticSearch_Search() {
-		return (EAttribute) semanticSearchEClass.getEStructuralFeatures().get(0);
+	public EReference getSemanticSearch_Search() {
+		return (EReference) semanticSearchEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -605,6 +637,96 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	@Override
 	public EAttribute getIdentifiable_Id() {
 		return (EAttribute) identifiableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getScopedModifier() {
+		return scopedModifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getScopedModifier_Elements() {
+		return (EReference) scopedModifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getElementReference() {
+		return elementReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPath() {
+		return pathEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPath_Path() {
+		return (EAttribute) pathEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDefaultModifier() {
+		return defaultModifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getDefaultModifier_Hide() {
+		return (EAttribute) defaultModifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDefaultModifier_Style() {
+		return (EReference) defaultModifierEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDefaultModifier_Colors() {
+		return (EReference) defaultModifierEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -658,7 +780,6 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		createEReference(filterDefinitionEClass, FILTER_DEFINITION__MODIFIERS);
 
 		modifierEClass = createEClass(MODIFIER);
-		createEAttribute(modifierEClass, MODIFIER__PATH);
 
 		visibilityModifierEClass = createEClass(VISIBILITY_MODIFIER);
 		createEAttribute(visibilityModifierEClass, VISIBILITY_MODIFIER__HIDE);
@@ -669,12 +790,13 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 
 		dynamicFilterEClass = createEClass(DYNAMIC_FILTER);
 		createEReference(dynamicFilterEClass, DYNAMIC_FILTER__FILTERS);
-		createEReference(dynamicFilterEClass, DYNAMIC_FILTER__RADIUS);
 
 		filterEClass = createEClass(FILTER);
 		createEReference(filterEClass, FILTER__REFERENCE);
 		createEAttribute(filterEClass, FILTER__NAME);
-		createEAttribute(filterEClass, FILTER__FOCUS);
+		createEReference(filterEClass, FILTER__FOCUS);
+		createEReference(filterEClass, FILTER__RADIUS);
+		createEReference(filterEClass, FILTER__DEFAULT_MODIFIER);
 
 		radiusEClass = createEClass(RADIUS);
 
@@ -686,10 +808,23 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		createEAttribute(boundedRadiusEClass, BOUNDED_RADIUS__MAX);
 
 		semanticSearchEClass = createEClass(SEMANTIC_SEARCH);
-		createEAttribute(semanticSearchEClass, SEMANTIC_SEARCH__SEARCH);
+		createEReference(semanticSearchEClass, SEMANTIC_SEARCH__SEARCH);
 
 		identifiableEClass = createEClass(IDENTIFIABLE);
 		createEAttribute(identifiableEClass, IDENTIFIABLE__ID);
+
+		scopedModifierEClass = createEClass(SCOPED_MODIFIER);
+		createEReference(scopedModifierEClass, SCOPED_MODIFIER__ELEMENTS);
+
+		elementReferenceEClass = createEClass(ELEMENT_REFERENCE);
+
+		pathEClass = createEClass(PATH);
+		createEAttribute(pathEClass, PATH__PATH);
+
+		defaultModifierEClass = createEClass(DEFAULT_MODIFIER);
+		createEAttribute(defaultModifierEClass, DEFAULT_MODIFIER__HIDE);
+		createEReference(defaultModifierEClass, DEFAULT_MODIFIER__STYLE);
+		createEReference(defaultModifierEClass, DEFAULT_MODIFIER__COLORS);
 	}
 
 	/**
@@ -729,14 +864,17 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		semanticZoomEClass.getESuperTypes().add(this.getInteractiveFeature());
 		levelEClass.getESuperTypes().add(this.getIdentifiable());
 		modifierEClass.getESuperTypes().add(this.getIdentifiable());
-		visibilityModifierEClass.getESuperTypes().add(this.getModifier());
-		styleModifierEClass.getESuperTypes().add(this.getModifier());
+		visibilityModifierEClass.getESuperTypes().add(this.getScopedModifier());
+		styleModifierEClass.getESuperTypes().add(this.getScopedModifier());
 		dynamicFilterEClass.getESuperTypes().add(this.getInteractiveFeature());
 		filterEClass.getESuperTypes().add(this.getIdentifiable());
 		fixedRadiusEClass.getESuperTypes().add(this.getRadius());
 		boundedRadiusEClass.getESuperTypes().add(this.getRadius());
 		semanticSearchEClass.getESuperTypes().add(this.getInteractiveFeature());
 		semanticSearchEClass.getESuperTypes().add(this.getIdentifiable());
+		scopedModifierEClass.getESuperTypes().add(this.getModifier());
+		pathEClass.getESuperTypes().add(this.getElementReference());
+		defaultModifierEClass.getESuperTypes().add(this.getModifier());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(interactivityEClass, Interactivity.class, "Interactivity", !IS_ABSTRACT, !IS_INTERFACE,
@@ -777,13 +915,11 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		initEAttribute(getFilterDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1,
 				FilterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEReference(getFilterDefinition_Modifiers(), this.getModifier(), null, "modifiers", null, 1, -1,
+		initEReference(getFilterDefinition_Modifiers(), this.getScopedModifier(), null, "modifiers", null, 1, -1,
 				FilterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modifierEClass, Modifier.class, "Modifier", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getModifier_Path(), ecorePackage.getEString(), "path", null, 1, 1, Modifier.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(visibilityModifierEClass, VisibilityModifier.class, "VisibilityModifier", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -805,9 +941,6 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		initEReference(getDynamicFilter_Filters(), this.getFilter(), null, "filters", null, 1, -1, DynamicFilter.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDynamicFilter_Radius(), this.getRadius(), null, "radius", null, 0, 1, DynamicFilter.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(filterEClass, Filter.class, "Filter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFilter_Reference(), this.getFilterDefinition(), null, "reference", null, 1, 1, Filter.class,
@@ -815,8 +948,15 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFilter_Name(), ecorePackage.getEString(), "name", null, 1, 1, Filter.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFilter_Focus(), ecorePackage.getEString(), "focus", null, 1, 1, Filter.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFilter_Focus(), this.getElementReference(), null, "focus", null, 1, 1, Filter.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFilter_Radius(), this.getRadius(), null, "radius", null, 0, 1, Filter.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getFilter_DefaultModifier(), this.getDefaultModifier(), null, "defaultModifier", null, 1, 1,
+				Filter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(radiusEClass, Radius.class, "Radius", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -834,14 +974,38 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 
 		initEClass(semanticSearchEClass, SemanticSearch.class, "SemanticSearch", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSemanticSearch_Search(), ecorePackage.getEString(), "search", null, 1, 1,
-				SemanticSearch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEReference(getSemanticSearch_Search(), this.getElementReference(), null, "search", null, 1, -1,
+				SemanticSearch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(identifiableEClass, Identifiable.class, "Identifiable", IS_ABSTRACT, IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIdentifiable_Id(), ecorePackage.getEString(), "id", null, 1, 1, Identifiable.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(scopedModifierEClass, ScopedModifier.class, "ScopedModifier", IS_ABSTRACT, IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScopedModifier_Elements(), this.getElementReference(), null, "elements", null, 1, 1,
+				ScopedModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(elementReferenceEClass, ElementReference.class, "ElementReference", IS_ABSTRACT, IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(pathEClass, Path.class, "Path", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPath_Path(), ecorePackage.getEString(), "path", null, 1, 1, Path.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(defaultModifierEClass, DefaultModifier.class, "DefaultModifier", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDefaultModifier_Hide(), ecorePackage.getEBoolean(), "hide", null, 1, 1, DefaultModifier.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefaultModifier_Style(), theDiagramPackage.getNodeStyleDescription(), null, "style", null, 0,
+				1, DefaultModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefaultModifier_Colors(), theViewPackage.getUserColor(), null, "colors", null, 0, -1,
+				DefaultModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

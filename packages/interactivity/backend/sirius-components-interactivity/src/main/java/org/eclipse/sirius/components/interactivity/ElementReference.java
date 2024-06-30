@@ -12,16 +12,17 @@
  */
 package org.eclipse.sirius.components.interactivity;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Modifier</b></em>'.
+ * A representation of the model object '<em><b>Element Reference</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getModifier()
+ * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getElementReference()
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface Modifier extends Identifiable {
-
-} // Modifier
+public interface ElementReference extends EObject {
+} // ElementReference

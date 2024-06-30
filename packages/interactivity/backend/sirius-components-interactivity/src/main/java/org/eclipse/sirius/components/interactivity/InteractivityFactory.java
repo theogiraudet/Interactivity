@@ -131,6 +131,24 @@ public interface InteractivityFactory extends EFactory {
 	SemanticSearch createSemanticSearch();
 
 	/**
+	 * Returns a new object of class '<em>Path</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path</em>'.
+	 * @generated
+	 */
+	Path createPath();
+
+	/**
+	 * Returns a new object of class '<em>Default Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Default Modifier</em>'.
+	 * @generated
+	 */
+	DefaultModifier createDefaultModifier();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -12,10 +12,18 @@
  */
 package org.eclipse.sirius.components.interactivity.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.sirius.components.interactivity.ElementReference;
 import org.eclipse.sirius.components.interactivity.Identifiable;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.SemanticSearch;
@@ -56,24 +64,14 @@ public class SemanticSearchImpl extends MinimalEObjectImpl.Container implements 
 	protected String id = ID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSearch() <em>Search</em>}' attribute.
+	 * The cached value of the '{@link #getSearch() <em>Search</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSearch()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SEARCH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSearch() <em>Search</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSearch()
-	 * @generated
-	 * @ordered
-	 */
-	protected String search = SEARCH_EDEFAULT;
+	protected EList<ElementReference> search;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,7 +121,11 @@ public class SemanticSearchImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public String getSearch() {
+	public EList<ElementReference> getSearch() {
+		if (search == null) {
+			search = new EObjectContainmentEList<>(ElementReference.class, this,
+					InteractivityPackage.SEMANTIC_SEARCH__SEARCH);
+		}
 		return search;
 	}
 
@@ -133,12 +135,12 @@ public class SemanticSearchImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public void setSearch(String newSearch) {
-		String oldSearch = search;
-		search = newSearch;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.SEMANTIC_SEARCH__SEARCH,
-					oldSearch, search));
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case InteractivityPackage.SEMANTIC_SEARCH__SEARCH:
+			return ((InternalEList<?>) getSearch()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -162,6 +164,7 @@ public class SemanticSearchImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -169,7 +172,8 @@ public class SemanticSearchImpl extends MinimalEObjectImpl.Container implements 
 			setId((String) newValue);
 			return;
 		case InteractivityPackage.SEMANTIC_SEARCH__SEARCH:
-			setSearch((String) newValue);
+			getSearch().clear();
+			getSearch().addAll((Collection<? extends ElementReference>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -187,7 +191,7 @@ public class SemanticSearchImpl extends MinimalEObjectImpl.Container implements 
 			setId(ID_EDEFAULT);
 			return;
 		case InteractivityPackage.SEMANTIC_SEARCH__SEARCH:
-			setSearch(SEARCH_EDEFAULT);
+			getSearch().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -204,7 +208,7 @@ public class SemanticSearchImpl extends MinimalEObjectImpl.Container implements 
 		case InteractivityPackage.SEMANTIC_SEARCH__ID:
 			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		case InteractivityPackage.SEMANTIC_SEARCH__SEARCH:
-			return SEARCH_EDEFAULT == null ? search != null : !SEARCH_EDEFAULT.equals(search);
+			return search != null && !search.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -258,8 +262,6 @@ public class SemanticSearchImpl extends MinimalEObjectImpl.Container implements 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (id: ");
 		result.append(id);
-		result.append(", search: ");
-		result.append(search);
 		result.append(')');
 		return result.toString();
 	}

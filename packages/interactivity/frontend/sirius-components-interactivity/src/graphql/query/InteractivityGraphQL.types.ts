@@ -114,14 +114,22 @@ export interface GQLZoomLevel extends Nameable, Identifiable {
 
 export interface GQLFilterDefinition extends Nameable {
   name: string;
-  modifiers: GQLModifier[];
+  modifiers: GQLScopedModifier[];
 }
 
-export interface GQLModifier extends Nameable, Identifiable {
+export interface ElementReference extends GQLModifier, Nameable {}
+
+export interface Path extends ElementReference {
   path: string;
 }
 
-export interface GQLVisibilityModifier extends GQLModifier {
+export interface GQLModifier extends Nameable, Identifiable {}
+
+export interface GQLScopedModifier extends GQLModifier {
+  elements: ElementReference;
+}
+
+export interface GQLVisibilityModifier extends GQLScopedModifier {
   hide: boolean;
 }
 
@@ -129,8 +137,19 @@ export function isVisibilityModifier(value: any): value is GQLVisibilityModifier
   return value['__typename'] !== undefined && value.__typename === 'VisibilityModifier';
 }
 
-export interface GQLStyleModifier extends GQLModifier {
+export interface GQLDefaultModifier extends GQLModifier {
+  hide: boolean;
   style: GQLNodeStyleDescription;
+  color: GQLUserColor[];
+}
+
+export function isDefaultModifier(value: any): value is GQLDefaultModifier {
+  return value['__typename'] !== undefined && value.__typename === 'DefaultModifier';
+}
+
+export interface GQLStyleModifier extends GQLScopedModifier {
+  style: GQLNodeStyleDescription;
+  color: GQLUserColor[];
 }
 
 export function isStyleModifier(value: any): value is GQLStyleModifier {
@@ -139,13 +158,14 @@ export function isStyleModifier(value: any): value is GQLStyleModifier {
 
 export interface GQLDynamicFilter extends GQLInteractiveFeature {
   filters: GQLFilter[];
-  radius: GQLRadius;
 }
 
 export interface GQLFilter extends Nameable, Identifiable {
   reference: GQLFilterDefinition;
   name: string;
-  focus: string;
+  radius: GQLRadius;
+  focus: ElementReference;
+  defaultModifier: GQLDefaultModifier;
 }
 
 export interface GQLRadius extends Nameable {}
@@ -163,8 +183,7 @@ export interface GQLSemanticSearch extends GQLInteractiveFeature, Identifiable {
   search: string;
 }
 
-export interface GQLNodeStyleDescription {
-  __typename: string;
+export interface GQLNodeStyleDescription extends Nameable {
   borderColor: GQLUserColor;
   borderRadius: number;
   borderSize: number;

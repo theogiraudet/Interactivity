@@ -15,6 +15,8 @@ import org.eclipse.sirius.components.core.api.IIdentityService;
 import org.eclipse.sirius.components.core.api.IPayload;
 import org.eclipse.sirius.components.interactivity.Identifiable;
 import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Path;
+import org.eclipse.sirius.components.interactivity.ScopedModifier;
 import org.eclipse.sirius.components.interpreter.AQLInterpreter;
 import org.eclipse.sirius.components.interpreter.Result;
 import org.eclipse.sirius.components.representations.Message;
@@ -59,8 +61,8 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
                     if(object instanceof Identifiable identifiable && List.of(input.containerIds()).contains(identifiable.getId())) {
                         Optional<String> query = Optional.empty();
                         boolean success = true;
-                        if(object instanceof Modifier modifier) {
-                            query = Optional.of(modifier.getPath());
+                        if(object instanceof ScopedModifier modifier) {
+                            query = Optional.of(modifier.getElements()).filter(elem -> elem instanceof Path).map(path -> ((Path) path).getPath());
                         } else {
                             success = false;
                             errors.add(new Message(object.eClass().getName() + " is not a registered Action type.", MessageLevel.ERROR));

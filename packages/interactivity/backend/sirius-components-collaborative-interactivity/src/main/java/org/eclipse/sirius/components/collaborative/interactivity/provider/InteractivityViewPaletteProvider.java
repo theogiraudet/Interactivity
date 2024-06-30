@@ -14,6 +14,7 @@ import org.eclipse.sirius.components.core.api.IObjectService;
 import org.eclipse.sirius.components.core.api.IURLParser;
 import org.eclipse.sirius.components.diagrams.description.DiagramDescription;
 import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.Path;
 import org.eclipse.sirius.components.interpreter.AQLInterpreter;
 import org.eclipse.sirius.components.interpreter.Result;
 import org.eclipse.sirius.components.view.emf.IViewRepresentationDescriptionPredicate;
@@ -53,7 +54,7 @@ public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
                 if(feature instanceof DynamicFilter dynamicFilter) {
                     for(var filter: dynamicFilter.getFilters()) {
                         AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(root.eClass().getEPackage()));
-                        Result result = interpreter.evaluateExpression(Map.of("root", root), filter.getFocus());
+                        Result result = interpreter.evaluateExpression(Map.of("root", root), ((Path) filter.getFocus()).getPath());
                         result.asObjects().flatMap(list -> list.stream().filter(targetElement::equals).findFirst())
                                 .ifPresent(obj -> toolList.add(SingleClickOnDiagramElementTool
                                         .newSingleClickOnDiagramElementTool("dynamic-filter")

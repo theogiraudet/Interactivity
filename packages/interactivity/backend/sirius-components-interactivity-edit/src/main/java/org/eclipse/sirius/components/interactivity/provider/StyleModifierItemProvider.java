@@ -30,6 +30,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.StyleModifier;
 import org.eclipse.sirius.components.view.ViewFactory;
@@ -65,7 +66,6 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 			super.getPropertyDescriptors(object);
 
 			addIdPropertyDescriptor(object);
-			addPathPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -87,22 +87,6 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 	}
 
 	/**
-	 * This adds a property descriptor for the Path feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addPathPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Modifier_path_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Modifier_path_feature",
-								"_UI_Modifier_type"),
-						InteractivityPackage.Literals.MODIFIER__PATH, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -114,6 +98,7 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(InteractivityPackage.Literals.SCOPED_MODIFIER__ELEMENTS);
 			childrenFeatures.add(InteractivityPackage.Literals.STYLE_MODIFIER__STYLE);
 			childrenFeatures.add(InteractivityPackage.Literals.STYLE_MODIFIER__COLORS);
 		}
@@ -180,9 +165,9 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 
 		switch (notification.getFeatureID(StyleModifier.class)) {
 		case InteractivityPackage.STYLE_MODIFIER__ID:
-		case InteractivityPackage.STYLE_MODIFIER__PATH:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
+		case InteractivityPackage.STYLE_MODIFIER__ELEMENTS:
 		case InteractivityPackage.STYLE_MODIFIER__STYLE:
 		case InteractivityPackage.STYLE_MODIFIER__COLORS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -201,6 +186,9 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.SCOPED_MODIFIER__ELEMENTS,
+				InteractivityFactory.eINSTANCE.createPath()));
 
 		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.STYLE_MODIFIER__STYLE,
 				DiagramFactory.eINSTANCE.createRectangularNodeStyleDescription()));

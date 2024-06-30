@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
 import org.eclipse.sirius.components.interactivity.DynamicFilter;
 import org.eclipse.sirius.components.interactivity.Filter;
 import org.eclipse.sirius.components.interactivity.FilterDefinition;
@@ -26,6 +27,7 @@ import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.Path;
 import org.eclipse.sirius.components.interactivity.SemanticSearch;
 import org.eclipse.sirius.components.interactivity.SemanticZoom;
 import org.eclipse.sirius.components.interactivity.StyleModifier;
@@ -97,6 +99,10 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 			return createBoundedRadius();
 		case InteractivityPackage.SEMANTIC_SEARCH:
 			return createSemanticSearch();
+		case InteractivityPackage.PATH:
+			return createPath();
+		case InteractivityPackage.DEFAULT_MODIFIER:
+			return createDefaultModifier();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -221,6 +227,28 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 	public SemanticSearch createSemanticSearch() {
 		SemanticSearchImpl semanticSearch = new SemanticSearchImpl();
 		return semanticSearch;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Path createPath() {
+		PathImpl path = new PathImpl();
+		return path;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DefaultModifier createDefaultModifier() {
+		DefaultModifierImpl defaultModifier = new DefaultModifierImpl();
+		return defaultModifier;
 	}
 
 	/**

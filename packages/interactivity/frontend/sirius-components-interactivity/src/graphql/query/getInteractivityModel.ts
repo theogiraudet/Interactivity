@@ -12,6 +12,42 @@
  *******************************************************************************/
 import { gql } from '@apollo/client';
 
+export const styleFragment = gql`
+  fragment styleFragment on NodeStyleDescription {
+    __typename
+    ... on RectangularNodeStyleDescription {
+      background {
+        name
+        value
+      }
+      borderColor {
+        name
+        value
+      }
+      borderLineStyle
+      borderSize
+      borderRadius
+    }
+    ... on ImageNodeStyleDescription {
+      shape
+      borderColor {
+        name
+        value
+      }
+      borderLineStyle
+      borderSize
+      borderRadius
+      positionDependentRotation
+    }
+    ... on IconLabelNodeStyleDescription {
+      background {
+        name
+        value
+      }
+    }
+  }
+`;
+
 export const filterFragment = gql`
   fragment filterFragment on FilterDefinition {
     name
@@ -20,42 +56,22 @@ export const filterFragment = gql`
       __typename
       ... on VisibilityModifier {
         hide
-        path
+        elements {
+          ... on Path {
+            path
+            __typename
+          }
+        }
       }
       ... on StyleModifier {
-        path
+        elements {
+          ... on Path {
+            path
+            __typename
+          }
+        }
         style {
-          __typename
-          ... on RectangularNodeStyleDescription {
-            background {
-              name
-              value
-            }
-            borderColor {
-              name
-              value
-            }
-            borderLineStyle
-            borderSize
-            borderRadius
-          }
-          ... on ImageNodeStyleDescription {
-            shape
-            borderColor {
-              name
-              value
-            }
-            borderLineStyle
-            borderSize
-            borderRadius
-            positionDependentRotation
-          }
-          ... on IconLabelNodeStyleDescription {
-            background {
-              name
-              value
-            }
-          }
+          ...styleFragment
         }
       }
     }
@@ -64,6 +80,7 @@ export const filterFragment = gql`
 
 export const getInteractivityModelQuery = gql`
   ${filterFragment}
+  ${styleFragment}
   query Interactivity($input: InteractivityModelInput!) {
     interactivity(input: $input) {
       ... on InteractivityModelSuccessPayload {
@@ -92,20 +109,32 @@ export const getInteractivityModelQuery = gql`
                 reference {
                   ...filterFragment
                 }
-              }
-              radius {
-                __typename
-                ... on FixedRadius {
-                  value
+                defaultModifier {
+                  id
+                  hide
+                  style {
+                    ...styleFragment
+                  }
                 }
-                ... on BoundedRadius {
-                  min
-                  max
+                radius {
+                  __typename
+                  ... on FixedRadius {
+                    value
+                  }
+                  ... on BoundedRadius {
+                    min
+                    max
+                  }
                 }
               }
             }
             ... on SemanticSearch {
-              search
+              search {
+                ... on Path {
+                  path
+                  __typename
+                }
+              }
               id
             }
           }

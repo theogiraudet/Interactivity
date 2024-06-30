@@ -28,7 +28,7 @@ package org.eclipse.sirius.components.interactivity;
  * @model
  * @generated
  */
-public interface VisibilityModifier extends Modifier {
+public interface VisibilityModifier extends ScopedModifier {
 	/**
 	 * Returns the value of the '<em><b>Hide</b></em>' attribute.
 	 * <!-- begin-user-doc -->

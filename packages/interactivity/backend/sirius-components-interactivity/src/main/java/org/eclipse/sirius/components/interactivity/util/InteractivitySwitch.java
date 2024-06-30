@@ -16,7 +16,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
 import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.ElementReference;
 import org.eclipse.sirius.components.interactivity.Filter;
 import org.eclipse.sirius.components.interactivity.FilterDefinition;
 import org.eclipse.sirius.components.interactivity.FixedRadius;
@@ -26,7 +28,9 @@ import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.Level;
 import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Path;
 import org.eclipse.sirius.components.interactivity.Radius;
+import org.eclipse.sirius.components.interactivity.ScopedModifier;
 import org.eclipse.sirius.components.interactivity.SemanticSearch;
 import org.eclipse.sirius.components.interactivity.SemanticZoom;
 import org.eclipse.sirius.components.interactivity.StyleModifier;
@@ -141,6 +145,8 @@ public class InteractivitySwitch<T> extends Switch<T> {
 			VisibilityModifier visibilityModifier = (VisibilityModifier) theEObject;
 			T result = caseVisibilityModifier(visibilityModifier);
 			if (result == null)
+				result = caseScopedModifier(visibilityModifier);
+			if (result == null)
 				result = caseModifier(visibilityModifier);
 			if (result == null)
 				result = caseIdentifiable(visibilityModifier);
@@ -151,6 +157,8 @@ public class InteractivitySwitch<T> extends Switch<T> {
 		case InteractivityPackage.STYLE_MODIFIER: {
 			StyleModifier styleModifier = (StyleModifier) theEObject;
 			T result = caseStyleModifier(styleModifier);
+			if (result == null)
+				result = caseScopedModifier(styleModifier);
 			if (result == null)
 				result = caseModifier(styleModifier);
 			if (result == null)
@@ -216,6 +224,44 @@ public class InteractivitySwitch<T> extends Switch<T> {
 		case InteractivityPackage.IDENTIFIABLE: {
 			Identifiable identifiable = (Identifiable) theEObject;
 			T result = caseIdentifiable(identifiable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.SCOPED_MODIFIER: {
+			ScopedModifier scopedModifier = (ScopedModifier) theEObject;
+			T result = caseScopedModifier(scopedModifier);
+			if (result == null)
+				result = caseModifier(scopedModifier);
+			if (result == null)
+				result = caseIdentifiable(scopedModifier);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.ELEMENT_REFERENCE: {
+			ElementReference elementReference = (ElementReference) theEObject;
+			T result = caseElementReference(elementReference);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.PATH: {
+			Path path = (Path) theEObject;
+			T result = casePath(path);
+			if (result == null)
+				result = caseElementReference(path);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.DEFAULT_MODIFIER: {
+			DefaultModifier defaultModifier = (DefaultModifier) theEObject;
+			T result = caseDefaultModifier(defaultModifier);
+			if (result == null)
+				result = caseModifier(defaultModifier);
+			if (result == null)
+				result = caseIdentifiable(defaultModifier);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -447,6 +493,66 @@ public class InteractivitySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIdentifiable(Identifiable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scoped Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scoped Modifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScopedModifier(ScopedModifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Element Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Element Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseElementReference(ElementReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePath(Path object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Default Modifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Default Modifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDefaultModifier(DefaultModifier object) {
 		return null;
 	}
 

@@ -47,8 +47,8 @@ export const DynamicFilter = (props: InteractiveFeatureProps<GQLDynamicFilter>) 
           prevState.delete(data.selectionDescriptionId);
           return prevState;
         });
+        emitCustomEvent('set-filter', filter);
       } else {
-        console.log(data.selectionDescriptionId);
         query(
           queryParams(
             props.editingContextId,
@@ -60,15 +60,15 @@ export const DynamicFilter = (props: InteractiveFeatureProps<GQLDynamicFilter>) 
           const dat = result.data as any;
           if (dat.dynamicFilter.__typename === 'ComputeDynamicFilterSuccessPayload') {
             const payload = dat.dynamicFilter as GQLComputeDynamicFilterSuccessPayload;
-            const filter = new DynFilter(data.selectionDescriptionId, gqlFilter!.reference, payload);
+            filter = new DynFilter(data.selectionDescriptionId, gqlFilter!.reference, gqlFilter!, payload);
             setActiveFilter((prevState) => {
-              prevState.set(data.selectionDescriptionId, filter);
+              prevState.set(data.selectionDescriptionId, filter!);
               return prevState;
             });
+            emitCustomEvent('set-filter', filter);
           }
         });
       }
-      emitCustomEvent('set-filter', filter);
     },
     [activeFilter, props.interactivity.filters, props.diagram.nodes.length, props.diagram.edges.length]
   );

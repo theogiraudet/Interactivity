@@ -24,7 +24,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.sirius.components.interactivity.DynamicFilter#getFilters <em>Filters</em>}</li>
- *   <li>{@link org.eclipse.sirius.components.interactivity.DynamicFilter#getRadius <em>Radius</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getDynamicFilter()
@@ -43,27 +42,5 @@ public interface DynamicFilter extends InteractiveFeature {
 	 * @generated
 	 */
 	EList<Filter> getFilters();
-
-	/**
-	 * Returns the value of the '<em><b>Radius</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Radius</em>' containment reference.
-	 * @see #setRadius(Radius)
-	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getDynamicFilter_Radius()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Radius getRadius();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.DynamicFilter#getRadius <em>Radius</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Radius</em>' containment reference.
-	 * @see #getRadius()
-	 * @generated
-	 */
-	void setRadius(Radius value);
 
 } // DynamicFilter

@@ -3,6 +3,7 @@ import { Node } from 'reactflow';
 import { Filter } from '../filters/Filter';
 import {
   GQLComputeDynamicFilterSuccessPayload,
+  GQLFilter,
   GQLFilterDefinition,
   GQLModifier,
 } from '../../graphql/query/InteractivityGraphQL.types';
@@ -10,17 +11,26 @@ import { applyModifier } from '../filters/ModifierHandler';
 
 export class DynFilter implements Filter {
   readonly id: string;
-  private readonly filter: GQLFilterDefinition;
+  private readonly filterDef: GQLFilterDefinition;
+  private readonly filter: GQLFilter;
   private readonly show: GQLComputeDynamicFilterSuccessPayload;
 
-  constructor(id: string, filter: GQLFilterDefinition, show: GQLComputeDynamicFilterSuccessPayload) {
+  constructor(
+    id: string,
+    filterDef: GQLFilterDefinition,
+    filter: GQLFilter,
+    show: GQLComputeDynamicFilterSuccessPayload
+  ) {
     this.id = id;
-    this.filter = filter;
+    this.filterDef = filterDef;
     this.show = show;
+    this.filter = filter;
   }
 
   apply(nodes: Node<NodeData>[]): Node<NodeData>[] {
-    const modifiers = new Map(this.filter.modifiers.map<[string, GQLModifier]>((modifier) => [modifier.id, modifier]));
+    const modifiers = new Map(
+      this.filterDef.modifiers.map<[string, GQLModifier]>((modifier) => [modifier.id, modifier])
+    );
     const groupedElement = new Map<GQLModifier, string[]>();
 
     for (const element of this.show.elementIds) {
@@ -36,6 +46,11 @@ export class DynFilter implements Filter {
         nodes.filter((node) => elements.includes(node.data.targetObjectId))
       );
     }
+
+    const ids = this.show.elementIds.map((id) => id.semanticElementId);
+    const notAffected = nodes.filter((node) => !ids.includes(node.data.targetObjectId));
+    applyModifier(this.filter.defaultModifier, notAffected);
+
     return nodes;
   }
 }

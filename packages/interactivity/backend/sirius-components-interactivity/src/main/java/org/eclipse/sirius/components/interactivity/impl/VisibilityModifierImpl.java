@@ -13,9 +13,12 @@
 package org.eclipse.sirius.components.interactivity.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.sirius.components.interactivity.ElementReference;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.VisibilityModifier;
 
@@ -28,7 +31,7 @@ import org.eclipse.sirius.components.interactivity.VisibilityModifier;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.VisibilityModifierImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.VisibilityModifierImpl#getPath <em>Path</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.VisibilityModifierImpl#getElements <em>Elements</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.VisibilityModifierImpl#isHide <em>Hide</em>}</li>
  * </ul>
  *
@@ -56,24 +59,14 @@ public class VisibilityModifierImpl extends MinimalEObjectImpl.Container impleme
 	protected String id = ID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPath() <em>Path</em>}' attribute.
+	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPath()
+	 * @see #getElements()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PATH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPath() <em>Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected String path = PATH_EDEFAULT;
+	protected ElementReference elements;
 
 	/**
 	 * The default value of the '{@link #isHide() <em>Hide</em>}' attribute.
@@ -144,8 +137,27 @@ public class VisibilityModifierImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public String getPath() {
-		return path;
+	public ElementReference getElements() {
+		return elements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetElements(ElementReference newElements, NotificationChain msgs) {
+		ElementReference oldElements = elements;
+		elements = newElements;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS, oldElements, newElements);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -154,12 +166,21 @@ public class VisibilityModifierImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public void setPath(String newPath) {
-		String oldPath = path;
-		path = newPath;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.VISIBILITY_MODIFIER__PATH,
-					oldPath, path));
+	public void setElements(ElementReference newElements) {
+		if (newElements != elements) {
+			NotificationChain msgs = null;
+			if (elements != null)
+				msgs = ((InternalEObject) elements).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS, null, msgs);
+			if (newElements != null)
+				msgs = ((InternalEObject) newElements).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS, null, msgs);
+			msgs = basicSetElements(newElements, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS,
+					newElements, newElements));
 	}
 
 	/**
@@ -192,12 +213,26 @@ public class VisibilityModifierImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS:
+			return basicSetElements(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case InteractivityPackage.VISIBILITY_MODIFIER__ID:
 			return getId();
-		case InteractivityPackage.VISIBILITY_MODIFIER__PATH:
-			return getPath();
+		case InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS:
+			return getElements();
 		case InteractivityPackage.VISIBILITY_MODIFIER__HIDE:
 			return isHide();
 		}
@@ -215,8 +250,8 @@ public class VisibilityModifierImpl extends MinimalEObjectImpl.Container impleme
 		case InteractivityPackage.VISIBILITY_MODIFIER__ID:
 			setId((String) newValue);
 			return;
-		case InteractivityPackage.VISIBILITY_MODIFIER__PATH:
-			setPath((String) newValue);
+		case InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS:
+			setElements((ElementReference) newValue);
 			return;
 		case InteractivityPackage.VISIBILITY_MODIFIER__HIDE:
 			setHide((Boolean) newValue);
@@ -236,8 +271,8 @@ public class VisibilityModifierImpl extends MinimalEObjectImpl.Container impleme
 		case InteractivityPackage.VISIBILITY_MODIFIER__ID:
 			setId(ID_EDEFAULT);
 			return;
-		case InteractivityPackage.VISIBILITY_MODIFIER__PATH:
-			setPath(PATH_EDEFAULT);
+		case InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS:
+			setElements((ElementReference) null);
 			return;
 		case InteractivityPackage.VISIBILITY_MODIFIER__HIDE:
 			setHide(HIDE_EDEFAULT);
@@ -256,8 +291,8 @@ public class VisibilityModifierImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 		case InteractivityPackage.VISIBILITY_MODIFIER__ID:
 			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		case InteractivityPackage.VISIBILITY_MODIFIER__PATH:
-			return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
+		case InteractivityPackage.VISIBILITY_MODIFIER__ELEMENTS:
+			return elements != null;
 		case InteractivityPackage.VISIBILITY_MODIFIER__HIDE:
 			return hide != HIDE_EDEFAULT;
 		}
@@ -277,8 +312,6 @@ public class VisibilityModifierImpl extends MinimalEObjectImpl.Container impleme
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (id: ");
 		result.append(id);
-		result.append(", path: ");
-		result.append(path);
 		result.append(", hide: ");
 		result.append(hide);
 		result.append(')');

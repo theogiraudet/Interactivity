@@ -23,29 +23,28 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.sirius.components.interactivity.ElementReference;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.StyleModifier;
 import org.eclipse.sirius.components.view.UserColor;
 import org.eclipse.sirius.components.view.diagram.NodeStyleDescription;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Style Modifier</b></em>'.
+ * An implementation of the model object '<em><b>Default Modifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.StyleModifierImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.StyleModifierImpl#getElements <em>Elements</em>}</li>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.StyleModifierImpl#getStyle <em>Style</em>}</li>
- *   <li>{@link org.eclipse.sirius.components.interactivity.impl.StyleModifierImpl#getColors <em>Colors</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DefaultModifierImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DefaultModifierImpl#isHide <em>Hide</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DefaultModifierImpl#getStyle <em>Style</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.DefaultModifierImpl#getColors <em>Colors</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class StyleModifierImpl extends MinimalEObjectImpl.Container implements StyleModifier {
+public class DefaultModifierImpl extends MinimalEObjectImpl.Container implements DefaultModifier {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -67,14 +66,24 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	protected String id = ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference.
+	 * The default value of the '{@link #isHide() <em>Hide</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getElements()
+	 * @see #isHide()
 	 * @generated
 	 * @ordered
 	 */
-	protected ElementReference elements;
+	protected static final boolean HIDE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHide() <em>Hide</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHide()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hide = HIDE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStyle() <em>Style</em>}' containment reference.
@@ -101,7 +110,7 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StyleModifierImpl() {
+	protected DefaultModifierImpl() {
 		super();
 	}
 
@@ -112,7 +121,7 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return InteractivityPackage.Literals.STYLE_MODIFIER;
+		return InteractivityPackage.Literals.DEFAULT_MODIFIER;
 	}
 
 	/**
@@ -135,7 +144,8 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.STYLE_MODIFIER__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.DEFAULT_MODIFIER__ID, oldId,
+					id));
 	}
 
 	/**
@@ -144,27 +154,8 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	 * @generated
 	 */
 	@Override
-	public ElementReference getElements() {
-		return elements;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetElements(ElementReference newElements, NotificationChain msgs) {
-		ElementReference oldElements = elements;
-		elements = newElements;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					InteractivityPackage.STYLE_MODIFIER__ELEMENTS, oldElements, newElements);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
+	public boolean isHide() {
+		return hide;
 	}
 
 	/**
@@ -173,21 +164,12 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	 * @generated
 	 */
 	@Override
-	public void setElements(ElementReference newElements) {
-		if (newElements != elements) {
-			NotificationChain msgs = null;
-			if (elements != null)
-				msgs = ((InternalEObject) elements).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - InteractivityPackage.STYLE_MODIFIER__ELEMENTS, null, msgs);
-			if (newElements != null)
-				msgs = ((InternalEObject) newElements).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - InteractivityPackage.STYLE_MODIFIER__ELEMENTS, null, msgs);
-			msgs = basicSetElements(newElements, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.STYLE_MODIFIER__ELEMENTS,
-					newElements, newElements));
+	public void setHide(boolean newHide) {
+		boolean oldHide = hide;
+		hide = newHide;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.DEFAULT_MODIFIER__HIDE, oldHide,
+					hide));
 	}
 
 	/**
@@ -210,7 +192,7 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 		style = newStyle;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					InteractivityPackage.STYLE_MODIFIER__STYLE, oldStyle, newStyle);
+					InteractivityPackage.DEFAULT_MODIFIER__STYLE, oldStyle, newStyle);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -230,16 +212,16 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 			NotificationChain msgs = null;
 			if (style != null)
 				msgs = ((InternalEObject) style).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - InteractivityPackage.STYLE_MODIFIER__STYLE, null, msgs);
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.DEFAULT_MODIFIER__STYLE, null, msgs);
 			if (newStyle != null)
 				msgs = ((InternalEObject) newStyle).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - InteractivityPackage.STYLE_MODIFIER__STYLE, null, msgs);
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.DEFAULT_MODIFIER__STYLE, null, msgs);
 			msgs = basicSetStyle(newStyle, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.STYLE_MODIFIER__STYLE, newStyle,
-					newStyle));
+			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.DEFAULT_MODIFIER__STYLE,
+					newStyle, newStyle));
 	}
 
 	/**
@@ -251,7 +233,7 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	public EList<UserColor> getColors() {
 		if (colors == null) {
 			colors = new EObjectContainmentEList<>(UserColor.class, this,
-					InteractivityPackage.STYLE_MODIFIER__COLORS);
+					InteractivityPackage.DEFAULT_MODIFIER__COLORS);
 		}
 		return colors;
 	}
@@ -264,11 +246,9 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case InteractivityPackage.STYLE_MODIFIER__ELEMENTS:
-			return basicSetElements(null, msgs);
-		case InteractivityPackage.STYLE_MODIFIER__STYLE:
+		case InteractivityPackage.DEFAULT_MODIFIER__STYLE:
 			return basicSetStyle(null, msgs);
-		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+		case InteractivityPackage.DEFAULT_MODIFIER__COLORS:
 			return ((InternalEList<?>) getColors()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -282,13 +262,13 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case InteractivityPackage.STYLE_MODIFIER__ID:
+		case InteractivityPackage.DEFAULT_MODIFIER__ID:
 			return getId();
-		case InteractivityPackage.STYLE_MODIFIER__ELEMENTS:
-			return getElements();
-		case InteractivityPackage.STYLE_MODIFIER__STYLE:
+		case InteractivityPackage.DEFAULT_MODIFIER__HIDE:
+			return isHide();
+		case InteractivityPackage.DEFAULT_MODIFIER__STYLE:
 			return getStyle();
-		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+		case InteractivityPackage.DEFAULT_MODIFIER__COLORS:
 			return getColors();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -303,16 +283,16 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case InteractivityPackage.STYLE_MODIFIER__ID:
+		case InteractivityPackage.DEFAULT_MODIFIER__ID:
 			setId((String) newValue);
 			return;
-		case InteractivityPackage.STYLE_MODIFIER__ELEMENTS:
-			setElements((ElementReference) newValue);
+		case InteractivityPackage.DEFAULT_MODIFIER__HIDE:
+			setHide((Boolean) newValue);
 			return;
-		case InteractivityPackage.STYLE_MODIFIER__STYLE:
+		case InteractivityPackage.DEFAULT_MODIFIER__STYLE:
 			setStyle((NodeStyleDescription) newValue);
 			return;
-		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+		case InteractivityPackage.DEFAULT_MODIFIER__COLORS:
 			getColors().clear();
 			getColors().addAll((Collection<? extends UserColor>) newValue);
 			return;
@@ -328,16 +308,16 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case InteractivityPackage.STYLE_MODIFIER__ID:
+		case InteractivityPackage.DEFAULT_MODIFIER__ID:
 			setId(ID_EDEFAULT);
 			return;
-		case InteractivityPackage.STYLE_MODIFIER__ELEMENTS:
-			setElements((ElementReference) null);
+		case InteractivityPackage.DEFAULT_MODIFIER__HIDE:
+			setHide(HIDE_EDEFAULT);
 			return;
-		case InteractivityPackage.STYLE_MODIFIER__STYLE:
+		case InteractivityPackage.DEFAULT_MODIFIER__STYLE:
 			setStyle((NodeStyleDescription) null);
 			return;
-		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+		case InteractivityPackage.DEFAULT_MODIFIER__COLORS:
 			getColors().clear();
 			return;
 		}
@@ -352,13 +332,13 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case InteractivityPackage.STYLE_MODIFIER__ID:
+		case InteractivityPackage.DEFAULT_MODIFIER__ID:
 			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		case InteractivityPackage.STYLE_MODIFIER__ELEMENTS:
-			return elements != null;
-		case InteractivityPackage.STYLE_MODIFIER__STYLE:
+		case InteractivityPackage.DEFAULT_MODIFIER__HIDE:
+			return hide != HIDE_EDEFAULT;
+		case InteractivityPackage.DEFAULT_MODIFIER__STYLE:
 			return style != null;
-		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+		case InteractivityPackage.DEFAULT_MODIFIER__COLORS:
 			return colors != null && !colors.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -377,8 +357,10 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (id: ");
 		result.append(id);
+		result.append(", hide: ");
+		result.append(hide);
 		result.append(')');
 		return result.toString();
 	}
 
-} //StyleModifierImpl
+} //DefaultModifierImpl

@@ -1,4 +1,5 @@
 import {
+  GQLDefaultModifier,
   GQLIconLabelNodeStyleDescription,
   GQLImageNodeStyleDescription,
   GQLModifier,
@@ -6,6 +7,7 @@ import {
   GQLRectangularNodeStyleDescription,
   GQLStyleModifier,
   GQLVisibilityModifier,
+  isDefaultModifier,
   isStyleModifier,
   isVisibilityModifier,
 } from '../../graphql/query/InteractivityGraphQL.types';
@@ -46,6 +48,15 @@ export function applyModifier(modifier: GQLModifier, nodes: Node<NodeData>[]) {
     applyVisibilityModifier(modifier, nodes);
   } else if (isStyleModifier(modifier)) {
     applyStyleModifier(modifier, nodes);
+  } else if (isDefaultModifier(modifier)) {
+    applyDefaultModifier(modifier, nodes);
+  }
+}
+
+function applyDefaultModifier(modifier: GQLDefaultModifier, nodes: Node<NodeData>[]) {
+  applyVisibilityModifier(modifier as any as GQLVisibilityModifier, nodes);
+  if (!modifier.hide) {
+    applyStyleModifier(modifier as any as GQLStyleModifier, nodes);
   }
 }
 

@@ -95,8 +95,7 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 						getResourceLocator(), getString("_UI_SemanticSearch_search_feature"),
 						getString("_UI_PropertyDescriptor_description", "_UI_SemanticSearch_search_feature",
 								"_UI_SemanticSearch_type"),
-						InteractivityPackage.Literals.SEMANTIC_SEARCH__SEARCH, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+						InteractivityPackage.Literals.SEMANTIC_SEARCH__SEARCH, true, false, false, null, null, null));
 	}
 
 	/**

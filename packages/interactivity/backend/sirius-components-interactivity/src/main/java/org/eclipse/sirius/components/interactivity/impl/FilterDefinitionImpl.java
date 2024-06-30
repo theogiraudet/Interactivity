@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.sirius.components.interactivity.FilterDefinition;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.ScopedModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,7 +70,7 @@ public class FilterDefinitionImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Modifier> modifiers;
+	protected EList<ScopedModifier> modifiers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,9 +121,9 @@ public class FilterDefinitionImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	@Override
-	public EList<Modifier> getModifiers() {
+	public EList<ScopedModifier> getModifiers() {
 		if (modifiers == null) {
-			modifiers = new EObjectContainmentEList<>(Modifier.class, this,
+			modifiers = new EObjectContainmentEList<>(ScopedModifier.class, this,
 					InteractivityPackage.FILTER_DEFINITION__MODIFIERS);
 		}
 		return modifiers;
@@ -173,7 +173,7 @@ public class FilterDefinitionImpl extends MinimalEObjectImpl.Container implement
 			return;
 		case InteractivityPackage.FILTER_DEFINITION__MODIFIERS:
 			getModifiers().clear();
-			getModifiers().addAll((Collection<? extends Modifier>) newValue);
+			getModifiers().addAll((Collection<? extends ScopedModifier>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);

@@ -17,7 +17,9 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
 import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.ElementReference;
 import org.eclipse.sirius.components.interactivity.Filter;
 import org.eclipse.sirius.components.interactivity.FilterDefinition;
 import org.eclipse.sirius.components.interactivity.FixedRadius;
@@ -27,7 +29,9 @@ import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.Level;
 import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Path;
 import org.eclipse.sirius.components.interactivity.Radius;
+import org.eclipse.sirius.components.interactivity.ScopedModifier;
 import org.eclipse.sirius.components.interactivity.SemanticSearch;
 import org.eclipse.sirius.components.interactivity.SemanticZoom;
 import org.eclipse.sirius.components.interactivity.StyleModifier;
@@ -161,6 +165,26 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseIdentifiable(Identifiable object) {
 			return createIdentifiableAdapter();
+		}
+
+		@Override
+		public Adapter caseScopedModifier(ScopedModifier object) {
+			return createScopedModifierAdapter();
+		}
+
+		@Override
+		public Adapter caseElementReference(ElementReference object) {
+			return createElementReferenceAdapter();
+		}
+
+		@Override
+		public Adapter casePath(Path object) {
+			return createPathAdapter();
+		}
+
+		@Override
+		public Adapter caseDefaultModifier(DefaultModifier object) {
+			return createDefaultModifierAdapter();
 		}
 
 		@Override
@@ -389,6 +413,62 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIdentifiableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.ScopedModifier <em>Scoped Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.ScopedModifier
+	 * @generated
+	 */
+	public Adapter createScopedModifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.ElementReference <em>Element Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.ElementReference
+	 * @generated
+	 */
+	public Adapter createElementReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Path <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.Path
+	 * @generated
+	 */
+	public Adapter createPathAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.DefaultModifier <em>Default Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.DefaultModifier
+	 * @generated
+	 */
+	public Adapter createDefaultModifierAdapter() {
 		return null;
 	}
 

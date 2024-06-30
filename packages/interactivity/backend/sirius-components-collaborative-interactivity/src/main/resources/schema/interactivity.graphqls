@@ -53,11 +53,6 @@ type SemanticElementModifier {
     modifierId: String!
 }
 
-type Color {
-    name: String!
-    value: String!
-}
-
 type ComputeAffectedElementsSuccessPayload {
     id: ID!
     affectedElementIds: [AffectedElementIdsPair!]!
@@ -79,6 +74,13 @@ interface Identifiable {
     id: String!
 }
 
+union ElementReference = Path
+
+type Path {
+    path: String!
+}
+
+
 union InteractiveFeature = SemanticZoom | DynamicFilter | SemanticSearch
 
 type SemanticZoom {
@@ -94,23 +96,33 @@ type ZoomLevel {
 
 type FilterDefinition {
     name: String!
-    modifiers: [Modifier!]!
+    modifiers: [ScopedModifier!]!
 }
 
 interface Modifier implements Identifiable {
-    path: String!
     id: String!
 }
 
-type VisibilityModifier implements Modifier & Identifiable {
-    path: String!
+interface ScopedModifier implements Modifier & Identifiable {
+    elements: ElementReference!
+    id: String!
+}
+
+type VisibilityModifier implements ScopedModifier & Modifier & Identifiable {
+    elements: ElementReference!
     hide: Boolean!
     id: String!
 }
 
-type StyleModifier implements Modifier & Identifiable {
-    path: String!
+type StyleModifier implements ScopedModifier & Modifier & Identifiable {
+    elements: ElementReference!
     style: NodeStyleDescription!
+    id: String!
+}
+
+type DefaultModifier implements Modifier & Identifiable {
+    hide: Boolean!
+    style: NodeStyleDescription
     id: String!
 }
 
@@ -156,7 +168,6 @@ type IconLabelNodeStyleDescription {
 
 type DynamicFilter {
     filters: [Filter!]!
-    radius: Radius
 }
 
 type Filter implements Identifiable {
@@ -164,6 +175,8 @@ type Filter implements Identifiable {
     name: String!
     focus: String!
     id: String!
+    radius: Radius
+    defaultModifier: DefaultModifier!
 }
 
 union Radius = FixedRadius | BoundedRadius
@@ -178,6 +191,6 @@ type BoundedRadius {
 }
 
 type SemanticSearch implements Identifiable {
-    search: String!
+    search: [ElementReference!]!
     id: String!
 }

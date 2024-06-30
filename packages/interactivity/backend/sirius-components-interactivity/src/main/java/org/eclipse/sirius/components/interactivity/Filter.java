@@ -24,6 +24,8 @@ package org.eclipse.sirius.components.interactivity;
  *   <li>{@link org.eclipse.sirius.components.interactivity.Filter#getReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.Filter#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.Filter#getFocus <em>Focus</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.Filter#getRadius <em>Radius</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.Filter#getDefaultModifier <em>Default Modifier</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getFilter()
@@ -76,25 +78,69 @@ public interface Filter extends Identifiable {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Focus</b></em>' attribute.
+	 * Returns the value of the '<em><b>Focus</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Focus</em>' attribute.
-	 * @see #setFocus(String)
+	 * @return the value of the '<em>Focus</em>' containment reference.
+	 * @see #setFocus(ElementReference)
 	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getFilter_Focus()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	String getFocus();
+	ElementReference getFocus();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.Filter#getFocus <em>Focus</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.Filter#getFocus <em>Focus</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Focus</em>' attribute.
+	 * @param value the new value of the '<em>Focus</em>' containment reference.
 	 * @see #getFocus()
 	 * @generated
 	 */
-	void setFocus(String value);
+	void setFocus(ElementReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Radius</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Radius</em>' containment reference.
+	 * @see #setRadius(Radius)
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getFilter_Radius()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Radius getRadius();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.Filter#getRadius <em>Radius</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Radius</em>' containment reference.
+	 * @see #getRadius()
+	 * @generated
+	 */
+	void setRadius(Radius value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Modifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Default Modifier</em>' containment reference.
+	 * @see #setDefaultModifier(DefaultModifier)
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getFilter_DefaultModifier()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	DefaultModifier getDefaultModifier();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.Filter#getDefaultModifier <em>Default Modifier</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Modifier</em>' containment reference.
+	 * @see #getDefaultModifier()
+	 * @generated
+	 */
+	void setDefaultModifier(DefaultModifier value);
 
 } // Filter

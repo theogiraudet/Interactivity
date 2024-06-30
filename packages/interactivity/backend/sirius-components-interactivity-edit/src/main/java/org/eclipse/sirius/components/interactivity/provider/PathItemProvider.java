@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -26,19 +26,19 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.sirius.components.interactivity.DynamicFilter;
-import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
+import org.eclipse.sirius.components.interactivity.Path;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.sirius.components.interactivity.DynamicFilter} object.
+ * This is the item provider adapter for a {@link org.eclipse.sirius.components.interactivity.Path} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DynamicFilterItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+public class PathItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -46,7 +46,7 @@ public class DynamicFilterItemProvider extends ItemProviderAdapter implements IE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DynamicFilterItemProvider(AdapterFactory adapterFactory) {
+	public PathItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,49 +61,35 @@ public class DynamicFilterItemProvider extends ItemProviderAdapter implements IE
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addPathPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Path feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(InteractivityPackage.Literals.DYNAMIC_FILTER__FILTERS);
-		}
-		return childrenFeatures;
+	protected void addPathPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Path_path_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Path_path_feature", "_UI_Path_type"),
+						InteractivityPackage.Literals.PATH__PATH, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
-	 * This returns DynamicFilter.gif.
+	 * This returns Path.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DynamicFilter"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Path"));
 	}
 
 	/**
@@ -124,7 +110,9 @@ public class DynamicFilterItemProvider extends ItemProviderAdapter implements IE
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_DynamicFilter_type");
+		String label = ((Path) object).getPath();
+		return label == null || label.length() == 0 ? getString("_UI_Path_type")
+				: getString("_UI_Path_type") + " " + label;
 	}
 
 	/**
@@ -138,9 +126,9 @@ public class DynamicFilterItemProvider extends ItemProviderAdapter implements IE
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(DynamicFilter.class)) {
-		case InteractivityPackage.DYNAMIC_FILTER__FILTERS:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+		switch (notification.getFeatureID(Path.class)) {
+		case InteractivityPackage.PATH__PATH:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -156,9 +144,6 @@ public class DynamicFilterItemProvider extends ItemProviderAdapter implements IE
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.DYNAMIC_FILTER__FILTERS,
-				InteractivityFactory.eINSTANCE.createFilter()));
 	}
 
 	/**

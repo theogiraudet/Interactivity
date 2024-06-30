@@ -57,7 +57,7 @@ public interface FilterDefinition extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Modifiers</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.Modifier}.
+	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.ScopedModifier}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Modifiers</em>' containment reference list.
@@ -65,6 +65,6 @@ public interface FilterDefinition extends EObject {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Modifier> getModifiers();
+	EList<ScopedModifier> getModifiers();
 
 } // FilterDefinition

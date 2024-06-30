@@ -13,13 +13,17 @@
 package org.eclipse.sirius.components.interactivity.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
+import org.eclipse.sirius.components.interactivity.ElementReference;
 import org.eclipse.sirius.components.interactivity.Filter;
 import org.eclipse.sirius.components.interactivity.FilterDefinition;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
+import org.eclipse.sirius.components.interactivity.Radius;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,6 +37,8 @@ import org.eclipse.sirius.components.interactivity.InteractivityPackage;
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.FilterImpl#getReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.FilterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.FilterImpl#getFocus <em>Focus</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.FilterImpl#getRadius <em>Radius</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.FilterImpl#getDefaultModifier <em>Default Modifier</em>}</li>
  * </ul>
  *
  * @generated
@@ -89,24 +95,34 @@ public class FilterImpl extends MinimalEObjectImpl.Container implements Filter {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getFocus() <em>Focus</em>}' attribute.
+	 * The cached value of the '{@link #getFocus() <em>Focus</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFocus()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String FOCUS_EDEFAULT = null;
+	protected ElementReference focus;
 
 	/**
-	 * The cached value of the '{@link #getFocus() <em>Focus</em>}' attribute.
+	 * The cached value of the '{@link #getRadius() <em>Radius</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFocus()
+	 * @see #getRadius()
 	 * @generated
 	 * @ordered
 	 */
-	protected String focus = FOCUS_EDEFAULT;
+	protected Radius radius;
+
+	/**
+	 * The cached value of the '{@link #getDefaultModifier() <em>Default Modifier</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultModifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected DefaultModifier defaultModifier;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,7 +237,7 @@ public class FilterImpl extends MinimalEObjectImpl.Container implements Filter {
 	 * @generated
 	 */
 	@Override
-	public String getFocus() {
+	public ElementReference getFocus() {
 		return focus;
 	}
 
@@ -230,12 +246,163 @@ public class FilterImpl extends MinimalEObjectImpl.Container implements Filter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setFocus(String newFocus) {
-		String oldFocus = focus;
+	public NotificationChain basicSetFocus(ElementReference newFocus, NotificationChain msgs) {
+		ElementReference oldFocus = focus;
 		focus = newFocus;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.FILTER__FOCUS, oldFocus, focus));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					InteractivityPackage.FILTER__FOCUS, oldFocus, newFocus);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setFocus(ElementReference newFocus) {
+		if (newFocus != focus) {
+			NotificationChain msgs = null;
+			if (focus != null)
+				msgs = ((InternalEObject) focus).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.FILTER__FOCUS, null, msgs);
+			if (newFocus != null)
+				msgs = ((InternalEObject) newFocus).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.FILTER__FOCUS, null, msgs);
+			msgs = basicSetFocus(newFocus, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.FILTER__FOCUS, newFocus,
+					newFocus));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Radius getRadius() {
+		return radius;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRadius(Radius newRadius, NotificationChain msgs) {
+		Radius oldRadius = radius;
+		radius = newRadius;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					InteractivityPackage.FILTER__RADIUS, oldRadius, newRadius);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRadius(Radius newRadius) {
+		if (newRadius != radius) {
+			NotificationChain msgs = null;
+			if (radius != null)
+				msgs = ((InternalEObject) radius).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.FILTER__RADIUS, null, msgs);
+			if (newRadius != null)
+				msgs = ((InternalEObject) newRadius).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.FILTER__RADIUS, null, msgs);
+			msgs = basicSetRadius(newRadius, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.FILTER__RADIUS, newRadius,
+					newRadius));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DefaultModifier getDefaultModifier() {
+		return defaultModifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDefaultModifier(DefaultModifier newDefaultModifier, NotificationChain msgs) {
+		DefaultModifier oldDefaultModifier = defaultModifier;
+		defaultModifier = newDefaultModifier;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					InteractivityPackage.FILTER__DEFAULT_MODIFIER, oldDefaultModifier, newDefaultModifier);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDefaultModifier(DefaultModifier newDefaultModifier) {
+		if (newDefaultModifier != defaultModifier) {
+			NotificationChain msgs = null;
+			if (defaultModifier != null)
+				msgs = ((InternalEObject) defaultModifier).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.FILTER__DEFAULT_MODIFIER, null, msgs);
+			if (newDefaultModifier != null)
+				msgs = ((InternalEObject) newDefaultModifier).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - InteractivityPackage.FILTER__DEFAULT_MODIFIER, null, msgs);
+			msgs = basicSetDefaultModifier(newDefaultModifier, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InteractivityPackage.FILTER__DEFAULT_MODIFIER,
+					newDefaultModifier, newDefaultModifier));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case InteractivityPackage.FILTER__FOCUS:
+			return basicSetFocus(null, msgs);
+		case InteractivityPackage.FILTER__RADIUS:
+			return basicSetRadius(null, msgs);
+		case InteractivityPackage.FILTER__DEFAULT_MODIFIER:
+			return basicSetDefaultModifier(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -256,6 +423,10 @@ public class FilterImpl extends MinimalEObjectImpl.Container implements Filter {
 			return getName();
 		case InteractivityPackage.FILTER__FOCUS:
 			return getFocus();
+		case InteractivityPackage.FILTER__RADIUS:
+			return getRadius();
+		case InteractivityPackage.FILTER__DEFAULT_MODIFIER:
+			return getDefaultModifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -278,7 +449,13 @@ public class FilterImpl extends MinimalEObjectImpl.Container implements Filter {
 			setName((String) newValue);
 			return;
 		case InteractivityPackage.FILTER__FOCUS:
-			setFocus((String) newValue);
+			setFocus((ElementReference) newValue);
+			return;
+		case InteractivityPackage.FILTER__RADIUS:
+			setRadius((Radius) newValue);
+			return;
+		case InteractivityPackage.FILTER__DEFAULT_MODIFIER:
+			setDefaultModifier((DefaultModifier) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -302,7 +479,13 @@ public class FilterImpl extends MinimalEObjectImpl.Container implements Filter {
 			setName(NAME_EDEFAULT);
 			return;
 		case InteractivityPackage.FILTER__FOCUS:
-			setFocus(FOCUS_EDEFAULT);
+			setFocus((ElementReference) null);
+			return;
+		case InteractivityPackage.FILTER__RADIUS:
+			setRadius((Radius) null);
+			return;
+		case InteractivityPackage.FILTER__DEFAULT_MODIFIER:
+			setDefaultModifier((DefaultModifier) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -323,7 +506,11 @@ public class FilterImpl extends MinimalEObjectImpl.Container implements Filter {
 		case InteractivityPackage.FILTER__NAME:
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case InteractivityPackage.FILTER__FOCUS:
-			return FOCUS_EDEFAULT == null ? focus != null : !FOCUS_EDEFAULT.equals(focus);
+			return focus != null;
+		case InteractivityPackage.FILTER__RADIUS:
+			return radius != null;
+		case InteractivityPackage.FILTER__DEFAULT_MODIFIER:
+			return defaultModifier != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -343,8 +530,6 @@ public class FilterImpl extends MinimalEObjectImpl.Container implements Filter {
 		result.append(id);
 		result.append(", name: ");
 		result.append(name);
-		result.append(", focus: ");
-		result.append(focus);
 		result.append(')');
 		return result.toString();
 	}

@@ -12,6 +12,8 @@
  */
 package org.eclipse.sirius.components.interactivity;
 
+import org.eclipse.emf.common.util.EList;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Semantic Search</b></em>'.
@@ -30,25 +32,15 @@ package org.eclipse.sirius.components.interactivity;
  */
 public interface SemanticSearch extends InteractiveFeature, Identifiable {
 	/**
-	 * Returns the value of the '<em><b>Search</b></em>' attribute.
+	 * Returns the value of the '<em><b>Search</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.components.interactivity.ElementReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Search</em>' attribute.
-	 * @see #setSearch(String)
+	 * @return the value of the '<em>Search</em>' containment reference list.
 	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getSemanticSearch_Search()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	String getSearch();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.sirius.components.interactivity.SemanticSearch#getSearch <em>Search</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Search</em>' attribute.
-	 * @see #getSearch()
-	 * @generated
-	 */
-	void setSearch(String value);
+	EList<ElementReference> getSearch();
 
 } // SemanticSearch

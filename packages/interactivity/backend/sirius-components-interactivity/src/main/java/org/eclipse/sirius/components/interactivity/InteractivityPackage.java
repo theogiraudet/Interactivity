@@ -402,22 +402,13 @@ public interface InteractivityPackage extends EPackage {
 	int MODIFIER__ID = IDENTIFIABLE__ID;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODIFIER__PATH = IDENTIFIABLE_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Modifier</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODIFIER_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 1;
+	int MODIFIER_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Modifier</em>' class.
@@ -429,22 +420,68 @@ public interface InteractivityPackage extends EPackage {
 	int MODIFIER_OPERATION_COUNT = IDENTIFIABLE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.ScopedModifier <em>Scoped Modifier</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.ScopedModifier
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getScopedModifier()
+	 * @generated
+	 */
+	int SCOPED_MODIFIER = 15;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBILITY_MODIFIER__ID = MODIFIER__ID;
+	int SCOPED_MODIFIER__ID = MODIFIER__ID;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBILITY_MODIFIER__PATH = MODIFIER__PATH;
+	int SCOPED_MODIFIER__ELEMENTS = MODIFIER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Scoped Modifier</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_MODIFIER_FEATURE_COUNT = MODIFIER_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Scoped Modifier</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPED_MODIFIER_OPERATION_COUNT = MODIFIER_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBILITY_MODIFIER__ID = SCOPED_MODIFIER__ID;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBILITY_MODIFIER__ELEMENTS = SCOPED_MODIFIER__ELEMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Hide</b></em>' attribute.
@@ -453,7 +490,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBILITY_MODIFIER__HIDE = MODIFIER_FEATURE_COUNT + 0;
+	int VISIBILITY_MODIFIER__HIDE = SCOPED_MODIFIER_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Visibility Modifier</em>' class.
@@ -462,7 +499,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBILITY_MODIFIER_FEATURE_COUNT = MODIFIER_FEATURE_COUNT + 1;
+	int VISIBILITY_MODIFIER_FEATURE_COUNT = SCOPED_MODIFIER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Visibility Modifier</em>' class.
@@ -471,7 +508,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBILITY_MODIFIER_OPERATION_COUNT = MODIFIER_OPERATION_COUNT + 0;
+	int VISIBILITY_MODIFIER_OPERATION_COUNT = SCOPED_MODIFIER_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -480,16 +517,16 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLE_MODIFIER__ID = MODIFIER__ID;
+	int STYLE_MODIFIER__ID = SCOPED_MODIFIER__ID;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYLE_MODIFIER__PATH = MODIFIER__PATH;
+	int STYLE_MODIFIER__ELEMENTS = SCOPED_MODIFIER__ELEMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Style</b></em>' containment reference.
@@ -498,7 +535,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLE_MODIFIER__STYLE = MODIFIER_FEATURE_COUNT + 0;
+	int STYLE_MODIFIER__STYLE = SCOPED_MODIFIER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Colors</b></em>' containment reference list.
@@ -507,7 +544,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLE_MODIFIER__COLORS = MODIFIER_FEATURE_COUNT + 1;
+	int STYLE_MODIFIER__COLORS = SCOPED_MODIFIER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Style Modifier</em>' class.
@@ -516,7 +553,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLE_MODIFIER_FEATURE_COUNT = MODIFIER_FEATURE_COUNT + 2;
+	int STYLE_MODIFIER_FEATURE_COUNT = SCOPED_MODIFIER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Style Modifier</em>' class.
@@ -525,7 +562,7 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STYLE_MODIFIER_OPERATION_COUNT = MODIFIER_OPERATION_COUNT + 0;
+	int STYLE_MODIFIER_OPERATION_COUNT = SCOPED_MODIFIER_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Filters</b></em>' containment reference list.
@@ -537,22 +574,13 @@ public interface InteractivityPackage extends EPackage {
 	int DYNAMIC_FILTER__FILTERS = INTERACTIVE_FEATURE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Radius</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_FILTER__RADIUS = INTERACTIVE_FEATURE_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Dynamic Filter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_FILTER_FEATURE_COUNT = INTERACTIVE_FEATURE_FEATURE_COUNT + 2;
+	int DYNAMIC_FILTER_FEATURE_COUNT = INTERACTIVE_FEATURE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Dynamic Filter</em>' class.
@@ -591,7 +619,7 @@ public interface InteractivityPackage extends EPackage {
 	int FILTER__NAME = IDENTIFIABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Focus</b></em>' attribute.
+	 * The feature id for the '<em><b>Focus</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -600,13 +628,31 @@ public interface InteractivityPackage extends EPackage {
 	int FILTER__FOCUS = IDENTIFIABLE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Radius</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER__RADIUS = IDENTIFIABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Default Modifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER__DEFAULT_MODIFIER = IDENTIFIABLE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Filter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILTER_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 3;
+	int FILTER_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Filter</em>' class.
@@ -748,7 +794,7 @@ public interface InteractivityPackage extends EPackage {
 	int SEMANTIC_SEARCH__ID = INTERACTIVE_FEATURE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Search</b></em>' attribute.
+	 * The feature id for the '<em><b>Search</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -773,6 +819,135 @@ public interface InteractivityPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEMANTIC_SEARCH_OPERATION_COUNT = INTERACTIVE_FEATURE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.ElementReference <em>Element Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.ElementReference
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getElementReference()
+	 * @generated
+	 */
+	int ELEMENT_REFERENCE = 16;
+
+	/**
+	 * The number of structural features of the '<em>Element Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_REFERENCE_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Element Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_REFERENCE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.PathImpl <em>Path</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.impl.PathImpl
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getPath()
+	 * @generated
+	 */
+	int PATH = 17;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH__PATH = ELEMENT_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Path</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_FEATURE_COUNT = ELEMENT_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Path</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_OPERATION_COUNT = ELEMENT_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.DefaultModifierImpl <em>Default Modifier</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.impl.DefaultModifierImpl
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getDefaultModifier()
+	 * @generated
+	 */
+	int DEFAULT_MODIFIER = 18;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_MODIFIER__ID = MODIFIER__ID;
+
+	/**
+	 * The feature id for the '<em><b>Hide</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_MODIFIER__HIDE = MODIFIER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Style</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_MODIFIER__STYLE = MODIFIER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Colors</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_MODIFIER__COLORS = MODIFIER_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Default Modifier</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_MODIFIER_FEATURE_COUNT = MODIFIER_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Default Modifier</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFAULT_MODIFIER_OPERATION_COUNT = MODIFIER_OPERATION_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Interactivity <em>Interactivity</em>}'.
@@ -945,17 +1120,6 @@ public interface InteractivityPackage extends EPackage {
 	EClass getModifier();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.components.interactivity.Modifier#getPath <em>Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Path</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.Modifier#getPath()
-	 * @see #getModifier()
-	 * @generated
-	 */
-	EAttribute getModifier_Path();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.VisibilityModifier <em>Visibility Modifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1030,17 +1194,6 @@ public interface InteractivityPackage extends EPackage {
 	EReference getDynamicFilter_Filters();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.sirius.components.interactivity.DynamicFilter#getRadius <em>Radius</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Radius</em>'.
-	 * @see org.eclipse.sirius.components.interactivity.DynamicFilter#getRadius()
-	 * @see #getDynamicFilter()
-	 * @generated
-	 */
-	EReference getDynamicFilter_Radius();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Filter <em>Filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1073,15 +1226,37 @@ public interface InteractivityPackage extends EPackage {
 	EAttribute getFilter_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.components.interactivity.Filter#getFocus <em>Focus</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.sirius.components.interactivity.Filter#getFocus <em>Focus</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Focus</em>'.
+	 * @return the meta object for the containment reference '<em>Focus</em>'.
 	 * @see org.eclipse.sirius.components.interactivity.Filter#getFocus()
 	 * @see #getFilter()
 	 * @generated
 	 */
-	EAttribute getFilter_Focus();
+	EReference getFilter_Focus();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.sirius.components.interactivity.Filter#getRadius <em>Radius</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Radius</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Filter#getRadius()
+	 * @see #getFilter()
+	 * @generated
+	 */
+	EReference getFilter_Radius();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.sirius.components.interactivity.Filter#getDefaultModifier <em>Default Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Default Modifier</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Filter#getDefaultModifier()
+	 * @see #getFilter()
+	 * @generated
+	 */
+	EReference getFilter_DefaultModifier();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Radius <em>Radius</em>}'.
@@ -1157,15 +1332,15 @@ public interface InteractivityPackage extends EPackage {
 	EClass getSemanticSearch();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.components.interactivity.SemanticSearch#getSearch <em>Search</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.SemanticSearch#getSearch <em>Search</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Search</em>'.
+	 * @return the meta object for the containment reference list '<em>Search</em>'.
 	 * @see org.eclipse.sirius.components.interactivity.SemanticSearch#getSearch()
 	 * @see #getSemanticSearch()
 	 * @generated
 	 */
-	EAttribute getSemanticSearch_Search();
+	EReference getSemanticSearch_Search();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Identifiable <em>Identifiable</em>}'.
@@ -1187,6 +1362,101 @@ public interface InteractivityPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getIdentifiable_Id();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.ScopedModifier <em>Scoped Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scoped Modifier</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.ScopedModifier
+	 * @generated
+	 */
+	EClass getScopedModifier();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.sirius.components.interactivity.ScopedModifier#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Elements</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.ScopedModifier#getElements()
+	 * @see #getScopedModifier()
+	 * @generated
+	 */
+	EReference getScopedModifier_Elements();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.ElementReference <em>Element Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Element Reference</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.ElementReference
+	 * @generated
+	 */
+	EClass getElementReference();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Path <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Path</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Path
+	 * @generated
+	 */
+	EClass getPath();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.components.interactivity.Path#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Path</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Path#getPath()
+	 * @see #getPath()
+	 * @generated
+	 */
+	EAttribute getPath_Path();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.DefaultModifier <em>Default Modifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Default Modifier</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.DefaultModifier
+	 * @generated
+	 */
+	EClass getDefaultModifier();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.components.interactivity.DefaultModifier#isHide <em>Hide</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hide</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.DefaultModifier#isHide()
+	 * @see #getDefaultModifier()
+	 * @generated
+	 */
+	EAttribute getDefaultModifier_Hide();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.sirius.components.interactivity.DefaultModifier#getStyle <em>Style</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Style</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.DefaultModifier#getStyle()
+	 * @see #getDefaultModifier()
+	 * @generated
+	 */
+	EReference getDefaultModifier_Style();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.DefaultModifier#getColors <em>Colors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Colors</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.DefaultModifier#getColors()
+	 * @see #getDefaultModifier()
+	 * @generated
+	 */
+	EReference getDefaultModifier_Colors();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1352,14 +1622,6 @@ public interface InteractivityPackage extends EPackage {
 		EClass MODIFIER = eINSTANCE.getModifier();
 
 		/**
-		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MODIFIER__PATH = eINSTANCE.getModifier_Path();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.VisibilityModifierImpl <em>Visibility Modifier</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1422,14 +1684,6 @@ public interface InteractivityPackage extends EPackage {
 		EReference DYNAMIC_FILTER__FILTERS = eINSTANCE.getDynamicFilter_Filters();
 
 		/**
-		 * The meta object literal for the '<em><b>Radius</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DYNAMIC_FILTER__RADIUS = eINSTANCE.getDynamicFilter_Radius();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.FilterImpl <em>Filter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1456,12 +1710,28 @@ public interface InteractivityPackage extends EPackage {
 		EAttribute FILTER__NAME = eINSTANCE.getFilter_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Focus</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Focus</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FILTER__FOCUS = eINSTANCE.getFilter_Focus();
+		EReference FILTER__FOCUS = eINSTANCE.getFilter_Focus();
+
+		/**
+		 * The meta object literal for the '<em><b>Radius</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FILTER__RADIUS = eINSTANCE.getFilter_Radius();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Modifier</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FILTER__DEFAULT_MODIFIER = eINSTANCE.getFilter_DefaultModifier();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.Radius <em>Radius</em>}' class.
@@ -1528,12 +1798,12 @@ public interface InteractivityPackage extends EPackage {
 		EClass SEMANTIC_SEARCH = eINSTANCE.getSemanticSearch();
 
 		/**
-		 * The meta object literal for the '<em><b>Search</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Search</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SEMANTIC_SEARCH__SEARCH = eINSTANCE.getSemanticSearch_Search();
+		EReference SEMANTIC_SEARCH__SEARCH = eINSTANCE.getSemanticSearch_Search();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.Identifiable <em>Identifiable</em>}' class.
@@ -1552,6 +1822,86 @@ public interface InteractivityPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IDENTIFIABLE__ID = eINSTANCE.getIdentifiable_Id();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.ScopedModifier <em>Scoped Modifier</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.components.interactivity.ScopedModifier
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getScopedModifier()
+		 * @generated
+		 */
+		EClass SCOPED_MODIFIER = eINSTANCE.getScopedModifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPED_MODIFIER__ELEMENTS = eINSTANCE.getScopedModifier_Elements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.ElementReference <em>Element Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.components.interactivity.ElementReference
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getElementReference()
+		 * @generated
+		 */
+		EClass ELEMENT_REFERENCE = eINSTANCE.getElementReference();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.PathImpl <em>Path</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.components.interactivity.impl.PathImpl
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getPath()
+		 * @generated
+		 */
+		EClass PATH = eINSTANCE.getPath();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PATH__PATH = eINSTANCE.getPath_Path();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.DefaultModifierImpl <em>Default Modifier</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.components.interactivity.impl.DefaultModifierImpl
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getDefaultModifier()
+		 * @generated
+		 */
+		EClass DEFAULT_MODIFIER = eINSTANCE.getDefaultModifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Hide</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEFAULT_MODIFIER__HIDE = eINSTANCE.getDefaultModifier_Hide();
+
+		/**
+		 * The meta object literal for the '<em><b>Style</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEFAULT_MODIFIER__STYLE = eINSTANCE.getDefaultModifier_Style();
+
+		/**
+		 * The meta object literal for the '<em><b>Colors</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEFAULT_MODIFIER__COLORS = eINSTANCE.getDefaultModifier_Colors();
 
 	}
 

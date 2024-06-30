@@ -349,6 +349,52 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.Path} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PathItemProvider pathItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.Path}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPathAdapter() {
+		if (pathItemProvider == null) {
+			pathItemProvider = new PathItemProvider(this);
+		}
+
+		return pathItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.DefaultModifier} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DefaultModifierItemProvider defaultModifierItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.DefaultModifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDefaultModifierAdapter() {
+		if (defaultModifierItemProvider == null) {
+			defaultModifierItemProvider = new DefaultModifierItemProvider(this);
+		}
+
+		return defaultModifierItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -504,6 +550,10 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 			boundedRadiusItemProvider.dispose();
 		if (semanticSearchItemProvider != null)
 			semanticSearchItemProvider.dispose();
+		if (pathItemProvider != null)
+			pathItemProvider.dispose();
+		if (defaultModifierItemProvider != null)
+			defaultModifierItemProvider.dispose();
 	}
 
 }
