@@ -39,6 +39,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="StyleModifier" eSuperTypes="#//Modifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="style" lowerBound="1" eType="ecore:EClass ../../../../../sirius-components-view-diagram/src/main/resources/model/diagram.ecore#//NodeStyleDescription"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="colors" upperBound="-1"
+        eType="ecore:EClass ../../../../../sirius-components-view/src/main/resources/model/view.ecore#//UserColor"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicFilter" eSuperTypes="#//InteractiveFeature">
     <eStructuralFeatures xsi:type="ecore:EReference" name="filters" lowerBound="1"

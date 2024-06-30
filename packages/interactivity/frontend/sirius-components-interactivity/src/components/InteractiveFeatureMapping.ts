@@ -1,9 +1,17 @@
-import { GQLDynamicFilter, GQLInteractiveFeature, GQLSemanticZoom } from '../graphql/query/InteractivityGraphQL.types';
+import {
+  GQLDynamicFilter,
+  GQLInteractiveFeature,
+  GQLInteractivity,
+  GQLSemanticZoom,
+} from '../graphql/query/InteractivityGraphQL.types';
 import { GraphicEditorProps } from './graphicEditorProps';
 import { SemanticZoom } from './semantic_zoom/SemanticZoom';
 import { DynamicFilter } from './dynamic_filter/DynamicFilter';
 
-export type InteractiveFeatureProps<T extends GQLInteractiveFeature> = GraphicEditorProps & { value: T };
+export type InteractiveFeatureProps<T extends GQLInteractiveFeature> = GraphicEditorProps & {
+  value: T;
+  interactivity: GQLInteractivity;
+};
 
 export type JsxInteractiveFeature<T extends GQLInteractiveFeature> = (
   props: InteractiveFeatureProps<T>

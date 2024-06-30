@@ -32,6 +32,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.view.ViewFactory;
 import org.eclipse.sirius.components.view.diagram.DiagramFactory;
 
 /**
@@ -114,6 +115,7 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(InteractivityPackage.Literals.STYLE_MODIFIER__STYLE);
+			childrenFeatures.add(InteractivityPackage.Literals.STYLE_MODIFIER__COLORS);
 		}
 		return childrenFeatures;
 	}
@@ -182,6 +184,7 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case InteractivityPackage.STYLE_MODIFIER__STYLE:
+		case InteractivityPackage.STYLE_MODIFIER__COLORS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -207,6 +210,9 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 
 		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.STYLE_MODIFIER__STYLE,
 				DiagramFactory.eINSTANCE.createIconLabelNodeStyleDescription()));
+
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.STYLE_MODIFIER__COLORS,
+				ViewFactory.eINSTANCE.createFixedColor()));
 	}
 
 	/**

@@ -12,14 +12,20 @@
  */
 package org.eclipse.sirius.components.interactivity.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.view.UserColor;
 import org.eclipse.sirius.components.view.diagram.NodeStyleDescription;
 
 /**
@@ -33,6 +39,7 @@ import org.eclipse.sirius.components.view.diagram.NodeStyleDescription;
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.StyleModifierImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.StyleModifierImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.sirius.components.interactivity.impl.StyleModifierImpl#getStyle <em>Style</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.impl.StyleModifierImpl#getColors <em>Colors</em>}</li>
  * </ul>
  *
  * @generated
@@ -87,6 +94,16 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	 * @ordered
 	 */
 	protected NodeStyleDescription style;
+
+	/**
+	 * The cached value of the '{@link #getColors() <em>Colors</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getColors()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<UserColor> colors;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -212,10 +229,26 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	 * @generated
 	 */
 	@Override
+	public EList<UserColor> getColors() {
+		if (colors == null) {
+			colors = new EObjectContainmentEList<>(UserColor.class, this,
+					InteractivityPackage.STYLE_MODIFIER__COLORS);
+		}
+		return colors;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case InteractivityPackage.STYLE_MODIFIER__STYLE:
 			return basicSetStyle(null, msgs);
+		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+			return ((InternalEList<?>) getColors()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -234,6 +267,8 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 			return getPath();
 		case InteractivityPackage.STYLE_MODIFIER__STYLE:
 			return getStyle();
+		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+			return getColors();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -243,6 +278,7 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -254,6 +290,10 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 			return;
 		case InteractivityPackage.STYLE_MODIFIER__STYLE:
 			setStyle((NodeStyleDescription) newValue);
+			return;
+		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+			getColors().clear();
+			getColors().addAll((Collection<? extends UserColor>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -276,6 +316,9 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 		case InteractivityPackage.STYLE_MODIFIER__STYLE:
 			setStyle((NodeStyleDescription) null);
 			return;
+		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+			getColors().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -294,6 +337,8 @@ public class StyleModifierImpl extends MinimalEObjectImpl.Container implements S
 			return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
 		case InteractivityPackage.STYLE_MODIFIER__STYLE:
 			return style != null;
+		case InteractivityPackage.STYLE_MODIFIER__COLORS:
+			return colors != null && !colors.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

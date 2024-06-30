@@ -3,6 +3,7 @@ package org.eclipse.sirius.components.collaborative.interactivity.services;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.sirius.components.collaborative.api.IRepresentationSearchService;
+import org.eclipse.sirius.components.core.api.IDomainSearchService;
 import org.eclipse.sirius.components.core.api.IEditingContext;
 import org.eclipse.sirius.components.core.api.IEditingContextSearchService;
 import org.eclipse.sirius.components.core.api.IObjectSearchService;
@@ -31,6 +32,7 @@ public class MetamodelsService {
     private final IEditingContextSearchService editingContextSearchService;
     private final IViewRepresentationDescriptionSearchService representationDescriptionSearchService;
 
+
     public MetamodelsService(ISemanticDataRepository repository, IObjectSearchService objectSearchService, IRepresentationSearchService representationSearchService, IEditingContextSearchService editingContextSearchService, IViewRepresentationDescriptionSearchService representationDescriptionSearchService) {
         this.repository = repository;
         this.objectSearchService = objectSearchService;
@@ -48,6 +50,10 @@ public class MetamodelsService {
            }
         }
         return Optional.empty();
+    }
+
+    public Optional<Diagram> getRepresentation(IEditingContext editingContext, String representationId) {
+        return representationSearchService.findById(editingContext, representationId, Diagram.class);
     }
 
     /**
@@ -71,7 +77,7 @@ public class MetamodelsService {
                     var interactivityOpt = this.getModelFromResourceSet(projectResourceSet, Interactivity.class, interactivity -> domainName.equals(interactivity.getDomainId()));
                     if(interactivityOpt.isPresent()) {
                         var interactivity = interactivityOpt.get();
-                        // TODO Which view to return when the interactivity model declare several DiagramEditors ?
+                        // TODO Which view to return when the interactivity model declare several DiagramEditors?
                         var viewOpt = this.getModelFromResourceSet(projectResourceSet, View.class, view -> view.getDescriptions().stream().anyMatch(desc -> desc.equals(interactivity.getDiagramDefinition())));
                         return viewOpt.map(view -> new Metamodels(interactivity, domainOpt.get(), view));
                     }

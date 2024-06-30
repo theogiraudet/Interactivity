@@ -1,6 +1,7 @@
 extend type Query {
     interactivity(input: InteractivityModelInput!): InteractivityModelPayload!
     affectedElements(input: ComputeAffectedNodesInput!): ComputeAffectedElementsPayload!
+    dynamicFilter(input: ComputeDynamicFilterInput!): ComputeDynamicFilterPayload!
 }
 
 input InteractivityModelInput {
@@ -16,13 +17,45 @@ input ComputeAffectedNodesInput {
     containerIds: [String!]!
 }
 
+input ComputeDynamicFilterInput {
+    id: ID!
+    editingContextId: ID!
+    representationId: ID!
+    filterId: String!
+    focusedElementId: String!
+}
+
 union SemanticZoomPayload = SuccessPayload | ErrorPayload
 union InteractivityModelPayload = InteractivityModelSuccessPayload | SuccessPayload | ErrorPayload
 union ComputeAffectedElementsPayload = ComputeAffectedElementsSuccessPayload | SuccessPayload | ErrorPayload
+union ComputeDynamicFilterPayload = ComputeDynamicFilterSuccessPayload | ErrorPayload
 
 type InteractivityModelSuccessPayload {
     id: ID!
     interactivity: Interactivity!
+}
+
+type ComputeDynamicFilterSuccessPayload {
+    id: ID!
+    elementIds: [SemanticElementModifier!]!
+    edges: [RelationEdgeMapping!]!
+}
+
+type RelationEdgeMapping {
+    sourceObjectId: String!
+    targetObjectIds: [String!]!
+    edgeDescription: String!
+    modifierId: String!
+}
+
+type SemanticElementModifier {
+    semanticElementId: String!
+    modifierId: String!
+}
+
+type Color {
+    name: String!
+    value: String!
 }
 
 type ComputeAffectedElementsSuccessPayload {
@@ -77,9 +110,49 @@ type VisibilityModifier implements Modifier & Identifiable {
 
 type StyleModifier implements Modifier & Identifiable {
     path: String!
-    style: INodeStyle
+    style: NodeStyleDescription!
     id: String!
 }
+
+type UserColor {
+    name: String!
+    value: String!
+}
+
+union NodeStyleDescription = RectangularNodeStyleDescription | ImageNodeStyleDescription | IconLabelNodeStyleDescription
+
+type RectangularNodeStyleDescription {
+    borderColor: UserColor!
+    borderRadius: Int!
+    borderSize: Int!
+    borderLineStyle: IntLineStyle!
+    background: UserColor!
+}
+
+type ImageNodeStyleDescription {
+    borderColor: UserColor!
+    borderRadius: Int!
+    borderSize: Int!
+    borderLineStyle: IntLineStyle!
+    shape: String!
+    positionDependentRotation: Boolean!
+}
+
+enum IntLineStyle {
+    DASH
+    DASH_DOT
+    DOT
+    SOLID
+}
+
+type IconLabelNodeStyleDescription {
+    borderColor: UserColor!
+    borderRadius: Int!
+    borderSize: Int!
+    borderLineStyle: IntLineStyle!
+    background: UserColor!
+}
+
 
 type DynamicFilter {
     filters: [Filter!]!

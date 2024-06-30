@@ -12,6 +12,8 @@
  */
 package org.eclipse.sirius.components.interactivity;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.sirius.components.view.UserColor;
 import org.eclipse.sirius.components.view.diagram.NodeStyleDescription;
 
 /**
@@ -24,6 +26,7 @@ import org.eclipse.sirius.components.view.diagram.NodeStyleDescription;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.sirius.components.interactivity.StyleModifier#getStyle <em>Style</em>}</li>
+ *   <li>{@link org.eclipse.sirius.components.interactivity.StyleModifier#getColors <em>Colors</em>}</li>
  * </ul>
  *
  * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getStyleModifier()
@@ -52,5 +55,17 @@ public interface StyleModifier extends Modifier {
 	 * @generated
 	 */
 	void setStyle(NodeStyleDescription value);
+
+	/**
+	 * Returns the value of the '<em><b>Colors</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.sirius.components.view.UserColor}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Colors</em>' containment reference list.
+	 * @see org.eclipse.sirius.components.interactivity.InteractivityPackage#getStyleModifier_Colors()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<UserColor> getColors();
 
 } // StyleModifier

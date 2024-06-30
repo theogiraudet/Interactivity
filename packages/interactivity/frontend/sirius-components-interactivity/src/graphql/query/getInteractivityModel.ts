@@ -12,7 +12,58 @@
  *******************************************************************************/
 import { gql } from '@apollo/client';
 
+export const filterFragment = gql`
+  fragment filterFragment on FilterDefinition {
+    name
+    modifiers {
+      id
+      __typename
+      ... on VisibilityModifier {
+        hide
+        path
+      }
+      ... on StyleModifier {
+        path
+        style {
+          __typename
+          ... on RectangularNodeStyleDescription {
+            background {
+              name
+              value
+            }
+            borderColor {
+              name
+              value
+            }
+            borderLineStyle
+            borderSize
+            borderRadius
+          }
+          ... on ImageNodeStyleDescription {
+            shape
+            borderColor {
+              name
+              value
+            }
+            borderLineStyle
+            borderSize
+            borderRadius
+            positionDependentRotation
+          }
+          ... on IconLabelNodeStyleDescription {
+            background {
+              name
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const getInteractivityModelQuery = gql`
+  ${filterFragment}
   query Interactivity($input: InteractivityModelInput!) {
     interactivity(input: $input) {
       ... on InteractivityModelSuccessPayload {
@@ -20,17 +71,7 @@ export const getInteractivityModelQuery = gql`
         interactivity {
           domainId
           filters {
-            name
-            modifiers {
-              id
-              ... on VisibilityModifier {
-                hide
-                path
-              }
-              ... on StyleModifier {
-                path
-              }
-            }
+            ...filterFragment
           }
           features {
             __typename
@@ -40,17 +81,7 @@ export const getInteractivityModelQuery = gql`
                 min
                 max
                 filter {
-                  name
-                  modifiers {
-                    id
-                    ... on VisibilityModifier {
-                      hide
-                      path
-                    }
-                    ... on StyleModifier {
-                      path
-                    }
-                  }
+                  ...filterFragment
                 }
               }
             }
@@ -59,17 +90,7 @@ export const getInteractivityModelQuery = gql`
                 id
                 name
                 reference {
-                  name
-                  modifiers {
-                    id
-                    ... on VisibilityModifier {
-                      hide
-                      path
-                    }
-                    ... on StyleModifier {
-                      path
-                    }
-                  }
+                  ...filterFragment
                 }
               }
               radius {

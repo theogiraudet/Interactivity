@@ -14,10 +14,12 @@
 export { DiagramContext } from './contexts/DiagramContext';
 export type { DiagramContextValue } from './contexts/DiagramContext.types';
 export { NodeTypeContext } from './contexts/NodeContext';
+export { useDiagramDescription } from './contexts/useDiagramDescription';
 export type { NodeTypeContextValue, NodeTypeContributionElement } from './contexts/NodeContext.types';
 export type { IConvertEngine, INodeConverter } from './converter/ConvertEngine.types';
 export { convertLineStyle, isListLayoutStrategy } from './converter/convertDiagram';
 export { AlignmentMap } from './converter/convertDiagram.types';
+export { convertDiagram } from './converter/convertDiagram';
 export { convertHandles } from './converter/convertHandles';
 export { convertInsideLabel, convertLabelStyle, convertOutsideLabels } from './converter/convertLabel';
 export type { GQLNodeDescription } from './graphql/query/nodeDescriptionFragment.types';
@@ -52,7 +54,14 @@ export type { DiagramPaletteToolContextValue } from './renderer/palette/DiagramP
 export { DiagramPaletteToolContext } from './renderer/palette/DiagramPaletteToolContext';
 export { DiagramPaletteToolContribution } from './renderer/palette/DiagramPaletteToolContribution';
 export type { DiagramPaletteToolContributionComponentProps } from './renderer/palette/DiagramPaletteToolContribution.types';
+export type { GQLSingleClickOnDiagramElementTool } from './renderer/palette/Palette.types';
 export { DiagramRepresentation } from './representation/DiagramRepresentation';
 export type { GQLDiagramDescription } from './representation/DiagramRepresentation.types';
+export type {
+  GQLIconLabelNodeStyle,
+  GQLImageNodeStyle,
+  GQLRectangularNodeStyle,
+} from './graphql/subscription/nodeFragment.types';
+export type { EdgeData } from './renderer/DiagramRenderer.types';
 export { useStore } from './representation/useStore';
 export type { useStoreValue } from './representation/useStore.types';

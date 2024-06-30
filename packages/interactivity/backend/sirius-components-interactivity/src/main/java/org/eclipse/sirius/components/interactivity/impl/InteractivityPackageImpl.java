@@ -433,6 +433,16 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
+	public EReference getStyleModifier_Colors() {
+		return (EReference) styleModifierEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDynamicFilter() {
 		return dynamicFilterEClass;
 	}
@@ -655,6 +665,7 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 
 		styleModifierEClass = createEClass(STYLE_MODIFIER);
 		createEReference(styleModifierEClass, STYLE_MODIFIER__STYLE);
+		createEReference(styleModifierEClass, STYLE_MODIFIER__COLORS);
 
 		dynamicFilterEClass = createEClass(DYNAMIC_FILTER);
 		createEReference(dynamicFilterEClass, DYNAMIC_FILTER__FILTERS);
@@ -708,6 +719,7 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		// Obtain other dependent packages
 		DiagramPackage theDiagramPackage = (DiagramPackage) EPackage.Registry.INSTANCE
 				.getEPackage(DiagramPackage.eNS_URI);
+		ViewPackage theViewPackage = (ViewPackage) EPackage.Registry.INSTANCE.getEPackage(ViewPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -782,6 +794,9 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		initEClass(styleModifierEClass, StyleModifier.class, "StyleModifier", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStyleModifier_Style(), theDiagramPackage.getNodeStyleDescription(), null, "style", null, 1, 1,
+				StyleModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStyleModifier_Colors(), theViewPackage.getUserColor(), null, "colors", null, 0, -1,
 				StyleModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

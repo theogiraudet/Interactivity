@@ -9,6 +9,7 @@ import org.eclipse.sirius.components.collaborative.interactivity.dto.Interactivi
 import org.eclipse.sirius.components.collaborative.interactivity.services.Metamodels;
 import org.eclipse.sirius.components.collaborative.interactivity.services.MetamodelsService;
 import org.eclipse.sirius.components.core.api.*;
+import org.eclipse.sirius.web.application.images.services.api.IProjectImageApplicationService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Sinks;
 import java.util.Optional;

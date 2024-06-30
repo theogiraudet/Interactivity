@@ -5,6 +5,7 @@
   "compilerOptions": {
     "strict": true,
     "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "sourceMap": true
   }
 }

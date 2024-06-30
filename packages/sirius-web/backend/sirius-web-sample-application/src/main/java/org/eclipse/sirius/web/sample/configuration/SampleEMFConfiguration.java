@@ -19,8 +19,6 @@ import org.eclipse.sirius.components.domain.provider.DomainItemProviderAdapterFa
 import org.eclipse.sirius.components.emf.configuration.ChildExtenderProvider;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.provider.InteractivityItemProviderAdapterFactory;
-import org.eclipse.sirius.components.semantic_zoom.SemanticZoomPackage;
-import org.eclipse.sirius.components.semantic_zoom.provider.SemanticZoomItemProviderAdapterFactory;
 import org.eclipse.sirius.components.view.ViewPackage;
 import org.eclipse.sirius.components.view.diagram.DiagramPackage;
 import org.eclipse.sirius.components.view.diagram.customnodes.CustomnodesPackage;
@@ -45,18 +43,6 @@ public class SampleEMFConfiguration {
     @ConditionalOnProperty(prefix = "org.eclipse.sirius.web.features", name = "studioDefinition")
     public EPackage interactivityEPackage() {
         return InteractivityPackage.eINSTANCE;
-    }
-
-    @Bean
-    @ConditionalOnProperty(prefix = "org.eclipse.sirius.web.features", name = "studioDefinition")
-    public EPackage semanticZoomEPackage() {
-        return SemanticZoomPackage.eINSTANCE;
-    }
-
-    @Bean
-    @ConditionalOnProperty(prefix = "org.eclipse.sirius.web.features", name = "studioDefinition")
-    public ChildExtenderProvider semanticZoomChildExtenderProvider() {
-        return new ChildExtenderProvider(InteractivityPackage.eNS_URI, SemanticZoomItemProviderAdapterFactory.InteractivityChildCreationExtender::new);
     }
 
     @Bean

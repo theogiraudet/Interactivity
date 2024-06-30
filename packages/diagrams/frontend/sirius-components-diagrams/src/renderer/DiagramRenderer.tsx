@@ -132,7 +132,13 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
 
   const [convertedDiagram, setDiagram] = useState<Diagram | undefined>(undefined);
   const { diagramId: representationId, editingContextId } = useContext<DiagramContextValue>(DiagramContext);
-  const setNodes = useFilter({ editingContextId, representationId, setNodes: oldSetNodes, getNodes });
+  const setNodes = useFilter({
+    editingContextId,
+    representationId,
+    setNodes: oldSetNodes,
+    getNodes,
+    gqlDiagram: diagramRefreshedEventPayload.diagram,
+  });
 
   useEffect(() => {
     const { diagram, cause } = diagramRefreshedEventPayload;

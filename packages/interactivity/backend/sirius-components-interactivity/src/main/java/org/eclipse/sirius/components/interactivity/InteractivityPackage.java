@@ -501,13 +501,22 @@ public interface InteractivityPackage extends EPackage {
 	int STYLE_MODIFIER__STYLE = MODIFIER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Colors</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYLE_MODIFIER__COLORS = MODIFIER_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Style Modifier</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYLE_MODIFIER_FEATURE_COUNT = MODIFIER_FEATURE_COUNT + 1;
+	int STYLE_MODIFIER_FEATURE_COUNT = MODIFIER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Style Modifier</em>' class.
@@ -989,6 +998,17 @@ public interface InteractivityPackage extends EPackage {
 	EReference getStyleModifier_Style();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.sirius.components.interactivity.StyleModifier#getColors <em>Colors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Colors</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.StyleModifier#getColors()
+	 * @see #getStyleModifier()
+	 * @generated
+	 */
+	EReference getStyleModifier_Colors();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.DynamicFilter <em>Dynamic Filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1374,6 +1394,14 @@ public interface InteractivityPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STYLE_MODIFIER__STYLE = eINSTANCE.getStyleModifier_Style();
+
+		/**
+		 * The meta object literal for the '<em><b>Colors</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STYLE_MODIFIER__COLORS = eINSTANCE.getStyleModifier_Colors();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.DynamicFilterImpl <em>Dynamic Filter</em>}' class.

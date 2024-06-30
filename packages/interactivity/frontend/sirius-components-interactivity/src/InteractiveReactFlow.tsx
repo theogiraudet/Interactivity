@@ -2,7 +2,7 @@ import { ReactFlowProps, ReactFlow, useReactFlow } from 'reactflow';
 import React, { useContext, forwardRef } from 'react';
 import { useInteractivity } from './hook/useInteractivity';
 import { Diagram, DiagramContext, DiagramContextValue, NodeData } from '@eclipse-sirius/sirius-components-diagrams';
-import { EdgeData } from '@eclipse-sirius/sirius-components-diagrams/dist/renderer/DiagramRenderer.types';
+import { EdgeData } from '@eclipse-sirius/sirius-components-diagrams';
 import { Interactivity } from './components/Interactivity';
 
 export const InteractiveReactFlow = forwardRef(

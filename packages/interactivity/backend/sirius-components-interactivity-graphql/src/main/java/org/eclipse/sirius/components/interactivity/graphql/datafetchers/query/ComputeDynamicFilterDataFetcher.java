@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import graphql.schema.DataFetchingEnvironment;
 import org.eclipse.sirius.components.annotations.spring.graphql.QueryDataFetcher;
 import org.eclipse.sirius.components.collaborative.interactivity.dto.ComputeAffectedElementsInput;
+import org.eclipse.sirius.components.collaborative.interactivity.dto.ComputeDynamicFilterInput;
 import org.eclipse.sirius.components.core.api.IPayload;
 import org.eclipse.sirius.components.graphql.api.IDataFetcherWithFieldCoordinates;
 import org.eclipse.sirius.components.graphql.api.IEditingContextDispatcher;
@@ -16,8 +17,8 @@ import java.util.concurrent.CompletableFuture;
  *
  * @author tgiraudet
  */
-@QueryDataFetcher(type = "Query", field = "affectedElements")
-public class ComputeAffectedElements implements IDataFetcherWithFieldCoordinates<CompletableFuture<IPayload>> {
+@QueryDataFetcher(type = "Query", field = "dynamicFilter")
+public class ComputeDynamicFilterDataFetcher implements IDataFetcherWithFieldCoordinates<CompletableFuture<IPayload>> {
 
     private static final String INPUT_ARGUMENT = "input";
 
@@ -27,7 +28,7 @@ public class ComputeAffectedElements implements IDataFetcherWithFieldCoordinates
 
     private final IEditingContextDispatcher editingContextDispatcher;
 
-    public ComputeAffectedElements(ObjectMapper objectMapper, IExceptionWrapper exceptionWrapper, IEditingContextDispatcher editingContextDispatcher) {
+    public ComputeDynamicFilterDataFetcher(ObjectMapper objectMapper, IExceptionWrapper exceptionWrapper, IEditingContextDispatcher editingContextDispatcher) {
         this.objectMapper = objectMapper;
         this.exceptionWrapper = exceptionWrapper;
         this.editingContextDispatcher = editingContextDispatcher;
@@ -36,7 +37,7 @@ public class ComputeAffectedElements implements IDataFetcherWithFieldCoordinates
     @Override
     public CompletableFuture<IPayload> get(DataFetchingEnvironment environment) throws Exception {
         Object argument = environment.getArgument(INPUT_ARGUMENT);
-        var input = this.objectMapper.convertValue(argument, ComputeAffectedElementsInput.class);
+        var input = this.objectMapper.convertValue(argument, ComputeDynamicFilterInput.class);
 
         return this.exceptionWrapper.wrapMono(() -> this.editingContextDispatcher.dispatchQuery(input.editingContextId(), input), input).toFuture();
     }
