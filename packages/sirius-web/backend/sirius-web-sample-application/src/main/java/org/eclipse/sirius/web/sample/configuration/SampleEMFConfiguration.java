@@ -27,6 +27,8 @@ import org.eclipse.sirius.components.view.diagram.provider.DiagramItemProviderAd
 import org.eclipse.sirius.components.view.form.FormPackage;
 import org.eclipse.sirius.components.view.form.provider.FormItemProviderAdapterFactory;
 import org.eclipse.sirius.components.view.provider.ViewItemProviderAdapterFactory;
+import org.eclipse.sirius.components.view.widget.reference.ReferencePackage;
+import org.eclipse.sirius.components.widgets.reference.provider.ReferenceItemProviderAdapterFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -126,5 +128,23 @@ public class SampleEMFConfiguration {
     @ConditionalOnProperty(prefix = "org.eclipse.sirius.web.features", name = "studioDefinition")
     public ChildExtenderProvider customNodesChildExtenderProvider() {
         return new ChildExtenderProvider(DiagramPackage.eNS_URI, CustomnodesItemProviderAdapterFactory.DiagramChildCreationExtender::new);
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "org.eclipse.sirius.web.features", name = "studioDefinition")
+    public EPackage referenceWidgetEPackage() {
+        return ReferencePackage.eINSTANCE;
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "org.eclipse.sirius.web.features", name = "studioDefinition")
+    public AdapterFactory referenceWidgetAdapterFactory() {
+        return new ReferenceItemProviderAdapterFactory();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "org.eclipse.sirius.web.features", name = "studioDefinition")
+    public ChildExtenderProvider referenceWidgetChildExtenderProvider() {
+        return new ChildExtenderProvider(FormPackage.eNS_URI, ReferenceItemProviderAdapterFactory.FormChildCreationExtender::new);
     }
 }
