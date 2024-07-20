@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.eclipse.sirius</groupId>
     <artifactId>sirius-components-interactivity-starter</artifactId>
-    <version>2024.3.6</version>
+    <version>2024.5.6</version>
     <name>sirius-components-interactivity-starter</name>
     <description>Sirius Components Interactivity Stater</description>
 
@@ -43,13 +43,13 @@
         <dependency>
             <groupId>org.eclipse.sirius</groupId>
             <artifactId>sirius-components-core</artifactId>
-            <version>2024.3.6</version>
+            <version>2024.5.6</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.sirius</groupId>
             <artifactId>sirius-web-application</artifactId>
-            <version>2024.3.6</version>
+            <version>2024.5.6</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

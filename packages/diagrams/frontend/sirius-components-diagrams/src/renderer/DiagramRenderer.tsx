@@ -11,7 +11,7 @@
  *     Obeo - initial API and implementation
  *******************************************************************************/
 
-import { Selection, useSelection } from '@eclipse-sirius/sirius-components-core';
+import { Selection, useData, useSelection } from '@eclipse-sirius/sirius-components-core';
 import React, {
   MouseEvent as ReactMouseEvent,
   useCallback,
@@ -34,7 +34,6 @@ import {
   OnEdgesChange,
   OnMove,
   OnNodesChange,
-  ReactFlow,
   ReactFlowProps,
   applyNodeChanges,
 } from 'reactflow';
@@ -318,8 +317,8 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
   const { nodesDraggable } = useNodesDraggable();
 
   let reactFlowProps: ReactFlowProps & { diagram: any } = {
-      diagram: convertedDiagram,
-      nodes: nodes,
+    diagram: convertedDiagram,
+    nodes: nodes,
     nodeTypes: nodeTypes,
     onNodesChange: handleNodesChange,
     edges: edges,
@@ -402,7 +401,7 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
     diagramRendererReactFlowPropsCustomizerExtensionPoint
   );
   reactFlowPropsCustomizers.forEach((customizer) => {
-    reactFlowProps = { ...customizer(reactFlowProps), convertedDiagram };
+    reactFlowProps = { ...customizer(reactFlowProps), diagram: convertedDiagram };
   });
 
   return <InteractiveReactFlow {...reactFlowProps} ref={ref} />;
