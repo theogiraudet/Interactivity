@@ -70,7 +70,7 @@ export interface GQLComputeDynamicFilterSuccessPayload {
   __typename: string;
   id: string;
   elementIds: GQLSemanticElementModifier[];
-  edges: GQLRelationEdgeMapping[];
+  edges: string[];
 }
 
 export interface GQLSemanticElementModifier {
@@ -78,11 +78,11 @@ export interface GQLSemanticElementModifier {
   modifierId: string;
 }
 
-export interface GQLRelationEdgeMapping {
-  sourceObjectId: string;
-  targetObjectIds: string[];
-  edgeDescription: string;
-}
+// export interface GQLRelationEdgeMapping {
+//   sourceObjectId: string;
+//   targetObjectIds: string[];
+//   edgeDescription: string;
+// }
 export type GQLComputeDynamicFilterPayload = GQLComputeDynamicFilterSuccessPayload | GQLErrorPayload;
 
 export interface Nameable {

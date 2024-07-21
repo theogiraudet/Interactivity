@@ -1,5 +1,5 @@
-import { NodeData } from '@eclipse-sirius/sirius-components-diagrams';
-import { Node } from 'reactflow';
+import { EdgeData, NodeData } from '@eclipse-sirius/sirius-components-diagrams';
+import { Edge, Node } from 'reactflow';
 import { Filter } from '../filters/Filter';
 import {
   GQLComputeDynamicFilterSuccessPayload,
@@ -27,7 +27,7 @@ export class DynFilter implements Filter {
     this.filter = filter;
   }
 
-  apply(nodes: Node<NodeData>[]): Node<NodeData>[] {
+  applyOnNodes(nodes: Node<NodeData>[]): Node<NodeData>[] {
     const modifiers = new Map(
       this.filterDef.modifiers.map<[string, GQLModifier]>((modifier) => [modifier.id, modifier])
     );
@@ -52,5 +52,15 @@ export class DynFilter implements Filter {
     applyModifier(this.filter.defaultModifier, notAffected);
 
     return nodes;
+  }
+
+  applyOnEdges(edges: Edge<EdgeData>[]): Edge<EdgeData>[] {
+    const list: Edge<EdgeData>[] = [];
+    for (const edge of edges) {
+      if (this.show.edges.includes(edge.id)) {
+        list.push(edge);
+      }
+    }
+    return list;
   }
 }

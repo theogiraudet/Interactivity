@@ -11,7 +11,6 @@ import org.eclipse.sirius.components.collaborative.interactivity.api.IInteractiv
 import org.eclipse.sirius.components.collaborative.interactivity.api.IInteractivityInput;
 import org.eclipse.sirius.components.collaborative.interactivity.dto.ComputeDynamicFilterInput;
 import org.eclipse.sirius.components.collaborative.interactivity.dto.ComputeDynamicFilterSuccessPayload;
-import org.eclipse.sirius.components.collaborative.interactivity.dto.RelationEdgeMapping;
 import org.eclipse.sirius.components.collaborative.interactivity.dto.SemanticElementModifier;
 import org.eclipse.sirius.components.collaborative.interactivity.services.MetamodelsService;
 import org.eclipse.sirius.components.core.api.ErrorPayload;
@@ -19,12 +18,13 @@ import org.eclipse.sirius.components.core.api.IEditingContext;
 import org.eclipse.sirius.components.core.api.IIdentityService;
 import org.eclipse.sirius.components.core.api.IPayload;
 import org.eclipse.sirius.components.diagrams.Diagram;
+import org.eclipse.sirius.components.diagrams.Edge;
+import org.eclipse.sirius.components.diagrams.Node;
 import org.eclipse.sirius.components.interactivity.*;
 import org.eclipse.sirius.components.interpreter.AQLInterpreter;
 import org.eclipse.sirius.components.interpreter.Result;
 import org.eclipse.sirius.components.representations.Message;
 import org.eclipse.sirius.components.view.diagram.DiagramDescription;
-import org.eclipse.sirius.web.application.editingcontext.EditingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -79,7 +79,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                     Context context = new Context(new HashSet<>(), new LinkedList<>(), model);
 //                    context.semanticElementIds().add(identityService.getId(slice.focus));
                     computeAffectedElements(slice.focus, slice.slice, filterDefinitionOpt.get(), context, diagram.get(), (DiagramDescription) diagramDescription);
-                    payload = new ComputeDynamicFilterSuccessPayload(input.id(), List.copyOf(context.semanticElementIds()), context.relationEdgeMappings());
+                    payload = new ComputeDynamicFilterSuccessPayload(input.id(), List.copyOf(context.semanticElementIds()), context.edgesToShow());
                 }
             }
         }
@@ -87,7 +87,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
         changeDescriptionSink.tryEmitNext(changeDescription);
     }
 
-    public record Context(Set<SemanticElementModifier> semanticElementIds, List<RelationEdgeMapping> relationEdgeMappings, EObject model) {}
+    public record Context(Set<SemanticElementModifier> semanticElementIds, List<String> edgesToShow, EObject model) {}
     public record Relations(Object sourceObject, List<Object> targetObjects, String relationName, String modifierId) {}
     public record Pair<T1, T2>(T1 t1, T2 t2) {}
 
@@ -95,7 +95,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
         Map<String, Object> references = new HashMap<>();
         // Store Object with Modifier ID
         Map<Integer, Pair<Object, String>> semanticElementsToShow = new HashMap<>();
-        List<Relations> referencesToHide = new LinkedList<>();
+        List<Relations> referencesToShow = new LinkedList<>();
 
         // Save all references
         for(var reference: source.eClass().getEReferences())  {
@@ -117,7 +117,6 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
         // Test the queries on each reference
         for(var reference: references.entrySet()) {
             source.eSet(source.eClass().getEStructuralFeature(reference.getKey()), reference.getValue());
-            // Issue when the query returns self
             for(ScopedModifier modifier: filter.getModifiers()) {
                 AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(root.eClass().getEPackage()));
                 Result result = interpreter.evaluateExpression(Map.of("root", root), ((Path) modifier.getElements()).getPath());
@@ -126,7 +125,10 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                     for(var pair: pairs) {
                         semanticElementsToShow.put(System.identityHashCode(pair.t1), pair);
                     }
-                    referencesToHide.add(new Relations(source, objs, reference.getKey(), modifier.getId()));
+                    // If the result contains only self, we don't want to show the relation
+                    if(!(pairs.size() == 1 && pairs.get(0).t1.equals(source)) && !pairs.isEmpty()) {
+                        referencesToShow.add(new Relations(source, objs, reference.getKey(), modifier.getId()));
+                    }
                 });
             }
 
@@ -146,27 +148,31 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                                 .map(id2 -> id.semanticElementId().equals(id2))
                                 .isPresent()
                         )
-                ).toList(); // Avoid propagation on browsed elements
-        computeIds(semanticElementsToShow.values(), referencesToHide, root, context, diagram, representationDescription);
+                ).filter(p -> !EcoreUtil.equals((EObject) p.t1(), source))
+                .toList(); // Avoid propagation on browsed elements
+        computeIds(semanticElementsToShow.values(), referencesToShow, root, context, diagram, representationDescription);
         for(var obj: propagateTo) {
             if(obj.t1 instanceof EObject eobj) {
-                var slicedOpt = slice(context.model(), identityService.getId(eobj));
-                if(slicedOpt.isPresent()) {
-                    var sliced = slicedOpt.get();
-                    computeAffectedElements(sliced.focus, sliced.slice, filter, context, diagram, representationDescription);
+                var idOpt = this.getOriginalEObjectId(eobj, root, context.model());
+                if(idOpt.isPresent()) {
+                    var slicedOpt = slice(context.model(), idOpt.get());
+                    if (slicedOpt.isPresent()) {
+                        var sliced = slicedOpt.get();
+                        computeAffectedElements(sliced.focus, sliced.slice, filter, context, diagram, representationDescription);
+                    }
                 }
             }
         }
     }
 
-    private void computeIds(Collection<Pair<Object, String>> semanticElementsToShow, List<Relations> referencesToHide, EObject model, Context context, Diagram diagram, DiagramDescription representationDescription) {
+    private void computeIds(Collection<Pair<Object, String>> semanticElementsToShow, List<Relations> referencesToShow, EObject model, Context context, Diagram diagram, DiagramDescription representationDescription) {
         for(var semanticElement: semanticElementsToShow) {
 //            Optional.ofNullable(identityService.getId(semanticElement.t1()))
 //                    .ifPresent(id -> context.semanticElementIds().add(new SemanticElementModifier(id, semanticElement.t2())));
             getOriginalEObjectId((EObject) semanticElement.t1(), model, context.model())
                     .ifPresent(id -> context.semanticElementIds().add(new SemanticElementModifier(id, semanticElement.t2())));
         }
-        for(var relation: referencesToHide) {
+        for(var relation: referencesToShow) {
             // Change these IDs too
             String sourceId = getOriginalEObjectId((EObject) relation.sourceObject, model, context.model()).get();
             List<String> targetIds = relation.targetObjects().stream().map(obj -> getOriginalEObjectId((EObject) obj, model, context.model()))
@@ -175,31 +181,52 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                     .toList();
 
             // Get the edges that have for source and target defined in the relation
-            var edges = diagram.getEdges().stream().filter(edge -> edge.getSourceId().equals(sourceId) && targetIds.contains(edge.getTargetObjectId()))
+            var edges = diagram.getEdges().stream().filter(edge -> edge.getTargetObjectId().equals(sourceId) &&
+                        getSemanticIdFromNodeId(edge.getTargetId(), diagram.getNodes()).filter(targetIds::contains).isPresent())
+                    .map(Edge::getId)
                     .toList();
-            // For each found edges, we get the description
-            List<String> descriptionIds = new LinkedList<>();
-            for(var edge: edges) {
-                var edgeDescOpt = representationDescription.getEdgeDescriptions()
-                        .stream()
-                        .filter(edgeDescription -> edge.getDescriptionId().contains(identityService.getId(edgeDescription)) && edgeDescription.getTargetNodesExpression().endsWith(relation.relationName)).findAny();
-                if(edgeDescOpt.isPresent()) {
-                    descriptionIds.add(edge.getDescriptionId());
-                }
-            }
 
-            if(!descriptionIds.isEmpty()) {
-                context.relationEdgeMappings().add(new RelationEdgeMapping(sourceId, targetIds, descriptionIds.get(0)));
-            } else {
-                logger.warn("No description ID found.");
-            }
+            context.edgesToShow.addAll(edges);
+            // For each found edges, we get the description
+//            List<String> descriptionIds = new LinkedList<>();
+//            for(var edge: edges) {
+//                var edgeDescOpt = representationDescription.getEdgeDescriptions()
+//                        .stream()
+//                        .filter(edgeDescription -> edge.getDescriptionId().contains(identityService.getId(edgeDescription)) && edgeDescription.getTargetNodesExpression().endsWith(relation.relationName)).findAny();
+//                if(edgeDescOpt.isPresent()) {
+//                    descriptionIds.add(edge.getDescriptionId());
+//                }
+//            }
+
+//            if(!descriptionIds.isEmpty()) {
+//                context.relationEdgeMappings().add(new RelationEdgeMapping(sourceId, targetIds, descriptionIds.get(0)));
+//            } else {
+//                logger.warn("No description ID found.");
+//            }
         }
     }
 
     private Optional<EObject> search(EObject clone, EObject model, String sourceObjectId) {
-        return computeLinkId(sourceObjectId, model)
-                .flatMap(id -> getFromLinkId(id, clone));
+        var iterator = model.eAllContents();
+        EObject obj = null;
+        while(iterator.hasNext() && obj == null) {
+            var next = iterator.next();
+            if(sourceObjectId != null && sourceObjectId.equals(identityService.getId(next))) {
+               obj = next;
+            }
+        }
 
+        if(obj != null) {
+            iterator = clone.eAllContents();
+            while(iterator.hasNext()) {
+                var next = iterator.next();
+                if(EcoreUtil.equals(next, obj)) {
+                    return Optional.of(next);
+                }
+            }
+        }
+
+        return Optional.empty();
     }
 
     private Optional<ContextualSlice> slice(EObject model, String sourceObjectId) {
@@ -225,46 +252,17 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
     record ContextualSlice(EObject focus, EObject slice) {}
 
     private Optional<String> getOriginalEObjectId(EObject cloned, EObject clonedModel, EObject model) {
-        return computeLinkId(cloned, clonedModel)
-                .flatMap(id -> getFromLinkId(id, model))
-                .flatMap(obj -> Optional.ofNullable(identityService.getId(obj)));
-    }
-
-    private Optional<Integer> computeLinkId(String id, EObject model) {
         var iterator = model.eAllContents();
-        int i = 0;
         while(iterator.hasNext()) {
-            if(identityService.getId(iterator.next()).equals(id)) {
-                return Optional.of(i);
+            var next = iterator.next();
+            if(EcoreUtil.equals(cloned, next)) {
+                return Optional.of(identityService.getId(next));
             }
-            i++;
         }
         return Optional.empty();
     }
 
-    private Optional<Integer> computeLinkId(EObject object, EObject model) {
-        // FIX: Why model is empty?
-        var iterator = model.eAllContents();
-        int i = 0;
-        while(iterator.hasNext()) {
-            if(iterator.next() == object) {
-                return Optional.of(i);
-            }
-            i++;
-        }
-        return Optional.empty();
+    private Optional<String> getSemanticIdFromNodeId(String nodeId, List<Node> nodes) {
+        return nodes.stream().filter(node -> node.getId().equals(nodeId)).map(Node::getTargetObjectId).findAny();
     }
-
-    private Optional<EObject> getFromLinkId(int number, EObject model) {
-        var iterator = model.eAllContents();
-        int i = 0;
-        while(iterator.hasNext()) {
-            if(i == number) {
-                return Optional.of(iterator.next());
-            }
-            i++;
-        }
-        return Optional.empty();
-    }
-
 }

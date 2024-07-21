@@ -1,5 +1,5 @@
-import { NodeData } from '@eclipse-sirius/sirius-components-diagrams';
-import { Node } from 'reactflow';
+import { EdgeData, NodeData } from '@eclipse-sirius/sirius-components-diagrams';
+import { Edge, Node } from 'reactflow';
 import { Filter } from '../filters/Filter';
 import { GQLFilterDefinition } from '../../graphql/query/InteractivityGraphQL.types';
 import { applyModifier } from '../filters/ModifierHandler';
@@ -15,7 +15,12 @@ export class SemZoomFilter implements Filter {
     this.affectedNodes = affectedNodes;
   }
 
-  apply(nodes: Node<NodeData>[]): Node<NodeData>[] {
+  //TODO To implement
+  applyOnEdges(edges: Edge<EdgeData>[]): Edge<EdgeData>[] {
+    return edges;
+  }
+
+  applyOnNodes(nodes: Node<NodeData>[]): Node<NodeData>[] {
     for (const modifier of this.filter.modifiers) {
       const nodeIds = this.affectedNodes.get(modifier.id);
       if (nodeIds) {

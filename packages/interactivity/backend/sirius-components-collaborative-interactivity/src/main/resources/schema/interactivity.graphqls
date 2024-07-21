@@ -38,7 +38,7 @@ type InteractivityModelSuccessPayload {
 type ComputeDynamicFilterSuccessPayload {
     id: ID!
     elementIds: [SemanticElementModifier!]!
-    edges: [RelationEdgeMapping!]!
+    edges: [String!]!
 }
 
 type RelationEdgeMapping {

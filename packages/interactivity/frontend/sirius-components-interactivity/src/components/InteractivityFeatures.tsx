@@ -18,7 +18,7 @@ type InteractivityProps = {
 
 const EPSILON = 0.0001;
 
-export const Interactivity = (props: InteractivityProps) => {
+export const InteractivityFeatures = (props: InteractivityProps) => {
   const zoomEvent = useMemo(() => new EventManager<(zoomLevel: number) => void>(), []);
   // const [interactions, setInteractions] = useState<GQLInteraction[]>([])
   const [oldZoom, setZoom] = useState<number>(0);

@@ -22,7 +22,7 @@ import React, {
   useState,
   memo,
 } from 'react';
-import {
+import ReactFlow, {
   Background,
   BackgroundVariant,
   ConnectionLineType,
@@ -84,16 +84,16 @@ import { useShiftSelection } from './selection/useShiftSelection';
 import { useSnapToGrid } from './snap-to-grid/useSnapToGrid';
 
 import 'reactflow/dist/style.css';
-import { InteractiveReactFlow } from '@eclipse-sirius/sirius-components-interactivity';
-import { useFilter } from '@eclipse-sirius/sirius-components-interactivity';
+import { Interactivity } from '@eclipse-sirius/sirius-components-interactivity';
+import { useInteractivityProxy } from '@eclipse-sirius/sirius-components-interactivity';
 
 const GRID_STEP: number = 10;
 
 export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRendererProps) => {
   const { readOnly } = useContext<DiagramContextValue>(DiagramContext);
   const { diagramDescription } = useDiagramDescription();
-  const { getEdges, onEdgesChange, getNodes, setEdges, setNodes: oldSetNodes } = useStore();
-  const nodes = getNodes();
+  const { getEdges, onEdgesChange, getNodes, setEdges: oldSetEdges, setNodes: oldSetNodes } = useStore();
+  // const nodes = getNodes();
   const edges = getEdges();
 
   const { onDirectEdit } = useDiagramDirectEdit();
@@ -135,12 +135,15 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
 
   const [convertedDiagram, setDiagram] = useState<Diagram | undefined>(undefined);
   const { diagramId: representationId, editingContextId } = useContext<DiagramContextValue>(DiagramContext);
-  const setNodes = useFilter({
+  const [setNodes, setEdges, nodes] = useInteractivityProxy({
     editingContextId,
     representationId,
     setNodes: oldSetNodes,
+    setEdges: oldSetEdges,
     getNodes,
+    getEdges,
     gqlDiagram: diagramRefreshedEventPayload.diagram,
+    convertedDiagram: convertedDiagram,
   });
 
   useEffect(() => {
@@ -404,5 +407,10 @@ export const DiagramRenderer = memo(({ diagramRefreshedEventPayload }: DiagramRe
     reactFlowProps = { ...customizer(reactFlowProps), diagram: convertedDiagram };
   });
 
-  return <InteractiveReactFlow {...reactFlowProps} ref={ref} />;
+  return (
+    <>
+      <Interactivity {...reactFlowProps} />
+      <ReactFlow {...reactFlowProps} ref={ref} />
+    </>
+  );
 });

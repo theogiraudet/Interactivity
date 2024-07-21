@@ -7,7 +7,7 @@ import { InteractiveFeatureProps } from '../InteractiveFeatureMapping';
 import { useEffect, useState } from 'react';
 import { SemZoomFilter } from './SemZoomFilter';
 import { emitCustomEvent } from 'react-custom-events';
-import { FilterState } from '../../hook/useFilter';
+import { FilterState } from '../../hook/useInteractivityProxy';
 import { computeAffectedElementsQuery } from '../../graphql/query/computeAffectedElements';
 import { OperationVariables, QueryOptions, useLazyQuery } from '@apollo/client';
 

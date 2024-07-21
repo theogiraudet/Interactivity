@@ -1,3 +1,3 @@
 export { getInteractivityModelQuery } from './graphql/query/getInteractivityModel';
-export { InteractiveReactFlow } from './InteractiveReactFlow';
-export { useFilter } from './hook/useFilter';
+export { Interactivity } from './Interactivity';
+export { useInteractivityProxy } from './hook/useInteractivityProxy';

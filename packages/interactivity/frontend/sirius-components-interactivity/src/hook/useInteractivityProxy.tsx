@@ -1,5 +1,12 @@
-import { NodeData, NodeTypeContext, NodeTypeContextValue } from '@eclipse-sirius/sirius-components-diagrams';
-import { Node } from 'reactflow';
+import {
+  convertDiagram,
+  Diagram,
+  EdgeData,
+  NodeData,
+  NodeTypeContext,
+  NodeTypeContextValue,
+} from '@eclipse-sirius/sirius-components-diagrams';
+import { Edge, Node } from 'reactflow';
 import { Filter } from '../components/filters/Filter';
 import { Dispatch, SetStateAction, useCallback, useContext, useEffect, useState } from 'react';
 import { useCustomEventListener } from 'react-custom-events';
@@ -7,29 +14,15 @@ import { useDiagramDescription } from '@eclipse-sirius/sirius-components-diagram
 import { GQLDiagram } from '@eclipse-sirius/sirius-components-diagrams';
 import { setModifierParms } from '../components/filters/ModifierHandler';
 
-// const queryParams = (
-//   editingContextId: string,
-//   representationId: string,
-//   ids: string[]
-// ): QueryOptions<OperationVariables, GQLComputeAffectedElementsPayload> => ({
-//   query: computeAffectedElementsQuery,
-//   fetchPolicy: 'no-cache',
-//   variables: {
-//     input: {
-//       id: crypto.randomUUID(),
-//       editingContextId: editingContextId,
-//       representationId: representationId,
-//       containerIds: ids,
-//     },
-//   },
-// });
-
 export type UseFilterProps = {
   editingContextId: string;
   representationId: string;
   setNodes: Dispatch<SetStateAction<Node<NodeData>[]>>;
+  setEdges: Dispatch<SetStateAction<Edge<EdgeData>[]>>;
   getNodes: () => Node<NodeData>[];
+  getEdges: () => Edge<EdgeData>[];
   gqlDiagram: GQLDiagram;
+  convertedDiagram: Diagram | undefined;
 };
 
 export type FilterState =
@@ -43,39 +36,51 @@ function isFilter(filter: FilterState): filter is Filter {
   return filter.hasOwnProperty('id');
 }
 
-export const useFilter = (props: UseFilterProps): Dispatch<SetStateAction<Node<NodeData>[]>> => {
+export const useInteractivityProxy = (
+  props: UseFilterProps
+): [Dispatch<SetStateAction<Node<NodeData>[]>>, Dispatch<SetStateAction<Edge<EdgeData>[]>>, Node<NodeData>[]] => {
   const [filters, setFilters] = useState<Map<string, Filter>>(new Map());
-  // const [filterDefs, setFilterDefs] = useState<GQLFilterDefinition[]>([]);
-  // const [affectedNodes, setAffectedNodes] = useState<Map<string, string[]>>(new Map());
-  // const [query] = useLazyQuery(computeAffectedElementsQuery);
-  // const [dnodes, setDNodes] = useState<Node<NodeData>[]>([]);
 
   const { diagramDescription } = useDiagramDescription();
   const { nodeConverters } = useContext<NodeTypeContextValue>(NodeTypeContext);
+  const [internalNodes, setInternalNodes] = useState<Node<NodeData>[]>([]);
 
   useEffect(() => {
     setModifierParms(nodeConverters, diagramDescription, props.gqlDiagram);
   }, [diagramDescription, nodeConverters, props.gqlDiagram]);
 
-  const callback = useCallback(
+  const callbackSetNode = useCallback(
     (value: Node<NodeData>[] | ((prevNodes: Node<NodeData>[]) => Node<NodeData>[])) => {
       if (typeof value === 'function') {
         props.setNodes((prevNodes) => {
           const nodesClone = structuredClone(prevNodes);
-          // setDNodes(prevNodes);
-          const returnNodes = value(filterNodes(nodesClone, filters));
-          console.log(returnNodes);
-          return returnNodes;
+          const nodes = value(filterNodes(nodesClone, filters));
+          setInternalNodes(nodes);
+          return nodes;
         });
       } else {
         const nodesClone = structuredClone(value);
-        // setDNodes(nodesClone);
-        const nnnnodes = filterNodes(nodesClone, filters);
-        console.log(nnnnodes);
-        props.setNodes(nnnnodes);
+        const nodes = filterNodes(nodesClone, filters);
+        props.setNodes(nodes);
+        setInternalNodes(nodes);
       }
     },
-    [props.setNodes, props.getNodes, filters]
+    [props.setNodes, filters]
+  );
+
+  const callbackSetEdge = useCallback(
+    (value: Edge<EdgeData>[] | ((prevEdges: Edge<EdgeData>[]) => Edge<EdgeData>[])) => {
+      if (typeof value === 'function') {
+        props.setEdges((prevEdges) => {
+          const edgesClone = structuredClone(prevEdges);
+          return value(filterEdges(edgesClone, filters));
+        });
+      } else {
+        const edgesClone = structuredClone(value);
+        props.setEdges(filterEdges(edgesClone, filters));
+      }
+    },
+    [props.setEdges, filters]
   );
 
   useCustomEventListener(
@@ -99,41 +104,26 @@ export const useFilter = (props: UseFilterProps): Dispatch<SetStateAction<Node<N
         }
         return prevState;
       });
+      const diagram = convertDiagram(props.gqlDiagram, nodeConverters, diagramDescription);
       props.setNodes((nodes) => {
-        console.log(nodes);
-        return filterNodes(nodes, filters);
+        const ns = filterNodes(diagram.nodes || nodes, filters);
+        setInternalNodes(ns);
+        return ns;
       });
+      props.setEdges((edges) => filterEdges(diagram.edges || edges, filters));
     },
     [filters]
   );
 
-  // useCustomEventListener('set-filter-definitions', (filterDefs: GQLFilterDefinition[]) => setFilterDefs(filterDefs));
-
-  // useEffect(() => {
-  //   query(
-  //     queryParams(
-  //       props.editingContextId,
-  //       props.representationId,
-  //       filterDefs.flatMap((def) => def.modifiers).map((mod) => mod.id)
-  //     )
-  //   ).then((data) => {
-  //     setAffectedNodes(parseQuery(data)!);
-  //   });
-  // }, [filterDefs, dnodes.length]);
-
-  return callback;
+  return [callbackSetNode, callbackSetEdge, internalNodes];
 };
 
 function filterNodes(nodes: Node<NodeData>[], filters: Map<string, Filter>) {
   const nodesClone = structuredClone(nodes);
-  return Array.from(filters.values()).reduce((computedNodes, filter) => filter.apply(computedNodes), nodesClone);
+  return Array.from(filters.values()).reduce((computedNodes, filter) => filter.applyOnNodes(computedNodes), nodesClone);
 }
 
-// export function parseQuery(data: any): Map<string, string[]> | undefined {
-//   data = data.data as any;
-//   if (data.affectedElements.__typename === 'ComputeAffectedElementsSuccessPayload') {
-//     const payload = data.affectedElements as GQLComputeAffectedElementsSuccessPayload;
-//     return new Map(payload.affectedElementIds.map((pair) => [pair.id, pair.affectedElementIds]));
-//   }
-//   return undefined;
-// }
+function filterEdges(edges: Edge<EdgeData>[], filters: Map<string, Filter>) {
+  const edgesClone = structuredClone(edges);
+  return Array.from(filters.values()).reduce((computedEdges, filter) => filter.applyOnEdges(computedEdges), edgesClone);
+}

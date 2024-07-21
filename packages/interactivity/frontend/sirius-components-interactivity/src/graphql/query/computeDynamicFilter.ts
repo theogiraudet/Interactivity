@@ -22,11 +22,7 @@ export const computeDynamicFilterQuery = gql`
           modifierId
           semanticElementId
         }
-        edges {
-          edgeDescription
-          sourceObjectId
-          targetObjectIds
-        }
+        edges
       }
     }
   }
