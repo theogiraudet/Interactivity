@@ -54,19 +54,27 @@ export const SemanticZoom = (props: InteractiveFeatureProps<GQLSemanticZoom>) =>
   }, [props.interactivity.filters, props.diagram.nodes.length]);
 
   useEffect(() => {
-    props.onZoom.listen((zoom) => {
+    props.onZoom.listen('semantic-zoom', (zoom) => {
       const filters: FilterState[] = [];
       for (const level of props.value.levels) {
         const newZoom = zoomNormalizer(Math.log(zoom), Math.log(props.zoomMin), Math.log(props.zoomMax));
         const specifiedZoomMin = zoomNormalizer(level.min, minSpecifiedZoom, maxSpecifiedZoom);
         const specifiedZoomMax = zoomNormalizer(level.max, minSpecifiedZoom, maxSpecifiedZoom);
         if (newZoom >= specifiedZoomMin && newZoom < specifiedZoomMax) {
-          filters.push({ filter: new SemZoomFilter(level.id, level.filter, affectedNodes), shouldApply: true });
+          filters.push({
+            filter: new SemZoomFilter(level.id, level.filter, structuredClone(affectedNodes)),
+            shouldApply: true,
+          });
         } else {
-          filters.push({ filter: new SemZoomFilter(level.id, level.filter, affectedNodes), shouldApply: false });
+          filters.push({
+            filter: new SemZoomFilter(level.id, level.filter, structuredClone(affectedNodes)),
+            shouldApply: false,
+          });
         }
       }
-      emitCustomEvent('set-filter', filters);
+      if (filters.length > 0) {
+        emitCustomEvent('set-filter', filters);
+      }
     });
   }, [affectedNodes]);
 
