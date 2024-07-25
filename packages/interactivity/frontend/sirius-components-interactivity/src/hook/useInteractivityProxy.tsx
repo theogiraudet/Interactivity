@@ -65,7 +65,7 @@ export const useInteractivityProxy = (
         setInternalNodes(nodes);
       }
     },
-    [props.setNodes, filters, props.gqlDiagram.nodes.length, props.gqlDiagram.edges.length]
+    [props.setNodes, filters, props.gqlDiagram.nodes, props.gqlDiagram.edges]
   );
 
   const callbackSetEdge = useCallback(
@@ -80,7 +80,7 @@ export const useInteractivityProxy = (
         props.setEdges(filterEdges(edgesClone, filters));
       }
     },
-    [props.setEdges, filters, props.gqlDiagram.nodes.length, props.gqlDiagram.edges.length]
+    [props.setEdges, filters, props.gqlDiagram.nodes, props.gqlDiagram.edges]
   );
 
   useCustomEventListener(
@@ -112,7 +112,7 @@ export const useInteractivityProxy = (
       });
       props.setEdges((edges) => filterEdges(diagram.edges || edges, filters));
     },
-    [filters, props.gqlDiagram.nodes.length, props.gqlDiagram.edges.length]
+    [filters, props.gqlDiagram.nodes, props.gqlDiagram.edges]
   );
 
   return [callbackSetNode, callbackSetEdge, internalNodes];
