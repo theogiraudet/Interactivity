@@ -41,14 +41,10 @@
         eType="ecore:EClass ../../../../../sirius-components-view/src/main/resources/model/view.ecore#//UserColor"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DynamicFilter" eSuperTypes="#//InteractiveFeature">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="filters" lowerBound="1"
-        upperBound="-1" eType="#//Filter" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Filter" eSuperTypes="#//Identifiable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
-        eType="#//FilterDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicFilter" eSuperTypes="#//InteractiveFeature #//Identifiable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" lowerBound="1"
+        eType="#//FilterDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="focus" lowerBound="1" eType="#//ElementReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="radius" eType="#//Radius"

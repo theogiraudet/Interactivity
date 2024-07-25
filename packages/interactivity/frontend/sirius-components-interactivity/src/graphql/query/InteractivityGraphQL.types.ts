@@ -167,12 +167,8 @@ export function isStyleModifier(value: any): value is GQLStyleModifier {
   return value['__typename'] !== undefined && value.__typename === 'StyleModifier';
 }
 
-export interface GQLDynamicFilter extends GQLInteractiveFeature {
-  filters: GQLFilter[];
-}
-
-export interface GQLFilter extends Nameable, Identifiable {
-  reference: GQLFilterDefinition;
+export interface GQLDynamicFilter extends GQLInteractiveFeature, Identifiable {
+  filter: GQLFilterDefinition;
   name: string;
   radius: GQLRadius;
   focus: ElementReference;

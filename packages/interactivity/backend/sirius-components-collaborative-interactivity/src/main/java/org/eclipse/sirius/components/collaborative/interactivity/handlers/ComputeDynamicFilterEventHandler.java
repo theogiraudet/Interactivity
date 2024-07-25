@@ -63,11 +63,11 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                     .flatMap(meta -> meta.interactivity().getFeatures()
                                     .stream()
                                     .filter(feature -> feature instanceof DynamicFilter)
-                                    .flatMap(dyn -> ((DynamicFilter) dyn).getFilters().stream())
+                                    .map(feature -> (DynamicFilter) feature)
                                     .filter(filter -> filter.getId().equals(input.filterId()))
                                     .findAny()
                     );
-            var filterDefinitionOpt = filterOpt.map(Filter::getReference);
+            var filterDefinitionOpt = filterOpt.map(DynamicFilter::getFilter);
             if(objectOpt.isPresent() && filterDefinitionOpt.isPresent()) {
                 EObject model = objectOpt.get();
                 Optional<ContextualSlice> sliceOpt = slice(model, input.focusedElementId());

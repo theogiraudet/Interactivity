@@ -441,7 +441,7 @@ export const Palette = ({
   };
 
   const invokeDynamicFilter = (tool: GQLSingleClickOnDiagramElementTool) => {
-    emitCustomEvent('dynamic-filter', tool);
+    emitCustomEvent('dynamic-filter-' + tool.selectionDescriptionId.split('|')[0], tool);
   };
 
   const invokeFadeDiagramElementTool = () => {

@@ -103,28 +103,26 @@ export const getInteractivityModelQuery = gql`
               }
             }
             ... on DynamicFilter {
-              filters {
+              id
+              name
+              filter {
+                ...filterFragment
+              }
+              defaultModifier {
                 id
-                name
-                reference {
-                  ...filterFragment
+                hide
+                style {
+                  ...styleFragment
                 }
-                defaultModifier {
-                  id
-                  hide
-                  style {
-                    ...styleFragment
-                  }
+              }
+              radius {
+                __typename
+                ... on FixedRadius {
+                  value
                 }
-                radius {
-                  __typename
-                  ... on FixedRadius {
-                    value
-                  }
-                  ... on BoundedRadius {
-                    min
-                    max
-                  }
+                ... on BoundedRadius {
+                  min
+                  max
                 }
               }
             }

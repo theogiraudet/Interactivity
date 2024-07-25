@@ -3,7 +3,7 @@ import { Edge, Node } from 'reactflow';
 import { Filter } from '../filters/Filter';
 import {
   GQLComputeDynamicFilterSuccessPayload,
-  GQLFilter,
+  GQLDynamicFilter,
   GQLFilterDefinition,
   GQLModifier,
 } from '../../graphql/query/InteractivityGraphQL.types';
@@ -12,13 +12,13 @@ import { applyModifier } from '../filters/ModifierHandler';
 export class DynFilter implements Filter {
   readonly id: string;
   private readonly filterDef: GQLFilterDefinition;
-  private readonly filter: GQLFilter;
+  private readonly filter: GQLDynamicFilter;
   private readonly show: GQLComputeDynamicFilterSuccessPayload;
 
   constructor(
     id: string,
     filterDef: GQLFilterDefinition,
-    filter: GQLFilter,
+    filter: GQLDynamicFilter,
     show: GQLComputeDynamicFilterSuccessPayload
   ) {
     this.id = id;

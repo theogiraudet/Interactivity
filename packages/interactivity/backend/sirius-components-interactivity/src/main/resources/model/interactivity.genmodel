@@ -44,14 +44,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//StyleModifier/colors"/>
     </genClasses>
     <genClasses ecoreClass="interactivity.ecore#//DynamicFilter">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//DynamicFilter/filters"/>
-    </genClasses>
-    <genClasses ecoreClass="interactivity.ecore#//Filter">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference interactivity.ecore#//Filter/reference"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interactivity.ecore#//Filter/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Filter/focus"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Filter/radius"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Filter/defaultModifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interactivity.ecore#//DynamicFilter/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference interactivity.ecore#//DynamicFilter/filter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//DynamicFilter/focus"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//DynamicFilter/radius"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//DynamicFilter/defaultModifier"/>
     </genClasses>
     <genClasses image="false" ecoreClass="interactivity.ecore#//Radius"/>
     <genClasses ecoreClass="interactivity.ecore#//FixedRadius">

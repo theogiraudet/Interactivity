@@ -174,11 +174,7 @@ type IconLabelNodeStyleDescription {
 
 
 type DynamicFilter {
-    filters: [Filter!]!
-}
-
-type Filter implements Identifiable {
-    reference: FilterDefinition
+    filter: FilterDefinition
     name: String!
     focus: String!
     id: String!

@@ -51,8 +51,7 @@ public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
             var metamodels = metamodelsOpt.get();
             var interactivity = metamodels.interactivity();
             for(var feature: interactivity.getFeatures()) {
-                if(feature instanceof DynamicFilter dynamicFilter) {
-                    for(var filter: dynamicFilter.getFilters()) {
+                if(feature instanceof DynamicFilter filter) {
                         AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(root.eClass().getEPackage()));
                         Result result = interpreter.evaluateExpression(Map.of("root", root), ((Path) filter.getFocus()).getPath());
                         result.asObjects().flatMap(list -> list.stream().filter(targetElement::equals).findFirst())
@@ -66,7 +65,6 @@ public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
                                 ));
                     }
                 }
-            }
             if(!toolList.isEmpty()) {
                 var filterSection = ToolSection.newToolSection(UUID.randomUUID().toString())
                         .label("Filters")

@@ -38,9 +38,8 @@ export const DynamicFilter = (props: InteractiveFeatureProps<GQLDynamicFilter>) 
   useEffect(() => {}, [props.interactivity.filters, props.diagram.nodes.length]);
 
   useCustomEventListener(
-    'dynamic-filter',
+    'dynamic-filter-' + props.value.id,
     (data: GQLSingleClickOnDiagramElementTool) => {
-      const gqlFilter = props.value.filters.find((value) => value.id === data.selectionDescriptionId.split('|')[0]);
       let filter = activeFilter.get(data.selectionDescriptionId);
       if (filter) {
         setActiveFilter((prevState) => {
@@ -60,7 +59,7 @@ export const DynamicFilter = (props: InteractiveFeatureProps<GQLDynamicFilter>) 
           const dat = result.data as any;
           if (dat.dynamicFilter.__typename === 'ComputeDynamicFilterSuccessPayload') {
             const payload = dat.dynamicFilter as GQLComputeDynamicFilterSuccessPayload;
-            filter = new DynFilter(data.selectionDescriptionId, gqlFilter!.reference, gqlFilter!, payload);
+            filter = new DynFilter(data.selectionDescriptionId, props.value.filter, props.value!, payload);
             setActiveFilter((prevState) => {
               prevState.set(data.selectionDescriptionId, filter!);
               return prevState;
