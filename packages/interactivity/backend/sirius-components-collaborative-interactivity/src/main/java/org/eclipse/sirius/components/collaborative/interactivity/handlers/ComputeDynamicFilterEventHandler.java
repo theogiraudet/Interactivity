@@ -58,16 +58,16 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
 
         if(interactivityInput instanceof ComputeDynamicFilterInput input) {
             var objectOpt = metamodelsService.getModel(editingContext, input.representationId());
-            var filterDefinitionOpt = metamodelsService.getDomainName(editingContext, input.representationId())
+            var filterOpt = metamodelsService.getDomainName(editingContext, input.representationId())
                     .flatMap(metamodelsService::getMetamodels)
                     .flatMap(meta -> meta.interactivity().getFeatures()
-                            .stream()
-                            .filter(feature -> feature instanceof DynamicFilter)
-                            .flatMap(dyn -> ((DynamicFilter) dyn).getFilters().stream())
-                            .filter(filter -> filter.getId().equals(input.filterId()))
-                            .map(Filter::getReference)
-                            .findAny()
+                                    .stream()
+                                    .filter(feature -> feature instanceof DynamicFilter)
+                                    .flatMap(dyn -> ((DynamicFilter) dyn).getFilters().stream())
+                                    .filter(filter -> filter.getId().equals(input.filterId()))
+                                    .findAny()
                     );
+            var filterDefinitionOpt = filterOpt.map(Filter::getReference);
             if(objectOpt.isPresent() && filterDefinitionOpt.isPresent()) {
                 EObject model = objectOpt.get();
                 Optional<ContextualSlice> sliceOpt = slice(model, input.focusedElementId());
@@ -77,8 +77,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                             .flatMap(metamodelsService::getMetamodels).get().view().getDescriptions().get(0);
                     ContextualSlice slice = sliceOpt.get();
                     Context context = new Context(new HashSet<>(), new LinkedList<>(), model);
-//                    context.semanticElementIds().add(identityService.getId(slice.focus));
-                    computeAffectedElements(slice.focus, slice.slice, filterDefinitionOpt.get(), context, diagram.get(), (DiagramDescription) diagramDescription);
+                    computeAffectedElements(slice.focus, slice.slice, filterDefinitionOpt.get(), context, 0, filterOpt.get().getRadius(), diagram.get(), (DiagramDescription) diagramDescription);
                     payload = new ComputeDynamicFilterSuccessPayload(input.id(), List.copyOf(context.semanticElementIds()), context.edgesToShow());
                 }
             }
@@ -91,7 +90,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
     public record Relations(Object sourceObject, List<Object> targetObjects, String relationName, String modifierId) {}
     public record Pair<T1, T2>(T1 t1, T2 t2) {}
 
-    public void computeAffectedElements(EObject source, EObject root, FilterDefinition filter, Context context, Diagram diagram, DiagramDescription representationDescription) {
+    public void computeAffectedElements(EObject source, EObject root, FilterDefinition filter, Context context, int currentRadius, Radius radius, Diagram diagram, DiagramDescription representationDescription) {
         Map<String, Object> references = new HashMap<>();
         // Store Object with Modifier ID
         Map<Integer, Pair<Object, String>> semanticElementsToShow = new HashMap<>();
@@ -151,6 +150,15 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                 ).filter(p -> !EcoreUtil.equals((EObject) p.t1(), source))
                 .toList(); // Avoid propagation on browsed elements
         computeIds(semanticElementsToShow.values(), referencesToShow, root, context, diagram, representationDescription);
+
+        if(radius != null) {
+            if(radius instanceof FixedRadius fixedRadius && fixedRadius.getValue() <= currentRadius) {
+                return;
+                //TODO implement bounded radius
+            } else if(radius instanceof BoundedRadius boundedRadius && boundedRadius.getMax() <= currentRadius) {
+                return;
+            }
+        }
         for(var obj: propagateTo) {
             if(obj.t1 instanceof EObject eobj) {
                 var idOpt = this.getOriginalEObjectId(eobj, root, context.model());
@@ -158,7 +166,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                     var slicedOpt = slice(context.model(), idOpt.get());
                     if (slicedOpt.isPresent()) {
                         var sliced = slicedOpt.get();
-                        computeAffectedElements(sliced.focus, sliced.slice, filter, context, diagram, representationDescription);
+                        computeAffectedElements(sliced.focus, sliced.slice, filter, context, currentRadius + 1, radius, diagram, representationDescription);
                     }
                 }
             }
