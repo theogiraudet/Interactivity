@@ -2,6 +2,7 @@ extend type Query {
     interactivity(input: InteractivityModelInput!): InteractivityModelPayload!
     affectedElements(input: ComputeAffectedNodesInput!): ComputeAffectedElementsPayload!
     dynamicFilter(input: ComputeDynamicFilterInput!): ComputeDynamicFilterPayload!
+    semanticSearch(input: SemanticSearchInput!): SemanticSearchPayload!
 }
 
 input InteractivityModelInput {
@@ -25,27 +26,33 @@ input ComputeDynamicFilterInput {
     focusedElementId: String!
 }
 
+input SemanticSearchInput {
+    id: ID!
+    editingContextId: ID!
+    representationId: ID!
+    input: String!
+}
+
 union SemanticZoomPayload = SuccessPayload | ErrorPayload
 union InteractivityModelPayload = InteractivityModelSuccessPayload | SuccessPayload | ErrorPayload
 union ComputeAffectedElementsPayload = ComputeAffectedElementsSuccessPayload | SuccessPayload | ErrorPayload
 union ComputeDynamicFilterPayload = ComputeDynamicFilterSuccessPayload | ErrorPayload
+union SemanticSearchPayload = SemanticSearchSuccessPayload | ErrorPayload
 
 type InteractivityModelSuccessPayload {
     id: ID!
     interactivity: Interactivity!
 }
 
+type SemanticSearchSuccessPayload {
+    id: ID!
+    semanticElementIds: [String!]!
+}
+
 type ComputeDynamicFilterSuccessPayload {
     id: ID!
     elementIds: [SemanticElementModifier!]!
     edges: [String!]!
-}
-
-type RelationEdgeMapping {
-    sourceObjectId: String!
-    targetObjectIds: [String!]!
-    edgeDescription: String!
-    modifierId: String!
 }
 
 type SemanticElementModifier {

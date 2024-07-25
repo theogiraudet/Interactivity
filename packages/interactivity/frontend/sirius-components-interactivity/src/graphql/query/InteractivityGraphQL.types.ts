@@ -5,6 +5,7 @@ export interface InteractivityModelQuery {
   interactivity: (input: GQLInteractivityModelInput) => GQLInteractivityModelPayload;
   affectedElements: (input: GQLComputeAffectedNodesInput) => GQLComputeAffectedElementsPayload;
   dynamicFilter: (input: GQLComputeDynamicFilterInput) => GQLComputeDynamicFilterPayload;
+  semanticSearch: (input: GQLSemanticSearchInput) => GQLSemanticSearchPayload;
 }
 
 export interface InteractivityPayload {
@@ -15,6 +16,13 @@ export interface GQLInteractivityModelInput {
   id: string;
   editingContextId: string;
   representationId: string;
+}
+
+export interface GQLSemanticSearchInput {
+  id: string;
+  editingContextId: string;
+  representationId: string;
+  input: string;
 }
 
 export interface GQLComputeAffectedNodesInput {
@@ -78,12 +86,15 @@ export interface GQLSemanticElementModifier {
   modifierId: string;
 }
 
-// export interface GQLRelationEdgeMapping {
-//   sourceObjectId: string;
-//   targetObjectIds: string[];
-//   edgeDescription: string;
-// }
 export type GQLComputeDynamicFilterPayload = GQLComputeDynamicFilterSuccessPayload | GQLErrorPayload;
+
+export interface GQLSemanticSearchSuccessPayload {
+  __typename: string;
+  id: string;
+  semanticElementIds: string[];
+}
+
+export type GQLSemanticSearchPayload = GQLSemanticSearchSuccessPayload | GQLErrorPayload;
 
 export interface Nameable {
   __typename: string;

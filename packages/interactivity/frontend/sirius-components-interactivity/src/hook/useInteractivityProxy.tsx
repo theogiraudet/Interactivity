@@ -12,7 +12,7 @@ import { Dispatch, SetStateAction, useCallback, useContext, useEffect, useState 
 import { useCustomEventListener } from 'react-custom-events';
 import { useDiagramDescription } from '@eclipse-sirius/sirius-components-diagrams';
 import { GQLDiagram } from '@eclipse-sirius/sirius-components-diagrams';
-import { setModifierParms } from '../components/filters/ModifierHandler';
+import { setModifierParams } from '../components/filters/ModifierHandler';
 
 export type UseFilterProps = {
   editingContextId: string;
@@ -46,7 +46,7 @@ export const useInteractivityProxy = (
   const [internalNodes, setInternalNodes] = useState<Node<NodeData>[]>([]);
 
   useEffect(() => {
-    setModifierParms(nodeConverters, diagramDescription, props.gqlDiagram);
+    setModifierParams(nodeConverters, diagramDescription, props.gqlDiagram);
   }, [diagramDescription, nodeConverters, props.gqlDiagram]);
 
   const callbackSetNode = useCallback(
@@ -65,7 +65,7 @@ export const useInteractivityProxy = (
         setInternalNodes(nodes);
       }
     },
-    [props.setNodes, filters]
+    [props.setNodes, filters, props.gqlDiagram.nodes.length, props.gqlDiagram.edges.length]
   );
 
   const callbackSetEdge = useCallback(
@@ -80,7 +80,7 @@ export const useInteractivityProxy = (
         props.setEdges(filterEdges(edgesClone, filters));
       }
     },
-    [props.setEdges, filters]
+    [props.setEdges, filters, props.gqlDiagram.nodes.length, props.gqlDiagram.edges.length]
   );
 
   useCustomEventListener(
@@ -112,7 +112,7 @@ export const useInteractivityProxy = (
       });
       props.setEdges((edges) => filterEdges(diagram.edges || edges, filters));
     },
-    [filters]
+    [filters, props.gqlDiagram.nodes.length, props.gqlDiagram.edges.length]
   );
 
   return [callbackSetNode, callbackSetEdge, internalNodes];

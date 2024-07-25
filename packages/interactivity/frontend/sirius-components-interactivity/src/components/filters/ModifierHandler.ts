@@ -32,7 +32,7 @@ export let nodeConverterContributions: INodeConverter[];
 export let diagramDescription: GQLDiagramDescription;
 export let gqldiagram: GQLDiagram;
 
-export function setModifierParms(
+export function setModifierParams(
   inodeConverterContributions: INodeConverter[],
   idiagramDescription: GQLDiagramDescription,
   igqldiagram: GQLDiagram

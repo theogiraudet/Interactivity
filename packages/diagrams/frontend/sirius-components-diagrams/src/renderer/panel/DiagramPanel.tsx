@@ -44,6 +44,7 @@ import { usePinDiagramElements } from '../pin/usePinDiagramElements';
 import { DiagramPanelActionProps, DiagramPanelProps, DiagramPanelState } from './DiagramPanel.types';
 import { diagramPanelActionExtensionPoint } from './DiagramPanelExtensionPoints';
 import { useExportToImage } from './useExportToImage';
+import { SemanticSearchIcon } from '@eclipse-sirius/sirius-components-interactivity';
 
 export const DiagramPanel = memo(
   ({ snapToGrid, onSnapToGrid, helperLines, onHelperLines, reactFlowWrapper }: DiagramPanelProps) => {
@@ -230,6 +231,7 @@ export const DiagramPanel = memo(
                 <UnpinIcon />
               </IconButton>
             </Tooltip>
+            <SemanticSearchIcon diagramId={diagramId} editingContextId={editingContextId} />
             {diagramPanelActionComponents.map(({ Component: DiagramPanelActionComponent }, index) => (
               <DiagramPanelActionComponent editingContextId={editingContextId} diagramId={diagramId} key={index} />
             ))}

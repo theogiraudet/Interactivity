@@ -62,7 +62,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interactivity.ecore#//BoundedRadius/max"/>
     </genClasses>
     <genClasses ecoreClass="interactivity.ecore#//SemanticSearch">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference interactivity.ecore#//SemanticSearch/search"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//SemanticSearch/search"/>
     </genClasses>
     <genClasses image="false" ecoreClass="interactivity.ecore#//Identifiable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interactivity.ecore#//Identifiable/id"/>
