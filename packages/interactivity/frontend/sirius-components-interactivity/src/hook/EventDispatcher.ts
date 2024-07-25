@@ -1,16 +1,16 @@
 export interface EventObserver<T extends (...args: any) => any> {
   update(...args: Parameters<T>): ReturnType<T>[];
-  listen(fun: (...args: Parameters<T>) => ReturnType<T>): void;
+  listen(id: string, fun: (...args: Parameters<T>) => ReturnType<T>): void;
 }
 
 export class EventManager<T extends (...args: any) => any> implements EventObserver<T> {
-  readonly listeners: ((...args: Parameters<T>) => ReturnType<T>)[] = [];
+  readonly listeners: Map<string, (...args: Parameters<T>) => ReturnType<T>> = new Map();
 
-  listen(fun: (...args: Parameters<T>) => ReturnType<T>) {
-    this.listeners.push(fun);
+  listen(id: string, fun: (...args: Parameters<T>) => ReturnType<T>) {
+    this.listeners.set(id, fun);
   }
 
   update(...args: Parameters<T>): ReturnType<T>[] {
-    return this.listeners.map((listener) => listener(...args));
+    return [...this.listeners.values()].map((listener) => listener(...args));
   }
 }

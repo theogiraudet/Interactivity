@@ -68,8 +68,6 @@ function applyVisibilityModifier(modifier: GQLVisibilityModifier, nodes: Node<No
 function applyStyleModifier(modifier: GQLStyleModifier, nodes: Node<NodeData>[]) {
   if (nodeConverterContributions && diagramDescription && gqldiagram) {
     for (const [_, node] of nodes.entries()) {
-      console.log('Node:');
-      console.log(node);
       const gqlnode = gqlnodes.find((n) => n.id === node.id)!;
       const diagram: GQLDiagram = {
         ...gqldiagram,
