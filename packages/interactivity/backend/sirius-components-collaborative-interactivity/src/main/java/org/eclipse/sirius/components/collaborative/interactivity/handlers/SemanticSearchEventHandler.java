@@ -54,7 +54,7 @@ public class SemanticSearchEventHandler implements IInteractivityEventHandler {
         if(interactivityInput instanceof SemanticSearchInput input) {
             var objectOpt = metamodelsService.getModel(editingContext, input.representationId());
             var semanticSearchOpt = metamodelsService.getDomainName(editingContext, input.representationId())
-                    .flatMap(metamodelsService::getMetamodels)
+                    .flatMap(domain -> metamodelsService.getMetamodels(domain, editingContext, input.representationId()))
                     .flatMap(meta -> meta.interactivity().getFeatures()
                             .stream()
                             .filter(feature -> feature instanceof SemanticSearch)

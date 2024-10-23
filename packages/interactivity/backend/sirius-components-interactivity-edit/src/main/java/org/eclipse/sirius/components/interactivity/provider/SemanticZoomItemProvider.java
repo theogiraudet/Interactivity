@@ -107,7 +107,7 @@ public class SemanticZoomItemProvider extends ItemProviderAdapter implements IEd
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SemanticZoom"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SemanticZoom.svg"));
 	}
 
 	/**

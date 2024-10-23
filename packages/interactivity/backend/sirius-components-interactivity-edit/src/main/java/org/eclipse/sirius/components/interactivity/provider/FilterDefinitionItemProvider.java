@@ -126,7 +126,7 @@ public class FilterDefinitionItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/FilterDefinition"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FilterDefinition.svg"));
 	}
 
 	/**

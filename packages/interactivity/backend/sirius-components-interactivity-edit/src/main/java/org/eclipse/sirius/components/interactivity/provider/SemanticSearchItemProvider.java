@@ -142,7 +142,7 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SemanticSearch"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SemanticSearch.svg"));
 	}
 
 	/**

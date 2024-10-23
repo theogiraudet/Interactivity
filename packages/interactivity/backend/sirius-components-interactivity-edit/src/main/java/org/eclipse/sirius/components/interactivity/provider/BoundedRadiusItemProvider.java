@@ -110,7 +110,7 @@ public class BoundedRadiusItemProvider extends ItemProviderAdapter implements IE
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BoundedRadius"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/BoundedRadius.svg"));
 	}
 
 	/**

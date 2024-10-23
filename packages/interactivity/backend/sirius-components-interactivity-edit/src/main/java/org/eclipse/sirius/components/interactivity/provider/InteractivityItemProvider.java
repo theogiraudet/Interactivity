@@ -143,7 +143,7 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Interactivity"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Interactivity.svg"));
 	}
 
 	/**

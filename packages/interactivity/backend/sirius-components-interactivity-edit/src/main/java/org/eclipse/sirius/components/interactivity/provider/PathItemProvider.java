@@ -92,7 +92,7 @@ public class PathItemProvider extends ItemProviderAdapter implements IEditingDom
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Path"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Path.svg"));
 	}
 
 	/**

@@ -132,7 +132,7 @@ public class StyleModifierItemProvider extends ItemProviderAdapter implements IE
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/StyleModifier"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StyleModifier.svg"));
 	}
 
 	/**

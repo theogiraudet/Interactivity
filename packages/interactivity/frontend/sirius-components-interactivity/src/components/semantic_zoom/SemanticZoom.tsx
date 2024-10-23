@@ -37,6 +37,7 @@ export const SemanticZoom = (props: InteractiveFeatureProps<GQLSemanticZoom>) =>
   const [query] = useLazyQuery(computeAffectedElementsQuery);
 
   useEffect(() => {
+    console.log('Send query');
     query(
       queryParams(
         props.editingContextId,

@@ -1,8 +1,12 @@
 package org.eclipse.sirius.components.collaborative.interactivity.handlers;
 
+import com.google.common.collect.Iterators;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.components.collaborative.api.ChangeDescription;
 import org.eclipse.sirius.components.collaborative.api.ChangeKind;
+import org.eclipse.sirius.components.collaborative.api.Monitoring;
 import org.eclipse.sirius.components.collaborative.interactivity.api.IInteractivityEventHandler;
 import org.eclipse.sirius.components.collaborative.interactivity.api.IInteractivityInput;
 import org.eclipse.sirius.components.collaborative.interactivity.dto.ComputeAffectedElementsInput;
@@ -14,16 +18,16 @@ import org.eclipse.sirius.components.core.api.IEditingContext;
 import org.eclipse.sirius.components.core.api.IIdentityService;
 import org.eclipse.sirius.components.core.api.IPayload;
 import org.eclipse.sirius.components.interactivity.Identifiable;
-import org.eclipse.sirius.components.interactivity.Modifier;
 import org.eclipse.sirius.components.interactivity.Path;
 import org.eclipse.sirius.components.interactivity.ScopedModifier;
 import org.eclipse.sirius.components.interpreter.AQLInterpreter;
 import org.eclipse.sirius.components.interpreter.Result;
 import org.eclipse.sirius.components.representations.Message;
 import org.eclipse.sirius.components.representations.MessageLevel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Sinks;
-
 import java.util.*;
 
 @Service
@@ -31,10 +35,15 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
 
     private final MetamodelsService metamodelsService;
     private final IIdentityService identityService;
+    private final Counter counter;
+    private final Logger logger = LoggerFactory.getLogger(ComputeAffectedElementsEventHandler.class);
 
-    public ComputeAffectedElementsEventHandler(MetamodelsService metamodelsService, IIdentityService identityService) {
+    public ComputeAffectedElementsEventHandler(MetamodelsService metamodelsService, IIdentityService identityService, MeterRegistry meterRegistry) {
         this.metamodelsService = metamodelsService;
         this.identityService = identityService;
+        this.counter = Counter.builder(Monitoring.EVENT_HANDLER)
+                .tag(Monitoring.NAME, this.getClass().getSimpleName())
+                .register(meterRegistry);
     }
 
     @Override
@@ -44,12 +53,15 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
 
     @Override
     public void handle(Sinks.One<IPayload> payloadSink, Sinks.Many<ChangeDescription> changeDescriptionSink, IEditingContext editingContext, IInteractivityInput interactivityInput) {
+        this.counter.increment();
+        logger.info("------ Beginning of interactivity.semantic_zoom");
+        long startTime = System.nanoTime();
         ChangeDescription changeDescription = new ChangeDescription(ChangeKind.NOTHING, interactivityInput.representationId(), interactivityInput);
         List<Message> errors = new LinkedList<>();
         IPayload payload = new ErrorPayload(interactivityInput.id(), errors);
         if(interactivityInput instanceof ComputeAffectedElementsInput input) {
             Optional<Metamodels> metamodelsOpt = metamodelsService.getDomainName(editingContext, interactivityInput.representationId())
-                    .flatMap(metamodelsService::getMetamodels);
+                    .flatMap(domain -> metamodelsService.getMetamodels(domain, editingContext, input.representationId()));
 
             if(metamodelsOpt.isPresent()) {
                 Metamodels metamodels = metamodelsOpt.get();
@@ -80,11 +92,17 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
                     }
                 }
                 var value = map.entrySet().stream().map(entry -> new ComputeAffectedElementsSuccessPayload.AffectedElementIdsPair(entry.getKey(), entry.getValue())).toArray(ComputeAffectedElementsSuccessPayload.AffectedElementIdsPair[]::new);
+                var returnSize = Arrays.stream(value).reduce(0, (acc, elem) -> acc + elem.affectedElementIds().length, Integer::sum);
+                logger.info("Number of elements returned by interactivity.semantic_zoom: {} elements", returnSize);
                 payload = new ComputeAffectedElementsSuccessPayload(interactivityInput.id(), value);
             }
         }
         payloadSink.tryEmitValue(payload);
         changeDescriptionSink.tryEmitNext(changeDescription);
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime;
+        logger.info("Execution time for interactivity.semantic_zoom: {} ms", duration / 1_000_000);
+        logger.info("------ End of interactivity.semantic_zoom");
     }
 
     private Optional<String[]> getObjectIds(IEditingContext editingContext, String representationId, String query) {
@@ -93,7 +111,8 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
             EObject obj = objectOpt.get();
             AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(obj.eClass().getEPackage()));
             Result result = interpreter.evaluateExpression(Map.of("root", obj), query);
-        return result.asObjects().map(list -> list.stream().map(identityService::getId).toArray(String[]::new));
+            logger.info("Size of the model: {} elements", Iterators.size(obj.eAllContents()));
+            return result.asObjects().map(list -> list.stream().map(identityService::getId).toArray(String[]::new));
         }
         return Optional.empty();
     }

@@ -140,7 +140,7 @@ public class LevelItemProvider extends ItemProviderAdapter implements IEditingDo
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Level"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Level.svg"));
 	}
 
 	/**

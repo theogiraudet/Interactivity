@@ -93,7 +93,7 @@ public class FixedRadiusItemProvider extends ItemProviderAdapter implements IEdi
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/FixedRadius"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FixedRadius.svg"));
 	}
 
 	/**

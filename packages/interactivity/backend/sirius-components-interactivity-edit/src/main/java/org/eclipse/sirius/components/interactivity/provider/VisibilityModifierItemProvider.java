@@ -143,7 +143,7 @@ public class VisibilityModifierItemProvider extends ItemProviderAdapter implemen
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/VisibilityModifier"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/VisibilityModifier.svg"));
 	}
 
 	/**

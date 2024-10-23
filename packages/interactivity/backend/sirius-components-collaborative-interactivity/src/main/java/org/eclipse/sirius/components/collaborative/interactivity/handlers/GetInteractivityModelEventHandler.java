@@ -35,7 +35,7 @@ public class GetInteractivityModelEventHandler implements IInteractivityEventHan
 
 
         Optional<Metamodels> metamodelsOpt = service.getDomainName(editingContext, interactivityInput.representationId())
-                .flatMap(service::getMetamodels);
+                .flatMap(domain -> service.getMetamodels(domain, editingContext, interactivityInput.representationId()));
 
         if(metamodelsOpt.isPresent()) {
             Metamodels metaModels = metamodelsOpt.get();

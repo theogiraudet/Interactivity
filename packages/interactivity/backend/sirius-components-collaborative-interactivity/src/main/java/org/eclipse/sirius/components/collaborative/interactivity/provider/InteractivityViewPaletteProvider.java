@@ -22,6 +22,7 @@ import org.eclipse.sirius.components.view.emf.api.IViewAQLInterpreterFactory;
 import org.eclipse.sirius.components.view.emf.diagram.IDiagramIdProvider;
 import org.eclipse.sirius.components.view.emf.diagram.ViewPaletteProvider;
 import org.eclipse.sirius.components.view.emf.diagram.api.IViewDiagramDescriptionSearchService;
+import org.eclipse.sirius.web.application.studio.services.ViewRepresentationDescriptionSearchService;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
@@ -44,12 +45,12 @@ public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
     @Override
     public Palette handle(Object targetElement, Object diagramElement, Object diagramElementDescription, DiagramDescription diagramDescription, IEditingContext editingContext) {
         Palette palette = super.handle(targetElement, diagramElement, diagramElementDescription, diagramDescription, editingContext);
-        var metamodelsOpt = metamodelsService.getDomainNameByRepresentationDescription(editingContext, diagramDescription).flatMap(metamodelsService::getMetamodels);
+        var interactivityOpt = metamodelsService.getDomainNameByRepresentationDescription(editingContext, diagramDescription)
+                .flatMap(metamodelsService::getInteractivityMetamodel);
         var root = ((EObject) targetElement).eResource().getContents().get(0);
-        if(metamodelsOpt.isPresent()) {
+        if(interactivityOpt.isPresent()) {
             var toolList = new LinkedList<ITool>();
-            var metamodels = metamodelsOpt.get();
-            var interactivity = metamodels.interactivity();
+            var interactivity = interactivityOpt.get();
             for(var feature: interactivity.getFeatures()) {
                 if(feature instanceof DynamicFilter filter) {
                         AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(root.eClass().getEPackage()));

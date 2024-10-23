@@ -20,6 +20,10 @@ import org.eclipse.sirius.components.view.diagram.provider.DiagramEditPlugin;
 
 import org.eclipse.sirius.components.view.provider.ViewEditPlugin;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
 /**
  * This is the central singleton for the Interactivity edit plugin.
  * <!-- begin-user-doc -->
@@ -74,6 +78,43 @@ public final class InteractivityEditPlugin extends EMFPlugin {
 	 */
 	public static Implementation getPlugin() {
 		return plugin;
+	}
+
+	@Override
+	protected Object doGetImage(String key) throws IOException {
+		URL url = new URL(this.getBaseURL() + "icons/" + key + extensionFor(key));
+		InputStream inputStream = url.openStream();
+		inputStream.close();
+		return url;
+	}
+
+	/**
+	 * Computes the file extension to be used with the key to specify an image resource.
+	 *
+	 * @param key
+	 *            the key for the imagine.
+	 * @return the file extension to be used with the key to specify an image resource.
+	 */
+	protected static String extensionFor(String key) {
+		String result = ".gif";
+		int index = key.lastIndexOf('.');
+		if (index != -1) {
+			String extension = key.substring(index + 1);
+			// @formatter:off
+			if ("png".equalsIgnoreCase(extension) ||
+					"gif".equalsIgnoreCase(extension) ||
+					"bmp".equalsIgnoreCase(extension) ||
+					"ico".equalsIgnoreCase(extension) ||
+					"jpg".equalsIgnoreCase(extension) ||
+					"jpeg".equalsIgnoreCase(extension) ||
+					"tif".equalsIgnoreCase(extension) ||
+					"tiff".equalsIgnoreCase(extension) ||
+					"svg".equalsIgnoreCase(extension)) {
+				result = "";
+			}
+			// @formatter:on
+		}
+		return result;
 	}
 
 	/**
