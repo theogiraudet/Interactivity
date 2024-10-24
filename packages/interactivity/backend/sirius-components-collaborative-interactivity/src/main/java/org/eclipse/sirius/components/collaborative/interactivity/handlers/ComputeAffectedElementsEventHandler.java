@@ -54,7 +54,7 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
     @Override
     public void handle(Sinks.One<IPayload> payloadSink, Sinks.Many<ChangeDescription> changeDescriptionSink, IEditingContext editingContext, IInteractivityInput interactivityInput) {
         this.counter.increment();
-        logger.info("------ Beginning of interactivity.semantic_zoom");
+        logger.info("[Monitoring] Beginning of interactivity.semantic_zoom");
         long startTime = System.nanoTime();
         ChangeDescription changeDescription = new ChangeDescription(ChangeKind.NOTHING, interactivityInput.representationId(), interactivityInput);
         List<Message> errors = new LinkedList<>();
@@ -92,8 +92,8 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
                     }
                 }
                 var value = map.entrySet().stream().map(entry -> new ComputeAffectedElementsSuccessPayload.AffectedElementIdsPair(entry.getKey(), entry.getValue())).toArray(ComputeAffectedElementsSuccessPayload.AffectedElementIdsPair[]::new);
-                var returnSize = Arrays.stream(value).reduce(0, (acc, elem) -> acc + elem.affectedElementIds().length, Integer::sum);
-                logger.info("Number of elements returned by interactivity.semantic_zoom: {} elements", returnSize);
+//                var returnSize = Arrays.stream(value).reduce(0, (acc, elem) -> acc + elem.affectedElementIds().length, Integer::sum);
+//                logger.info("[Monitoring] Number of elements returned by interactivity.semantic_zoom: {} elements", returnSize);
                 payload = new ComputeAffectedElementsSuccessPayload(interactivityInput.id(), value);
             }
         }
@@ -101,8 +101,8 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
         changeDescriptionSink.tryEmitNext(changeDescription);
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
-        logger.info("Execution time for interactivity.semantic_zoom: {} ms", duration / 1_000_000);
-        logger.info("------ End of interactivity.semantic_zoom");
+        logger.info("[Monitoring] Execution time for interactivity.semantic_zoom: {} ms", duration / 1_000_000);
+        logger.info("[Monitoring] End of interactivity.semantic_zoom");
     }
 
     private Optional<String[]> getObjectIds(IEditingContext editingContext, String representationId, String query) {
@@ -111,7 +111,7 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
             EObject obj = objectOpt.get();
             AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(obj.eClass().getEPackage()));
             Result result = interpreter.evaluateExpression(Map.of("root", obj), query);
-            logger.info("Size of the model: {} elements", Iterators.size(obj.eAllContents()));
+//            logger.info("Size of the model: {} elements", Iterators.size(obj.eAllContents()));
             return result.asObjects().map(list -> list.stream().map(identityService::getId).toArray(String[]::new));
         }
         return Optional.empty();

@@ -48,6 +48,7 @@ export const DynamicFilter = (props: InteractiveFeatureProps<GQLDynamicFilter>) 
         });
         emitCustomEvent('set-filter', filter);
       } else {
+        const start = performance.now();
         query(
           queryParams(
             props.editingContextId,
@@ -57,6 +58,9 @@ export const DynamicFilter = (props: InteractiveFeatureProps<GQLDynamicFilter>) 
           )
         ).then((result) => {
           const dat = result.data as any;
+          const end = performance.now();
+          const responseTime = end - start;
+          console.log(`[Monitoring] Dynamic filter response time: ${responseTime} ms`);
           if (dat.dynamicFilter.__typename === 'ComputeDynamicFilterSuccessPayload') {
             const payload = dat.dynamicFilter as GQLComputeDynamicFilterSuccessPayload;
             filter = new DynFilter(data.selectionDescriptionId, props.value.filter, props.value!, payload);

@@ -23,10 +23,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Sinks;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SemanticSearchEventHandler implements IInteractivityEventHandler {
@@ -47,6 +45,7 @@ public class SemanticSearchEventHandler implements IInteractivityEventHandler {
 
     @Override
     public void handle(Sinks.One<IPayload> payloadSink, Sinks.Many<ChangeDescription> changeDescriptionSink, IEditingContext editingContext, IInteractivityInput interactivityInput) {
+        long startTime = System.nanoTime();
         ChangeDescription changeDescription = new ChangeDescription(ChangeKind.NOTHING, interactivityInput.representationId(), interactivityInput);
         List<Message> errors = new LinkedList<>();
         IPayload payload = new ErrorPayload(interactivityInput.id(), errors);
@@ -79,6 +78,7 @@ public class SemanticSearchEventHandler implements IInteractivityEventHandler {
                             }
                         }
                         if(!found.isEmpty()) {
+                            logger.info("[Monitoring] Number of elements returned by interactivity.semantic_search: {} elements", found.size());
                             payload = new SemanticSearchSuccessPayload(input.id(), List.copyOf(found));
                         }
                     } else {
@@ -92,13 +92,14 @@ public class SemanticSearchEventHandler implements IInteractivityEventHandler {
 
                             var resultOpt = result.asObjects().map(list -> list.stream()
                                             .map(obj -> (EObject) obj)
-                                            .filter(obj -> input.input().equals(obj.eGet(obj.eClass().getEStructuralFeature(attribute)).toString()))
+                                            .filter(obj -> input.input().equals(Optional.ofNullable(obj.eGet(obj.eClass().getEStructuralFeature(attribute))).map(Object::toString).orElse(null)))
                                             .map(identityService::getId)
-                                            .toList())
+                                            .collect(Collectors.toSet()))
                                     .filter(list -> !list.isEmpty());
 
                             if (resultOpt.isPresent()) {
-                                payload = new SemanticSearchSuccessPayload(input.id(), resultOpt.get());
+                                logger.info("[Monitoring] Number of elements returned by interactivity.semantic_search: {} elements", resultOpt.get().size());
+                                payload = new SemanticSearchSuccessPayload(input.id(), List.copyOf(resultOpt.get()));
                                 break;
                             }
                         } else {
@@ -112,6 +113,10 @@ public class SemanticSearchEventHandler implements IInteractivityEventHandler {
         errors.add(new Message("No result found.", MessageLevel.INFO));
         payloadSink.tryEmitValue(payload);
         changeDescriptionSink.tryEmitNext(changeDescription);
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime;
+        logger.info("[Monitoring] Execution time for interactivity.semantic_search: {} ms", duration / 1_000_000);
+        logger.info("[Monitoring] End of interactivity.semantic_search");
     }
 
     private boolean referencesString(String query, EObject root) {

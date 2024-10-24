@@ -122,7 +122,7 @@ public class MetamodelsService {
     }
 
     public Optional<String> getDomainNameByRepresentationDescription(IEditingContext editingContext, IRepresentationDescription description) {
-        return this.representationDescriptionSearchService.findById(editingContext, description.getId()).map(desc -> desc.getDomainType().split("::")[0]);
+        return this.representationDescriptionSearchService.findById(editingContext, description.getId()).map(desc -> desc.getDomainType().split("::?")[0]);
     }
 
     /**

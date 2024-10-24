@@ -38,6 +38,7 @@ export const SemanticZoom = (props: InteractiveFeatureProps<GQLSemanticZoom>) =>
 
   useEffect(() => {
     console.log('Send query');
+    const start = performance.now();
     query(
       queryParams(
         props.editingContextId,
@@ -50,6 +51,9 @@ export const SemanticZoom = (props: InteractiveFeatureProps<GQLSemanticZoom>) =>
           .map((mod) => mod.id)
       )
     ).then((data) => {
+      const end = performance.now();
+      const responseTime = end - start;
+      console.log(`[Monitoring] Semantic zoom response time: ${responseTime} ms`);
       setAffectedNodes(parseQuery(data)!);
     });
   }, [props.interactivity.filters, props.diagram.nodes.length]);

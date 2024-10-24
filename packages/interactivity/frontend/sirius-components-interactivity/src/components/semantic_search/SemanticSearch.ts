@@ -44,9 +44,12 @@ export const SemanticSearch = (props: InteractiveFeatureProps<GQLSemanticSearch>
           shouldApply: false,
         });
         setActiveFilter(undefined);
-        console.log('Clean!');
       } else {
+        const start = performance.now();
         query(queryParams(props.editingContextId, props.representationId, input)).then((result) => {
+          const end = performance.now();
+          const responseTime = end - start;
+          console.log(`[Monitoring] Semantic search response time: ${responseTime} ms`);
           const dat = result.data as any;
           if (dat.semanticSearch.__typename === 'SemanticSearchSuccessPayload') {
             const payload = dat.semanticSearch as GQLSemanticSearchSuccessPayload;

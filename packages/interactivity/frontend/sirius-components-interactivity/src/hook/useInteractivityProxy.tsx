@@ -90,6 +90,7 @@ export const useInteractivityProxy = (
         if (!Array.isArray(receivedFilters)) {
           receivedFilters = [receivedFilters];
         }
+        const start = performance.now();
         for (let filter of receivedFilters) {
           if (isFilter(filter)) {
             filter = { filter: filter };
@@ -102,6 +103,9 @@ export const useInteractivityProxy = (
             prevState.set(filter.filter.id, filter.filter);
           }
         }
+        const end = performance.now();
+        const responseTime = end - start;
+        console.log(`[Monitoring] Time to apply filters: ${responseTime} ms`);
         return prevState;
       });
       const diagram = convertDiagram(props.gqlDiagram, nodeConverters, diagramDescription);
