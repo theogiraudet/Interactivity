@@ -92,8 +92,8 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
                     }
                 }
                 var value = map.entrySet().stream().map(entry -> new ComputeAffectedElementsSuccessPayload.AffectedElementIdsPair(entry.getKey(), entry.getValue())).toArray(ComputeAffectedElementsSuccessPayload.AffectedElementIdsPair[]::new);
-//                var returnSize = Arrays.stream(value).reduce(0, (acc, elem) -> acc + elem.affectedElementIds().length, Integer::sum);
-//                logger.info("[Monitoring] Number of elements returned by interactivity.semantic_zoom: {} elements", returnSize);
+                var returnSize = Arrays.stream(value).reduce(0, (acc, elem) -> acc + elem.affectedElementIds().length, Integer::sum);
+                logger.info("[Monitoring] Number of elements returned by interactivity.semantic_zoom: {} elements", returnSize);
                 payload = new ComputeAffectedElementsSuccessPayload(interactivityInput.id(), value);
             }
         }
@@ -111,7 +111,7 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
             EObject obj = objectOpt.get();
             AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(obj.eClass().getEPackage()));
             Result result = interpreter.evaluateExpression(Map.of("root", obj), query);
-//            logger.info("Size of the model: {} elements", Iterators.size(obj.eAllContents()));
+            logger.info("Size of the model: {} elements", Iterators.size(obj.eResource().getAllContents()));
             return result.asObjects().map(list -> list.stream().map(identityService::getId).toArray(String[]::new));
         }
         return Optional.empty();

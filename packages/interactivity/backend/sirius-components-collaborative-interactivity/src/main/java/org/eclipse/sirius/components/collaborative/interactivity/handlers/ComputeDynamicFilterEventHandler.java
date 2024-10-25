@@ -73,8 +73,8 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
             );
             var filterDefinitionOpt = filterOpt.map(DynamicFilter::getFilter);
             if (objectOpt.isPresent() && filterDefinitionOpt.isPresent()) {
-//                EObject model = EcoreUtil.getRootContainer(objectOpt.get());
-                EObject model = objectOpt.get();
+                EObject model = EcoreUtil.getRootContainer(objectOpt.get());
+//                EObject model = objectOpt.get();
                 var size = Iterators.size(model.eResource().getAllContents());
                 logger.info("[Monitoring] Number of elements in the current model: {} elements", size);
                 Optional<ContextualSlice> sliceOpt = slice(model, input.focusedElementId());
@@ -84,7 +84,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                     ContextualSlice slice = sliceOpt.get();
                     Context context = new Context(new HashSet<>(), new LinkedList<>(), model);
                     computeAffectedElements(slice.focus, slice.slice, filterDefinitionOpt.get(), context, 0, filterOpt.get().getRadius(), diagram.get(), (DiagramDescription) diagramDescription);
-                    logger.info("[Monitoring] Number of elements returned by interactivity.dynamic_filter: {} elements", context.semanticElementIds());
+                    logger.info("[Monitoring] Number of elements returned by interactivity.dynamic_filter: {} elements", context.semanticElementIds().size());
                     payload = new ComputeDynamicFilterSuccessPayload(input.id(), List.copyOf(context.semanticElementIds()), context.edgesToShow());
                 }
             }
@@ -282,6 +282,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
                 EObject parent = source.eContainer();
                 EStructuralFeature containingFeature = source.eContainingFeature();
                 Object container = parent.eGet(containingFeature);
+                cleanEObject(parent);
                 if (container instanceof Collection collection) {
                     collection.clear();
                     collection.add(source);
@@ -294,6 +295,18 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
     }
 
     record ContextualSlice(EObject focus, EObject slice) {
+    }
+
+    private void cleanEObject(EObject eobject) {
+        for (var reference : eobject.eClass().getEReferences()) {
+            if (!reference.isDerived()) {
+                if (eobject.eGet(reference) instanceof EList<? extends Object> l) {
+                    l.clear();
+                } else {
+                    eobject.eSet(reference, null);
+                }
+            }
+        }
     }
 
 //    private Optional<String> getOriginalEObjectId(EObject cloned, EObject clonedModel, EObject model) {
