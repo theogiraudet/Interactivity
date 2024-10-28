@@ -45,6 +45,28 @@ public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
     @Override
     public Palette handle(Object targetElement, Object diagramElement, Object diagramElementDescription, DiagramDescription diagramDescription, IEditingContext editingContext) {
         Palette palette = super.handle(targetElement, diagramElement, diagramElementDescription, diagramDescription, editingContext);
+        var snippetList = new LinkedList<ITool>();
+        snippetList.add(SingleClickOnDiagramElementTool
+                .newSingleClickOnDiagramElementTool("add-composite")
+                .label("Add composite")
+                .iconURL(List.of("/images/snippet.svg"))
+                .targetDescriptions(List.of())
+                .selectionDescriptionId("")
+                .build()
+        );
+        snippetList.add(SingleClickOnDiagramElementTool
+                .newSingleClickOnDiagramElementTool("add-abstract-class")
+                .label("Add abstract class")
+                .iconURL(List.of("/images/snippet.svg"))
+                .targetDescriptions(List.of())
+                .selectionDescriptionId("")
+                .build()
+        );
+        var snippetSection = ToolSection.newToolSection(UUID.randomUUID().toString())
+                .label("Snippets")
+                .iconURL(List.of("/images/snippet.svg"))
+                .tools(snippetList)
+                .build();
         var interactivityOpt = metamodelsService.getDomainNameByRepresentationDescription(editingContext, diagramDescription)
                 .flatMap(metamodelsService::getInteractivityMetamodel);
         var root = ((EObject) targetElement).eResource().getContents().get(0);
@@ -74,9 +96,12 @@ public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
                         .build();
                 var list = Lists.newLinkedList(palette.toolSections());
                 list.add(filterSection);
+                list.add(snippetSection);
                 return Palette.newPalette(palette.id()).tools(palette.tools()).toolSections(list).build();
             }
         }
-        return palette;
+        var list = Lists.newLinkedList(palette.toolSections());
+        list.add(snippetSection);
+        return Palette.newPalette(palette.id()).tools(palette.tools()).toolSections(list).build();
     }
 }

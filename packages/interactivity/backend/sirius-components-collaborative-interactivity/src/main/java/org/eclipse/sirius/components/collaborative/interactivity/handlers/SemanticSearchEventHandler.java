@@ -1,6 +1,7 @@
 package org.eclipse.sirius.components.collaborative.interactivity.handlers;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.sirius.components.collaborative.api.ChangeDescription;
 import org.eclipse.sirius.components.collaborative.api.ChangeKind;
 import org.eclipse.sirius.components.collaborative.interactivity.api.IInteractivityEventHandler;
@@ -51,7 +52,7 @@ public class SemanticSearchEventHandler implements IInteractivityEventHandler {
         IPayload payload = new ErrorPayload(interactivityInput.id(), errors);
 
         if(interactivityInput instanceof SemanticSearchInput input) {
-            var objectOpt = metamodelsService.getModel(editingContext, input.representationId());
+            var objectOpt = metamodelsService.getModel(editingContext, input.representationId()).map(EcoreUtil::getRootContainer);
             var semanticSearchOpt = metamodelsService.getDomainName(editingContext, input.representationId())
                     .flatMap(domain -> metamodelsService.getMetamodels(domain, editingContext, input.representationId()))
                     .flatMap(meta -> meta.interactivity().getFeatures()

@@ -90,7 +90,6 @@ export const useInteractivityProxy = (
         if (!Array.isArray(receivedFilters)) {
           receivedFilters = [receivedFilters];
         }
-        const start = performance.now();
         for (let filter of receivedFilters) {
           if (isFilter(filter)) {
             filter = { filter: filter };
@@ -103,9 +102,6 @@ export const useInteractivityProxy = (
             prevState.set(filter.filter.id, filter.filter);
           }
         }
-        const end = performance.now();
-        const responseTime = end - start;
-        console.log(`[Monitoring] Time to apply filters: ${responseTime} ms`);
         return prevState;
       });
       const diagram = convertDiagram(props.gqlDiagram, nodeConverters, diagramDescription);
@@ -123,11 +119,27 @@ export const useInteractivityProxy = (
 };
 
 function filterNodes(nodes: Node<NodeData>[], filters: Map<string, Filter>) {
+  const start = performance.now();
   const nodesClone = structuredClone(nodes);
-  return Array.from(filters.values()).reduce((computedNodes, filter) => filter.applyOnNodes(computedNodes), nodesClone);
+  const result = Array.from(filters.values()).reduce(
+    (computedNodes, filter) => filter.applyOnNodes(computedNodes),
+    nodesClone
+  );
+  const end = performance.now();
+  const responseTime = end - start;
+  console.log(`[Monitoring] Time to apply filters on nodes: ${responseTime} ms`);
+  return result;
 }
 
 function filterEdges(edges: Edge<EdgeData>[], filters: Map<string, Filter>) {
+  const start = performance.now();
   const edgesClone = structuredClone(edges);
-  return Array.from(filters.values()).reduce((computedEdges, filter) => filter.applyOnEdges(computedEdges), edgesClone);
+  const result = Array.from(filters.values()).reduce(
+    (computedEdges, filter) => filter.applyOnEdges(computedEdges),
+    edgesClone
+  );
+  const end = performance.now();
+  const responseTime = end - start;
+  console.log(`[Monitoring] Time to apply filters on edges: ${responseTime} ms`);
+  return result;
 }
