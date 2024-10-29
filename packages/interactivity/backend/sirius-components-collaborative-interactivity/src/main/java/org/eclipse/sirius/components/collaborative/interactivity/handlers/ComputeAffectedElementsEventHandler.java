@@ -4,6 +4,7 @@ import com.google.common.collect.Iterators;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.sirius.components.collaborative.api.ChangeDescription;
 import org.eclipse.sirius.components.collaborative.api.ChangeKind;
 import org.eclipse.sirius.components.collaborative.api.Monitoring;
@@ -106,12 +107,23 @@ public class ComputeAffectedElementsEventHandler implements IInteractivityEventH
     }
 
     private Optional<String[]> getObjectIds(IEditingContext editingContext, String representationId, String query) {
-        var objectOpt = metamodelsService.getModel(editingContext, representationId);
+        var objectOpt = metamodelsService.getModel(editingContext, representationId).map(EcoreUtil::getRootContainer);
         if(objectOpt.isPresent()) {
             EObject obj = objectOpt.get();
             AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(obj.eClass().getEPackage()));
             Result result = interpreter.evaluateExpression(Map.of("root", obj), query);
             logger.info("Size of the model: {} elements", Iterators.size(obj.eResource().getAllContents()));
+//            var nbElements = 0;
+//            var nbRelations = 0;
+//            var iterator = obj.eClass().getEPackage().eAllContents();
+//            while(iterator.hasNext()) {
+//                EObject object = iterator.next();
+//                if(object instanceof EClassifier clazz) {
+//                    nbElements++;
+//                    nbRelations += object.eCrossReferences().stream().filter(ref -> ref instanceof EReference).collect(Collectors.toSet()).size();
+//                }
+//            }
+//            logger.info("Size of the metamodel: {} elements, {} relations", nbElements, nbRelations);
             return result.asObjects().map(list -> list.stream().map(identityService::getId).toArray(String[]::new));
         }
         return Optional.empty();

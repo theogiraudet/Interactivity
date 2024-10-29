@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -138,6 +138,24 @@ public interface InteractivityFactory extends EFactory {
 	 * @generated
 	 */
 	DefaultModifier createDefaultModifier();
+
+	/**
+	 * Returns a new object of class '<em>Snippet</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Snippet</em>'.
+	 * @generated
+	 */
+	Snippet createSnippet();
+
+	/**
+	 * Returns a new object of class '<em>Sirius Web Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sirius Web Model</em>'.
+	 * @generated
+	 */
+	SiriusWebModel createSiriusWebModel();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -17,11 +17,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -33,7 +30,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
@@ -139,7 +135,7 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 	 * This returns Interactivity.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
@@ -211,6 +207,9 @@ public class InteractivityItemProvider extends ItemProviderAdapter implements IE
 
 		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__FEATURES,
 				InteractivityFactory.eINSTANCE.createSemanticSearch()));
+
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__FEATURES,
+				InteractivityFactory.eINSTANCE.createSnippet()));
 
 		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.INTERACTIVITY__FILTERS,
 				InteractivityFactory.eINSTANCE.createFilterDefinition()));

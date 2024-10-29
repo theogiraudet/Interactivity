@@ -135,6 +135,10 @@ export const getInteractivityModelQuery = gql`
               }
               id
             }
+            ... on Snippet {
+              id
+              name
+            }
           }
         }
       }

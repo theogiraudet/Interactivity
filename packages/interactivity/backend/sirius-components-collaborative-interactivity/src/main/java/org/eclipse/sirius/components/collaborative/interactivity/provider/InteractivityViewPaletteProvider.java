@@ -2,6 +2,8 @@ package org.eclipse.sirius.components.collaborative.interactivity.provider;
 
 import com.google.common.collect.Lists;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.sirius.components.collaborative.diagrams.api.IDiagramDescriptionService;
 import org.eclipse.sirius.components.collaborative.diagrams.dto.ITool;
 import org.eclipse.sirius.components.collaborative.diagrams.dto.Palette;
@@ -13,8 +15,7 @@ import org.eclipse.sirius.components.core.api.IIdentityService;
 import org.eclipse.sirius.components.core.api.IObjectService;
 import org.eclipse.sirius.components.core.api.IURLParser;
 import org.eclipse.sirius.components.diagrams.description.DiagramDescription;
-import org.eclipse.sirius.components.interactivity.DynamicFilter;
-import org.eclipse.sirius.components.interactivity.Path;
+import org.eclipse.sirius.components.interactivity.*;
 import org.eclipse.sirius.components.interpreter.AQLInterpreter;
 import org.eclipse.sirius.components.interpreter.Result;
 import org.eclipse.sirius.components.view.emf.IViewRepresentationDescriptionPredicate;
@@ -28,6 +29,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Service
@@ -45,63 +48,87 @@ public class InteractivityViewPaletteProvider extends ViewPaletteProvider {
     @Override
     public Palette handle(Object targetElement, Object diagramElement, Object diagramElementDescription, DiagramDescription diagramDescription, IEditingContext editingContext) {
         Palette palette = super.handle(targetElement, diagramElement, diagramElementDescription, diagramDescription, editingContext);
-        var snippetList = new LinkedList<ITool>();
-        snippetList.add(SingleClickOnDiagramElementTool
-                .newSingleClickOnDiagramElementTool("add-composite")
-                .label("Add composite")
-                .iconURL(List.of("/images/snippet.svg"))
-                .targetDescriptions(List.of())
-                .selectionDescriptionId("")
-                .build()
-        );
-        snippetList.add(SingleClickOnDiagramElementTool
-                .newSingleClickOnDiagramElementTool("add-abstract-class")
-                .label("Add abstract class")
-                .iconURL(List.of("/images/snippet.svg"))
-                .targetDescriptions(List.of())
-                .selectionDescriptionId("")
-                .build()
-        );
-        var snippetSection = ToolSection.newToolSection(UUID.randomUUID().toString())
-                .label("Snippets")
-                .iconURL(List.of("/images/snippet.svg"))
-                .tools(snippetList)
-                .build();
         var interactivityOpt = metamodelsService.getDomainNameByRepresentationDescription(editingContext, diagramDescription)
                 .flatMap(metamodelsService::getInteractivityMetamodel);
         var root = ((EObject) targetElement).eResource().getContents().get(0);
+
         if(interactivityOpt.isPresent()) {
-            var toolList = new LinkedList<ITool>();
             var interactivity = interactivityOpt.get();
-            for(var feature: interactivity.getFeatures()) {
-                if(feature instanceof DynamicFilter filter) {
-                        AQLInterpreter interpreter = new AQLInterpreter(List.of(), List.of(root.eClass().getEPackage()));
-                        Result result = interpreter.evaluateExpression(Map.of("root", root), ((Path) filter.getFocus()).getPath());
-                        result.asObjects().flatMap(list -> list.stream().filter(targetElement::equals).findFirst())
-                                .ifPresent(obj -> toolList.add(SingleClickOnDiagramElementTool
-                                        .newSingleClickOnDiagramElementTool("dynamic-filter")
-                                        .label(filter.getName())
-                                        .iconURL(List.of("/images/filter.svg"))
-                                        .targetDescriptions(List.of())
-                                        .selectionDescriptionId(filter.getId() + "|" + this.identityService.getId(obj))
-                                        .build()
-                                ));
-                    }
-                }
-            if(!toolList.isEmpty()) {
-                var filterSection = ToolSection.newToolSection(UUID.randomUUID().toString())
-                        .label("Filters")
-                        .iconURL(List.of("/images/filter.svg"))
-                        .tools(toolList)
-                        .build();
-                var list = Lists.newLinkedList(palette.toolSections());
-                list.add(filterSection);
-                list.add(snippetSection);
-                return Palette.newPalette(palette.id()).tools(palette.tools()).toolSections(list).build();
+
+            var interpreter = new AQLInterpreter(List.of(), List.of(root.eClass().getEPackage()));
+            Map<String, Object> map = Map.of("root", root);
+            var list = Lists.newLinkedList(palette.toolSections());
+
+            handleDynamicFilterPalette(interpreter, map, interactivity.getFeatures(), targetElement).ifPresent(list::add);
+            handleSnippetPalette(interpreter, map, interactivity.getFeatures(), targetElement).ifPresent(list::add);
+
+            return Palette.newPalette(palette.id()).tools(palette.tools()).toolSections(list).build();
+        }
+
+        return palette;
+    }
+
+    private Optional<ToolSection> handleDynamicFilterPalette(AQLInterpreter interpreter, Map<String, Object> params, Collection<InteractiveFeature> features, Object targetElement) {
+        Function<DynamicFilter, String> getPath = (filter) -> ((Path) filter.getFocus()).getPath();
+        BiFunction<DynamicFilter, Object, SingleClickOnDiagramElementTool> createTool = (filter, obj) ->
+                buildSingleClickOnDiagramElementTool("dynamic-filter",
+                        filter.getName(),
+                        "/images/filter.svg",
+                        filter.getId() + "|" + this.identityService.getId(obj));
+        var builderParams = new InteractiveFeatureToolBuilderParams<>(interpreter, params, features, getPath, createTool, targetElement, "Filters", "/images/filter.svg", DynamicFilter.class);
+        return handleFeaturePalette(builderParams);
+    }
+
+    private Optional<ToolSection> handleSnippetPalette(AQLInterpreter interpreter, Map<String, Object> params, Collection<InteractiveFeature> features, Object targetElement) {
+        Function<Snippet, String> getPath = (snippet) -> ((Path) snippet.getFocus()).getPath();
+        BiFunction<Snippet, Object, SingleClickOnDiagramElementTool> createTool = (snippet, obj) ->
+                buildSingleClickOnDiagramElementTool("snippet",
+                        snippet.getName(),
+                        "/images/snippet.svg",
+                        snippet.getId() + "|" + this.identityService.getId(obj));
+        var builderParams = new InteractiveFeatureToolBuilderParams<>(interpreter, params, features, getPath, createTool, targetElement, "Snippets", "/images/snippet.svg", Snippet.class);
+        return handleFeaturePalette(builderParams);
+    }
+
+    private <T extends InteractiveFeature> Optional<ToolSection> handleFeaturePalette(InteractiveFeatureToolBuilderParams<T> params) {
+        List<ITool> toolList = new LinkedList<>();
+        for(var feature: params.features) {
+            if(params.clazz.isInstance(feature)) {
+                var feat = params.clazz.cast(feature);
+                Result result = params.interpreter.evaluateExpression(params.params, params.getPath.apply(feat));
+                result.asObjects().flatMap(list -> list.stream().filter(params.targetElement::equals).findFirst())
+                        .ifPresent(obj -> toolList.add(params.getTool.apply(feat, obj)));
             }
         }
-        var list = Lists.newLinkedList(palette.toolSections());
-        list.add(snippetSection);
-        return Palette.newPalette(palette.id()).tools(palette.tools()).toolSections(list).build();
+        if(!toolList.isEmpty()) {
+            return Optional.of(ToolSection.newToolSection(UUID.randomUUID().toString())
+                    .label(params.sectionName)
+                    .iconURL(List.of(params.icon))
+                    .tools(toolList)
+                    .build());
+        }
+        return Optional.empty();
     }
+
+    private SingleClickOnDiagramElementTool buildSingleClickOnDiagramElementTool(String id, String label, String icon, String selectionDescriptionId) {
+        return SingleClickOnDiagramElementTool
+                .newSingleClickOnDiagramElementTool(id)
+                .label(label)
+                .iconURL(List.of(icon))
+                .targetDescriptions(List.of())
+                .selectionDescriptionId(selectionDescriptionId)
+                .build();
+    }
+
+    private record InteractiveFeatureToolBuilderParams<T extends InteractiveFeature>(
+            AQLInterpreter interpreter,
+            Map<String, Object> params,
+            Collection<InteractiveFeature> features,
+            Function<T, String> getPath,
+            BiFunction<T, Object, SingleClickOnDiagramElementTool> getTool,
+            Object targetElement,
+            String sectionName,
+            String icon,
+            Class<T> clazz
+            ) {}
 }

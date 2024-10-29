@@ -88,7 +88,7 @@ public class PathItemProvider extends ItemProviderAdapter implements IEditingDom
 	 * This returns Path.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {

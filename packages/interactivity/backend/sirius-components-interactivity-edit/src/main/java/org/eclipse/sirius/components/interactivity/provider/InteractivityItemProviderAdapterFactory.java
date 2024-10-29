@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -19,11 +19,8 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.domain.EditingDomain;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ChildCreationExtenderManager;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -37,9 +34,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-
 import org.eclipse.sirius.components.interactivity.util.InteractivityAdapterFactory;
 
 /**
@@ -84,7 +79,7 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	protected Collection<Object> supportedTypes = new ArrayList<>();
 
 	/**
 	 * This constructs an instance.
@@ -377,6 +372,52 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.Snippet} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SnippetItemProvider snippetItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.Snippet}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSnippetAdapter() {
+		if (snippetItemProvider == null) {
+			snippetItemProvider = new SnippetItemProvider(this);
+		}
+
+		return snippetItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.sirius.components.interactivity.SiriusWebModel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SiriusWebModelItemProvider siriusWebModelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.sirius.components.interactivity.SiriusWebModel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSiriusWebModelAdapter() {
+		if (siriusWebModelItemProvider == null) {
+			siriusWebModelItemProvider = new SiriusWebModelItemProvider(this);
+		}
+
+		return siriusWebModelItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -450,6 +491,7 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Collection<?> getNewChildDescriptors(Object object, EditingDomain editingDomain) {
 		return childCreationExtenderManager.getNewChildDescriptors(object, editingDomain);
 	}
@@ -459,6 +501,7 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getResourceLocator() {
 		return childCreationExtenderManager;
 	}
@@ -501,7 +544,7 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 	}
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
+	 * This disposes all of the item providers created by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -532,6 +575,10 @@ public class InteractivityItemProviderAdapterFactory extends InteractivityAdapte
 			pathItemProvider.dispose();
 		if (defaultModifierItemProvider != null)
 			defaultModifierItemProvider.dispose();
+		if (snippetItemProvider != null)
+			snippetItemProvider.dispose();
+		if (siriusWebModelItemProvider != null)
+			siriusWebModelItemProvider.dispose();
 	}
 
 }

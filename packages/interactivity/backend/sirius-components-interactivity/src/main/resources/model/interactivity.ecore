@@ -84,4 +84,15 @@
         eType="ecore:EClass ../../../../../sirius-components-view/src/main/resources/model/view.ecore#//UserColor"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Snippet" eSuperTypes="#//InteractiveFeature #//Identifiable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//ModelSnippet"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="focus" lowerBound="1" eType="#//ElementReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelSnippet" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SiriusWebModel" eSuperTypes="#//ModelSnippet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -89,7 +89,7 @@ public class FixedRadiusItemProvider extends ItemProviderAdapter implements IEdi
 	 * This returns FixedRadius.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {

@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -14,10 +14,29 @@ package org.eclipse.sirius.components.interactivity.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.eclipse.sirius.components.interactivity.*;
+import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
+import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.ElementReference;
+import org.eclipse.sirius.components.interactivity.FilterDefinition;
+import org.eclipse.sirius.components.interactivity.FixedRadius;
+import org.eclipse.sirius.components.interactivity.Identifiable;
+import org.eclipse.sirius.components.interactivity.InteractiveFeature;
+import org.eclipse.sirius.components.interactivity.Interactivity;
+import org.eclipse.sirius.components.interactivity.InteractivityPackage;
+import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.ModelSnippet;
+import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Path;
+import org.eclipse.sirius.components.interactivity.Radius;
+import org.eclipse.sirius.components.interactivity.ScopedModifier;
+import org.eclipse.sirius.components.interactivity.SemanticSearch;
+import org.eclipse.sirius.components.interactivity.SemanticZoom;
+import org.eclipse.sirius.components.interactivity.SiriusWebModel;
+import org.eclipse.sirius.components.interactivity.Snippet;
+import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.interactivity.VisibilityModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -238,6 +257,33 @@ public class InteractivitySwitch<T> extends Switch<T> {
 				result = caseModifier(defaultModifier);
 			if (result == null)
 				result = caseIdentifiable(defaultModifier);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.SNIPPET: {
+			Snippet snippet = (Snippet) theEObject;
+			T result = caseSnippet(snippet);
+			if (result == null)
+				result = caseInteractiveFeature(snippet);
+			if (result == null)
+				result = caseIdentifiable(snippet);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.MODEL_SNIPPET: {
+			ModelSnippet modelSnippet = (ModelSnippet) theEObject;
+			T result = caseModelSnippet(modelSnippet);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case InteractivityPackage.SIRIUS_WEB_MODEL: {
+			SiriusWebModel siriusWebModel = (SiriusWebModel) theEObject;
+			T result = caseSiriusWebModel(siriusWebModel);
+			if (result == null)
+				result = caseModelSnippet(siriusWebModel);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -514,6 +560,51 @@ public class InteractivitySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDefaultModifier(DefaultModifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Snippet</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Snippet</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSnippet(Snippet object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Snippet</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Snippet</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelSnippet(ModelSnippet object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sirius Web Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sirius Web Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSiriusWebModel(SiriusWebModel object) {
 		return null;
 	}
 

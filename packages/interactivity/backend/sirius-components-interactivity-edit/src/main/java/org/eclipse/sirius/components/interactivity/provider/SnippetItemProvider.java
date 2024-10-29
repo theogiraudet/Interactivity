@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -17,11 +17,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -33,18 +30,17 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
-import org.eclipse.sirius.components.interactivity.SemanticSearch;
+import org.eclipse.sirius.components.interactivity.Snippet;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.sirius.components.interactivity.SemanticSearch} object.
+ * This is the item provider adapter for a {@link org.eclipse.sirius.components.interactivity.Snippet} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SemanticSearchItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+public class SnippetItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -52,7 +48,7 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SemanticSearchItemProvider(AdapterFactory adapterFactory) {
+	public SnippetItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -68,7 +64,7 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 			super.getPropertyDescriptors(object);
 
 			addIdPropertyDescriptor(object);
-			addSearchPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,18 +86,18 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	}
 
 	/**
-	 * This adds a property descriptor for the Search feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSearchPropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_SemanticSearch_search_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_SemanticSearch_search_feature",
-								"_UI_SemanticSearch_type"),
-						InteractivityPackage.Literals.SEMANTIC_SEARCH__SEARCH, true, false, false, null, null, null));
+						getResourceLocator(), getString("_UI_Snippet_name_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Snippet_name_feature", "_UI_Snippet_type"),
+						InteractivityPackage.Literals.SNIPPET__NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -116,7 +112,8 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(InteractivityPackage.Literals.SEMANTIC_SEARCH__SEARCH);
+			childrenFeatures.add(InteractivityPackage.Literals.SNIPPET__MODEL);
+			childrenFeatures.add(InteractivityPackage.Literals.SNIPPET__FOCUS);
 		}
 		return childrenFeatures;
 	}
@@ -135,14 +132,14 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	}
 
 	/**
-	 * This returns SemanticSearch.gif.
+	 * This returns Snippet.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SemanticSearch.svg"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Snippet.svg"));
 	}
 
 	/**
@@ -163,13 +160,10 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SemanticSearch) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_SemanticSearch_type")
-				: getString("_UI_SemanticSearch_type") + " " + label;
+		String label = ((Snippet) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_Snippet_type")
+				: getString("_UI_Snippet_type") + " " + label;
 	}
-
-
-
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -182,11 +176,13 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(SemanticSearch.class)) {
-		case InteractivityPackage.SEMANTIC_SEARCH__ID:
+		switch (notification.getFeatureID(Snippet.class)) {
+		case InteractivityPackage.SNIPPET__ID:
+		case InteractivityPackage.SNIPPET__NAME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
-		case InteractivityPackage.SEMANTIC_SEARCH__SEARCH:
+		case InteractivityPackage.SNIPPET__MODEL:
+		case InteractivityPackage.SNIPPET__FOCUS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -204,7 +200,10 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.SEMANTIC_SEARCH__SEARCH,
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.SNIPPET__MODEL,
+				InteractivityFactory.eINSTANCE.createSiriusWebModel()));
+
+		newChildDescriptors.add(createChildParameter(InteractivityPackage.Literals.SNIPPET__FOCUS,
 				InteractivityFactory.eINSTANCE.createPath()));
 	}
 

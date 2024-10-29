@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -913,6 +913,135 @@ public interface InteractivityPackage extends EPackage {
 	int DEFAULT_MODIFIER_OPERATION_COUNT = MODIFIER_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.SnippetImpl <em>Snippet</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.impl.SnippetImpl
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getSnippet()
+	 * @generated
+	 */
+	int SNIPPET = 18;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNIPPET__ID = INTERACTIVE_FEATURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNIPPET__NAME = INTERACTIVE_FEATURE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Model</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNIPPET__MODEL = INTERACTIVE_FEATURE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Focus</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNIPPET__FOCUS = INTERACTIVE_FEATURE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Snippet</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNIPPET_FEATURE_COUNT = INTERACTIVE_FEATURE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Snippet</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNIPPET_OPERATION_COUNT = INTERACTIVE_FEATURE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.ModelSnippet <em>Model Snippet</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.ModelSnippet
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getModelSnippet()
+	 * @generated
+	 */
+	int MODEL_SNIPPET = 19;
+
+	/**
+	 * The number of structural features of the '<em>Model Snippet</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_SNIPPET_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Model Snippet</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_SNIPPET_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.sirius.components.interactivity.impl.SiriusWebModelImpl <em>Sirius Web Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.sirius.components.interactivity.impl.SiriusWebModelImpl
+	 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getSiriusWebModel()
+	 * @generated
+	 */
+	int SIRIUS_WEB_MODEL = 20;
+
+	/**
+	 * The feature id for the '<em><b>Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIRIUS_WEB_MODEL__MODEL = MODEL_SNIPPET_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Sirius Web Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIRIUS_WEB_MODEL_FEATURE_COUNT = MODEL_SNIPPET_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Sirius Web Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIRIUS_WEB_MODEL_OPERATION_COUNT = MODEL_SNIPPET_OPERATION_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Interactivity <em>Interactivity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1401,6 +1530,80 @@ public interface InteractivityPackage extends EPackage {
 	EReference getDefaultModifier_Colors();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.Snippet <em>Snippet</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Snippet</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Snippet
+	 * @generated
+	 */
+	EClass getSnippet();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.sirius.components.interactivity.Snippet#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Snippet#getName()
+	 * @see #getSnippet()
+	 * @generated
+	 */
+	EAttribute getSnippet_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.sirius.components.interactivity.Snippet#getModel <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Model</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Snippet#getModel()
+	 * @see #getSnippet()
+	 * @generated
+	 */
+	EReference getSnippet_Model();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.sirius.components.interactivity.Snippet#getFocus <em>Focus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Focus</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.Snippet#getFocus()
+	 * @see #getSnippet()
+	 * @generated
+	 */
+	EReference getSnippet_Focus();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.ModelSnippet <em>Model Snippet</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Snippet</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.ModelSnippet
+	 * @generated
+	 */
+	EClass getModelSnippet();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.sirius.components.interactivity.SiriusWebModel <em>Sirius Web Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sirius Web Model</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.SiriusWebModel
+	 * @generated
+	 */
+	EClass getSiriusWebModel();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.sirius.components.interactivity.SiriusWebModel#getModel <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Model</em>'.
+	 * @see org.eclipse.sirius.components.interactivity.SiriusWebModel#getModel()
+	 * @see #getSiriusWebModel()
+	 * @generated
+	 */
+	EReference getSiriusWebModel_Model();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1826,6 +2029,68 @@ public interface InteractivityPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFAULT_MODIFIER__COLORS = eINSTANCE.getDefaultModifier_Colors();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.SnippetImpl <em>Snippet</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.components.interactivity.impl.SnippetImpl
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getSnippet()
+		 * @generated
+		 */
+		EClass SNIPPET = eINSTANCE.getSnippet();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SNIPPET__NAME = eINSTANCE.getSnippet_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Model</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SNIPPET__MODEL = eINSTANCE.getSnippet_Model();
+
+		/**
+		 * The meta object literal for the '<em><b>Focus</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SNIPPET__FOCUS = eINSTANCE.getSnippet_Focus();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.ModelSnippet <em>Model Snippet</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.components.interactivity.ModelSnippet
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getModelSnippet()
+		 * @generated
+		 */
+		EClass MODEL_SNIPPET = eINSTANCE.getModelSnippet();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.sirius.components.interactivity.impl.SiriusWebModelImpl <em>Sirius Web Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.sirius.components.interactivity.impl.SiriusWebModelImpl
+		 * @see org.eclipse.sirius.components.interactivity.impl.InteractivityPackageImpl#getSiriusWebModel()
+		 * @generated
+		 */
+		EClass SIRIUS_WEB_MODEL = eINSTANCE.getSiriusWebModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIRIUS_WEB_MODEL__MODEL = eINSTANCE.getSiriusWebModel_Model();
 
 	}
 

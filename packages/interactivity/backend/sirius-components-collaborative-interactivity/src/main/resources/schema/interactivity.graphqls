@@ -3,12 +3,21 @@ extend type Query {
     affectedElements(input: ComputeAffectedNodesInput!): ComputeAffectedElementsPayload!
     dynamicFilter(input: ComputeDynamicFilterInput!): ComputeDynamicFilterPayload!
     semanticSearch(input: SemanticSearchInput!): SemanticSearchPayload!
+    addSnippet(input: SnippetInput!): SnippetPayload!
 }
 
 input InteractivityModelInput {
     id: ID!
     editingContextId: ID!
     representationId: ID!
+}
+
+input SnippetInput {
+    id: ID!
+    editingContextId: ID!
+    representationId: ID!
+    focusElementId: ID!
+    snippetId: ID!
 }
 
 input ComputeAffectedNodesInput {
@@ -38,10 +47,15 @@ union InteractivityModelPayload = InteractivityModelSuccessPayload | SuccessPayl
 union ComputeAffectedElementsPayload = ComputeAffectedElementsSuccessPayload | SuccessPayload | ErrorPayload
 union ComputeDynamicFilterPayload = ComputeDynamicFilterSuccessPayload | ErrorPayload
 union SemanticSearchPayload = SemanticSearchSuccessPayload | ErrorPayload
+union SnippetPayload = SnippetSuccessPayload | SuccessPayload | ErrorPayload
 
 type InteractivityModelSuccessPayload {
     id: ID!
     interactivity: Interactivity!
+}
+
+type SnippetSuccessPayload {
+    id: ID!
 }
 
 type SemanticSearchSuccessPayload {
@@ -88,7 +102,7 @@ type Path {
 }
 
 
-union InteractiveFeature = SemanticZoom | DynamicFilter | SemanticSearch
+union InteractiveFeature = SemanticZoom | DynamicFilter | SemanticSearch | Snippet
 
 type SemanticZoom {
     levels: [ZoomLevel!]!
@@ -180,6 +194,11 @@ type DynamicFilter {
     id: String!
     radius: Radius
     defaultModifier: DefaultModifier!
+}
+
+type Snippet {
+    name: String!
+    id: String!
 }
 
 union Radius = FixedRadius | BoundedRadius

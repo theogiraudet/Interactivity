@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -15,12 +15,24 @@ package org.eclipse.sirius.components.interactivity.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.sirius.components.interactivity.*;
+import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
+import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.FilterDefinition;
+import org.eclipse.sirius.components.interactivity.FixedRadius;
+import org.eclipse.sirius.components.interactivity.Interactivity;
+import org.eclipse.sirius.components.interactivity.InteractivityFactory;
+import org.eclipse.sirius.components.interactivity.InteractivityPackage;
+import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.Path;
+import org.eclipse.sirius.components.interactivity.SemanticSearch;
+import org.eclipse.sirius.components.interactivity.SemanticZoom;
+import org.eclipse.sirius.components.interactivity.SiriusWebModel;
+import org.eclipse.sirius.components.interactivity.Snippet;
+import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.interactivity.VisibilityModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,6 +102,10 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 			return createPath();
 		case InteractivityPackage.DEFAULT_MODIFIER:
 			return createDefaultModifier();
+		case InteractivityPackage.SNIPPET:
+			return createSnippet();
+		case InteractivityPackage.SIRIUS_WEB_MODEL:
+			return createSiriusWebModel();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -225,6 +241,28 @@ public class InteractivityFactoryImpl extends EFactoryImpl implements Interactiv
 	public DefaultModifier createDefaultModifier() {
 		DefaultModifierImpl defaultModifier = new DefaultModifierImpl();
 		return defaultModifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Snippet createSnippet() {
+		SnippetImpl snippet = new SnippetImpl();
+		return snippet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SiriusWebModel createSiriusWebModel() {
+		SiriusWebModelImpl siriusWebModel = new SiriusWebModelImpl();
+		return siriusWebModel;
 	}
 
 	/**

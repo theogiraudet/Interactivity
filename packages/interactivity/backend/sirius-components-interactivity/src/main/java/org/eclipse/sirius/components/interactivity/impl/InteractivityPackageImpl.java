@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -16,9 +16,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.sirius.components.interactivity.BoundedRadius;
 import org.eclipse.sirius.components.interactivity.DefaultModifier;
 import org.eclipse.sirius.components.interactivity.DynamicFilter;
@@ -31,17 +29,18 @@ import org.eclipse.sirius.components.interactivity.Interactivity;
 import org.eclipse.sirius.components.interactivity.InteractivityFactory;
 import org.eclipse.sirius.components.interactivity.InteractivityPackage;
 import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.ModelSnippet;
 import org.eclipse.sirius.components.interactivity.Modifier;
 import org.eclipse.sirius.components.interactivity.Path;
 import org.eclipse.sirius.components.interactivity.Radius;
 import org.eclipse.sirius.components.interactivity.ScopedModifier;
 import org.eclipse.sirius.components.interactivity.SemanticSearch;
 import org.eclipse.sirius.components.interactivity.SemanticZoom;
+import org.eclipse.sirius.components.interactivity.SiriusWebModel;
+import org.eclipse.sirius.components.interactivity.Snippet;
 import org.eclipse.sirius.components.interactivity.StyleModifier;
 import org.eclipse.sirius.components.interactivity.VisibilityModifier;
-
 import org.eclipse.sirius.components.view.ViewPackage;
-
 import org.eclipse.sirius.components.view.diagram.DiagramPackage;
 
 /**
@@ -176,6 +175,27 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	private EClass defaultModifierEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass snippetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelSnippetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass siriusWebModelEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -711,6 +731,76 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 	 * @generated
 	 */
 	@Override
+	public EClass getSnippet() {
+		return snippetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSnippet_Name() {
+		return (EAttribute) snippetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSnippet_Model() {
+		return (EReference) snippetEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSnippet_Focus() {
+		return (EReference) snippetEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getModelSnippet() {
+		return modelSnippetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSiriusWebModel() {
+		return siriusWebModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSiriusWebModel_Model() {
+		return (EReference) siriusWebModelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public InteractivityFactory getInteractivityFactory() {
 		return (InteractivityFactory) getEFactoryInstance();
 	}
@@ -798,6 +888,16 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		createEAttribute(defaultModifierEClass, DEFAULT_MODIFIER__HIDE);
 		createEReference(defaultModifierEClass, DEFAULT_MODIFIER__STYLE);
 		createEReference(defaultModifierEClass, DEFAULT_MODIFIER__COLORS);
+
+		snippetEClass = createEClass(SNIPPET);
+		createEAttribute(snippetEClass, SNIPPET__NAME);
+		createEReference(snippetEClass, SNIPPET__MODEL);
+		createEReference(snippetEClass, SNIPPET__FOCUS);
+
+		modelSnippetEClass = createEClass(MODEL_SNIPPET);
+
+		siriusWebModelEClass = createEClass(SIRIUS_WEB_MODEL);
+		createEReference(siriusWebModelEClass, SIRIUS_WEB_MODEL__MODEL);
 	}
 
 	/**
@@ -848,6 +948,9 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 		scopedModifierEClass.getESuperTypes().add(this.getModifier());
 		pathEClass.getESuperTypes().add(this.getElementReference());
 		defaultModifierEClass.getESuperTypes().add(this.getModifier());
+		snippetEClass.getESuperTypes().add(this.getInteractiveFeature());
+		snippetEClass.getESuperTypes().add(this.getIdentifiable());
+		siriusWebModelEClass.getESuperTypes().add(this.getModelSnippet());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(interactivityEClass, Interactivity.class, "Interactivity", !IS_ABSTRACT, !IS_INTERFACE,
@@ -973,6 +1076,25 @@ public class InteractivityPackageImpl extends EPackageImpl implements Interactiv
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDefaultModifier_Colors(), theViewPackage.getUserColor(), null, "colors", null, 0, -1,
 				DefaultModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(snippetEClass, Snippet.class, "Snippet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSnippet_Name(), ecorePackage.getEString(), "name", null, 1, 1, Snippet.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSnippet_Model(), this.getModelSnippet(), null, "model", null, 1, 1, Snippet.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSnippet_Focus(), this.getElementReference(), null, "focus", null, 1, 1, Snippet.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelSnippetEClass, ModelSnippet.class, "ModelSnippet", IS_ABSTRACT, IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(siriusWebModelEClass, SiriusWebModel.class, "SiriusWebModel", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSiriusWebModel_Model(), ecorePackage.getEObject(), null, "model", null, 1, 1,
+				SiriusWebModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

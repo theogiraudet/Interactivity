@@ -40,6 +40,14 @@ export interface GQLComputeDynamicFilterInput {
   focusedElementId: string;
 }
 
+export interface GQLSnippetInput {
+  id: string;
+  editingContextId: string;
+  representationId: string;
+  snippetId: string;
+  focusedElementId: string;
+}
+
 export interface GQLSuccessPayload {
   __typename: string;
   id: string;
@@ -84,6 +92,13 @@ export interface GQLComputeDynamicFilterSuccessPayload {
 export interface GQLSemanticElementModifier {
   semanticElementId: string;
   modifierId: string;
+}
+
+export type GQLSnippetPayload = GQLSnippetSuccessPayload | GQLErrorPayload;
+
+export interface GQLSnippetSuccessPayload {
+  __typename: string;
+  id: string;
 }
 
 export type GQLComputeDynamicFilterPayload = GQLComputeDynamicFilterSuccessPayload | GQLErrorPayload;
@@ -213,4 +228,8 @@ export interface GQLIconLabelNodeStyleDescription extends GQLNodeStyleDescriptio
 export interface GQLUserColor {
   name: string;
   value: string;
+}
+
+export interface GQLSnippet extends GQLInteractiveFeature, Identifiable {
+  name: string;
 }

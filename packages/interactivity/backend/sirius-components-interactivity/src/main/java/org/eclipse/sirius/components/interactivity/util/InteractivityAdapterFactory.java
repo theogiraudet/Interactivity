@@ -4,9 +4,9 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  */
@@ -14,12 +14,30 @@ package org.eclipse.sirius.components.interactivity.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.sirius.components.interactivity.*;
+import org.eclipse.sirius.components.interactivity.BoundedRadius;
+import org.eclipse.sirius.components.interactivity.DefaultModifier;
+import org.eclipse.sirius.components.interactivity.DynamicFilter;
+import org.eclipse.sirius.components.interactivity.ElementReference;
+import org.eclipse.sirius.components.interactivity.FilterDefinition;
+import org.eclipse.sirius.components.interactivity.FixedRadius;
+import org.eclipse.sirius.components.interactivity.Identifiable;
+import org.eclipse.sirius.components.interactivity.InteractiveFeature;
+import org.eclipse.sirius.components.interactivity.Interactivity;
+import org.eclipse.sirius.components.interactivity.InteractivityPackage;
+import org.eclipse.sirius.components.interactivity.Level;
+import org.eclipse.sirius.components.interactivity.ModelSnippet;
+import org.eclipse.sirius.components.interactivity.Modifier;
+import org.eclipse.sirius.components.interactivity.Path;
+import org.eclipse.sirius.components.interactivity.Radius;
+import org.eclipse.sirius.components.interactivity.ScopedModifier;
+import org.eclipse.sirius.components.interactivity.SemanticSearch;
+import org.eclipse.sirius.components.interactivity.SemanticZoom;
+import org.eclipse.sirius.components.interactivity.SiriusWebModel;
+import org.eclipse.sirius.components.interactivity.Snippet;
+import org.eclipse.sirius.components.interactivity.StyleModifier;
+import org.eclipse.sirius.components.interactivity.VisibilityModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,7 +93,7 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InteractivitySwitch<Adapter> modelSwitch = new InteractivitySwitch<Adapter>() {
+	protected InteractivitySwitch<Adapter> modelSwitch = new InteractivitySwitch<>() {
 		@Override
 		public Adapter caseInteractivity(Interactivity object) {
 			return createInteractivityAdapter();
@@ -164,6 +182,21 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseDefaultModifier(DefaultModifier object) {
 			return createDefaultModifierAdapter();
+		}
+
+		@Override
+		public Adapter caseSnippet(Snippet object) {
+			return createSnippetAdapter();
+		}
+
+		@Override
+		public Adapter caseModelSnippet(ModelSnippet object) {
+			return createModelSnippetAdapter();
+		}
+
+		@Override
+		public Adapter caseSiriusWebModel(SiriusWebModel object) {
+			return createSiriusWebModelAdapter();
 		}
 
 		@Override
@@ -434,6 +467,48 @@ public class InteractivityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefaultModifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.Snippet <em>Snippet</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.Snippet
+	 * @generated
+	 */
+	public Adapter createSnippetAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.ModelSnippet <em>Model Snippet</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.ModelSnippet
+	 * @generated
+	 */
+	public Adapter createModelSnippetAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.sirius.components.interactivity.SiriusWebModel <em>Sirius Web Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.sirius.components.interactivity.SiriusWebModel
+	 * @generated
+	 */
+	public Adapter createSiriusWebModelAdapter() {
 		return null;
 	}
 

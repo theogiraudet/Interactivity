@@ -106,7 +106,7 @@ public class BoundedRadiusItemProvider extends ItemProviderAdapter implements IE
 	 * This returns BoundedRadius.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {

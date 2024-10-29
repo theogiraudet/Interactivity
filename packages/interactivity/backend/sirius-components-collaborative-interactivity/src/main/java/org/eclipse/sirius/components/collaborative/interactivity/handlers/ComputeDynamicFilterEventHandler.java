@@ -300,7 +300,7 @@ public class ComputeDynamicFilterEventHandler implements IInteractivityEventHand
     private void cleanEObject(EObject eobject) {
         for (var reference : eobject.eClass().getEReferences()) {
             if (!reference.isDerived()) {
-                if (eobject.eGet(reference) instanceof EList<? extends Object> l) {
+                if (eobject.eGet(reference) instanceof EList<?> l) {
                     l.clear();
                 } else {
                     eobject.eSet(reference, null);

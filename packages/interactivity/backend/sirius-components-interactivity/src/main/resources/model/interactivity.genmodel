@@ -76,5 +76,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//DefaultModifier/style"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//DefaultModifier/colors"/>
     </genClasses>
+    <genClasses ecoreClass="interactivity.ecore#//Snippet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute interactivity.ecore#//Snippet/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Snippet/model"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference interactivity.ecore#//Snippet/focus"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="interactivity.ecore#//ModelSnippet"/>
+    <genClasses ecoreClass="interactivity.ecore#//SiriusWebModel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference interactivity.ecore#//SiriusWebModel/model"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

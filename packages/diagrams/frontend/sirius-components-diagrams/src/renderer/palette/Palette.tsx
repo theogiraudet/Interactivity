@@ -434,6 +434,9 @@ export const Palette = ({
       case 'dynamic-filter':
         invokeDynamicFilter(tool as GQLSingleClickOnDiagramElementTool);
         break;
+      case 'snippet':
+        invokeSnippet(tool as GQLSingleClickOnDiagramElementTool);
+        break;
       default:
         invokeSingleClickTool(tool);
         break;
@@ -442,6 +445,10 @@ export const Palette = ({
 
   const invokeDynamicFilter = (tool: GQLSingleClickOnDiagramElementTool) => {
     emitCustomEvent('dynamic-filter-' + tool.selectionDescriptionId.split('|')[0], tool);
+  };
+
+  const invokeSnippet = (tool: GQLSingleClickOnDiagramElementTool) => {
+    emitCustomEvent('snippet-' + tool.selectionDescriptionId.split('|')[0], tool);
   };
 
   const invokeFadeDiagramElementTool = () => {

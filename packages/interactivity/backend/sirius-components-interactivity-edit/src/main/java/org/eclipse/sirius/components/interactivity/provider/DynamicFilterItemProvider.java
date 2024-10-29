@@ -157,7 +157,7 @@ public class DynamicFilterItemProvider extends ItemProviderAdapter implements IE
 	 * This returns DynamicFilter.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
