@@ -109,13 +109,13 @@ public class PathItemProvider extends ItemProviderAdapter implements IEditingDom
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Path) object).getPath();
 		return label == null || label.length() == 0 ? getString("_UI_Path_type")
-				: getString("_UI_Path_type") + " " + label;
+				: label;
 	}
 
 	/**

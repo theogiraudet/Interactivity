@@ -127,12 +127,12 @@ public class BoundedRadiusItemProvider extends ItemProviderAdapter implements IE
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		BoundedRadius boundedRadius = (BoundedRadius) object;
-		return getString("_UI_BoundedRadius_type") + " " + boundedRadius.getMin();
+		return "[" + boundedRadius.getMin() + ".." + boundedRadius.getMax();
 	}
 
 	/**

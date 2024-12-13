@@ -20,6 +20,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -159,17 +160,77 @@ public class SemanticSearchItemProvider extends ItemProviderAdapter implements I
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SemanticSearch) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_SemanticSearch_type")
-				: getString("_UI_SemanticSearch_type") + " " + label;
+		return getString("_UI_SemanticSearch_type");
 	}
 
+	@Override
+	public Object getStyledText(Object object) {
+		return super.getStyledText(object);
+	}
 
+	@Override
+	protected String getTypeText(Object object) {
+		return super.getTypeText(object);
+	}
 
+	@Override
+	protected String getTypeText(EAttribute attribute) {
+		return super.getTypeText(attribute);
+	}
+
+	@Override
+	protected String getFeatureText(Object feature) {
+		return super.getFeatureText(feature);
+	}
+
+	@Override
+	public String getString(String key) {
+		return super.getString(key);
+	}
+
+	@Override
+	public String getString(String key, boolean translate) {
+		return super.getString(key, translate);
+	}
+
+	@Override
+	public String getString(String key, Object[] substitutions) {
+		return super.getString(key, substitutions);
+	}
+
+	@Override
+	public String getString(String key, Object[] substitutions, boolean translate) {
+		return super.getString(key, substitutions, translate);
+	}
+
+	@Override
+	protected String getString(String key, String s0) {
+		return super.getString(key, s0);
+	}
+
+	@Override
+	protected String getString(String key, String s0, boolean translate) {
+		return super.getString(key, s0, translate);
+	}
+
+	@Override
+	protected String getString(String key, String s0, String s1) {
+		return super.getString(key, s0, s1);
+	}
+
+	@Override
+	protected String getString(String key, String s0, String s1, boolean translate) {
+		return super.getString(key, s0, s1, translate);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

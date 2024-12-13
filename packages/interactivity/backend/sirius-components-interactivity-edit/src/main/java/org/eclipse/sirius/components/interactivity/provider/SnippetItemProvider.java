@@ -156,13 +156,13 @@ public class SnippetItemProvider extends ItemProviderAdapter implements IEditing
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Snippet) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_Snippet_type")
-				: getString("_UI_Snippet_type") + " " + label;
+				: label;
 	}
 
 	/**

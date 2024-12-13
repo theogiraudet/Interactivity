@@ -157,13 +157,12 @@ public class LevelItemProvider extends ItemProviderAdapter implements IEditingDo
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Level) object).getId();
-		return label == null || label.length() == 0 ? getString("_UI_Level_type")
-				: getString("_UI_Level_type") + " " + label;
+		Level level = (Level) object;
+		return "On [" + level.getMin() + ".." + level.getMax() + "]";
 	}
 
 	/**

@@ -110,12 +110,12 @@ public class FixedRadiusItemProvider extends ItemProviderAdapter implements IEdi
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		FixedRadius fixedRadius = (FixedRadius) object;
-		return getString("_UI_FixedRadius_type") + " " + fixedRadius.getValue();
+		return Integer.toString(fixedRadius.getValue());
 	}
 
 	/**
